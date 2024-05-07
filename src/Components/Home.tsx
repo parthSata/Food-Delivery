@@ -21,7 +21,7 @@ function Home(): JSX.Element {
   // const navigate = useNavigate();
   const [showAddProductDialog, setShowAddProductDialog] =
     useState<boolean>(false);
-  const [updateProductId, setUpdateProductId] = useState<number | null>(null);
+  const [updateProductId, setUpdateProductId] = useState<number| null>(null);
   const [products, setProducts] = useState<Product[]>([]);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
@@ -34,15 +34,18 @@ function Home(): JSX.Element {
   };
 
   const handleUpdate = (id: number) => {
-    console.log("Home, Product Id is :", id);
+    console.log("Home Id :", id);
+
     const productToUpdate = products.find((product) => product.id === id);
-    if (!productToUpdate) {
-      return;
+    if (productToUpdate) {
+      setShowAddProductDialog(true);
+      setUpdateProductId(id);
+    } else {
+      console.log("Product not found for update!");
     }
-    setShowAddProductDialog(true);
-    setUpdateProductId(id);
   };
 
+  
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
     if (storedProducts) {
@@ -132,7 +135,7 @@ function Home(): JSX.Element {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((item) => (
+                  {products?.map((item) => (
                     <tr
                       key={item.id}
                       className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
@@ -271,10 +274,10 @@ function Home(): JSX.Element {
                 </svg>
               </button>
               <div className="p-6">
-                <AddProduct
-                  onClose={() => setShowAddProductDialog(false)}
-                  productId:Number={updateProductId}
-                />
+                  <AddProduct
+                    onClose={() => setShowAddProductDialog(false)}
+                    productId={updateProductId}
+                  />
               </div>
             </div>
           </div>

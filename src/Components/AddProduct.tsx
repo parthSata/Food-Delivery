@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Pasta from "../assets/AddProduct/Pasta.png";
 import Pizza from "../assets/AddProduct/Pizza.jpg";
 import Burger from "../assets/AddProduct/Burger.jpg";
@@ -16,7 +16,8 @@ interface ProductData {
 }
 
 interface Props {
-  productId: number;
+  onClose: () => void;
+  productId?: number | null;
 }
 
 const AddProduct: React.FC<Props> = ({ productId }) => {
@@ -35,6 +36,8 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     Discription: "",
   });
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const images = [Pasta, Pizza, Burger];
 
   const prevSlide = () => {
@@ -49,7 +52,11 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     );
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     if (event.target === null) return; // Null check
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -62,23 +69,23 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     }
   }, []);
 
-  const handleDelete = () => {
-    const savedFormData = JSON.parse(localStorage.getItem(formData.id) ?? "[]");
-    if (savedFormData) {
-      localStorage.removeItem(savedFormData.id);
-      setFormData({
-        id: "",
-        ProductName: "",
-        Price: "",
-        DiscountPrice: "",
-        Unit: "",
-        Stock: "",
-        IsVeg: "True",
-        Status: "In Stock",
-        Discription: "",
-      });
-    }
-  };
+  // const handleDelete = () => {
+  //   const savedFormData = JSON.parse(localStorage.getItem(formData.id) ?? "[]");
+  //   if (savedFormData) {
+  //     localStorage.removeItem(savedFormData.id);
+  //     setFormData({
+  //       id: "",
+  //       ProductName: "",
+  //       Price: "",
+  //       DiscountPrice: "",
+  //       Unit: "",
+  //       Stock: "",
+  //       IsVeg: "True",
+  //       Status: "In Stock",
+  //       Discription: "",
+  //     });
+  //   }
+  // };
 
   const handleSubmit = () => {
     const newProduct = { ...formData, id: Date.now().toString() };
@@ -101,27 +108,48 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     setImageDropdown(!imageDropdown);
   };
 
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // You can handle the file upload here, such as uploading it to a server or processing it
+      // For now, let's just log the file object
+      console.log("Uploded Image File:", file);
+    }
+  };
+  const handleImageUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
   const handleUpdate = () => {
-    const existingProductData = JSON.parse(
+    const existingProducts = JSON.parse(
       localStorage.getItem("products") ?? "[]"
     );
-    if (!existingProductData) {
+    const existingProduct = existingProducts.find(
+      (product: any) => product.id === productId
+    );
+    if (existingProduct) {
+      setFormData(existingProduct);
+      // find index of updated product id then update that object with updated data 
+      
+      // console.log("Product Data Updated");
+    } else {
       console.log("Product not found for update!");
-      return;
     }
-    setFormData(existingProductData);
   };
 
   useEffect(() => {
-    const existingProductData = JSON.parse(
+    const existingProducts = JSON.parse(
       localStorage.getItem("products") ?? "[]"
     );
-    console.log("🚀 ~ useEffect ~ existingProductData:", existingProductData);
-
-    existingProductData.filter(
-      (productId: number) => existingProductData.productId == productId
+    const existingProduct = existingProducts.find(
+      (product: ProductData) => product.id === productId
     );
+    if (existingProduct) {
+      // Set form data with existing product values
+      setFormData(existingProduct);
+    }
   }, [productId]);
+  console.log("AddProduct Id :", productId);
 
   return (
     <div className="">
@@ -142,6 +170,8 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
               alt=""
             />
           </div>
+
+          {/* Image Dropdown */}
           <button
             id="dropdownMenuIconButton"
             data-dropdown-toggle="dropdownDots"
@@ -159,6 +189,13 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
               <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
             </svg>
           </button>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleImageUpload}
+            ref={fileInputRef}
+          />
           <div
             className={`absolute right-0 z-10 mt-[74px] mr-4 font-semibold w-36 h-18 border-[1px solid #EFEFEF] rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
               imageDropdown ? "" : "hidden"
@@ -177,6 +214,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
                 role="menuitem"
                 tabIndex={-1}
                 id="menu-item-0"
+                onClick={handleImageUploadClick}
               >
                 Upload Image
               </a>
@@ -191,6 +229,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
               </a>
             </div>
           </div>
+          {/* Image Dropdown */}
 
           <button
             type="button"
@@ -324,7 +363,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
                 <select
                   name="IsVeg"
                   value={formData.IsVeg}
-                  onChange={() => handleChange}
+                  onChange={(e) => handleChange(e)}
                   className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white "
                 >
                   <option className="" value="True">
@@ -342,7 +381,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
                 <select
                   name="Status"
                   value={formData.Status}
-                  onChange={() => handleChange}
+                  onChange={(e) => handleChange(e)}
                   className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white "
                 >
                   <option className="" value="In Stock">
@@ -359,13 +398,14 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
                 </label>
                 <textarea
                   className="appearance-none block w-full  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white resize-none"
-                  id="grid-last-name"
+                  //@ts-ignore
                   type="text"
+                  id="grid-last-name"
                   placeholder="Type Here..."
                   rows={5}
                   cols={5}
                   value={formData.Discription}
-                  onChange={() => handleChange}
+                  onChange={(e) => handleChange(e)}
                   name="Discription"
                 />
               </div>
@@ -384,17 +424,17 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
         >
           Save Product
         </button>
-        <button
+        {/* <button
           type="submit"
           className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
           style={{
             boxShadow: "2px 2px 25px 2px #94CD0099",
             fontFamily: "Bai Jamjuree",
           }}
-          onClick={handleDelete}
+          // onClick={handleDelete}
         >
           Delete Product
-        </button>
+        </button> */}
         {/* <button
           type="submit"
           className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
