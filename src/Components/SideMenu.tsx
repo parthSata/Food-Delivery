@@ -13,7 +13,6 @@ function SideMenu() {
       sideMenuRef.current &&
       !sideMenuRef.current.contains(event.target as Node)
     ) {
-      // Click occurred outside of side menu, close it
       closeSideMenu();
     }
   };

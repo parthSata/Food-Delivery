@@ -1,7 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, RefObject } from "react";
 import Pasta from "../assets/AddProduct/Pasta.png";
 import Pizza from "../assets/AddProduct/Pizza.jpg";
 import Burger from "../assets/AddProduct/Burger.jpg";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface ProductData {
   id: number | string;
@@ -19,9 +22,10 @@ interface ProductData {
 interface Props {
   onClose: () => void;
   productId?: number | null;
+  onAddProduct: (newProduct: ProductData) => void;
 }
 
-const AddProduct: React.FC<Props> = ({ productId }) => {
+const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
   const [imageDropdown, setImageDropdown] = useState<boolean>(false);
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [products, setProducts] = useState<ProductData[]>([]);
@@ -37,10 +41,37 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     Status: "In Stock",
     Discription: "",
   });
+  const imageDropdownRef: RefObject<HTMLButtonElement> = useRef(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const images = [Pasta, Pizza, Burger];
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        imageDropdownRef.current &&
+        !imageDropdownRef.current.contains(event.target as Node)
+      ) {
+        // Clicked outside of the dropdown, close it
+        closeImageDropdown();
+      }
+    };
+
+    // Add event listener to handle clicks outside of the dropdown
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  const closeImageDropdown = () => {
+    if (imageDropdownRef.current) {
+      imageDropdownRef.current.classList.add("hidden");
+    }
+  };
 
   const prevSlide = () => {
     setCurrentSlide((prevSlide) =>
@@ -71,95 +102,6 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     }
   }, []);
 
-  // const handleDelete = () => {
-  //   const savedFormData = JSON.parse(localStorage.getItem(formData.id) ?? "[]");
-  //   if (savedFormData) {
-  //     localStorage.removeItem(savedFormData.id);
-  //     setFormData({
-  //       id: "",
-  //       ProductName: "",
-  //       Price: "",
-  //       DiscountPrice: "",
-  //       Unit: "",
-  //       Stock: "",
-  //       IsVeg: "True",
-  //       Status: "In Stock",
-  //       Discription: "",
-  //     });
-  //   }
-  // };
-
-  // const handleSubmit = () => {
-  //   if (
-  //     !formData.ProductName ||
-  //     !formData.Price ||
-  //     !formData.DiscountPrice ||
-  //     !formData.Unit ||
-  //     !formData.Stock ||
-  //     !formData.Discription ||
-  //     formData.ProductImage?.length === 0 // Ensure at least one image is uploaded
-  //   ) {
-  //     alert("Please fill in all the fields");
-  //     return;
-  //   }
-
-  //   if (formData.ProductImage && formData.ProductImage.length === 0) {
-  //     const confirmUpload = window.confirm(
-  //       "No image uploaded. Do you want to proceed without an image?"
-  //     );
-  //     if (!confirmUpload) {
-  //       return; // Don't proceed without an image
-  //     }
-  //   }
-
-  //   const newProduct: ProductData = {
-  //     ...formData,
-  //     id: Date.now().toString(),
-  //     ProductImage: [],
-  //   };
-
-  //   if (formData.ProductImage) {
-  //     formData.ProductImage.forEach((image, index) => {
-  //       const reader = new FileReader();
-  //       reader.onload = () => {
-  //         const base64Data = reader.result as string;
-  //         const file = dataURLtoFile(base64Data, `image_${index}.png`);
-  //         newProduct.ProductImage?.push(file);
-  //       };
-  //       reader.readAsDataURL(image);
-  //     });
-  //   }
-
-  //   // Function to convert base64 to File
-  //   function dataURLtoFile(dataUrl: string, filename: string): File {
-  //     const arr = dataUrl.split(",");
-  //     const mime = arr[0].match(/:(.*?);/)![1];
-  //     const bstr = atob(arr[1]);
-  //     let n = bstr.length;
-  //     const u8arr = new Uint8Array(n);
-  //     while (n--) {
-  //       u8arr[n] = bstr.charCodeAt(n);
-  //     }
-  //     return new File([u8arr], filename, { type: mime });
-  //   }
-  //   setProducts((prevProducts) => [...prevProducts, newProduct]);
-
-  //   localStorage.setItem("products", JSON.stringify([...products, newProduct]));
-
-  //   setFormData({
-  //     id: "",
-  //     ProductName: "",
-  //     Price: "",
-  //     DiscountPrice: "",
-  //     Unit: "",
-  //     ProductImage: [],
-  //     Stock: "",
-  //     IsVeg: "True",
-  //     Status: "In Stock",
-  //     Discription: "",
-  //   });
-  // };
-
   const handleSubmit = () => {
     if (
       !formData.ProductName ||
@@ -171,10 +113,10 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
       !formData.ProductImage || // Add null check for formData.ProductImage
       formData.ProductImage?.length === 0 // Ensure at least one image is uploaded
     ) {
-      alert("Please fill in all the fields");
+      toast.warn("Please Fill all inputs and Upload Image");
       return;
     }
-  
+
     if (formData.ProductImage && formData.ProductImage.length === 0) {
       const confirmUpload = window.confirm(
         "No image uploaded. Do you want to proceed without an image?"
@@ -183,16 +125,15 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
         return; // Don't proceed without an image
       }
     }
-  
+
     const newProduct: ProductData = {
       ...formData,
       id: Date.now().toString(),
       ProductImage: [], // Initialize empty array
     };
-  
-    // Loop through each uploaded image and read it as base64
+
     formData.ProductImage.forEach((image) => {
-      if (typeof image === 'string') {
+      if (typeof image === "string") {
         // If it's a base64 encoded string, push it directly
         newProduct.ProductImage?.push(image);
       } else {
@@ -212,7 +153,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
         reader.readAsDataURL(image);
       }
     });
-  
+
     setFormData({
       id: "",
       ProductName: "",
@@ -225,18 +166,21 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
       Status: "In Stock",
       Discription: "",
     });
+
+    onAddProduct(newProduct);
+    onClose();
   };
-  
 
-
-  
   const handleDropdown = () => {
     setImageDropdown(!imageDropdown);
+    if (imageDropdownRef.current) {
+      imageDropdownRef.current.classList.toggle("hidden");
+    }
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log("🚀 ~ handleImageUpload ~ file:", file)
+    console.log("🚀 ~ handleImageUpload ~ file:", file);
     if (file) {
       setFormData({
         ...formData,
@@ -308,6 +252,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
             className="absolute right-2 z-20 inline-flex  items-center p-2 text-sm font-medium text-center  top-[35px] rounded-lg text-white focus:ring-gray-50"
             type="button"
             onClick={handleDropdown}
+            ref={imageDropdownRef}
           >
             <svg
               className="w-5 h-5"
@@ -336,8 +281,10 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
             tabIndex={-1}
             style={{ fontFamily: "Bai Jamjuree" }}
             id="drop-down"
+            //@ts-ignored
+            ref={imageDropdownRef}
           >
-            <div className="py-1 border-b-2 ">
+            <div className="py-1 border-b-2">
               <a
                 href="#"
                 className="text-[#161A1D] block px-4 py-2 h-8 text-sm  font-semibold border-b-2"
@@ -554,28 +501,12 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
         >
           Save Product
         </button>
-        {/* <button
-          type="submit"
-          className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
-          style={{
-            boxShadow: "2px 2px 25px 2px #94CD0099",
-            fontFamily: "Bai Jamjuree",
-          }}
-          // onClick={handleDelete}
-        >
-          Delete Product
-        </button> */}
-        {/* <button
-          type="submit"
-          className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
-          style={{
-            boxShadow: "2px 2px 25px 2px #94CD0099",
-            fontFamily: "Bai Jamjuree",
-          }}
-          onClick={handleSelect}
-        >
-          Select Product
-        </button> */}
+        <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          pauseOnFocusLoss={false}
+          limit={1}
+        />
         <button
           type="submit"
           className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import search from "../assets/HomePage/search.png";
 import Pizza from "../assets/HomePage/Pizza.png";
-import Right from "../assets/HomePage/RightArrow.png";
-import Left from "../assets/HomePage/LeftArrow.png";
-// import { useNavigate } from "react-router-dom";
+// import Right from "../assets/HomePage/RightArrow.png";
+// import Left from "../assets/HomePage/LeftArrow.png";
 import AddProduct from "./AddProduct";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
@@ -23,6 +22,44 @@ function Home(): JSX.Element {
     useState<boolean>(false);
   const [updateProductId, setUpdateProductId] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 5;
+  const [searchInput, setSearchInput] = useState("");
+
+  const filteredProducts = products.filter((product) =>
+    product.ProductName.toLowerCase().includes(searchInput.toLowerCase())
+  );
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const handleAddOrUpdateProduct = (newProduct: Product) => {
+    const updatedProducts = [...products];
+    const existingProductIndex = updatedProducts.findIndex(
+      (product) => product.id === newProduct.id
+    );
+
+    if (existingProductIndex !== -1) {
+      updatedProducts[existingProductIndex] = newProduct;
+    } else {
+      updatedProducts.push(newProduct);
+    }
+
+    // Update state and local storage
+    setProducts(updatedProducts);
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+    // Close the dialog
+    setShowAddProductDialog(false);
+  };
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
@@ -48,8 +85,19 @@ function Home(): JSX.Element {
     if (storedProducts) {
       setProducts(JSON.parse(storedProducts));
     }
-    console.log("🚀 ~ useEffect ~ storedProducts:", storedProducts);
   }, []);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   return (
     <>
@@ -76,6 +124,7 @@ function Home(): JSX.Element {
                     type="text"
                     placeholder="Search.."
                     className="border-gray-400  border-[1px] p-4 text-[#A2A3A5] focus:border-none  pr-12 hover:border-[1px solid #E7E7E9]  h-10 rounded-full"
+                    onChange={(e) => setSearchInput(e.target.value)}
                   />
                   <img
                     src={search}
@@ -131,14 +180,14 @@ function Home(): JSX.Element {
                   </tr>
                 </thead>
                 <tbody>
-                  {products?.map((item) => (
+                  {currentItems?.map((item) => (
                     <tr
                       key={item.id}
                       className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
                     >
                       <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
                         <img
-                          src={item.ProductImage}
+                          src={item.ProductImage || Pizza}
                           className="ml-2 mr-2 w-[42px] h-[42px]"
                           alt=""
                         />
@@ -178,7 +227,7 @@ function Home(): JSX.Element {
           {/* table End */}
         </div>
         {/* Pagination */}
-        {products > 5 && (
+        {/* {products.length > 5 && (
           <div className="flex justify-end">
             <div
               className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md"
@@ -236,8 +285,55 @@ function Home(): JSX.Element {
               />
             </div>
           </div>
+        )} */}
+
+        {totalPages > 1 && (
+          <div className="flex justify-end">
+            <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
+              {/* <img
+                src={Left}
+                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+              /> */}
+              <button
+                className="mr-4 rounded-sm px-3 py-1 bg-gray-300 hover:bg-gray-400 focus:outline-none"
+                onClick={() => handlePreviousPage()}
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <ul className="flex items-end justify-around w-64 top-[]">
+                {[...Array(totalPages)].map((_, index) => (
+                  <li key={index} className="page flex flex-grow">
+                    <a
+                      href="#"
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
+                        currentPage === index + 1 ? "font-bold" : ""
+                      }`}
+                    >
+                      {index + 1}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              {/* <img
+                src={Right}
+                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                
+              /> */}
+              <button
+                className="ml-4 rounded-sm px-3 py-1 bg-gray-300 hover:bg-gray-400 focus:outline-none"
+                onClick={() => handleNextPage()}
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          </div>
         )}
-        {/* Pagination */}s{/* Body Ended Started */}
+
+        {/* Pagination */}
+        {/* Body Ended Started */}
       </div>
       {showAddProductDialog && (
         <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-4 m-8">
@@ -276,6 +372,7 @@ function Home(): JSX.Element {
                 <AddProduct
                   onClose={() => setShowAddProductDialog(false)}
                   productId={updateProductId}
+                  onAddProduct={() => handleAddOrUpdateProduct}
                 />
               </div>
             </div>
