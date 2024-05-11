@@ -9,6 +9,7 @@ interface ProductData {
   Price: number | string;
   DiscountPrice: number | string;
   Unit: number | string;
+  ProductImage?: (File | string)[];
   Stock: string;
   IsVeg: string;
   Status: string;
@@ -30,6 +31,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     Price: "",
     DiscountPrice: "",
     Unit: "",
+    ProductImage: [],
     Stock: "",
     IsVeg: "True",
     Status: "In Stock",
@@ -57,7 +59,7 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    if (event.target === null) return; // Null check
+    if (event.target === null) return;
     const { name, value } = event.target;
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -87,35 +89,162 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
   //   }
   // };
 
+  // const handleSubmit = () => {
+  //   if (
+  //     !formData.ProductName ||
+  //     !formData.Price ||
+  //     !formData.DiscountPrice ||
+  //     !formData.Unit ||
+  //     !formData.Stock ||
+  //     !formData.Discription ||
+  //     formData.ProductImage?.length === 0 // Ensure at least one image is uploaded
+  //   ) {
+  //     alert("Please fill in all the fields");
+  //     return;
+  //   }
+
+  //   if (formData.ProductImage && formData.ProductImage.length === 0) {
+  //     const confirmUpload = window.confirm(
+  //       "No image uploaded. Do you want to proceed without an image?"
+  //     );
+  //     if (!confirmUpload) {
+  //       return; // Don't proceed without an image
+  //     }
+  //   }
+
+  //   const newProduct: ProductData = {
+  //     ...formData,
+  //     id: Date.now().toString(),
+  //     ProductImage: [],
+  //   };
+
+  //   if (formData.ProductImage) {
+  //     formData.ProductImage.forEach((image, index) => {
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         const base64Data = reader.result as string;
+  //         const file = dataURLtoFile(base64Data, `image_${index}.png`);
+  //         newProduct.ProductImage?.push(file);
+  //       };
+  //       reader.readAsDataURL(image);
+  //     });
+  //   }
+
+  //   // Function to convert base64 to File
+  //   function dataURLtoFile(dataUrl: string, filename: string): File {
+  //     const arr = dataUrl.split(",");
+  //     const mime = arr[0].match(/:(.*?);/)![1];
+  //     const bstr = atob(arr[1]);
+  //     let n = bstr.length;
+  //     const u8arr = new Uint8Array(n);
+  //     while (n--) {
+  //       u8arr[n] = bstr.charCodeAt(n);
+  //     }
+  //     return new File([u8arr], filename, { type: mime });
+  //   }
+  //   setProducts((prevProducts) => [...prevProducts, newProduct]);
+
+  //   localStorage.setItem("products", JSON.stringify([...products, newProduct]));
+
+  //   setFormData({
+  //     id: "",
+  //     ProductName: "",
+  //     Price: "",
+  //     DiscountPrice: "",
+  //     Unit: "",
+  //     ProductImage: [],
+  //     Stock: "",
+  //     IsVeg: "True",
+  //     Status: "In Stock",
+  //     Discription: "",
+  //   });
+  // };
+
   const handleSubmit = () => {
-    const newProduct = { ...formData, id: Date.now().toString() };
-    setProducts((prevProducts) => [...prevProducts, newProduct]);
-    localStorage.setItem("products", JSON.stringify([...products, newProduct]));
+    if (
+      !formData.ProductName ||
+      !formData.Price ||
+      !formData.DiscountPrice ||
+      !formData.Unit ||
+      !formData.Stock ||
+      !formData.Discription ||
+      !formData.ProductImage || // Add null check for formData.ProductImage
+      formData.ProductImage?.length === 0 // Ensure at least one image is uploaded
+    ) {
+      alert("Please fill in all the fields");
+      return;
+    }
+  
+    if (formData.ProductImage && formData.ProductImage.length === 0) {
+      const confirmUpload = window.confirm(
+        "No image uploaded. Do you want to proceed without an image?"
+      );
+      if (!confirmUpload) {
+        return; // Don't proceed without an image
+      }
+    }
+  
+    const newProduct: ProductData = {
+      ...formData,
+      id: Date.now().toString(),
+      ProductImage: [], // Initialize empty array
+    };
+  
+    // Loop through each uploaded image and read it as base64
+    formData.ProductImage.forEach((image) => {
+      if (typeof image === 'string') {
+        // If it's a base64 encoded string, push it directly
+        newProduct.ProductImage?.push(image);
+      } else {
+        // If it's a File object, read it as base64 and push the encoded string
+        const reader = new FileReader();
+        reader.onload = () => {
+          const base64Data = reader.result as string;
+          newProduct.ProductImage?.push(base64Data);
+          // Update the state after saving to localStorage
+          setProducts((prevProducts) => [...prevProducts, newProduct]);
+          // Save to localStorage immediately
+          localStorage.setItem(
+            "products",
+            JSON.stringify([...products, newProduct])
+          );
+        };
+        reader.readAsDataURL(image);
+      }
+    });
+  
     setFormData({
       id: "",
       ProductName: "",
       Price: "",
       DiscountPrice: "",
       Unit: "",
+      ProductImage: [],
       Stock: "",
       IsVeg: "True",
       Status: "In Stock",
       Discription: "",
     });
   };
+  
 
+
+  
   const handleDropdown = () => {
     setImageDropdown(!imageDropdown);
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    console.log("🚀 ~ handleImageUpload ~ file:", file)
     if (file) {
-      // You can handle the file upload here, such as uploading it to a server or processing it
-      // For now, let's just log the file object
-      console.log("Uploded Image File:", file);
+      setFormData({
+        ...formData,
+        ProductImage: [...(formData.ProductImage ?? []), file],
+      });
     }
   };
+
   const handleImageUploadClick = () => {
     fileInputRef.current?.click();
   };
@@ -124,14 +253,17 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
     const existingProducts = JSON.parse(
       localStorage.getItem("products") ?? "[]"
     );
-    const existingProduct = existingProducts.find(
-      (product: any) => product.id === productId
+    const existingProductIndex = existingProducts.findIndex(
+      (product: ProductData) => product.id === productId
     );
-    if (existingProduct) {
-      setFormData(existingProduct);
-      // find index of updated product id then update that object with updated data 
-      
-      // console.log("Product Data Updated");
+    if (existingProductIndex !== -1) {
+      existingProducts[existingProductIndex] = { ...formData, id: productId };
+      // find index of updated product id then update that object with updated data
+
+      localStorage.setItem("products", JSON.stringify(existingProducts));
+      setProducts(existingProducts);
+
+      console.log("Product Data Updated");
     } else {
       console.log("Product not found for update!");
     }
@@ -145,16 +277,14 @@ const AddProduct: React.FC<Props> = ({ productId }) => {
       (product: ProductData) => product.id === productId
     );
     if (existingProduct) {
-      // Set form data with existing product values
       setFormData(existingProduct);
     }
   }, [productId]);
-  console.log("AddProduct Id :", productId);
 
   return (
     <div className="">
       {/* DialogBox For Add Product */}
-      <div className="flex justify-center gap-2 mt-[700px] sm:mt-[530px] md:mt-[350px] lg:mt-[6px] xl:mt-[85px] md:now lg:flex-nowrap flex-wrap">
+      <div className="flex justify-center gap-2 mt-[700px] sm:mt-[530px] md:mt-[350px] lg:mt-[6px] xl:mt-[85px]  lg:flex-nowrap flex-wrap">
         {/* image */}
         <div className="flex flex-col items-center relative mt-[2px] sm:mt-[180px] md:mt-[10px] lg:mt-[10px]">
           <span

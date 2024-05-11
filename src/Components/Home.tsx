@@ -15,13 +15,13 @@ interface Product {
   Status: string;
   Price: number;
   DiscountPrice: number;
+  ProductImage: string;
 }
 
 function Home(): JSX.Element {
-  // const navigate = useNavigate();
   const [showAddProductDialog, setShowAddProductDialog] =
     useState<boolean>(false);
-  const [updateProductId, setUpdateProductId] = useState<number| null>(null);
+  const [updateProductId, setUpdateProductId] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
@@ -34,8 +34,6 @@ function Home(): JSX.Element {
   };
 
   const handleUpdate = (id: number) => {
-    console.log("Home Id :", id);
-
     const productToUpdate = products.find((product) => product.id === id);
     if (productToUpdate) {
       setShowAddProductDialog(true);
@@ -45,12 +43,12 @@ function Home(): JSX.Element {
     }
   };
 
-  
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
     if (storedProducts) {
       setProducts(JSON.parse(storedProducts));
     }
+    console.log("🚀 ~ useEffect ~ storedProducts:", storedProducts);
   }, []);
 
   return (
@@ -59,11 +57,9 @@ function Home(): JSX.Element {
         {/* Header Started Here */}
         <Header />
         {/* Header End Here */}
-
         {/* sideMenu */}
         <SideMenu />
         {/* sideMenu */}
-
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div
@@ -103,13 +99,13 @@ function Home(): JSX.Element {
           <div className="flex flex-col relative overflow-x-auto">
             <div className="mt-4 flex rounded-[10px] overflow-hidden relative  ">
               <table
-                className=" w-full   text-md text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400"
                 style={{
                   fontFamily: "Bai Jamjuree",
                   boxShadow: "2px 2px 30px 2px #FFF3E5",
                 }}
               >
-                <thead className="rounded-full bg-[#DF201F]">
+                <thead className="rounded-full bg-[#DF201F] sm:overflow-x-auto sm:overflow-y-scroll">
                   <tr className="text-[#FFFFFF] font-semibold ">
                     <th className="border-r-1  py-2 px-4 rounded-tl-lg    border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Name
@@ -142,7 +138,7 @@ function Home(): JSX.Element {
                     >
                       <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
                         <img
-                          src={Pizza}
+                          src={item.ProductImage}
                           className="ml-2 mr-2 w-[42px] h-[42px]"
                           alt=""
                         />
@@ -181,64 +177,67 @@ function Home(): JSX.Element {
           </div>
           {/* table End */}
         </div>
-        <div className="flex justify-end">
-          <div
-            className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md"
-            style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
-          >
-            <img
-              src={Left}
-              className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-            />
-            <ul className="flex items-end justify-around w-64 top-[]">
-              <li className="flex flex-grow ">
-                <a
-                  href="#"
-                  className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                >
-                  1
-                </a>
-              </li>
-              <li className="page flex flex-grow">
-                <a
-                  href="#"
-                  className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                >
-                  2
-                </a>
-              </li>
-              <li className="page flex flex-grow">
-                <a
-                  href="#"
-                  className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                >
-                  3
-                </a>
-              </li>
-              <li className="page flex flex-grow">
-                <a
-                  href="#"
-                  className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                >
-                  4
-                </a>
-              </li>
-              <li className="page flex flex-grow">
-                <a
-                  href="#"
-                  className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                >
-                  5
-                </a>
-              </li>
-            </ul>
-            <img
-              src={Right}
-              className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-            />
+        {/* Pagination */}
+        {products > 5 && (
+          <div className="flex justify-end">
+            <div
+              className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md"
+              style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
+            >
+              <img
+                src={Left}
+                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+              />
+              <ul className="flex items-end justify-around w-64 top-[]">
+                <li className="flex flex-grow ">
+                  <a
+                    href="#"
+                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                  >
+                    1
+                  </a>
+                </li>
+                <li className="page flex flex-grow">
+                  <a
+                    href="#"
+                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                  >
+                    2
+                  </a>
+                </li>
+                <li className="page flex flex-grow">
+                  <a
+                    href="#"
+                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                  >
+                    3
+                  </a>
+                </li>
+                <li className="page flex flex-grow">
+                  <a
+                    href="#"
+                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                  >
+                    4
+                  </a>
+                </li>
+                <li className="page flex flex-grow">
+                  <a
+                    href="#"
+                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+                  >
+                    5
+                  </a>
+                </li>
+              </ul>
+              <img
+                src={Right}
+                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
+              />
+            </div>
           </div>
-        </div>
-        {/* Body Ended Started */}
+        )}
+        {/* Pagination */}s{/* Body Ended Started */}
       </div>
       {showAddProductDialog && (
         <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-4 m-8">
@@ -274,10 +273,10 @@ function Home(): JSX.Element {
                 </svg>
               </button>
               <div className="p-6">
-                  <AddProduct
-                    onClose={() => setShowAddProductDialog(false)}
-                    productId={updateProductId}
-                  />
+                <AddProduct
+                  onClose={() => setShowAddProductDialog(false)}
+                  productId={updateProductId}
+                />
               </div>
             </div>
           </div>
