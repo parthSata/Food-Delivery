@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef, RefObject } from "react";
-import Pasta from "../assets/AddProduct/Pasta.png";
-import Pizza from "../assets/AddProduct/Pizza.jpg";
-import Burger from "../assets/AddProduct/Burger.jpg";
+// import Pasta from "../assets/AddProduct/Pasta.png";
+// import Pizza from "../assets/AddProduct/Pizza.jpg";
+// import Burger from "../assets/AddProduct/Burger.jpg";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validator from "validator";
 
 interface ProductData {
   id: number | string;
@@ -12,7 +13,7 @@ interface ProductData {
   Price: number | string;
   DiscountPrice: number | string;
   Unit: number | string;
-  ProductImage?: (File | string)[];
+  ProductImage?: string;
   Stock: string;
   IsVeg: string;
   Status: string;
@@ -26,8 +27,9 @@ interface Props {
 }
 
 const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
-  const [imageDropdown, setImageDropdown] = useState<boolean>(false);
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  // const [imageDropdown, setImageDropdown] = useState<boolean>(false);
+  // const [currentSlide, setCurrentSlide] = useState<number>(0);
+  // @ts-ignore
   const [products, setProducts] = useState<ProductData[]>([]);
   const [formData, setFormData] = useState<ProductData>({
     id: "",
@@ -35,17 +37,25 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
     Price: "",
     DiscountPrice: "",
     Unit: "",
-    ProductImage: [],
+    ProductImage: "",
     Stock: "",
     IsVeg: "True",
     Status: "In Stock",
     Discription: "",
   });
   const imageDropdownRef: RefObject<HTMLButtonElement> = useRef(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  // const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // const images = [Pasta, Pizza, Burger];
 
-  const images = [Pasta, Pizza, Burger];
+  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    if (name === "ProductImage") {
+      setErrorMessage(validate(value));
+    }
+  };
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -67,23 +77,30 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
     };
   }, []);
 
+  const validate = (value: string): string => {
+    if (validator.isURL(value)) {
+      return ""; // Return empty string for valid URL
+    } else {
+      return "Is Not Valid URL"; // Return error message for invalid URL
+    }
+  };
   const closeImageDropdown = () => {
     if (imageDropdownRef.current) {
       imageDropdownRef.current.classList.add("hidden");
     }
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? images.length - 1 : prevSlide - 1
-    );
-  };
+  // const prevSlide = () => {
+  //   setCurrentSlide((prevSlide) =>
+  //     prevSlide === 0 ? images.length - 1 : prevSlide - 1
+  //   );
+  // };
 
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === images.length - 1 ? 0 : prevSlide + 1
-    );
-  };
+  // const nextSlide = () => {
+  //   setCurrentSlide((prevSlide) =>
+  //     prevSlide === images.length - 1 ? 0 : prevSlide + 1
+  //   );
+  // };
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -129,30 +146,30 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
     const newProduct: ProductData = {
       ...formData,
       id: Date.now().toString(),
-      ProductImage: [], // Initialize empty array
+      ProductImage: "", // Initialize empty array
     };
 
-    formData.ProductImage.forEach((image) => {
-      if (typeof image === "string") {
-        // If it's a base64 encoded string, push it directly
-        newProduct.ProductImage?.push(image);
-      } else {
-        // If it's a File object, read it as base64 and push the encoded string
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64Data = reader.result as string;
-          newProduct.ProductImage?.push(base64Data);
-          // Update the state after saving to localStorage
-          setProducts((prevProducts) => [...prevProducts, newProduct]);
-          // Save to localStorage immediately
-          localStorage.setItem(
-            "products",
-            JSON.stringify([...products, newProduct])
-          );
-        };
-        reader.readAsDataURL(image);
-      }
-    });
+    // formData.ProductImage.forEach((image) => {
+    //   if (typeof image === "string") {
+    //     // If it's a base64 encoded string, push it directly
+    //     newProduct.ProductImage?.push(image);
+    //   } else {
+    //     // If it's a File object, read it as base64 and push the encoded string
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //       const base64Data = reader.result as string;
+    //       newProduct.ProductImage?.push(base64Data);
+    //       // Update the state after saving to localStorage
+    //       setProducts((prevProducts) => [...prevProducts, newProduct]);
+    //       // Save to localStorage immediately
+    //       localStorage.setItem(
+    //         "products",
+    //         JSON.stringify([...products, newProduct])
+    //       );
+    //     };
+    //     reader.readAsDataURL(image);
+    //   }
+    // });
 
     setFormData({
       id: "",
@@ -160,7 +177,7 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
       Price: "",
       DiscountPrice: "",
       Unit: "",
-      ProductImage: [],
+      ProductImage: "",
       Stock: "",
       IsVeg: "True",
       Status: "In Stock",
@@ -171,27 +188,26 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
     onClose();
   };
 
-  const handleDropdown = () => {
-    setImageDropdown(!imageDropdown);
-    if (imageDropdownRef.current) {
-      imageDropdownRef.current.classList.toggle("hidden");
-    }
-  };
+  // const handleDropdown = () => {
+  //   setImageDropdown(!imageDropdown);
+  //   if (imageDropdownRef.current) {
+  //     imageDropdownRef.current.classList.toggle("hidden");
+  //   }
+  // };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    console.log("🚀 ~ handleImageUpload ~ file:", file);
-    if (file) {
-      setFormData({
-        ...formData,
-        ProductImage: [...(formData.ProductImage ?? []), file],
-      });
-    }
-  };
+  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     setFormData({
+  //       ...formData,
+  //       ProductImage: [...(formData.ProductImage ?? []), file],
+  //     });
+  //   }
+  // };
 
-  const handleImageUploadClick = () => {
-    fileInputRef.current?.click();
-  };
+  // const handleImageUploadClick = () => {
+  //   fileInputRef.current?.click();
+  // };
 
   const handleUpdate = () => {
     const existingProducts = JSON.parse(
@@ -237,16 +253,58 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
           >
             Product Image
           </span>
-          <div className="">
-            <img
-              src={images[currentSlide]}
-              className="h-[300px] w-[500px] rounded-lg"
-              alt=""
-            />
+          <div className="border-2 flex flex-col justify-center items-center h-[150px] w-[400px] rounded-lg mb-8">
+            {formData.ProductImage && (
+              <img
+                src={formData.ProductImage}
+                className="h-[300px] w-[500px] rounded-lg"
+                alt="Image Preview"
+              />
+            )}
+            {/* <span
+              className="mt-[2px] self-start ml-14 text-xl font-semibold"
+              style={{ fontFamily: "Bai jamjuree" }}
+            >
+              Image Url
+            </span>
+            <div className="flex justify-center items-center flex-col ">
+              <input
+                type="url"
+                name="ProductImage"
+                value={formData.ProductImage}
+                className="border-2 text-[#A2A3A5] mt-[3px] p-8 text-2xl focus:outline-none h-[80px] w-[300px] rounded-lg"
+                onChange={handleUrlChange}
+              />
+              <span className="font-bold self-start text-red-600 text-sm">
+                {errorMessage}
+              </span>
+            </div> */}
+            {!formData.ProductImage && (
+              <>
+                <span
+                  className="mt-[2px] self-start ml-14 text-xl font-semibold"
+                  style={{ fontFamily: "Bai jamjuree" }}
+                >
+                  Image Url
+                </span>
+                <div className="flex justify-center items-center flex-col ">
+                  <input
+                    type="url"
+                    name="ProductImage"
+                    value={formData.ProductImage}
+                    className="border-2 text-[#A2A3A5] mt-[3px] p-8 text-2xl focus:outline-none h-[80px] w-[300px] rounded-lg"
+                    onChange={handleUrlChange}
+                  />
+                  <span className="font-bold self-start text-red-600 text-sm">
+                    {errorMessage}
+                  </span>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Image Dropdown */}
-          <button
+          {/* <button
             id="dropdownMenuIconButton"
             data-dropdown-toggle="dropdownDots"
             className="absolute right-2 z-20 inline-flex  items-center p-2 text-sm font-medium text-center  top-[35px] rounded-lg text-white focus:ring-gray-50"
@@ -305,10 +363,10 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
                 Delete
               </a>
             </div>
-          </div>
+          </div> */}
           {/* Image Dropdown */}
 
-          <button
+          {/* <button
             type="button"
             className="absolute start-0 z-30 flex bottom-20 top-28 lg:top-0 lg:bottom-[250px] md:top-32   items-center justify-center  px-4 cursor-pointer group focus:outline-none"
             onClick={prevSlide}
@@ -355,7 +413,7 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
               </svg>
               <span className="sr-only">Next</span>
             </span>
-          </button>
+          </button> */}
         </div>
 
         <div className="w-full max-w-lg">

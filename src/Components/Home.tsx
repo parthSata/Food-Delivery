@@ -227,65 +227,6 @@ function Home(): JSX.Element {
           {/* table End */}
         </div>
         {/* Pagination */}
-        {/* {products.length > 5 && (
-          <div className="flex justify-end">
-            <div
-              className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md"
-              style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
-            >
-              <img
-                src={Left}
-                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-              />
-              <ul className="flex items-end justify-around w-64 top-[]">
-                <li className="flex flex-grow ">
-                  <a
-                    href="#"
-                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                  >
-                    1
-                  </a>
-                </li>
-                <li className="page flex flex-grow">
-                  <a
-                    href="#"
-                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                  >
-                    2
-                  </a>
-                </li>
-                <li className="page flex flex-grow">
-                  <a
-                    href="#"
-                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                  >
-                    3
-                  </a>
-                </li>
-                <li className="page flex flex-grow">
-                  <a
-                    href="#"
-                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                  >
-                    4
-                  </a>
-                </li>
-                <li className="page flex flex-grow">
-                  <a
-                    href="#"
-                    className="h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-                  >
-                    5
-                  </a>
-                </li>
-              </ul>
-              <img
-                src={Right}
-                className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
-              />
-            </div>
-          </div>
-        )} */}
 
         {totalPages > 1 && (
           <div className="flex justify-end">
@@ -295,13 +236,16 @@ function Home(): JSX.Element {
                 className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
               /> */}
               <button
-                className="mr-4 rounded-sm px-3 py-1 bg-gray-300 hover:bg-gray-400 focus:outline-none"
+                className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200    focus:outline-none"
                 onClick={() => handlePreviousPage()}
                 disabled={currentPage === 1}
               >
-                Previous
+                <i
+                  className="fa-solid fa-angle-left"
+                  style={{ color: "#8f9194" }}
+                ></i>
               </button>
-              <ul className="flex items-end justify-around w-64 top-[]">
+              <ul className="flex items-end justify-around w-[80px] top-[]">
                 {[...Array(totalPages)].map((_, index) => (
                   <li key={index} className="page flex flex-grow">
                     <a
@@ -322,11 +266,14 @@ function Home(): JSX.Element {
                 
               /> */}
               <button
-                className="ml-4 rounded-sm px-3 py-1 bg-gray-300 hover:bg-gray-400 focus:outline-none"
+                className="ml-4 rounded-sm px-3 py-1  hover:bg-gray-200 focus:outline-none"
                 onClick={() => handleNextPage()}
                 disabled={currentPage === totalPages}
               >
-                Next
+                <i
+                  className="fa-solid fa-angle-right"
+                  style={{ color: "#8f9194" }}
+                ></i>
               </button>
             </div>
           </div>

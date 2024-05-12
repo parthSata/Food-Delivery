@@ -2,7 +2,7 @@ import { useState } from "react";
 import Logo from "../assets/Login/Logo1.png";
 import Resend from "../assets/Login/Resend.png";
 import image from "../assets/Login/img.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 
 function Verification() {
@@ -12,6 +12,11 @@ function Verification() {
   console.log(CallingCode);
   const [otp, setOtp] = useState("");
 
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    navigate("/");
+  };
   return (
     <>
       <div className="h-screen w-screen flex flex-row justify-center items-center flex-wrap xl:flex-wrap">
@@ -79,6 +84,7 @@ function Verification() {
               boxShadow: "2px 2px 25px 2px #DF201F80",
             }}
             className="bg-red-500 h-[60px] md:h-[60px] w-[260px] md:w-[260px] rounded-[60px] text-white text-[22px] md:text-[22px] mt-5"
+            onClick={() => handleSubmit}
           >
             VERIFICATION
           </button>
