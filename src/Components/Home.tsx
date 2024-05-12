@@ -111,13 +111,13 @@ function Home(): JSX.Element {
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div
-            className="flex justify-between  items-center mt-10"
+            className="flex justify-between  items-center mt-10 "
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <div className="">
               <span className="font-semibold text-[#161A1D]">Product List</span>
             </div>
-            <div className="">
+            <div className="flex flex-wrap">
               <div className="flex justify-evenly ">
                 <div className="relative">
                   <input
@@ -188,7 +188,7 @@ function Home(): JSX.Element {
                       <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
                         <img
                           src={item.ProductImage || Pizza}
-                          className="ml-2 mr-2 w-[42px] h-[42px]"
+                          className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
                           alt=""
                         />
                         {item.ProductName}

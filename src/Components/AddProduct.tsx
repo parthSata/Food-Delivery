@@ -1,7 +1,4 @@
 import React, { useEffect, useState, useRef, RefObject } from "react";
-// import Pasta from "../assets/AddProduct/Pasta.png";
-// import Pizza from "../assets/AddProduct/Pizza.jpg";
-// import Burger from "../assets/AddProduct/Burger.jpg";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,9 +24,6 @@ interface Props {
 }
 
 const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
-  // const [imageDropdown, setImageDropdown] = useState<boolean>(false);
-  // const [currentSlide, setCurrentSlide] = useState<number>(0);
-  // @ts-ignore
   const [products, setProducts] = useState<ProductData[]>([]);
   const [formData, setFormData] = useState<ProductData>({
     id: "",
@@ -45,15 +39,43 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
   });
   const imageDropdownRef: RefObject<HTMLButtonElement> = useRef(null);
   const [errorMessage, setErrorMessage] = useState("");
-  // const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isValidUrl, setIsValidUrl] = useState(false);
 
-  // const images = [Pasta, Pizza, Burger];
-
-  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUrlChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { name, value } = event.target;
+    console.log("Current form data:", formData); // Log current form data
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+
     if (name === "ProductImage") {
       setErrorMessage(validate(value));
+      if (validator.isURL(value)) {
+        try {
+          console.log("In URL validation");
+
+          const response = await fetch(value);
+          console.log("Fetch response:", response); // Log fetch response
+          if (response.ok) {
+            const imageUrl = value;
+            console.log("Image URL:", imageUrl); // Log created image URL
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              ProductImage: imageUrl,
+            }));
+          } else {
+            console.log("Fetch unsuccessful");
+
+            setFormData((prevFormData) => ({
+              ...prevFormData,
+              ProductImage: "", // Clear image if fetch fails
+            }));
+            toast.error("Failed to fetch image from the URL");
+          }
+        } catch (error) {
+          console.error("Error during fetch:", error);
+        }
+      }
     }
   };
 
@@ -79,6 +101,7 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
 
   const validate = (value: string): string => {
     if (validator.isURL(value)) {
+      setIsValidUrl(true);
       return ""; // Return empty string for valid URL
     } else {
       return "Is Not Valid URL"; // Return error message for invalid URL
@@ -89,18 +112,6 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
       imageDropdownRef.current.classList.add("hidden");
     }
   };
-
-  // const prevSlide = () => {
-  //   setCurrentSlide((prevSlide) =>
-  //     prevSlide === 0 ? images.length - 1 : prevSlide - 1
-  //   );
-  // };
-
-  // const nextSlide = () => {
-  //   setCurrentSlide((prevSlide) =>
-  //     prevSlide === images.length - 1 ? 0 : prevSlide + 1
-  //   );
-  // };
 
   const handleChange = (
     event: React.ChangeEvent<
@@ -139,37 +150,19 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
         "No image uploaded. Do you want to proceed without an image?"
       );
       if (!confirmUpload) {
-        return; // Don't proceed without an image
+        return;
       }
     }
 
     const newProduct: ProductData = {
       ...formData,
       id: Date.now().toString(),
-      ProductImage: "", // Initialize empty array
     };
 
-    // formData.ProductImage.forEach((image) => {
-    //   if (typeof image === "string") {
-    //     // If it's a base64 encoded string, push it directly
-    //     newProduct.ProductImage?.push(image);
-    //   } else {
-    //     // If it's a File object, read it as base64 and push the encoded string
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       const base64Data = reader.result as string;
-    //       newProduct.ProductImage?.push(base64Data);
-    //       // Update the state after saving to localStorage
-    //       setProducts((prevProducts) => [...prevProducts, newProduct]);
-    //       // Save to localStorage immediately
-    //       localStorage.setItem(
-    //         "products",
-    //         JSON.stringify([...products, newProduct])
-    //       );
-    //     };
-    //     reader.readAsDataURL(image);
-    //   }
-    // });
+    const updatedProducts = [...products, newProduct];
+    setProducts(updatedProducts);
+
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
 
     setFormData({
       id: "",
@@ -218,7 +211,6 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
     );
     if (existingProductIndex !== -1) {
       existingProducts[existingProductIndex] = { ...formData, id: productId };
-      // find index of updated product id then update that object with updated data
 
       localStorage.setItem("products", JSON.stringify(existingProducts));
       setProducts(existingProducts);
@@ -261,26 +253,9 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
                 alt="Image Preview"
               />
             )}
-            {/* <span
-              className="mt-[2px] self-start ml-14 text-xl font-semibold"
-              style={{ fontFamily: "Bai jamjuree" }}
-            >
-              Image Url
-            </span>
-            <div className="flex justify-center items-center flex-col ">
-              <input
-                type="url"
-                name="ProductImage"
-                value={formData.ProductImage}
-                className="border-2 text-[#A2A3A5] mt-[3px] p-8 text-2xl focus:outline-none h-[80px] w-[300px] rounded-lg"
-                onChange={handleUrlChange}
-              />
-              <span className="font-bold self-start text-red-600 text-sm">
-                {errorMessage}
-              </span>
-            </div> */}
-            {!formData.ProductImage && (
-              <>
+
+            {!isValidUrl && (
+              <div className="">
                 <span
                   className="mt-[2px] self-start ml-14 text-xl font-semibold"
                   style={{ fontFamily: "Bai jamjuree" }}
@@ -299,121 +274,9 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
                     {errorMessage}
                   </span>
                 </div>
-              </>
+              </div>
             )}
           </div>
-
-          {/* Image Dropdown */}
-          {/* <button
-            id="dropdownMenuIconButton"
-            data-dropdown-toggle="dropdownDots"
-            className="absolute right-2 z-20 inline-flex  items-center p-2 text-sm font-medium text-center  top-[35px] rounded-lg text-white focus:ring-gray-50"
-            type="button"
-            onClick={handleDropdown}
-            ref={imageDropdownRef}
-          >
-            <svg
-              className="w-5 h-5"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 4 15"
-            >
-              <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-            </svg>
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-            onChange={handleImageUpload}
-            ref={fileInputRef}
-          />
-          <div
-            className={`absolute right-0 z-10 mt-[74px] mr-4 font-semibold w-36 h-18 border-[1px solid #EFEFEF] rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${
-              imageDropdown ? "" : "hidden"
-            }`}
-            role="menu"
-            aria-orientation="vertical"
-            aria-labelledby="menu-button"
-            tabIndex={-1}
-            style={{ fontFamily: "Bai Jamjuree" }}
-            id="drop-down"
-            //@ts-ignored
-            ref={imageDropdownRef}
-          >
-            <div className="py-1 border-b-2">
-              <a
-                href="#"
-                className="text-[#161A1D] block px-4 py-2 h-8 text-sm  font-semibold border-b-2"
-                role="menuitem"
-                tabIndex={-1}
-                id="menu-item-0"
-                onClick={handleImageUploadClick}
-              >
-                Upload Image
-              </a>
-              <a
-                href="#"
-                className="text-gray-700 block px-4 py-2 text-sm  "
-                role="menuitem"
-                tabIndex={-1}
-                id="menu-item-1"
-              >
-                Delete
-              </a>
-            </div>
-          </div> */}
-          {/* Image Dropdown */}
-
-          {/* <button
-            type="button"
-            className="absolute start-0 z-30 flex bottom-20 top-28 lg:top-0 lg:bottom-[250px] md:top-32   items-center justify-center  px-4 cursor-pointer group focus:outline-none"
-            onClick={prevSlide}
-          >
-            <span className="inline-flex items-center  justify-center w-8 h-8 rounded-full bg-white dark:bg-white">
-              <svg
-                className="w-4 h-4 text-black rtl:rotate-180 "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 1 1 5l4 4"
-                />
-              </svg>
-              <span className="sr-only">Previous</span>
-            </span>
-          </button>
-          <button
-            type="button"
-            className="absolute end-0  bottom-20 h-32 top-28 lg:top-28 lg:bottom-[200px] md:top-32 z-30 flex items-center  justify-center  px-4 cursor-pointer group focus:outline-none"
-            onClick={nextSlide}
-          >
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-white">
-              <svg
-                className="w-4 h-4 text-black rtl:rotate-180"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 6 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m1 9 4-4-4-4"
-                />
-              </svg>
-              <span className="sr-only">Next</span>
-            </span>
-          </button> */}
         </div>
 
         <div className="w-full max-w-lg">
