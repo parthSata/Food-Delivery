@@ -145,16 +145,16 @@ function Home(): JSX.Element {
           </div>
 
           {/* table Start */}
-          <div className="flex flex-col relative overflow-x-auto">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  ">
+          <div className="flex flex-col relative ">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto ">
               <table
-                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto "
                 style={{
                   fontFamily: "Bai Jamjuree",
                   boxShadow: "2px 2px 30px 2px #FFF3E5",
                 }}
               >
-                <thead className="rounded-full bg-[#DF201F] sm:overflow-x-auto sm:overflow-y-scroll">
+                <thead className="rounded-full bg-[#DF201F] ">
                   <tr className="text-[#FFFFFF] font-semibold ">
                     <th className="border-r-1  py-2 px-4 rounded-tl-lg    border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Name

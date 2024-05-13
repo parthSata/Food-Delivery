@@ -35,7 +35,7 @@ function SideMenu() {
       <div
         ref={sideMenuRef}
         id="side-menu"
-        className="fixed top-0 left-0 h-screen sm:h-full w-[210px] md:hidden bg-white border-2 border-gray-600 z-50 transition duration-400 ease-in-out transform hidden"
+        className="fixed top-0 left-0 h-full sm:h-full w-[210px] md:hidden bg-white border-2 border-gray-600 z-50 transition duration-400 ease-in-out transform hidden"
       >
         <div className="flex flex-col m-6 font-bold gap- justify-center items-center">
           <img
@@ -43,7 +43,7 @@ function SideMenu() {
             alt=""
             className="h-12 w-12 hover:border-2 p-[4px] rounded-lg"
           />
-          <span className="text-[20px]"> Food Delivery</span>
+          <span className="text-[20px]">Food Delivery</span>
         </div>
         <ul
           className={`flex font-medium text-[16px] mt-16 gap-10 w-full flex-col items-center justify-center overflow-x-scroll`}

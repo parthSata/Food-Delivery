@@ -10,7 +10,7 @@ interface ProductData {
   Price: number | string;
   DiscountPrice: number | string;
   Unit: number | string;
-  ProductImage?: string;
+  ProductImage?: File | string;
   Stock: string;
   IsVeg: string;
   Status: string;
@@ -24,6 +24,8 @@ interface Props {
 }
 
 const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
+  const [imageDropdown, setImageDropdown] = useState<boolean>(false);
+  // @ts-ignore
   const [products, setProducts] = useState<ProductData[]>([]);
   const [formData, setFormData] = useState<ProductData>({
     id: "",
@@ -41,39 +43,44 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(false);
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleUrlChange = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const { name, value } = event.target;
-    console.log("Current form data:", formData); // Log current form data
+    const { name, value, files } = event.target;
+
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
 
     if (name === "ProductImage") {
-      setErrorMessage(validate(value));
-      if (validator.isURL(value)) {
-        try {
-          console.log("In URL validation");
-
-          const response = await fetch(value);
-          console.log("Fetch response:", response); // Log fetch response
-          if (response.ok) {
-            const imageUrl = value;
-            console.log("Image URL:", imageUrl); // Log created image URL
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              ProductImage: imageUrl,
-            }));
-          } else {
-            console.log("Fetch unsuccessful");
-
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              ProductImage: "", // Clear image if fetch fails
-            }));
-            toast.error("Failed to fetch image from the URL");
+      if (files && files.length > 0) {
+        const file = files[0];
+        const imageUrl = URL.createObjectURL(file);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          ProductImage: imageUrl,
+        }));
+      } else {
+        setErrorMessage(validate(value));
+        if (validator.isURL(value)) {
+          try {
+            const response = await fetch(value);
+            if (response.ok) {
+              const imageUrl = value;
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                ProductImage: imageUrl,
+              }));
+            } else {
+              setFormData((prevFormData) => ({
+                ...prevFormData,
+                ProductImage: "", // Clear image if fetch fails
+              }));
+              toast.error("Failed to fetch image from the URL");
+            }
+          } catch (error) {
+            console.error("Error during fetch:", error);
           }
-        } catch (error) {
-          console.error("Error during fetch:", error);
         }
       }
     }
@@ -129,8 +136,16 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
       setProducts(storedProducts);
     }
   }, []);
+  const convertImageToBase64 = (file: File) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (
       !formData.ProductName ||
       !formData.Price ||
@@ -138,31 +153,41 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
       !formData.Unit ||
       !formData.Stock ||
       !formData.Discription ||
-      !formData.ProductImage || // Add null check for formData.ProductImage
-      formData.ProductImage?.length === 0 // Ensure at least one image is uploaded
+      !formData.ProductImage ||
+      (typeof formData.ProductImage === "string" &&
+        formData.ProductImage.length === 0)
     ) {
       toast.warn("Please Fill all inputs and Upload Image");
       return;
     }
-
-    if (formData.ProductImage && formData.ProductImage.length === 0) {
-      const confirmUpload = window.confirm(
-        "No image uploaded. Do you want to proceed without an image?"
-      );
-      if (!confirmUpload) {
-        return;
+    let productImageBase64: any = "";
+    if (formData.ProductImage) {
+      if (typeof formData.ProductImage === "string") {
+        // Handle case when ProductImage is a string (URL)
+        productImageBase64 = formData.ProductImage;
+      } else {
+        // Handle case when ProductImage is a File
+        const file = formData.ProductImage;
+        productImageBase64 = await convertImageToBase64(file);
       }
     }
 
     const newProduct: ProductData = {
       ...formData,
       id: Date.now().toString(),
+      ProductImage: productImageBase64, // Store the Base64 string
     };
 
-    const updatedProducts = [...products, newProduct];
-    setProducts(updatedProducts);
+    const existingProducts: ProductData[] = JSON.parse(
+      localStorage.getItem("products") ?? "[]"
+    );
+
+    const updatedProducts: ProductData[] = [...existingProducts, newProduct];
 
     localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+    // Only update the products state with the new product
+    setProducts(updatedProducts);
 
     setFormData({
       id: "",
@@ -177,49 +202,81 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
       Discription: "",
     });
 
-    onAddProduct(newProduct);
     onClose();
   };
 
-  // const handleDropdown = () => {
-  //   setImageDropdown(!imageDropdown);
-  //   if (imageDropdownRef.current) {
-  //     imageDropdownRef.current.classList.toggle("hidden");
-  //   }
-  // };
-
-  // const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setFormData({
-  //       ...formData,
-  //       ProductImage: [...(formData.ProductImage ?? []), file],
-  //     });
-  //   }
-  // };
-
-  // const handleImageUploadClick = () => {
-  //   fileInputRef.current?.click();
-  // };
-
-  const handleUpdate = () => {
-    const existingProducts = JSON.parse(
-      localStorage.getItem("products") ?? "[]"
-    );
-    const existingProductIndex = existingProducts.findIndex(
-      (product: ProductData) => product.id === productId
-    );
-    if (existingProductIndex !== -1) {
-      existingProducts[existingProductIndex] = { ...formData, id: productId };
-
-      localStorage.setItem("products", JSON.stringify(existingProducts));
-      setProducts(existingProducts);
-
-      console.log("Product Data Updated");
-    } else {
-      console.log("Product not found for update!");
+  const handleDropdown = () => {
+    setImageDropdown((prevDropdown) => !prevDropdown);
+    if (imageDropdownRef.current) {
+      imageDropdownRef.current.classList.toggle("hidden");
     }
   };
+
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+        setFormData({
+            ...formData,
+            ProductImage: file,
+        });
+    }
+};
+
+  const handleUpdate = async () => {
+  if (
+    !formData.ProductName ||
+    !formData.Price ||
+    !formData.DiscountPrice ||
+    !formData.Unit ||
+    !formData.Stock ||
+    !formData.Discription ||
+    !formData.ProductImage ||
+    (typeof formData.ProductImage === "string" &&
+      formData.ProductImage.length === 0)
+  ) {
+    toast.warn("Please Fill all inputs and Upload Image");
+    return;
+  }
+
+  let productImageBase64: any = "";
+  if (formData.ProductImage) {
+    if (typeof formData.ProductImage === "string") {
+      // Handle case when ProductImage is a string (URL)
+      productImageBase64 = formData.ProductImage;
+    } else {
+      // Handle case when ProductImage is a File
+      const file = formData.ProductImage;
+      productImageBase64 = await convertImageToBase64(file);
+    }
+  }
+
+  const updatedProduct: ProductData = {
+    ...formData,
+    ProductImage: productImageBase64, // Store the Base64 string
+  };
+
+  const existingProducts: ProductData[] = JSON.parse(
+    localStorage.getItem("products") ?? "[]"
+  );
+
+  const existingProductIndex = existingProducts.findIndex(
+    (product: ProductData) => product.id === productId
+  );
+
+  if (existingProductIndex !== -1) {
+    existingProducts[existingProductIndex] = updatedProduct;
+
+    localStorage.setItem("products", JSON.stringify(existingProducts));
+    setProducts(existingProducts);
+
+    console.log("Product Data Updated");
+  } else {
+    console.log("Product not found for update!");
+  }
+
+  onClose();
+};
+
 
   useEffect(() => {
     const existingProducts = JSON.parse(
@@ -245,29 +302,23 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
           >
             Product Image
           </span>
-          <div className="border-2 flex flex-col justify-center items-center h-[150px] w-[400px] rounded-lg mb-8">
-            {formData.ProductImage && (
-              <img
-                src={formData.ProductImage}
-                className="h-[300px] w-[500px] rounded-lg"
-                alt="Image Preview"
-              />
-            )}
+          {/* {!isValidUrl && (
+            <div className=" flex flex-col justify-center items-center h-[150px] w-[400px] rounded-lg mb-8">
+              {formData.ProductImage && (
+                <img
+                  src={formData.ProductImage}
+                  className="h-[300px] w-[500px] rounded-lg"
+                  alt="Image Preview"
+                />
+              )}
 
-            {!isValidUrl && (
               <div className="">
-                <span
-                  className="mt-[2px] self-start ml-14 text-xl font-semibold"
-                  style={{ fontFamily: "Bai jamjuree" }}
-                >
-                  Image Url
-                </span>
                 <div className="flex justify-center items-center flex-col ">
                   <input
-                    type="url"
+                    type="file"
                     name="ProductImage"
                     value={formData.ProductImage}
-                    className="border-2 text-[#A2A3A5] mt-[3px] p-8 text-2xl focus:outline-none h-[80px] w-[300px] rounded-lg"
+                    className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg"
                     onChange={handleUrlChange}
                   />
                   <span className="font-bold self-start text-red-600 text-sm">
@@ -275,9 +326,100 @@ const AddProduct: React.FC<Props> = ({ productId, onAddProduct, onClose }) => {
                   </span>
                 </div>
               </div>
-            )}
+            </div>
+          )} */}
+
+          {!isValidUrl && (
+            <div className="">
+              <div className="flex justify-center items-center flex-col ">
+                {formData.ProductImage &&
+                typeof formData.ProductImage !== "string" ? (
+                  <img
+                    src={URL.createObjectURL(formData.ProductImage)} // Use createObjectURL to display image preview
+                    className="h-[300px] w-[500px] rounded-lg"
+                    alt="Image Preview"
+                  />
+                ) : (
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg"
+                    onChange={handleImageUpload}
+                    ref={fileInputRef}
+                  />
+                )}
+                <span className="font-bold self-start text-red-600 text-sm">
+                  {errorMessage}
+                </span>
+              </div>
+            </div>
+          )}
+          {formData.ProductImage && (
+            <button
+              id="dropdownMenuIconButton"
+              className="absolute right-[30px]  z-20 inline-flex items-center p-2 text-sm font-medium text-center top-[35px] rounded-lg text-white focus:ring-gray-50"
+              type="button"
+              onClick={handleDropdown}
+            >
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 4 15"
+              >
+                <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+              </svg>
+            </button>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            onChange={handleImageUpload}
+            // @ts-ignore
+            ref={imageDropdownRef}
+          />
+        </div>
+        {/* Image Dropdown */}
+
+        <div
+          className={`absolute right-[140px] top-[382px] z-10 mt-[74px] mr-4 font-semibold w-36 h-18 border-[1px solid #EFEFEF] rounded-md  bg-white shadow-lg ring-1  ring-black ring-opacity-5 focus:outline-none ${
+            imageDropdown ? "" : "hidden"
+          }`}
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabIndex={-1}
+          style={{ fontFamily: "Bai Jamjuree" }}
+          id="drop-down"
+          //@ts-ignored
+          ref={imageDropdownRef}
+        >
+          <div className="py-1 border-b-2">
+            <a
+              href="#"
+              className="text-[#161A1D] block px-4 py-2 h-8 text-sm  font-semibold border-b-2"
+              role="menuitem"
+              tabIndex={-1}
+              id="menu-item-0"
+              onClick={handleUpdate}
+            >
+              Update Image
+            </a>
+            {/* <a
+              href="#"
+              className="text-gray-700 block px-4 py-2 text-sm  "
+              role="menuitem"
+              tabIndex={-1}
+              id="menu-item-1"
+            >
+              Delete
+            </a> */}
           </div>
         </div>
+
+        {/* Image Dropdown */}
 
         <div className="w-full max-w-lg">
           <form
