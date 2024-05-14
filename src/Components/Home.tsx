@@ -60,6 +60,15 @@ function Home(): JSX.Element {
     setShowAddProductDialog(false);
   };
 
+  // Auto fetch Data after add,update product 
+
+  useEffect(() => {
+    const storedProducts = JSON.parse(localStorage.getItem("products") ?? "[]");
+    if (storedProducts) {
+      setProducts(storedProducts);
+    }
+  }, [updateProductId , products]);
+
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
 
@@ -324,7 +333,7 @@ function Home(): JSX.Element {
                       (product) => product.id === updateProductId
                     )?.ProductImage
                       ? "top-[10px] left-[10px] sm:top-[20px] sm:left-[20px] md:top-[10px] md:left-[10px] lg:top-[10px] lg:left-[10px] xl:top-[20px] xl:left-[20px]"
-                      : "top-[400px] left-[675px] sm:top-[390px] sm:left-[695px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[40px] xl:left-[980px]"
+                      : "top-[400px] left-[545px] sm:top-[390px] sm:left-[600px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[80px] xl:left-[980px]"
                   } mt-0 mr-6`}
                   onClick={closeAddProductDialog}
                 >

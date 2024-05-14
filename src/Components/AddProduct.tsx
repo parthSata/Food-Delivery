@@ -325,7 +325,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
         className={`flex justify-center gap-2 mt-[700px] sm:mt-[530px] md:mt-[350px] lg:mt-[6px] xl:mt-[85px]  lg:flex-nowrap flex-wrap ${
           !formData.ProductImage
             ? "mt-[400px] sm:mt-[200px] md:mt-[80px] lg:mt-[30px] "
-            : " xl:mt-[6px]"
+            : " xl:mt-[80px]"
         }`}
       >
         {/* image */}
@@ -353,7 +353,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   <input
                     type="file"
                     accept="image/*"
-                    className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg"
+                    className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg "
                     onChange={handleImageUpload}
                     ref={fileInputRef}
                   />
@@ -435,7 +435,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                 <input
                   className={`${
                     productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none  hover:outline-green-700 focus:outline-2  focus:border-green-700 bg-white`}
+                  } appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
                   type="text"
                   placeholder="Pizza"
                   name="ProductName"
@@ -459,7 +459,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                 <input
                   className={`${
                     productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white`}
+                  } appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
                   id="grid-last-name"
                   type="number"
                   placeholder="180"
@@ -476,7 +476,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   Discount Price
                 </label>
                 <input
-                  className="appearance-none block w-full h-[60px]   text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white"
+                  className="appearance-none block w-full h-[60px]   text-[#A2A3A5] border border-[2px solid #E8E8E8]  rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white"
                   id="grid-last-name"
                   type="number"
                   placeholder="175"
@@ -496,7 +496,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   Unit
                 </label>
                 <input
-                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white"
+                  className="appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white"
                   id="grid-last-name"
                   type="number"
                   placeholder="Gms"
@@ -516,7 +516,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                 <input
                   className={`${
                     productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white`}
+                  } appearance-none block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
                   id="grid-last-name"
                   type="number"
                   placeholder="25"
@@ -536,7 +536,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   name="IsVeg"
                   value={formData.IsVeg}
                   onChange={(e) => handleChange(e)}
-                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white "
+                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]  bg-white "
                   disabled={productId !== null}
                 >
                   <option className="" value="True">
@@ -555,7 +555,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   name="Status"
                   value={formData.Status}
                   onChange={(e) => handleChange(e)}
-                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white "
+                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
                   disabled={productId !== null}
                 >
                   <option className="" value="In Stock">
@@ -571,7 +571,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   Discription
                 </label>
                 <textarea
-                  className="appearance-none block w-full  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight focus:outline-none bg-white resize-none"
+                  className="appearance-none block w-full  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white resize-none"
                   //@ts-ignore
                   type="text"
                   id="grid-last-name"

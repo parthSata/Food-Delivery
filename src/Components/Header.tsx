@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import Notification from "../assets/HomePage/Notification.png";
 import Profile from "../assets/HomePage/Profile.png";
 import Logo from "../assets/Login/Logo1.png";
@@ -21,7 +21,7 @@ function Header(): JSX.Element {
     <div className="h-full w-full">
       <nav
         className=" bg-[#FFFFFF] flex-1 flex justify-between "
-        style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}
+        style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
       >
         <div className="flex items-center">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
