@@ -25,7 +25,6 @@ function Home(): JSX.Element {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
-
   const filteredProducts = products.filter((product) =>
     product.ProductName.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -146,12 +145,13 @@ function Home(): JSX.Element {
 
           {/* table Start */}
           <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto ">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto  max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
               <table
-                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto "
+                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
                 style={{
                   fontFamily: "Bai Jamjuree",
                   boxShadow: "2px 2px 30px 2px #FFF3E5",
+                  minWidth: "100%",
                 }}
               >
                 <thead className="rounded-full bg-[#DF201F] ">
@@ -292,30 +292,60 @@ function Home(): JSX.Element {
               <div className="absolute inset-0  bg-[#161A1D] opacity-75"></div>
             </div>
 
-            <div className="bg-white rounded-lg shadow-xl transform transition-all  sm:top-[600px]  md:top-[1px]    sm:max-w-[1000px] sm:w-full">
-              <button
-                type="button"
-                className="text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute  top-[710px] sm:top-[720px] md:top-[465px] lg:top-[40px] xl:top-[80px] right-[-22px] mt-0 mr-6"
-                onClick={closeAddProductDialog}
-              >
-                <span className="sr-only ">Close</span>
-                <svg
-                  className="h-[26px] w-[26px] p-[4px]"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
+            <div className="bg-white rounded-lg shadow-xl transform transition-all      sm:max-w-[1000px] sm:w-full">
+              <div className="p-6 relative">
+                {/* <button
+                  type="button"
+                  className={` text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute  top-[675px] left-[675px] sm:top-[680px] sm:left-[695px] md:top-[340px] md:left-[745px] lg:top-[1px] lg:left-[975px]  xl:top-[80px] xl:left-[980px] mt-0 mr-6 `}
+                  onClick={closeAddProductDialog}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-              <div className="p-6">
+                  <span className="sr-only ">Close</span>
+                  <svg
+                    className="h-[26px] w-[26px] p-[4px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button> */}
+                <button
+                  type="button"
+                  className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute ${
+                    updateProductId &&
+                    !filteredProducts.find(
+                      (product) => product.id === updateProductId
+                    )?.ProductImage
+                      ? "top-[10px] left-[10px] sm:top-[20px] sm:left-[20px] md:top-[10px] md:left-[10px] lg:top-[10px] lg:left-[10px] xl:top-[20px] xl:left-[20px]"
+                      : "top-[400px] left-[675px] sm:top-[390px] sm:left-[695px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[40px] xl:left-[980px]"
+                  } mt-0 mr-6`}
+                  onClick={closeAddProductDialog}
+                >
+                  <span className="sr-only ">Close</span>
+                  <svg
+                    className="h-[26px] w-[26px] p-[4px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+
                 <AddProduct
                   onClose={() => setShowAddProductDialog(false)}
                   productId={updateProductId}
