@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef, RefObject } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import validator from "validator";
 
 interface ProductData {
   id: number | string;
@@ -40,52 +39,10 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
     Discription: "",
   });
   const imageDropdownRef: RefObject<HTMLButtonElement> = useRef(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isValidUrl, setIsValidUrl] = useState(false);
   const [errors, setErrors] = useState<Partial<ProductData>>({});
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   // @ts-ignore
-  const handleUrlChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value, files } = event.target;
-
-    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-
-    if (name === "ProductImage") {
-      if (files && files.length > 0) {
-        const file = files[0];
-        const imageUrl = URL.createObjectURL(file);
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          ProductImage: imageUrl,
-        }));
-      } else {
-        setErrorMessage(validate(value));
-        if (validator.isURL(value)) {
-          try {
-            const response = await fetch(value);
-            if (response.ok) {
-              const imageUrl = value;
-              setFormData((prevFormData) => ({
-                ...prevFormData,
-                ProductImage: imageUrl,
-              }));
-            } else {
-              setFormData((prevFormData) => ({
-                ...prevFormData,
-                ProductImage: "", // Clear image if fetch fails
-              }));
-              toast.error("Failed to fetch image from the URL");
-            }
-          } catch (error) {
-            console.error("Error during fetch:", error);
-          }
-        }
-      }
-    }
-  };
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -107,14 +64,6 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
     };
   }, []);
 
-  const validate = (value: string): string => {
-    if (validator.isURL(value)) {
-      setIsValidUrl(true);
-      return ""; // Return empty string for valid URL
-    } else {
-      return "Is Not Valid URL"; // Return error message for invalid URL
-    }
-  };
   const closeImageDropdown = () => {
     if (imageDropdownRef.current) {
       imageDropdownRef.current.classList.add("hidden");
@@ -339,31 +288,29 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
             Product Image
           </span>
 
-          {!isValidUrl && (
-            <div className="">
-              <div className="flex justify-center items-center flex-col ">
-                {formData.ProductImage &&
-                typeof formData.ProductImage !== "string" ? (
-                  <img
-                    src={URL.createObjectURL(formData.ProductImage)} // Use createObjectURL to display image preview
-                    className="h-[300px] w-[500px] rounded-lg"
-                    alt="Image Preview"
-                  />
-                ) : (
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg "
-                    onChange={handleImageUpload}
-                    ref={fileInputRef}
-                  />
-                )}
-                {errors.ProductImage && (
-                  <span className="text-red-600 text-md">Select the File</span>
-                )}
-              </div>
+          <div className="">
+            <div className="flex justify-center items-center flex-col ">
+              {formData.ProductImage &&
+              typeof formData.ProductImage !== "string" ? (
+                <img
+                  src={URL.createObjectURL(formData.ProductImage)} // Use createObjectURL to display image preview
+                  className="h-[300px] w-[500px] rounded-lg"
+                  alt="Image Preview"
+                />
+              ) : (
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg "
+                  onChange={handleImageUpload}
+                  ref={fileInputRef}
+                />
+              )}
+              {errors.ProductImage && (
+                <span className="text-red-600 text-md">Select the File</span>
+              )}
             </div>
-          )}
+          </div>
           {formData.ProductImage && (
             <button
               id="dropdownMenuIconButton"
