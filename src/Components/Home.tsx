@@ -154,9 +154,9 @@ function Home(): JSX.Element {
 
           {/* table Start */}
           <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto  max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto  max-w-[100%] ">
               <table
-                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+                className="w-full  text-md text-left rtl:text-right text-gray-500  table-auto overflow-x-scroll"
                 style={{
                   fontFamily: "Bai Jamjuree",
                   boxShadow: "2px 2px 30px 2px #FFF3E5",
@@ -171,7 +171,7 @@ function Home(): JSX.Element {
                     <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Product Id
                     </th>
-                    <th className="border-r-1 py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Quantity
                     </th>
                     <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
@@ -233,6 +233,110 @@ function Home(): JSX.Element {
               </table>
             </div>
           </div>
+
+          <div className="relative overflow-x-auto rounded-[10px]">
+            <table
+              className="mt-4 w-full text-md text-left rtl:text-right overflow-hidden  text-gray-500"
+              style={{
+                fontFamily: "Bai Jamjuree",
+                boxShadow: "2px 2px 30px 2px #FFF3E5",
+                minWidth: "100%",
+              }}
+            >
+              <thead className="rounded-full   bg-[#DF201F]  ">
+                <tr className="text-[#FFFFFF] font-semibold ">
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Product Id
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Quantity
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Status
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Price
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Discount Price
+                  </th>
+                  <th
+                    scope="col"
+                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
+                  >
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems?.map((item) => (
+                  <tr
+                    key={item.id}
+                    className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
+                  >
+                    <td
+                      scope="row"
+                      className="flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]"
+                    >
+                      <img
+                        src={item.ProductImage || Pizza}
+                        className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
+                        alt=""
+                      />
+                      {item.ProductName}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.id}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.Stock}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.Status}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      ₹{item.Price}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      ₹{item.DiscountPrice}
+                    </td>
+                    <td className="p-4 py-2 px-4 border-opacity-10">
+                      <i
+                        className="fa-solid fa-trash fa-xl  cursor-pointer md:mr-2 lg:mr-6"
+                        onClick={(): void => handleDelete(item.id)}
+                      ></i>
+                      <i
+                        className="fa-solid fa-pen fa-xl cursor-pointer "
+                        onClick={() => handleUpdate(item.id)}
+                      ></i>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
           {/* table End */}
         </div>
         {/* Pagination */}
