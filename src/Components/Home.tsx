@@ -60,14 +60,14 @@ function Home(): JSX.Element {
     setShowAddProductDialog(false);
   };
 
-  // Auto fetch Data after add,update product 
+  // Auto fetch Data after add,update product
 
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem("products") ?? "[]");
     if (storedProducts) {
       setProducts(storedProducts);
     }
-  }, [updateProductId , products]);
+  }, [updateProductId, products]);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
@@ -303,28 +303,6 @@ function Home(): JSX.Element {
 
             <div className="bg-white rounded-lg shadow-xl transform transition-all      sm:max-w-[1000px] sm:w-full">
               <div className="p-6 relative">
-                {/* <button
-                  type="button"
-                  className={` text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute  top-[675px] left-[675px] sm:top-[680px] sm:left-[695px] md:top-[340px] md:left-[745px] lg:top-[1px] lg:left-[975px]  xl:top-[80px] xl:left-[980px] mt-0 mr-6 `}
-                  onClick={closeAddProductDialog}
-                >
-                  <span className="sr-only ">Close</span>
-                  <svg
-                    className="h-[26px] w-[26px] p-[4px]"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button> */}
                 <button
                   type="button"
                   className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute ${

@@ -19,7 +19,7 @@ function Verification() {
   };
   return (
     <>
-      <div className="h-screen w-screen flex flex-row justify-center items-center flex-wrap xl:flex-wrap">
+      <div className="h-screen w-full flex flex-row justify-center items-center flex-wrap xl:flex-wrap">
         <div className="flex justify-center items-center flex-col ">
           <img src={Logo} className="h-[106px] w-[96px]" alt="" />
           <div className="">
