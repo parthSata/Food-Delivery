@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import search from "../assets/HomePage/search.png";
-import Pizza from "../assets/HomePage/Pizza.png";
 // import Right from "../assets/HomePage/RightArrow.png";
 // import Left from "../assets/HomePage/LeftArrow.png";
 import AddProduct from "./AddProduct";
 import Header from "./Header";
 import SideMenu from "./SideMenu";
+import Table from "./Table";
 
 interface Product {
   id: number;
@@ -20,6 +20,7 @@ interface Product {
 function Home(): JSX.Element {
   const [showAddProductDialog, setShowAddProductDialog] =
     useState<boolean>(false);
+  // @ts-ignore
   const [updateProductId, setUpdateProductId] = useState<number | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,6 +32,7 @@ function Home(): JSX.Element {
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // @ts-ignore
   const currentItems = filteredProducts.slice(
     indexOfFirstItem,
     indexOfLastItem
@@ -67,26 +69,26 @@ function Home(): JSX.Element {
     if (storedProducts) {
       setProducts(storedProducts);
     }
-  }, [updateProductId, products]);
+  }, [updateProductId]);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
 
-  const handleDelete = (id: number) => {
-    const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts);
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
-  };
+  // const handleDelete = (id: number) => {
+  //   const updatedProducts = products.filter((product) => product.id !== id);
+  //   setProducts(updatedProducts);
+  //   localStorage.setItem("products", JSON.stringify(updatedProducts));
+  // };
 
-  const handleUpdate = (id: number) => {
-    const productToUpdate = products.find((product) => product.id === id);
-    if (productToUpdate) {
-      setShowAddProductDialog(true);
-      setUpdateProductId(id);
-    } else {
-      console.log("Product not found for update!");
-    }
-  };
+  // const handleUpdate = (id: number) => {
+  //   const productToUpdate = products.find((product) => product.id === id);
+  //   if (productToUpdate) {
+  //     setShowAddProductDialog(true);
+  //     setUpdateProductId(id);
+  //   } else {
+  //     console.log("Product not found for update!");
+  //   }
+  // };
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -109,7 +111,7 @@ function Home(): JSX.Element {
 
   return (
     <>
-      <div className="min-w-fit h-full">
+      <div className="min-w-fit ">
         {/* Header Started Here */}
         <Header />
         {/* Header End Here */}
@@ -119,7 +121,7 @@ function Home(): JSX.Element {
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div
-            className="flex justify-between  items-center mt-10 "
+            className="flex justify-between  items-center mt-10 flex-wrap"
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <div className="">
@@ -151,191 +153,9 @@ function Home(): JSX.Element {
               </div>
             </div>
           </div>
+          <Table />
 
           {/* table Start */}
-          <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto  max-w-[100%] ">
-              <table
-                className="w-full  text-md text-left rtl:text-right text-gray-500  table-auto overflow-x-scroll"
-                style={{
-                  fontFamily: "Bai Jamjuree",
-                  boxShadow: "2px 2px 30px 2px #FFF3E5",
-                  minWidth: "100%",
-                }}
-              >
-                <thead className="rounded-full bg-[#DF201F] ">
-                  <tr className="text-[#FFFFFF] font-semibold ">
-                    <th className="border-r-1  py-2 px-4 rounded-tl-lg    border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Name
-                    </th>
-                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Product Id
-                    </th>
-                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Quantity
-                    </th>
-                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Status
-                    </th>
-                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Price
-                    </th>
-                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Discount Price
-                    </th>
-                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems?.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
-                    >
-                      <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
-                        <img
-                          src={item.ProductImage || Pizza}
-                          className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
-                          alt=""
-                        />
-                        {item.ProductName}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.id}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.Stock}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.Status}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        ₹{item.Price}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        ₹{item.DiscountPrice}
-                      </td>
-                      <td className="p-4  py-2 px-4 border-opacity-10 ">
-                        <i
-                          className="fa-solid fa-trash fa-xl  cursor-pointer md:mr-2 lg:mr-6"
-                          onClick={(): void => handleDelete(item.id)}
-                        ></i>
-                        <i
-                          className="fa-solid fa-pen fa-xl cursor-pointer "
-                          onClick={() => handleUpdate(item.id)}
-                        ></i>{" "}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div className="relative overflow-x-auto rounded-[10px]">
-            <table
-              className="mt-4 w-full text-md text-left rtl:text-right overflow-hidden  text-gray-500"
-              style={{
-                fontFamily: "Bai Jamjuree",
-                boxShadow: "2px 2px 30px 2px #FFF3E5",
-                minWidth: "100%",
-              }}
-            >
-              <thead className="rounded-full   bg-[#DF201F]  ">
-                <tr className="text-[#FFFFFF] font-semibold ">
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Product Id
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Quantity
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Status
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Price
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Discount Price
-                  </th>
-                  <th
-                    scope="col"
-                    className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
-                  >
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems?.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
-                  >
-                    <td
-                      scope="row"
-                      className="flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]"
-                    >
-                      <img
-                        src={item.ProductImage || Pizza}
-                        className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
-                        alt=""
-                      />
-                      {item.ProductName}
-                    </td>
-                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                      {item.id}
-                    </td>
-                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                      {item.Stock}
-                    </td>
-                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                      {item.Status}
-                    </td>
-                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                      ₹{item.Price}
-                    </td>
-                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                      ₹{item.DiscountPrice}
-                    </td>
-                    <td className="p-4 py-2 px-4 border-opacity-10">
-                      <i
-                        className="fa-solid fa-trash fa-xl  cursor-pointer md:mr-2 lg:mr-6"
-                        onClick={(): void => handleDelete(item.id)}
-                      ></i>
-                      <i
-                        className="fa-solid fa-pen fa-xl cursor-pointer "
-                        onClick={() => handleUpdate(item.id)}
-                      ></i>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
 
           {/* table End */}
         </div>
@@ -364,9 +184,8 @@ function Home(): JSX.Element {
                     <a
                       href="#"
                       onClick={() => handlePageChange(index + 1)}
-                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
-                        currentPage === index + 1 ? "font-bold" : ""
-                      }`}
+                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                        }`}
                     >
                       {index + 1}
                     </a>
@@ -409,14 +228,13 @@ function Home(): JSX.Element {
               <div className="p-6 relative">
                 <button
                   type="button"
-                  className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute ${
-                    updateProductId &&
+                  className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute ${updateProductId &&
                     !filteredProducts.find(
                       (product) => product.id === updateProductId
                     )?.ProductImage
-                      ? "top-[10px] left-[100px] sm:top-[20px] sm:left-[20px] md:top-[10px] md:left-[10px] lg:top-[10px] lg:left-[10px] xl:top-[20px] xl:left-[20px]"
-                      : "top-[400px] left-[545px] sm:top-[390px] sm:left-[600px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[80px] xl:left-[980px]"
-                  } mt-0 mr-6`}
+                    ? "top-[10px] left-[100px] sm:top-[20px] sm:left-[20px] md:top-[10px] md:left-[10px] lg:top-[10px] lg:left-[10px] xl:top-[20px] xl:left-[20px]"
+                    : "top-[400px] left-[545px] sm:top-[390px] sm:left-[600px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[80px] xl:left-[980px]"
+                    } mt-0 mr-6`}
                   onClick={closeAddProductDialog}
                 >
                   <span className="sr-only ">Close</span>
