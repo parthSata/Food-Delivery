@@ -20,7 +20,11 @@ function Header(): JSX.Element {
   return (
     <div className="h-full w-full">
       <nav
+<<<<<<< HEAD
         className="bg-[#FFFFFF] flex-1  flex justify-between "
+=======
+        className=" bg-[#FFFFFF] flex-1  flex justify-between "
+>>>>>>> 30af93ee6327c6119fb12e796f657558607f2a39
         style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
       >
         <div className="flex items-center">

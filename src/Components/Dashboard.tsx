@@ -68,8 +68,13 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className="flex gap-6 flex-wrap lg:flex-nowrap">
+<<<<<<< HEAD
                     <div className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] " style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}>
                         <div className="flex justify-around ">
+=======
+                    <div className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full " style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}>
+                        <div className="flex justify-around">
+>>>>>>> 30af93ee6327c6119fb12e796f657558607f2a39
                             <div className="relative  w-full">
                                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400" style={{ fontFamily: "Bai Jamjuree" }}>
                                     <thead className="text-md  bg-gray-50 ">
@@ -119,7 +124,11 @@ function Dashboard() {
                         <div className="flex flex-col relative " style={{ fontFamily: "Bai Jamjuree" }}>
                             <div className="relative overflow-x-auto  max-w-[100%]">
                                 <table
+<<<<<<< HEAD
                                     className="mt-4 w-full  text-md text-left rtl:text-right rounded-[10px] overflow-hidden  text-gray-500"
+=======
+                                    className="mt-4 w-full text-md text-left rtl:text-right rounded-[10px] overflow-hidden  text-gray-500"
+>>>>>>> 30af93ee6327c6119fb12e796f657558607f2a39
                                     style={{
                                         fontFamily: "Bai Jamjuree",
                                         boxShadow: "2px 2px 30px 2px #FFF3E5",
