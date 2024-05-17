@@ -27,7 +27,7 @@ function Register() {
   );
   const [email, setEmail] = useState("");
   const [selectedState, setSelectedState] = useState<string>("Gujrat");
-  //   const [name, setName] = useState("");
+  const [name, setName] = useState("");
 
   const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
@@ -39,9 +39,9 @@ function Register() {
     setIsValidMobileNumber(mobileNumberPattern.test(number));
     setMobileNumber(number);
   };
-  //   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //     setName(e.target.value);
-  //   };
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredEmail = e.target.value;
@@ -60,7 +60,7 @@ function Register() {
 
     if (isValidMobileNumber && isValidEmail && passcode === confirmPasscode) {
       const userData = {
-        name: e.currentTarget.elements["name"].value,
+        name,
         mobileNumber,
         email,
         passcode,
@@ -99,7 +99,7 @@ function Register() {
   };
   return (
     <div>
-      <div className="flex flex-row  justify-center items-center gap-14 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
+      <div className="flex flex-row   justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
         {/* Login */}
         <form
           style={{ fontFamily: "Montserrat Alternates" }}
@@ -128,9 +128,11 @@ function Register() {
                   <div className="flex items-center border-b">
                     <input
                       type="text"
+                      value={name}
                       placeholder="Name"
                       className="ml-2 p-6 text-[14px] focus:outline-none  h-[50px] w-[320px]  hover:border-0 font-semibold"
                       style={{ fontFamily: "Montserrat Alternates" }}
+                      onChange={handleNameChange}
                     />
                     <img
                       src={User}
@@ -218,14 +220,12 @@ function Register() {
                     onChange={setPasscode}
                     numInputs={6}
                     inputType="password"
-                    placeholder="*"
-                    inputStyle={"*"}
                     renderInput={(props, index) => (
                       <input
                         {...props}
                         key={index}
                         accept="*"
-                        className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-semibold text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[70px] lg:w-[65px] md:w-[60px] h-[70px] w-[60px]"
+                        className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
                         style={{
                           width: 50,
                           fontFamily: "Montserrat Alternates",
@@ -244,12 +244,11 @@ function Register() {
                       onChange={setConfirmPasscode}
                       numInputs={6}
                       inputType="password"
-                      placeholder="*"
                       renderInput={(props, index) => (
                         <input
                           {...props}
                           key={index}
-                          className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[70px] lg:w-[65px] md:w-[60px] h-[70px] w-[60px]"
+                          className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none  [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
                           style={{
                             width: 50,
                             fontFamily: "Montserrat Alternates",
@@ -260,8 +259,10 @@ function Register() {
                   </div>
                 </div>
 
+                {/* State Select */}
+
                 <select
-                  className="rounded-lg px-1 py-1  cursor-pointer outline-none  bg-white"
+                  className="rounded-lg px-1 py-1  cursor-pointer outline-none mt-2 border-b-4 bg-white"
                   style={{ fontFamily: "Bai Jamjuree" }}
                   value={selectedState}
                   onChange={handleStateSelect}
@@ -327,7 +328,7 @@ function Register() {
         <div className="flex justify-center ">
           <img
             src={Shop}
-            className="h-[508px]  w-[400px] sm:h-[600px] sm:w-[600px] md:w-[635px] md:h-[650px] lg:h-[650px] lg:w-[650px] xl:h-[600px] xl:w-[600px]"
+            className="h-[600px] w-[500px] sm:h-[600px] sm:w-[550px] md:w-[600px] md:h-[600px] lg:h-[700px] lg:w-[700px] xl:h-[700px] xl:w-[650px]"
             alt=""
           />
         </div>

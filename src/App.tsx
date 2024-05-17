@@ -5,6 +5,8 @@ import Verification from "./Components/Verification";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
+import Table from "./Components/Table";
+import Dashboard from "./Components/Dashboard";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verification" element={<Verification />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/table" element={<Table />} />
       </Routes>
     </BrowserRouter>
   );

@@ -20,7 +20,7 @@ function Header(): JSX.Element {
   return (
     <div className="h-full w-full">
       <nav
-        className=" bg-[#FFFFFF] flex-1 flex justify-between "
+        className=" bg-[#FFFFFF] flex-1  flex justify-between "
         style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
       >
         <div className="flex items-center">
@@ -28,38 +28,33 @@ function Header(): JSX.Element {
           <span className="text-[24px] font-bold">Food Delivery</span>
         </div>
         <div
-          className={`  md:flex item-center text-[14px] ${
-            showSideMenu ? "" : "hidden"
-          }`}
+          className={`  md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"
+            }`}
           style={{ fontFamily: "Bai Jamjuree" }}
           id="navbar-default"
         >
           <ul className={`flex items-center  font-semibold text-[16px] gap-8`}>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/dashboard" ? "bg-red-500" : ""
-              } `}
+              className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                } `}
             >
-              <Link to="/#">Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/menus" ? "bg-red-500" : ""
-              } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/menus" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                } `}
             >
               <Link to="/#">Menus</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/orders" ? "bg-red-500" : ""
-              } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/orders" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                } `}
             >
               <Link to="/#">Orders</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/restaurant-list" ? "bg-red-500" : ""
-              } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurant-list" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                } `}
             >
               <Link to="/#">Restaurant List</Link>
             </li>
@@ -73,7 +68,7 @@ function Header(): JSX.Element {
               alt="Notification icon"
               className="absolute ml-4 h-[37.74px] w-[37.74px] top-0 "
             />
-            <div className="relative rounded-full p-[2px] left-[14px] top-[-10px] ml-2 h-[22px] w-[24px] text-[12px] bg-[#DF201F] text-white text-center z-[1]">
+            <div className="relative rounded-full p-[2px] left-[14px] top-[-25px] ml-2 h-[18px] w-[24px] text-[10px] bg-[#DF201F] text-white text-center z-[1]">
               10+
             </div>
           </div>
