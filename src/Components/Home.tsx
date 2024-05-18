@@ -115,9 +115,7 @@ function Home(): JSX.Element {
         {/* Header Started Here */}
         <Header />
         {/* Header End Here */}
-        {/* sideMenu */}
-        <SideMenu />
-        {/* sideMenu */}
+1
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div

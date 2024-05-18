@@ -53,7 +53,9 @@ function LineChart() {
   };
   return (
     <div className="w-full h-64 sm:h-[300px] sm:w-[500px]   md:h-[280px] lg:h-96 lg:w-[520px] md:w-full ">
-      <Line data={data} options={options} />
+      <div className=" h-64 w-[300px] sm:w-[800px]  md:h-80   md:w-[700px] lg:w-[550px] ">
+        <Line data={data} options={options} />
+      </div>
     </div>
   )
 }

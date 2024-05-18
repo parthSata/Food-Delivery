@@ -6,7 +6,8 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
 import Table from "./Components/Table";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import Orders from "./Components/Orders/Orders";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/table" element={<Table />} />
       </Routes>
     </BrowserRouter>
