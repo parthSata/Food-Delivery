@@ -114,7 +114,7 @@ function Home(): JSX.Element {
         {/* Header Started Here */}
         <Header />
         {/* Header End Here */}
-1
+
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div
