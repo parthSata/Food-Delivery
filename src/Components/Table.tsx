@@ -152,7 +152,7 @@ function Table() {
                     ></i>
                     <i
                       className="fa-solid fa-pen fa-xl cursor-pointer "
-                      onClick={() => handleUpdate(item.id)}
+                      onClick={(): void => handleUpdate(item.id)}
                     ></i>
                   </td>
                 </tr>
