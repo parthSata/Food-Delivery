@@ -26,11 +26,7 @@ function LineChart() {
     plugins: {
       tooltip: {
         callbacks: {
-<<<<<<< HEAD
           label: function (context: any) {
-=======
-          label: function (context :any) {
->>>>>>> 30af93ee6327c6119fb12e796f657558607f2a39
             return `${context.raw.toLocaleString()}rs`;
           },
         },
@@ -56,12 +52,10 @@ function LineChart() {
     },
   };
   return (
-<<<<<<< HEAD
     <div className="w-full h-64 sm:h-[300px] sm:w-[500px]   md:h-[280px] lg:h-96 lg:w-[520px] md:w-full ">
-=======
-    <div className="w-full h-64 w-50   md:h-80 lg:h-96 lg:w-96 md:w-[700px] ">
->>>>>>> 30af93ee6327c6119fb12e796f657558607f2a39
-      <Line data={data} options={options} />
+      <div className=" h-64 w-[300px] sm:w-[800px]  md:h-80   md:w-[700px] lg:w-[550px] ">
+        <Line data={data} options={options} />
+      </div>
     </div>
   )
 }

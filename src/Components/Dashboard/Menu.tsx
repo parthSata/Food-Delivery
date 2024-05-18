@@ -4,6 +4,8 @@ import Notification from "../../assets/HomePage/Notification.png";
 import Profile from "../../assets/HomePage/Profile.png";
 import Logo from "../../assets/Login/Logo1.png";
 import menu from "../../assets/Dashboard/menu.png";
+import Sidebar from './Sidebar';
+
 
 function DashboardHeader() {
     const [showSideMenu] = useState<boolean>(false);
@@ -20,6 +22,7 @@ function DashboardHeader() {
     return (
         <>
             <div className="h-full w-full ">
+                <Sidebar />
                 <nav
                     className="flex flex-nowrap   bg-[#FFFFFF]   justify-between "
                     style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
@@ -44,7 +47,7 @@ function DashboardHeader() {
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/orders" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/#">Orders</Link>
+                                <Link to="/orders">Orders</Link>
                             </li>
                             <li
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/products" ? "text-red-500  border-b-2 border-[#DF201F]" : ""

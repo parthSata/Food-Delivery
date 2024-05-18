@@ -3,6 +3,7 @@ import Notification from "../assets/HomePage/Notification.png";
 import Profile from "../assets/HomePage/Profile.png";
 import Logo from "../assets/Login/Logo1.png";
 import { Link, useLocation } from "react-router-dom";
+import SideMenu from "./SideMenu";
 
 function Header(): JSX.Element {
   const [showSideMenu] = useState<boolean>(false);
@@ -19,6 +20,7 @@ function Header(): JSX.Element {
 
   return (
     <div className="h-full w-full">
+      <SideMenu />
       <nav
         className="bg-[#FFFFFF] flex-1  flex justify-between "
         style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
