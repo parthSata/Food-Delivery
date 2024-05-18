@@ -14,13 +14,17 @@ interface Product {
 
 function Table() {
   const [products, setProducts] = useState<Product[]>([]);
+  // @ts-ignore
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
+  // @ts-ignore
+
   const [searchInput, setSearchInput] = useState("");
   const filteredProducts = products.filter((product) =>
     product.ProductName.toLowerCase().includes(searchInput.toLowerCase())
   );
   const [updateProductId, setUpdateProductId] = useState<number | null>(null);
+  // @ts-ignore
 
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;

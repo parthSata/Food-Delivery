@@ -4,7 +4,6 @@ import search from "../assets/HomePage/search.png";
 // import Left from "../assets/HomePage/LeftArrow.png";
 import AddProduct from "./AddProduct";
 import Header from "./Header";
-import SideMenu from "./SideMenu";
 import Table from "./Table";
 
 interface Product {
