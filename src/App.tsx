@@ -6,7 +6,7 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
 import Table from "./Components/Table";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   return (
