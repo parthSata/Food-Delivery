@@ -49,6 +49,7 @@ function Table() {
   const handleUpdate = (id: number) => {
     const productToUpdate = products.find((product) => product.id === id);
     if (productToUpdate) {
+      // setShowAddProductDialog(true);
       setUpdateProductId(id);
     } else {
       console.log("Product not found for update!");

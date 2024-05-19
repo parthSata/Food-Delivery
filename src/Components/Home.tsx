@@ -4,7 +4,9 @@ import search from "../assets/HomePage/search.png";
 // import Left from "../assets/HomePage/LeftArrow.png";
 import AddProduct from "./AddProduct";
 import Header from "./Header";
-import Table from "./Table";
+// import Table from "./Table";
+import Pizza from "../assets/HomePage/Pizza.png";
+
 
 interface Product {
   id: number;
@@ -73,21 +75,21 @@ function Home(): JSX.Element {
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
 
-  // const handleDelete = (id: number) => {
-  //   const updatedProducts = products.filter((product) => product.id !== id);
-  //   setProducts(updatedProducts);
-  //   localStorage.setItem("products", JSON.stringify(updatedProducts));
-  // };
+  const handleDelete = (id: number) => {
+    const updatedProducts = products.filter((product) => product.id !== id);
+    setProducts(updatedProducts);
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+  };
 
-  // const handleUpdate = (id: number) => {
-  //   const productToUpdate = products.find((product) => product.id === id);
-  //   if (productToUpdate) {
-  //     setShowAddProductDialog(true);
-  //     setUpdateProductId(id);
-  //   } else {
-  //     console.log("Product not found for update!");
-  //   }
-  // };
+  const handleUpdate = (id: number) => {
+    const productToUpdate = products.find((product) => product.id === id);
+    if (productToUpdate) {
+      setShowAddProductDialog(true);
+      setUpdateProductId(id);
+    } else {
+      console.log("Product not found for update!");
+    }
+  };
 
   useEffect(() => {
     const storedProducts = localStorage.getItem("products");
@@ -150,67 +152,147 @@ function Home(): JSX.Element {
               </div>
             </div>
           </div>
-          <Table />
+          {/* <Table /> */}
 
           {/* table Start */}
-
+          <div className="flex flex-col relative ">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden relative  overflow-x-auto  max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+              <table
+                className="w-full  text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                  boxShadow: "2px 2px 30px 2px #FFF3E5",
+                  minWidth: "100%",
+                }}
+              >
+                <thead className="rounded-full bg-[#DF201F] ">
+                  <tr className="text-[#FFFFFF] font-semibold ">
+                    <th className="border-r-1  py-2 px-4 rounded-tl-lg    border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Name
+                    </th>
+                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Product Id
+                    </th>
+                    <th className="border-r-1 py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Quantity
+                    </th>
+                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Status
+                    </th>
+                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Price
+                    </th>
+                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Discount Price
+                    </th>
+                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
+                      Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentItems?.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="text-[#A2A3A5] border-[2px]   border-opacity-10 border-[#A2A3A5] border-b"
+                    >
+                      <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
+                        <img
+                          src={item.ProductImage || Pizza}
+                          className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
+                          alt=""
+                        />
+                        {item.ProductName}
+                      </td>
+                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                        {item.id}
+                      </td>
+                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                        {item.Stock}
+                      </td>
+                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                        {item.Status}
+                      </td>
+                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                        ₹{item.Price}
+                      </td>
+                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                        ₹{item.DiscountPrice}
+                      </td>
+                      <td className="p-4  py-2 px-4 border-opacity-10 ">
+                        <i
+                          className="fa-solid fa-trash fa-xl  cursor-pointer md:mr-2 lg:mr-6"
+                          onClick={(): void => handleDelete(item.id)}
+                        ></i>
+                        <i
+                          className="fa-solid fa-pen fa-xl cursor-pointer "
+                          onClick={() => handleUpdate(item.id)}
+                        ></i>{" "}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
           {/* table End */}
         </div>
-        {/* Pagination */}
+        {/* table End */}
+      </div>
+      {/* Pagination */}
 
-        {totalPages > 1 && (
-          <div className="flex justify-end">
-            <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
-              {/* <img
+      {totalPages > 1 && (
+        <div className="flex justify-end">
+          <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
+            {/* <img
                 src={Left}
                 className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
               /> */}
-              <button
-                className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200    focus:outline-none"
-                onClick={() => handlePreviousPage()}
-                disabled={currentPage === 1}
-              >
-                <i
-                  className="fa-solid fa-angle-left"
-                  style={{ color: "#8f9194" }}
-                ></i>
-              </button>
-              <ul className="flex items-end justify-around w-[80px] top-[]">
-                {[...Array(totalPages)].map((_, index) => (
-                  <li key={index} className="page flex flex-grow">
-                    <a
-                      href="#"
-                      onClick={() => handlePageChange(index + 1)}
-                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
-                        }`}
-                    >
-                      {index + 1}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              {/* <img
+            <button
+              className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200    focus:outline-none"
+              onClick={() => handlePreviousPage()}
+              disabled={currentPage === 1}
+            >
+              <i
+                className="fa-solid fa-angle-left"
+                style={{ color: "#8f9194" }}
+              ></i>
+            </button>
+            <ul className="flex items-end justify-around w-[80px] top-[]">
+              {[...Array(totalPages)].map((_, index) => (
+                <li key={index} className="page flex flex-grow">
+                  <a
+                    href="#"
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                      }`}
+                  >
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            {/* <img
                 src={Right}
                 className="h-[26px] w-[25px] rounded-sm cursor-pointer focus:text-white focus:border-black-8 focus:bg-[#DF201F]"
                 
               /> */}
-              <button
-                className="ml-4 rounded-sm px-3 py-1  hover:bg-gray-200 focus:outline-none"
-                onClick={() => handleNextPage()}
-                disabled={currentPage === totalPages}
-              >
-                <i
-                  className="fa-solid fa-angle-right"
-                  style={{ color: "#8f9194" }}
-                ></i>
-              </button>
-            </div>
+            <button
+              className="ml-4 rounded-sm px-3 py-1  hover:bg-gray-200 focus:outline-none"
+              onClick={() => handleNextPage()}
+              disabled={currentPage === totalPages}
+            >
+              <i
+                className="fa-solid fa-angle-right"
+                style={{ color: "#8f9194" }}
+              ></i>
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* Pagination */}
-        {/* Body Ended Started */}
-      </div>
+      {/* Pagination */}
+      {/* Body Ended Started */}
       {showAddProductDialog && (
         <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-4 m-8">
           <div className="flex items-center  justify-center h-screen ">
@@ -261,7 +343,9 @@ function Home(): JSX.Element {
             </div>
           </div>
         </div>
-      )}
+
+      )
+      }
     </>
   );
 }
