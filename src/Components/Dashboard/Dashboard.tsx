@@ -5,10 +5,12 @@ import TotalShops from '../../assets/Dashboard/TotalShops.png'
 import Pizza from "../../assets/HomePage/Pizza.png";
 // import LineChart from '../Chart/Line'
 import DashboardHeader from './Menu'
+import { useState } from 'react';
+useState
 
 
 function Dashboard() {
-
+    
 
     return (
         <>
@@ -179,6 +181,11 @@ function Dashboard() {
                         </div>
                     </div>
                 </div>
+
+                {/* Pagination */}
+
+              
+                {/* Pagination */}
             </div>
         </>
     )
