@@ -67,7 +67,7 @@ function Orders() {
                         </div>
                         <div className="flex flex-wrap  item-center">
                             <div className="w-full flex flex-wrap  p-2 ">
-                                <div className="border-2 p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
                                             <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
@@ -110,7 +110,7 @@ function Orders() {
                         </div>
                         <div className="flex flex-wrap  item-center">
                             <div className="w-full flex flex-wrap  p-2 ">
-                                <div className="border-2 p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
                                             <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
@@ -159,7 +159,7 @@ function Orders() {
                         </div>
                         <div className="flex flex-wrap  item-center">
                             <div className="w-full flex flex-wrap  p-2 ">
-                                <div className="border-2 p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
                                             <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
@@ -202,7 +202,7 @@ function Orders() {
                         </div>
                         <div className="flex flex-wrap  item-center">
                             <div className="w-full flex flex-wrap  p-2 ">
-                                <div className="border-2 p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
                                             <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>

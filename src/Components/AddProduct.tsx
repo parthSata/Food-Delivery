@@ -42,7 +42,6 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
   const [errors, setErrors] = useState<Partial<ProductData>>({});
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  // @ts-ignore
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {

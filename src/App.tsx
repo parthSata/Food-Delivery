@@ -8,6 +8,7 @@ import Register from "./Components/Register";
 import Table from "./Components/Table";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Orders from "./Components/Orders/Orders";
+import Products from "./Components/Products";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/products" element={<Products />} />
         <Route path="/table" element={<Table />} />
       </Routes>
     </BrowserRouter>

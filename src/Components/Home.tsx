@@ -70,7 +70,7 @@ function Home(): JSX.Element {
     if (storedProducts) {
       setProducts(storedProducts);
     }
-  }, [updateProductId]);
+  }, [products]);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);

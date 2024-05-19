@@ -53,7 +53,7 @@ function DashboardHeader() {
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/products" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/#">Products</Link>
+                                <Link to="/products">Products</Link>
                             </li>
                             <li
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/customers" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
