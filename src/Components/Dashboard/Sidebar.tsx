@@ -4,6 +4,7 @@ import Orders from "../../assets/HomePage/Orders.png";
 import Restaurant from "../../assets/HomePage/Restaurant.png";
 import Menu from "../../assets/HomePage/Menu.png";
 import Logo from "../../assets/Login/Logo1.png";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
     const sideMenuRef = useRef<HTMLDivElement>(null);
@@ -50,42 +51,55 @@ function Sidebar() {
                 >
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-4 hover:bg-red-200 rounded-lg p-4">
-                            Dashboard
                             <img src={Dashboard} className="h-6 w-6" alt="" />
+                            <Link to="/dashboard">
+                                Dashboard
+                            </Link>
                         </span>
                     </li>
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-12 hover:bg-red-200 rounded-lg p-4">
-                            Orders
                             <img src={Orders} className="h-6 w-6" alt="" />
+                            <Link to="/orders">
+                                orders
+                            </Link>
                         </span>
                     </li>
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-10 hover:bg-red-200 rounded-lg p-4">
-                            Products
                             <img src={Menu} className="h-8 w-10" alt="" />
+                            <Link to="/products">
+                                Products
+                            </Link>
                         </span>
                     </li>
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-2 hover:bg-red-200 rounded-lg p-4">
-                            Customers
                             <img src={Restaurant} className="h-10 w-10" alt="" />
+                            <Link to="/customers">
+                                Customers
+                            </Link>
                         </span>
                     </li>
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-2 hover:bg-red-200 rounded-lg p-4">
-                            Coupons
                             <img src={Restaurant} className="h-10 w-10" alt="" />
+                            <Link to="/coupons">
+                                Coupons
+                            </Link>
                         </span>
                     </li>
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-2 hover:bg-red-200 rounded-lg p-4">
-                            Restaurants
+
                             <img src={Restaurant} className="h-10 w-10" alt="" />
+                            <Link to="/restaurants ">
+                                Restaurants
+                            </Link>
                         </span>
                     </li>
                 </ul>
-            </div>
+            </div >
         </>
     )
 }

@@ -8,7 +8,7 @@ import Register from "./Components/Register";
 import Table from "./Components/Table";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Orders from "./Components/Orders/Orders";
-import Products from "./Components/Products";
+import Products from "./Components/Products/Products";
 
 function App() {
   return (

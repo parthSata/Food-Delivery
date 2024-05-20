@@ -3,9 +3,9 @@ import search from "../assets/HomePage/search.png";
 // import Right from "../assets/HomePage/RightArrow.png";
 // import Left from "../assets/HomePage/LeftArrow.png";
 import AddProduct from "./AddProduct";
-import Header from "./Header";
 // import Table from "./Table";
 import Pizza from "../assets/HomePage/Pizza.png";
+import DashboardHeader from "./Dashboard/Menu";
 
 
 interface Product {
@@ -26,7 +26,7 @@ function Home(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState(""); 
   const filteredProducts = products.filter((product) =>
     product.ProductName.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -55,15 +55,12 @@ function Home(): JSX.Element {
       updatedProducts.push(newProduct);
     }
 
-    // Update state and local storage
     setProducts(updatedProducts);
     localStorage.setItem("products", JSON.stringify(updatedProducts));
 
-    // Close the dialog
     setShowAddProductDialog(false);
   };
 
-  // Auto fetch Data after add,update product
 
   useEffect(() => {
     const storedProducts = JSON.parse(localStorage.getItem("products") ?? "[]");
@@ -114,7 +111,7 @@ function Home(): JSX.Element {
     <>
       <div className="min-w-fit ">
         {/* Header Started Here */}
-        <Header />
+        <DashboardHeader />
         {/* Header End Here */}
 
         {/* Body Part Started */}
