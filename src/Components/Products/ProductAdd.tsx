@@ -18,7 +18,7 @@ interface Product {
 function ProductAdd() {
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
-    const apiUrl = "http://localhost:3000/products"
+    const apiUrl = "http://localhost:3000/products";
 
     const [product, setProduct] = useState<Product>({
         name: '',
@@ -32,9 +32,10 @@ function ProductAdd() {
         categoryId: 1,
     });
 
-    const cloudinary = new Cloudinary({ cloud_name: cloudName, secure: true });
+    const [previewImage, setPreviewImage] = useState<string | null>(null);
+    const [productImages, setProductImages] = useState([]);
 
-    const uploadImageToCloudinary = async (file: File) => {
+    const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
         try {
             const data = new FormData();
             data.append("file", file);
@@ -45,39 +46,82 @@ function ProductAdd() {
                 body: data,
             });
 
-            const imgdata = await response.json();
-
-            return imgdata.url;
+            const imgData = await response.json();
+            return imgData.url;
         } catch (error) {
             console.error('Error uploading image to Cloudinary:', error);
             return null;
         }
     };
 
-    const handleImageUpload = async (e: any) => {
-        const files = e.target.files;
-        console.log("Selected files:", files);
-        const imageUrls = await Promise.all(
-            Array.from(files).map((file: any) => uploadImageToCloudinary(file))
-        );
-        console.log("Uploaded image URLs:", imageUrls);
+    // const handleImageUpload = async(e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    //     if (!e.target.files) return;
+
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         const imageUrl = await uploadImageToCloudinary(file);
+    //         if (imageUrl) {
+    //             const newImages = [...product.images];
+    //             newImages[index] = imageUrl;
+    //             setProduct((prevState) => ({
+    //                 ...prevState,
+    //                 images: newImages
+    //             }));
+    //             setPreviewImage(imageUrl);
+    //             e.target.disabled = true; // Disable input after selecting an image
+    //         }
+    //     }
+    // };
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+        if (!e.target.files) return;
+
+        const file = e.target.files[0];
+        if (file) {
+            const imageUrl = await uploadImageToCloudinary(file);
+            if (imageUrl) {
+                const newImages = [...product.images];
+                newImages[index] = imageUrl;
+                setProduct((prevState) => ({
+                    ...prevState,
+                    images: newImages
+                }));
+                setProductImages((prevImages) => {
+                    const updatedImages = [...prevImages];
+                    updatedImages[index] = imageUrl;
+                    return updatedImages;
+                });
+                setPreviewImage(imageUrl);
+                e.target.disabled = true; // Disable input after selecting an image
+            }
+        }
+    };
+
+    // const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    //     const files = e.target.files;
+    //     if (files && files.length > 0) {
+    //         const imageUrl = await uploadImageToCloudinary(files[0]);
+    //         if (imageUrl) {
+    //             const newImages = [...product.images];
+    //             newImages[index] = imageUrl;
+    //             setProduct((prevState) => ({
+    //                 ...prevState,
+    //                 images: newImages
+    //             }));
+    //             setPreviewImage(imageUrl);
+    //             e.target.disabled = true; // Disable input after selecting an image
+    //         }
+    //     }
+    // };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
         setProduct((prevState) => ({
             ...prevState,
-            images: [...prevState.images, ...imageUrls.filter(url => url !== null)]
+            [name]: value
         }));
-
-        // Disable the input after selecting an image
-        e.target.disabled = true;
     };
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value });
-    };
-
-
 
     const handleSubmit = async (e: React.FormEvent) => {
-        console.log("Submit button clicked");
         e.preventDefault();
         try {
             const response = await fetch(apiUrl, {
@@ -87,8 +131,6 @@ function ProductAdd() {
                 },
                 body: JSON.stringify(product),
             });
-
-
             const result = await response.json();
             console.log('Product saved:', result);
             // Reset the form or handle successful submission
@@ -96,7 +138,6 @@ function ProductAdd() {
             console.error('Error saving the product:', error);
         }
     };
-
     return (
         <>
             <div className="">
@@ -106,84 +147,41 @@ function ProductAdd() {
                     <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
                         <div className="flex  flex-wrap">
                             <div className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>
-                                <div className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${product.images.length > 0 ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}>
-                                    {product.images.length > 0 ? (
-                                        <div className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden">
-                                            <img src={product.images[0]} alt="Preview" className="h-full w-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
-                                                <label className='flex'>
-                                                    <span className="flex self-center"><i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i></span>
-                                                    <input type="file" onChange={handleImageUpload} style={{ display: 'none' }} />
-                                                </label>
+                                {[0, 1, 2, 3].map((index) => (
+                                    <div
+                                        key={index}
+                                        className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index] ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}
+                                    >
+                                        {productImages[index] ? (
+                                            <div
+                                                className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden cursor-pointer"
+                                                onClick={() => setPreviewImage(productImages[index])}
+                                            >
+                                                <img src={productImages[index]} alt={`Preview ${index}`} className="h-full w-full object-cover" />
                                             </div>
-                                            <p className="">Upload New</p>
-                                        </>
-                                    )}
-                                </div>
-                                <div className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${product.images.length > 0 ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}>
-                                    {product.images.length > 0 ? (
-                                        <div className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden">
-                                            <img src={product.images[0]} alt="Preview" className="h-full w-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
-                                                <label className='flex'>
-                                                    <span className="flex self-center"><i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i></span>
-                                                    <input type="file" onChange={handleImageUpload} style={{ display: 'none' }} />
-                                                </label>
-                                            </div>
-                                            <p className="">Upload New</p>
-                                        </>
-                                    )}
-                                </div>
-                                <div className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${product.images.length > 0 ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}>
-                                    {product.images.length > 0 ? (
-                                        <div className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden">
-                                            <img src={product.images[0]} alt="Preview" className="h-full w-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
-                                                <label className='flex'>
-                                                    <span className="flex self-center"><i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i></span>
-                                                    <input type="file" onChange={handleImageUpload} style={{ display: 'none' }} />
-                                                </label>
-                                            </div>
-                                            <p className="">Upload New</p>
-                                        </>
-                                    )}
-                                </div>
-                                <div className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${product.images.length > 0 ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}>
-                                    {product.images.length > 0 ? (
-                                        <div className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden">
-                                            <img src={product.images[0]} alt="Preview" className="h-full w-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
-                                                <label className='flex'>
-                                                    <span className="flex self-center"><i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i></span>
-                                                    <input type="file" onChange={handleImageUpload} style={{ display: 'none' }} />
-                                                </label>
-                                            </div>
-                                            <p className="">Upload New</p>
-                                        </>
-                                    )}
-                                </div>
+                                        ) : (
+                                            <>
+                                                <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
+                                                    <label className='flex'>
+                                                        <span className="flex self-center">
+                                                            <i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i>
+                                                        </span>
+                                                        <input type="file" onChange={(e) => handleImageUpload(e, index)} style={{ display: 'none' }} />
+                                                    </label>
+                                                </div>
+                                                <p>Upload New</p>
+                                            </>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         {/* Preview Image */}
                         <div className="flex items-center w-full order-1" style={{ fontFamily: "Bai Jamjuree" }}>
                             <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]" style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}>
                                 <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
-                                    {product.images.length > 0 ? (
-                                        product.images.map((imageUrl, index) => (
-                                            <img key={index} src={imageUrl} alt={`Preview ${index}`} className="" />
-                                        ))
+                                    {previewImage ? (
+                                        <img src={previewImage} alt="Preview" className="h-full w-full object-cover" />
                                     ) : (
                                         <p>No image uploaded</p>
                                     )}

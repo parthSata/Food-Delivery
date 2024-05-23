@@ -49,43 +49,19 @@
       "image": "https://example.com/image1.png"
     },
     {
-      "id": "ea52",
-      "name": "Anika Phillips",
-      "price": "788",
-      "discountPrice": "427",
-      "weight": "39",
-      "unit": "Ducimus ratione eiu",
-      "packagingCharges": "80",
-      "description": "Vel facilis consecte",
+      "id": "5ff9",
+      "name": "Irma Lamb",
+      "price": "286",
+      "discountPrice": "55",
+      "weight": "10",
+      "unit": "Nesciunt alias labo",
+      "packagingCharges": "95",
+      "description": "Nihil provident opt",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448010/Burger_tlsmii.jpg"
-      ]
-    },
-    {
-      "id": "e022",
-      "name": "Darius Wiley",
-      "price": "230",
-      "discountPrice": "183",
-      "weight": "62",
-      "unit": "Veniam eveniet per",
-      "packagingCharges": "15",
-      "description": "Aliquid id est exerc",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448264/Burger_uqafjk.jpg"
-      ],
-      "categoryId": 1
-    },
-    {
-      "id": "39b0",
-      "name": "Malik Nunez",
-      "price": "366",
-      "discountPrice": "243",
-      "weight": "42",
-      "unit": "Ullam labore deserun",
-      "packagingCharges": "50",
-      "description": "Molestiae proident ",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448964/Burger_tojik5.jpg"
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469173/Pasta_ffxjfm.png",
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469181/BurgerNew_syyynf.jpg",
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469187/Pasta_rto4rc.png",
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469194/BurgerNew_smmbnw.jpg"
       ],
       "categoryId": 1
     }
