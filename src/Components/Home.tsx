@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import search from "../assets/HomePage/search.png";
 // import Right from "../assets/HomePage/RightArrow.png";
 // import Left from "../assets/HomePage/LeftArrow.png";
-import AddProduct from "./AddProduct";
+import AddProduct from "./AddCategory";
 // import Table from "./Table";
 import Pizza from "../assets/HomePage/Pizza.png";
 import DashboardHeader from "./Dashboard/Menu";
@@ -26,7 +26,7 @@ function Home(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
-  const [searchInput, setSearchInput] = useState(""); 
+  const [searchInput, setSearchInput] = useState("");
   const filteredProducts = products.filter((product) =>
     product.ProductName.toLowerCase().includes(searchInput.toLowerCase())
   );
@@ -59,15 +59,19 @@ function Home(): JSX.Element {
     localStorage.setItem("products", JSON.stringify(updatedProducts));
 
     setShowAddProductDialog(false);
+    fetchProducts()
   };
 
-
-  useEffect(() => {
+  const fetchProducts = () => {
     const storedProducts = JSON.parse(localStorage.getItem("products") ?? "[]");
     if (storedProducts) {
       setProducts(storedProducts);
     }
-  }, [products]);
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, []);
 
   const openAddProductDialog = () => setShowAddProductDialog(true);
   const closeAddProductDialog = () => setShowAddProductDialog(false);
@@ -86,6 +90,7 @@ function Home(): JSX.Element {
     } else {
       console.log("Product not found for update!");
     }
+    fetchProducts()
   };
 
   useEffect(() => {
@@ -144,7 +149,7 @@ function Home(): JSX.Element {
                   style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
                   onClick={openAddProductDialog}
                 >
-                  Add New Product +
+                  Add New Category +
                 </button>
               </div>
             </div>
@@ -165,22 +170,16 @@ function Home(): JSX.Element {
                 <thead className="rounded-full bg-[#DF201F] ">
                   <tr className="text-[#FFFFFF] font-semibold ">
                     <th className="border-r-1  py-2 px-4 rounded-tl-lg    border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Name
+                      Category Name
                     </th>
                     <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Product Id
+                      Description
                     </th>
                     <th className="border-r-1 py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Quantity
+                      Number of Products
                     </th>
                     <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Status
-                    </th>
-                    <th className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Price
-                    </th>
-                    <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Discount Price
                     </th>
                     <th className="border-r-1  py-2 px-4   border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Actions
@@ -291,7 +290,7 @@ function Home(): JSX.Element {
       {/* Pagination */}
       {/* Body Ended Started */}
       {showAddProductDialog && (
-        <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-4 m-8">
+        <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-12 m-8">
           <div className="flex items-center  justify-center h-screen ">
             <div
               className="fixed inset-0 transition-opacity "
@@ -309,7 +308,7 @@ function Home(): JSX.Element {
                       (product) => product.id === updateProductId
                     )?.ProductImage
                     ? "top-[10px] left-[100px] sm:top-[20px] sm:left-[20px] md:top-[10px] md:left-[10px] lg:top-[10px] lg:left-[10px] xl:top-[20px] xl:left-[20px]"
-                    : "top-[400px] left-[545px] sm:top-[390px] sm:left-[600px] md:top-[30px] md:left-[965px] lg:top-[10px] lg:left-[980px] xl:top-[80px] xl:left-[980px]"
+                    : "top-[400px] left-[545px] sm:top-[390px] sm:left-[600px] md:top-[30px] md:left-[965px] lg:top-[2px] lg:left-[10px] xl:top-[1px] xl:left-[980px]"
                     } mt-0 mr-6`}
                   onClick={closeAddProductDialog}
                 >

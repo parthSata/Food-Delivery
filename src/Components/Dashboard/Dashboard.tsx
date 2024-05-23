@@ -5,21 +5,37 @@ import TotalShops from '../../assets/Dashboard/TotalShops.png'
 import Pizza from "../../assets/HomePage/Pizza.png";
 // import LineChart from '../Chart/Line'
 import DashboardHeader from './Menu'
-import { useState } from 'react';
-useState
+import { useEffect, useState } from 'react';
+
 
 
 function Dashboard() {
+    const [dashboardData, setDashboardData] = useState(null);
 
-
+    useEffect(() => {
+        fetchData();
+    }, []);
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://localhost:3000');
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            const jsonData = await response.json();
+            setDashboardData(jsonData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
     return (
         <>
             <div className="h-full w-full">
                 <DashboardHeader />
+                {/* {dashboardData && ( */}
                 <div className="flex justify-between  mt-8 flex-wrap text-lg" style={{ fontFamily: "Bai Jamjuree" }}>
                     <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
                         <div className="flex flex-col">
-                            <span className='self-start'>923</span>
+                            <span className='self-start'>{ }</span>
                             <span className=''>Recent Order</span>
                         </div>
                         <span className=""><img src={Cart} className="h-[50px] w-[50px] " /></span>
@@ -46,6 +62,7 @@ function Dashboard() {
                         <span className=""><img src={TotalShops} className="h-[50px] w-[50px]" /></span>
                     </div>
                 </div>
+                {/* )} */}
                 <div className="flex gap-6 ">
                     <div className="mt-4 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full flex-wrap" style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}>
                         <div className="flex justify-around gap-6 flex-wrap lg:flex-nowrap ">

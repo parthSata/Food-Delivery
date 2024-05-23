@@ -270,15 +270,11 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
       {/* DialogBox For Add Product */}
 
       <div
-        className={`flex justify-center gap-2 mt-[700px] sm:mt-[530px] md:mt-[350px] lg:mt-[6px] xl:mt-[85px]  lg:flex-nowrap flex-wrap ${
-          !formData.ProductImage
-            ? "mt-[400px] sm:mt-[200px] md:mt-[80px] lg:mt-[30px] "
-            : " xl:mt-[80px]"
-        }`}
+        className={`flex justify-center gap-2  mt-[250px] sm:mt-[200px] md:mt-[20px] lg:mt-[20px]  xl:mt-[5px]  lg:flex-nowrap flex-wrap`}
       >
         {/* image */}
         <div
-          className={`flex flex-col items-center relative mt-[2px] sm:mt-[180px] md:mt-[10px] lg:mt-[10px] `}
+          className={`flex flex-col items-center relative mt-[2px] sm:mt-[60px] md:mt-[10px] lg:mt-[10px] `}
         >
           <span
             className="font-semibold"
@@ -290,7 +286,7 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
           <div className="">
             <div className="flex justify-center items-center flex-col ">
               {formData.ProductImage &&
-              typeof formData.ProductImage !== "string" ? (
+                typeof formData.ProductImage !== "string" ? (
                 <img
                   src={URL.createObjectURL(formData.ProductImage)} // Use createObjectURL to display image preview
                   className="h-[300px] w-[500px] rounded-lg"
@@ -340,9 +336,8 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
         {/* Image Dropdown */}
 
         <div
-          className={`absolute right-[120px] top-[725px] sm:fixed sm:top-[730px] sm:right-[130px] md:fixed md:top-[380px] md:right-[220px] lg:top-[40px] lg:right-[570px] lg:fixed xl:top-[120px] xl:right-[580px] xl:fixed  z-10 mt-[74px] opacity-0.1 mr-4 font-semibold w-36 h-18 border-[1px solid #EFEFEF] rounded-md  bg-white shadow-lg focus:outline-none ${
-            imageDropdown ? "" : "hidden"
-          }`}
+          className={`absolute right-[120px] top-[725px] sm:fixed sm:top-[730px] sm:right-[130px] md:fixed md:top-[380px] md:right-[220px] lg:top-[40px] lg:right-[570px] lg:fixed xl:top-[120px] xl:right-[580px] xl:fixed  z-10 mt-[74px] opacity-0.1 mr-4 font-semibold w-36 h-18 border-[1px solid #EFEFEF] rounded-md  bg-white shadow-lg focus:outline-none ${imageDropdown ? "" : "hidden"
+            }`}
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -376,12 +371,11 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
             <div className="flex flex-wrap mb-6">
               <div className="w-full px-3 mb-6">
                 <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Product Name
+                  Category Name
                 </label>
                 <input
-                  className={`${
-                    productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
+                  className={`${productId !== null ? "border-4 border-gray" : "outline-none"
+                    } appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
                   type="text"
                   placeholder="Pizza"
                   name="ProductName"
@@ -390,127 +384,12 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                 />
                 {errors.ProductName && (
                   <span
-                    className={`text-red-600 text-sm ${
-                      formData.ProductName ? "" : "hidden"
-                    }}`}
+                    className={`text-red-600 text-sm ${formData.ProductName ? "" : "hidden"
+                      }}`}
                   >
                     {errors.ProductName}
                   </span>
                 )}
-              </div>
-              <div className="w-full md:w-1/2 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Price
-                </label>
-                <input
-                  className={`${
-                    productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
-                  id="grid-last-name"
-                  type="number"
-                  placeholder="180"
-                  value={formData.Price}
-                  onChange={handleChange}
-                  name="Price"
-                />
-                {errors.Price && (
-                  <span className="text-red-600 text-sm">{errors.Price}</span>
-                )}
-              </div>
-              <div className="w-full md:w-1/2 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Discount Price
-                </label>
-                <input
-                  className="appearance-none block w-full h-[60px]   text-[#A2A3A5] border border-[2px solid #E8E8E8]  rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white"
-                  id="grid-last-name"
-                  type="number"
-                  placeholder="175"
-                  value={formData.DiscountPrice}
-                  onChange={handleChange}
-                  name="DiscountPrice"
-                  disabled={productId !== null}
-                />
-                {errors.DiscountPrice && (
-                  <span className="text-red-600 text-sm">
-                    {errors.DiscountPrice}
-                  </span>
-                )}
-              </div>
-              <div className="w-full md:w-1/3 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Unit
-                </label>
-                <input
-                  className="appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white"
-                  id="grid-last-name"
-                  type="number"
-                  placeholder="Gms"
-                  value={formData.Unit}
-                  onChange={handleChange}
-                  name="Unit"
-                  disabled={productId !== null}
-                />
-                {errors.Unit && (
-                  <span className="text-red-600 text-sm">{errors.Unit}</span>
-                )}
-              </div>
-              <div className="w-full md:w-1/3 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Stock
-                </label>
-                <input
-                  className={`${
-                    productId !== null ? "border-4 border-gray" : "outline-none"
-                  } appearance-none block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
-                  id="grid-last-name"
-                  type="number"
-                  placeholder="25"
-                  value={formData.Stock}
-                  onChange={handleChange}
-                  name="Stock"
-                />
-                {errors.Stock && (
-                  <span className="text-red-600 text-sm">{errors.Stock}</span>
-                )}
-              </div>
-              <div className="w-full md:w-1/3 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Is Veg
-                </label>
-                <select
-                  name="IsVeg"
-                  value={formData.IsVeg}
-                  onChange={(e) => handleChange(e)}
-                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]  bg-white "
-                  disabled={productId !== null}
-                >
-                  <option className="" value="True">
-                    True
-                  </option>
-                  <option className="" value="False">
-                    False
-                  </option>
-                </select>
-              </div>
-              <div className="w-full md:w-1/1 px-3 mb-6">
-                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Status
-                </label>
-                <select
-                  name="Status"
-                  value={formData.Status}
-                  onChange={(e) => handleChange(e)}
-                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
-                  disabled={productId !== null}
-                >
-                  <option className="" value="In Stock">
-                    In Stock
-                  </option>
-                  <option className="" value="Out of Stock">
-                    Out of Stock
-                  </option>
-                </select>
               </div>
               <div className="w-full md:w-1/1 px-3 mb-6">
                 <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -535,6 +414,44 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
                   </span>
                 )}
               </div>
+              <div className="w-full md:w-1/2 px-3 mb-6">
+                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Number of Products
+                </label>
+                <input
+                  className={` appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
+                  id="grid-last-name"
+                  type="number"
+                  placeholder="180"
+                  // value={formData.Price}
+                  // onChange={handleChange}
+                  name="Price"
+                />
+                {errors.Price && (
+                  <span className="text-red-600 text-sm">{errors.Price}</span>
+                )}
+              </div>
+
+              <div className="w-full md:w-1/1 px-3 mb-6">
+                <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                  Status
+                </label>
+                <select
+                  name="Status"
+                  value={formData.Status}
+                  onChange={(e) => handleChange(e)}
+                  className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
+                  disabled={productId !== null}
+                >
+                  <option className="" value="In Stock">
+                    In Stock
+                  </option>
+                  <option className="" value="Out of Stock">
+                    Out of Stock
+                  </option>
+                </select>
+              </div>
+
             </div>
           </form>
         </div>
@@ -560,9 +477,8 @@ const AddProduct: React.FC<Props> = ({ productId, onClose }) => {
         />
         <button
           type="submit"
-          className={`rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] ${
-            productId === null ? "hidden" : ""
-          }`}
+          className={`rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] ${productId === null ? "hidden" : ""
+            }`}
           style={{
             boxShadow: "2px 2px 25px 2px #94CD0099",
             fontFamily: "Bai Jamjuree",

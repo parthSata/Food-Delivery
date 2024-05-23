@@ -8,7 +8,7 @@ function Burger() {
             <div className="">
                 <DashboardHeader />
                 {/* Product Heading */}
-                <div className="bg-[#f65554]  h-52 w-full  sm:w-full">
+                <div className="bg-[#fcbc65]  h-52 w-full  sm:w-full">
                     <div className="flex justify-between  items-center w-full">
                         <span className="text-3xl pl-28 text-white">Burger</span>
                         <img src={BurgerImg} alt="" className="visible sm:visible md:visible lg:visible xl:visible h-[205px] w-fit " />

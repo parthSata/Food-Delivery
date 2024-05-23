@@ -1,0 +1,273 @@
+{
+  "categories ": [
+    {
+      "category_id": 1,
+      "category_name": "Pizza",
+      "description": "Delicious cheesy pizzas with various toppings.",
+      "number_of_products": 180,
+      "status": "In Stock"
+    },
+    {
+      "category_id": 2,
+      "category_name": "Burgers",
+      "description": "Juicy beef and chicken burgers with fresh ingredients.",
+      "number_of_products": 150,
+      "status": "In Stock"
+    },
+    {
+      "category_id": 3,
+      "category_name": "Pasta",
+      "description": "Authentic Italian pasta with rich and creamy sauces.",
+      "number_of_products": 120,
+      "status": "Out of Stock"
+    },
+    {
+      "category_id": 4,
+      "category_name": "Salads",
+      "description": "Fresh and healthy salads made with organic ingredients.",
+      "number_of_products": 90,
+      "status": "In Stock"
+    },
+    {
+      "category_id": 5,
+      "category_name": "Desserts",
+      "description": "Sweet and delightful desserts to finish your meal.",
+      "number_of_products": 60,
+      "status": "In Stock"
+    }
+  ],
+  "products": [
+    {
+      "name": "Product 1",
+      "category_id": 1,
+      "price": 10,
+      "discountPrice": 8,
+      "weight": 500,
+      "unit": "grams",
+      "packagingCharges": 2,
+      "description": "This is a description for Product 1",
+      "image": "https://example.com/image1.png"
+    },
+    {
+      "id": "ea52",
+      "name": "Anika Phillips",
+      "price": "788",
+      "discountPrice": "427",
+      "weight": "39",
+      "unit": "Ducimus ratione eiu",
+      "packagingCharges": "80",
+      "description": "Vel facilis consecte",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448010/Burger_tlsmii.jpg"
+      ]
+    },
+    {
+      "id": "e022",
+      "name": "Darius Wiley",
+      "price": "230",
+      "discountPrice": "183",
+      "weight": "62",
+      "unit": "Veniam eveniet per",
+      "packagingCharges": "15",
+      "description": "Aliquid id est exerc",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448264/Burger_uqafjk.jpg"
+      ],
+      "categoryId": 1
+    },
+    {
+      "id": "39b0",
+      "name": "Malik Nunez",
+      "price": "366",
+      "discountPrice": "243",
+      "weight": "42",
+      "unit": "Ullam labore deserun",
+      "packagingCharges": "50",
+      "description": "Molestiae proident ",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716448964/Burger_tojik5.jpg"
+      ],
+      "categoryId": 1
+    }
+  ],
+  "recentOrders": [
+    {
+      "orderId": "ORD000003",
+      "status": "Accepted",
+      "time": "03:25 PM",
+      "details": "Accepted Order",
+      "items": [
+        "Burger",
+        "Pizza"
+      ]
+    },
+    {
+      "orderId": "ORD000004",
+      "status": "Cancelled",
+      "time": "05:10 PM",
+      "details": "Cancelled Order",
+      "items": [
+        "Pasta"
+      ]
+    },
+    {
+      "orderId": "ORD000003",
+      "status": "Accepted",
+      "time": "08:55 PM",
+      "details": "Accepted Order",
+      "items": [
+        "Salad"
+      ]
+    },
+    {
+      "orderId": "ORD000003",
+      "status": "Accepted",
+      "time": "09:02 PM",
+      "details": "Accepted Order",
+      "items": [
+        "Sandwich"
+      ]
+    }
+  ],
+  "revenue": [
+    {
+      "day": "Mo",
+      "amount": 14300
+    },
+    {
+      "day": "Tu",
+      "amount": 15000
+    },
+    {
+      "day": "We",
+      "amount": 20000
+    },
+    {
+      "day": "Th",
+      "amount": 25000
+    },
+    {
+      "day": "Fr",
+      "amount": 30000
+    },
+    {
+      "day": "Sa",
+      "amount": 35000
+    },
+    {
+      "day": "Su",
+      "amount": 44620
+    }
+  ],
+  "placedOrders": [
+    {
+      "order": "French Fries",
+      "customerName": "Jhon Leo",
+      "status": "Pending",
+      "time": "10:05",
+      "discountPrice": 200
+    },
+    {
+      "order": "French Crostini",
+      "customerName": "Kristien",
+      "status": "Cancelled",
+      "time": "12:05",
+      "discountPrice": 150
+    },
+    {
+      "order": "Noodles",
+      "customerName": "Jack Suit",
+      "status": "Delivered",
+      "time": "15:35",
+      "discountPrice": 500
+    },
+    {
+      "order": "Garlic Bread",
+      "customerName": "Alesdro Guitto",
+      "status": "Delivered",
+      "time": "16:05",
+      "discountPrice": 150
+    },
+    {
+      "order": "Pizza",
+      "customerName": "Peter Gill",
+      "status": "Delivered",
+      "time": "10:50",
+      "discountPrice": 150
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD000003",
+      "date": "2022-03-25",
+      "time": "03:25 PM",
+      "items": [
+        {
+          "name": "Hamburger",
+          "price": 100
+        },
+        {
+          "name": "Vegetarian Pizza",
+          "price": 100
+        },
+        {
+          "name": "Chicken Biryani",
+          "price": 150
+        }
+      ],
+      "status": "Accepted"
+    },
+    {
+      "id": "ORD000002",
+      "date": "2022-03-25",
+      "time": "12:01 PM",
+      "items": [
+        {
+          "name": "Best Veg Dum Biryani",
+          "price": 200
+        },
+        {
+          "name": "Vegetarian Pizza",
+          "price": 100
+        }
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "ORD000003",
+      "date": "2022-03-24",
+      "time": "03:25 PM",
+      "items": [
+        {
+          "name": "Hamburger",
+          "price": 100
+        },
+        {
+          "name": "Vegetarian Pizza",
+          "price": 100
+        },
+        {
+          "name": "Chicken Biryani",
+          "price": 150
+        }
+      ],
+      "status": "Accepted"
+    },
+    {
+      "id": "ORD000002",
+      "date": "2022-03-24",
+      "time": "12:01 PM",
+      "items": [
+        {
+          "name": "Best Veg Dum Biryani",
+          "price": 200
+        },
+        {
+          "name": "Vegetarian Pizza",
+          "price": 100
+        }
+      ],
+      "status": "Cancelled"
+    }
+  ]
+}

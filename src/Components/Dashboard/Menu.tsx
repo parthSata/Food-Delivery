@@ -85,7 +85,7 @@ function DashboardHeader() {
 
 
                 </nav>
-                <div className="flex mt-4  sm:hidden md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
+                <div className="flex mt-4  md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
                     <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
                         <span className=""><img src={menu} alt="" className="" onClick={toggleSideMenu}
                         /></span>

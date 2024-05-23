@@ -1,10 +1,14 @@
-import Burger from './Burger'
+// import Burger from './Burger'
+// import Pizza from './Pizza'
+import ProductAdd from './ProductAdd'
 
 
 function Products() {
   return (
     <>
-      <Burger />
+      {/* <Burger />
+      <Pizza /> */}
+      <ProductAdd />
 
     </>
   )
