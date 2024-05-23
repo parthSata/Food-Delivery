@@ -1,37 +1,36 @@
 import DashboardHeader from '../Dashboard/Menu';
 // import ImagePng from '../../assets/Products/Image.png';
 import { useState } from 'react';
-import { Cloudinary } from 'cloudinary-core';
+// import { Cloudinary } from 'cloudinary-core';
 
 interface Product {
     name: string;
-    price: number;
-    discountPrice: number;
-    weight: number;
+    price: number | string;
+    discountPrice: number | string;
+    weight: number | string;
     unit: string;
-    packagingCharges: number;
+    packagingCharges: number | string;
     description: string;
     images: string[];
-    categoryId: number,
+    categoryId: number | string,
 }
 
 function ProductAdd() {
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";
-
+    const [errors, setErrors] = useState<Partial<Product>>({});
     const [product, setProduct] = useState<Product>({
         name: '',
-        price: 0,
-        discountPrice: 0,
-        weight: 0,
+        price: '',
+        discountPrice: '',
+        weight: '',
         unit: '',
-        packagingCharges: 0,
+        packagingCharges: '',
         description: '',
         images: [],
         categoryId: 1,
     });
-
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [productImages, setProductImages] = useState([]);
 
@@ -54,8 +53,6 @@ function ProductAdd() {
         }
     };
 
-    // const handleImageUpload = async(e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    //     if (!e.target.files) return;
 
     //     const file = e.target.files[0];
     //     if (file) {
@@ -87,6 +84,7 @@ function ProductAdd() {
                 }));
                 setProductImages((prevImages) => {
                     const updatedImages = [...prevImages];
+                    // @ts-ignore
                     updatedImages[index] = imageUrl;
                     return updatedImages;
                 });
@@ -96,22 +94,6 @@ function ProductAdd() {
         }
     };
 
-    // const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    //     const files = e.target.files;
-    //     if (files && files.length > 0) {
-    //         const imageUrl = await uploadImageToCloudinary(files[0]);
-    //         if (imageUrl) {
-    //             const newImages = [...product.images];
-    //             newImages[index] = imageUrl;
-    //             setProduct((prevState) => ({
-    //                 ...prevState,
-    //                 images: newImages
-    //             }));
-    //             setPreviewImage(imageUrl);
-    //             e.target.disabled = true; // Disable input after selecting an image
-    //         }
-    //     }
-    // };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -121,8 +103,48 @@ function ProductAdd() {
         }));
     };
 
+    const isFieldEmpty = (value: string | number) => {
+        return value === "" || value === null || value === undefined;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        const newErrors: Partial<Product> = {};
+
+        switch (true) {
+            case isFieldEmpty(product.name):
+                newErrors.name = "Product Name is required";
+                break;
+            case isFieldEmpty(product.price):
+                newErrors.price = "Price is required";
+                break;
+            case isFieldEmpty(product.discountPrice):
+                newErrors.discountPrice = "Discount Price is required";
+                break;
+            case isFieldEmpty(product.weight):
+                newErrors.weight = "Weight is required";
+                break;
+            case isFieldEmpty(product.unit):
+                newErrors.unit = "Unit is required";
+                break;
+            case isFieldEmpty(product.packagingCharges):
+                newErrors.packagingCharges = "Packaging Charges is required";
+                break;
+            case isFieldEmpty(product.description):
+                newErrors.description = "Discription  is required";
+                break;
+
+            default:
+                break;
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        setErrors({});
+
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
@@ -137,6 +159,18 @@ function ProductAdd() {
         } catch (error) {
             console.error('Error saving the product:', error);
         }
+
+        setProduct({
+            name: '',
+            price: "",
+            discountPrice: "",
+            weight: "",
+            unit: '',
+            packagingCharges: "",
+            description: '',
+            images: [],
+            categoryId: 1,
+        });
     };
     return (
         <>
@@ -158,6 +192,7 @@ function ProductAdd() {
                                                 onClick={() => setPreviewImage(productImages[index])}
                                             >
                                                 <img src={productImages[index]} alt={`Preview ${index}`} className="h-full w-full object-cover" />
+
                                             </div>
                                         ) : (
                                             <>
@@ -168,8 +203,10 @@ function ProductAdd() {
                                                         </span>
                                                         <input type="file" onChange={(e) => handleImageUpload(e, index)} style={{ display: 'none' }} />
                                                     </label>
+
                                                 </div>
                                                 <p>Upload New</p>
+
                                             </>
                                         )}
                                     </div>
@@ -208,6 +245,14 @@ function ProductAdd() {
                                             value={product.name}
                                             onChange={handleChange}
                                         />
+                                        {errors.name && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.name ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.name}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="w-full  md:w-1/2 px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -221,6 +266,14 @@ function ProductAdd() {
                                             value={product.price}
                                             onChange={handleChange}
                                         />
+                                        {errors.price && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.price ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.price}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="w-full md:w-1/2 px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -234,6 +287,14 @@ function ProductAdd() {
                                             value={product.discountPrice}
                                             onChange={handleChange}
                                         />
+                                        {errors.discountPrice && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.discountPrice}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -247,6 +308,14 @@ function ProductAdd() {
                                             value={product.weight}
                                             onChange={handleChange}
                                         />
+                                        {errors.weight && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.weight}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -260,6 +329,14 @@ function ProductAdd() {
                                             value={product.unit}
                                             onChange={handleChange}
                                         />
+                                        {errors.unit && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.unit}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="w-full   px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -273,6 +350,14 @@ function ProductAdd() {
                                             value={product.packagingCharges}
                                             onChange={handleChange}
                                         />
+                                        {errors.packagingCharges && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.packagingCharges}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="w-full px-3 mb-6">
                                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -286,6 +371,14 @@ function ProductAdd() {
                                             value={product.description}
                                             onChange={handleChange}
                                         />
+                                        {errors.description && (
+                                            <span
+                                                className={`text-red-600 text-sm ${product.description ? "" : "hidden"
+                                                    }}`}
+                                            >
+                                                {errors.description}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
                                 <button

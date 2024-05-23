@@ -13,55 +13,20 @@
       "description": "Juicy beef and chicken burgers with fresh ingredients.",
       "number_of_products": 150,
       "status": "In Stock"
-    },
-    {
-      "category_id": 3,
-      "category_name": "Pasta",
-      "description": "Authentic Italian pasta with rich and creamy sauces.",
-      "number_of_products": 120,
-      "status": "Out of Stock"
-    },
-    {
-      "category_id": 4,
-      "category_name": "Salads",
-      "description": "Fresh and healthy salads made with organic ingredients.",
-      "number_of_products": 90,
-      "status": "In Stock"
-    },
-    {
-      "category_id": 5,
-      "category_name": "Desserts",
-      "description": "Sweet and delightful desserts to finish your meal.",
-      "number_of_products": 60,
-      "status": "In Stock"
     }
   ],
   "products": [
     {
-      "name": "Product 1",
-      "category_id": 1,
-      "price": 10,
-      "discountPrice": 8,
-      "weight": 500,
-      "unit": "grams",
-      "packagingCharges": 2,
-      "description": "This is a description for Product 1",
-      "image": "https://example.com/image1.png"
-    },
-    {
-      "id": "5ff9",
-      "name": "Irma Lamb",
-      "price": "286",
-      "discountPrice": "55",
-      "weight": "10",
-      "unit": "Nesciunt alias labo",
-      "packagingCharges": "95",
-      "description": "Nihil provident opt",
+      "id": "ed48",
+      "name": "Sydnee Byrd",
+      "price": "809",
+      "discountPrice": "796",
+      "weight": "1",
+      "unit": "Recusandae Quaerat ",
+      "packagingCharges": "56",
+      "description": "Ea necessitatibus ex",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469173/Pasta_ffxjfm.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469181/BurgerNew_syyynf.jpg",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469187/Pasta_rto4rc.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716469194/BurgerNew_smmbnw.jpg"
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716473359/Burger_kfpmgf.jpg"
       ],
       "categoryId": 1
     }
@@ -72,37 +37,7 @@
       "status": "Accepted",
       "time": "03:25 PM",
       "details": "Accepted Order",
-      "items": [
-        "Burger",
-        "Pizza"
-      ]
-    },
-    {
-      "orderId": "ORD000004",
-      "status": "Cancelled",
-      "time": "05:10 PM",
-      "details": "Cancelled Order",
-      "items": [
-        "Pasta"
-      ]
-    },
-    {
-      "orderId": "ORD000003",
-      "status": "Accepted",
-      "time": "08:55 PM",
-      "details": "Accepted Order",
-      "items": [
-        "Salad"
-      ]
-    },
-    {
-      "orderId": "ORD000003",
-      "status": "Accepted",
-      "time": "09:02 PM",
-      "details": "Accepted Order",
-      "items": [
-        "Sandwich"
-      ]
+      "items": ["Burger", "Pizza"]
     }
   ],
   "revenue": [
