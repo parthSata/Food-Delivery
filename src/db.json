@@ -5,14 +5,8 @@
       "category_name": "Pizza",
       "description": "Delicious cheesy pizzas with various toppings.",
       "number_of_products": 180,
-      "status": "In Stock"
-    },
-    {
-      "category_id": 2,
-      "category_name": "Burgers",
-      "description": "Juicy beef and chicken burgers with fresh ingredients.",
-      "number_of_products": 150,
-      "status": "In Stock"
+      "status": "In Stock",
+      "id": "f9b2"
     }
   ],
   "products": [
@@ -37,37 +31,45 @@
       "status": "Accepted",
       "time": "03:25 PM",
       "details": "Accepted Order",
-      "items": ["Burger", "Pizza"]
+      "items": ["Burger", "Pizza"],
+      "id": "ebc7"
     }
   ],
   "revenue": [
     {
       "day": "Mo",
-      "amount": 14300
+      "amount": 14300,
+      "id": "d03c"
     },
     {
       "day": "Tu",
-      "amount": 15000
+      "amount": 15000,
+      "id": "942a"
     },
     {
       "day": "We",
-      "amount": 20000
+      "amount": 20000,
+      "id": "0941"
     },
     {
       "day": "Th",
-      "amount": 25000
+      "amount": 25000,
+      "id": "1266"
     },
     {
       "day": "Fr",
-      "amount": 30000
+      "amount": 30000,
+      "id": "5ea0"
     },
     {
       "day": "Sa",
-      "amount": 35000
+      "amount": 35000,
+      "id": "29c2"
     },
     {
       "day": "Su",
-      "amount": 44620
+      "amount": 44620,
+      "id": "8f0c"
     }
   ],
   "placedOrders": [
@@ -76,35 +78,40 @@
       "customerName": "Jhon Leo",
       "status": "Pending",
       "time": "10:05",
-      "discountPrice": 200
+      "discountPrice": 200,
+      "id": "9234"
     },
     {
       "order": "French Crostini",
       "customerName": "Kristien",
       "status": "Cancelled",
       "time": "12:05",
-      "discountPrice": 150
+      "discountPrice": 150,
+      "id": "bb9f"
     },
     {
       "order": "Noodles",
       "customerName": "Jack Suit",
       "status": "Delivered",
       "time": "15:35",
-      "discountPrice": 500
+      "discountPrice": 500,
+      "id": "55e2"
     },
     {
       "order": "Garlic Bread",
       "customerName": "Alesdro Guitto",
       "status": "Delivered",
       "time": "16:05",
-      "discountPrice": 150
+      "discountPrice": 150,
+      "id": "d7bb"
     },
     {
       "order": "Pizza",
       "customerName": "Peter Gill",
       "status": "Delivered",
       "time": "10:50",
-      "discountPrice": 150
+      "discountPrice": 150,
+      "id": "a4e0"
     }
   ],
   "orders": [

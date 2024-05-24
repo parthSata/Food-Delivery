@@ -291,7 +291,7 @@ function Home(): JSX.Element {
       {/* Body Ended Started */}
       {showAddProductDialog && (
         <div className="fixed rounded-[10px]  z-10 inset-0 overflow-x-hidden  sm:m-10 md:m-12 m-8">
-          <div className="flex items-center  justify-center h-screen ">
+          <div className="flex items-center  justify-center h-full ">
             <div
               className="fixed inset-0 transition-opacity "
               aria-hidden="true"

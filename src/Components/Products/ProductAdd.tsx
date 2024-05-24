@@ -39,6 +39,7 @@ function ProductAdd() {
             const data = new FormData();
             data.append("file", file);
             data.append("upload_preset", presetKey);
+            data.append("folder" , "Products")
 
             const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
                 method: 'POST',
@@ -46,7 +47,7 @@ function ProductAdd() {
             });
 
             const imgData = await response.json();
-            return imgData.url;
+            return imgData.secure_url;
         } catch (error) {
             console.error('Error uploading image to Cloudinary:', error);
             return null;
