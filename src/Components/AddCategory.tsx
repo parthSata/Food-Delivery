@@ -31,9 +31,10 @@ const AddProduct: React.FC<Props> = ({ }) => {
     imageUrl: '',
   });
 
-  const [errors, setErrors] = useState({});
+  // const [errors, setErrors] = useState({});
+  // @ts-ignore
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  // const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
     try {
@@ -55,17 +56,17 @@ const AddProduct: React.FC<Props> = ({ }) => {
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files && e.target.files.length > 0) {
+  //     const file = e.target.files[0];
+  //     setImageFile(file);
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       // setImagePreview(reader.result as string);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -99,7 +100,6 @@ const AddProduct: React.FC<Props> = ({ }) => {
       });
       const result = await response.json();
       console.log('Product saved:', result);
-      onAddProduct(result);
       toast.success("Category added successfully!");
     } catch (error) {
       console.error('Error saving the product:', error);
