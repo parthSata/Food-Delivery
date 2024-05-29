@@ -1,14 +1,5 @@
 {
-  "categories ": [
-    {
-      "category_id": 1,
-      "category_name": "Pizza",
-      "description": "Delicious cheesy pizzas with various toppings.",
-      "number_of_products": 180,
-      "status": "In Stock",
-      "id": "f9b2"
-    }
-  ],
+  "categories": [],
   "products": [
     {
       "id": "ed48",
@@ -23,6 +14,34 @@
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716473359/Burger_kfpmgf.jpg"
       ],
       "categoryId": 1
+    },
+    {
+      "id": "73ed",
+      "name": "Burger",
+      "price": "380",
+      "discountPrice": "155",
+      "weight": "11",
+      "unit": "Sint et nihil volup",
+      "packagingCharges": "50",
+      "description": "Autem dolores totam ",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716552914/Products/Burger_ckigrj.jpg"
+      ],
+      "categoryId": 1
+    },
+    {
+      "id": "c1c2",
+      "name": "Sawyer Price",
+      "price": "288",
+      "discountPrice": "524",
+      "weight": "21",
+      "unit": "Consectetur et debi",
+      "packagingCharges": "65",
+      "description": "Dolore omnis culpa ",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1716638765/Products/BurgerNew_fm2rh5.jpg"
+      ],
+      "categoryId": 1
     }
   ],
   "recentOrders": [
@@ -31,7 +50,10 @@
       "status": "Accepted",
       "time": "03:25 PM",
       "details": "Accepted Order",
-      "items": ["Burger", "Pizza"],
+      "items": [
+        "Burger",
+        "Pizza"
+      ],
       "id": "ebc7"
     }
   ],

@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 
 
 function Dashboard() {
-    // @ts-ignore
     const [dashboardData, setDashboardData] = useState(null);
 
     useEffect(() => {
@@ -25,7 +24,7 @@ function Dashboard() {
             const jsonData = await response.json();
             setDashboardData(jsonData);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // console.error('Error fetching data:', error);
         }
     };
     return (

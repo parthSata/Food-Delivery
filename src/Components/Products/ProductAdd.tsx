@@ -29,7 +29,7 @@ function ProductAdd() {
         packagingCharges: '',
         description: '',
         images: [],
-        categoryId: 1,
+        categoryId: "",
     });
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [productImages, setProductImages] = useState([]);
@@ -39,7 +39,8 @@ function ProductAdd() {
             const data = new FormData();
             data.append("file", file);
             data.append("upload_preset", presetKey);
-            data.append("folder" , "Products")
+            data.append("cloud_name", cloudName);
+            data.append("folder", "Products");
 
             const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
                 method: 'POST',
@@ -47,13 +48,12 @@ function ProductAdd() {
             });
 
             const imgData = await response.json();
-            return imgData.secure_url;
+            return imgData.url;
         } catch (error) {
             console.error('Error uploading image to Cloudinary:', error);
             return null;
         }
     };
-
 
     //     const file = e.target.files[0];
     //     if (file) {
@@ -156,7 +156,6 @@ function ProductAdd() {
             });
             const result = await response.json();
             console.log('Product saved:', result);
-            // Reset the form or handle successful submission
         } catch (error) {
             console.error('Error saving the product:', error);
         }
@@ -170,9 +169,13 @@ function ProductAdd() {
             packagingCharges: "",
             description: '',
             images: [],
-            categoryId: 1,
+            categoryId: "",
         });
     };
+
+    const oncloseDelete = () => {
+
+    }
     return (
         <>
             <div className="">
@@ -193,14 +196,36 @@ function ProductAdd() {
                                                 onClick={() => setPreviewImage(productImages[index])}
                                             >
                                                 <img src={productImages[index]} alt={`Preview ${index}`} className="h-full w-full object-cover" />
-
+                                                <button
+                                                    type="button"
+                                                    className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
+                                                    onClick={oncloseDelete}
+                                                >
+                                                    <span className="sr-only ">Close</span>
+                                                    <svg
+                                                        className="h-[26px] w-[26px] p-[4px]"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        stroke="currentColor"
+                                                        aria-hidden="true"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            strokeWidth={2}
+                                                            d="M6 18L18 6M6 6l12 12"
+                                                        />
+                                                    </svg>
+                                                </button>
                                             </div>
+
                                         ) : (
                                             <>
                                                 <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
                                                     <label className='flex'>
                                                         <span className="flex self-center">
-                                                            <i className="fa-duotone fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i>
+                                                            <i className="fa-solid fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i>
                                                         </span>
                                                         <input type="file" onChange={(e) => handleImageUpload(e, index)} style={{ display: 'none' }} />
                                                     </label>
