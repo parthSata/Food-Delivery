@@ -1,115 +1,230 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-interface ProductData {
-  id: number | string;
-  CategoryName: string;
-  NumberOfProducts: number;
-  ProductImage?: File | string;
-  Status: string;
-  Discription: string;
-}
+import { v4 as uuidv4 } from 'uuid';
+import { CategoriesData } from "./Home";
 
 interface Props {
-  onClose: () => void;
-  productId?: number | null;
-  onAddProduct: (newProduct: ProductData) => void;
+  onAddCategory: (newCategory: CategoriesData) => Promise<void>;
+  id: string
 }
 
-const AddProduct: React.FC<Props> = ({ }) => {
+const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const apiUrl = "http://localhost:3000/categories";
-  const [product, setProduct] = useState({
-    categoryName: '',
-    description: '',
-    numberOfProducts: '',
-    status: '',
-    categoryId: 1,
-    imageUrl: '',
+
+  const [category, setCategory] = useState<CategoriesData>({
+    id: "",
+    categoryName: "",
+    description: "",
+    numberOfProducts: "",
+    status: "In Stock",
+    imageUrl: "",
   });
 
-  // const [errors, setErrors] = useState({});
-  // @ts-ignore
+  const [errors, setErrors] = useState<Partial<CategoriesData>>({});
   const [imageFile, setImageFile] = useState<File | null>(null);
-  // const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+
+  useEffect(() => {
+    if (id) {
+      fetchCategoryById(id);
+    }
+  }, [id]);
+
+  const fetchCategoryById = async (id: string) => {
     try {
-      const data = new FormData();
-      data.append("file", file);
-      data.append("upload_preset", presetKey);
-      data.append("folder", "Categories");
-
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: 'POST',
-        body: data,
-      });
-
-      const imgData = await response.json();
-      return imgData.secure_url;
+      const response = await fetch(`${apiUrl}/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setCategory(data);
+        setImagePreview(data.imageUrl || null);
+      } else {
+        toast.error("Failed to fetch category.");
+      }
     } catch (error) {
-      console.error('Error uploading image to Cloudinary:', error);
-      return null;
+      toast.error("Error fetching category.");
     }
   };
 
-  // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     const file = e.target.files[0];
-  //     setImageFile(file);
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       // setImagePreview(reader.result as string);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
-
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setProduct(prevProduct => ({
-      ...prevProduct,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Clicked");
 
-    let imageUrl: string | null = '';
+    const newErrors: Partial<CategoriesData> = {};
+    if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
+    if (isFieldEmpty(category.description)) newErrors.description = "Description is required";
+    if (isFieldEmpty(category.numberOfProducts)) newErrors.numberOfProducts = "Number Of Products is required";
+    if (isFieldEmpty(category.status)) newErrors.status = "Status is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+
+    let imageUrl = category.imageUrl;
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
     }
 
-    const productData = {
-      ...product,
+    const updatedCategory = { ...category, imageUrl };
+    console.log("🚀 ~ handleUpdate ~ updatedCategory:", updatedCategory);
+
+    try {
+      const response = await fetch(`http://localhost:3000/categories/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedCategory)
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        console.log("data ", data)
+        toast.success('Category successfully updated');
+      } else {
+        toast.warn('Failed to update!');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Error updating category.");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const updatedCategory: any = { ...category }
+    updatedCategory[name] = value
+    console.log("🚀 ~ handleChange ~ updatedCategory:", updatedCategory)
+
+    setCategory(updatedCategory)
+  };
+
+  console.log("category", category)
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const isFieldEmpty = (value: string | number) => {
+    return value === "" || value === null || value === undefined;
+  };
+
+  const resetForm = () => {
+    setCategory({
+      categoryName: "",
+      description: "",
+      numberOfProducts: "",
+      status: "In Stock",
+      id: "",
+      imageUrl: "",
+    });
+    setImagePreview(null);
+    setImageFile(null);
+  };
+
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors: Partial<CategoriesData> = {};
+
+    switch (true) {
+      case isFieldEmpty(category.categoryName):
+        newErrors.categoryName = "Category Name is required";
+        break;
+      case isFieldEmpty(category.description):
+        newErrors.description = "Description is required";
+        break;
+      case isFieldEmpty(category.numberOfProducts):
+        newErrors.numberOfProducts = "Number Of Products is required";
+        break;
+      case isFieldEmpty(category.status):
+        newErrors.status = "Status is required";
+        break;
+      default:
+        break;
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+
+    let imageUrl = "";
+    if (imageFile) {
+      imageUrl = await uploadImageToCloudinary(imageFile);
+    }
+
+    const newCategory: CategoriesData = {
+      ...category,
       imageUrl,
+      id: uuidv4(),
     };
 
     try {
       const response = await fetch(apiUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(productData),
+        body: JSON.stringify(newCategory),
       });
-      const result = await response.json();
-      console.log('Product saved:', result);
-      toast.success("Category added successfully!");
+
+      if (response.ok) {
+        toast.success("Category added successfully!");
+        onAddCategory(newCategory);
+      } else {
+        toast.error("Failed to add category.");
+      }
     } catch (error) {
-      console.error('Error saving the product:', error);
-      toast.error("Error saving the product!");
+      toast.error("Error adding category.");
+    }
+
+    resetForm();
+  };
+
+  const uploadImageToCloudinary = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", presetKey);
+    formData.append("cloud_name", cloudName);
+    formData.append("folder", "Categories")
+
+    try {
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.secure_url;
+      } else {
+        toast.error("Failed to upload image.");
+        return "";
+      }
+    } catch (error) {
+      toast.error("Error uploading image.");
+      return "";
     }
   };
 
   return (
     <div className="">
-      {/* DialogBox For Add Product */}
+      {/* DialogBox For Add Category */}
 
       <div
         className={`flex justify-center gap-2  mt-[250px] sm:mt-[200px] md:mt-[20px] lg:mt-[20px]  xl:mt-[5px]  lg:flex-nowrap flex-wrap`}
@@ -122,26 +237,23 @@ const AddProduct: React.FC<Props> = ({ }) => {
             className="font-semibold"
             style={{ fontFamily: "Montserrat Alternates" }}
           >
-            Product Image
+            Category Image
           </span>
 
           <div className="">
             <div className="flex justify-center items-starts flex-col ">
-              <input
-                type="file"
-                accept="image/*"
-                className="border-2 text-[#A2A3A5] mt-[3px] p-2 text-xl focus:outline-none h-[50px] w-[300px] rounded-lg "
-              />
+              {imagePreview ? (
+                <img src={imagePreview} alt="Selected" className="w-full h-64 object-cover rounded-lg" />
+              ) : (
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="border-2 text-[#A2A3A5] mt-2 p-2 text-xl focus:outline-none rounded-lg w-full"
+                  onChange={handleImageChange}
+                />
+              )}
             </div>
           </div>
-              {/* {errors.ProductImage && (
-                <span className="text-red-600 text-md">Select the File</span>
-              )} */}
-          <input
-            type="file"
-            accept="image/*"
-            style={{ display: "none" }}
-          />
         </div>
         <div className="w-full max-w-lg">
           <form
@@ -157,16 +269,18 @@ const AddProduct: React.FC<Props> = ({ }) => {
                   className={` appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
                   type="text"
                   placeholder="Pizza"
-                  name="ProductName"
+                  name="categoryName"
+                  onChange={handleChange}
+                  value={category.categoryName}
                 />
-                {/* {errors.ProductName && (
+                {errors.categoryName && (
                   <span
-                    className={`text-red-600 text-sm ${formData.ProductName ? "" : "hidden"
+                    className={`text-red-600 text-sm ${category.categoryName ? "" : "hidden"
                       }}`}
                   >
-                    {errors.ProductName}
+                    {errors.categoryName}
                   </span>
-                )} */}
+                )}
               </div>
               <div className="w-full md:w-1/1 px-3 mb-6">
                 <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -180,17 +294,19 @@ const AddProduct: React.FC<Props> = ({ }) => {
                   placeholder="Type Here..."
                   rows={5}
                   cols={5}
-                  name="Discription"
+                  name="description"
+                  value={category.description}
+                  onChange={handleChange}
                 />
-                {/* {errors.Discription && (
+                {errors.description && (
                   <span className="text-red-600 text-sm">
-                    {errors.Discription}
+                    {errors.description}
                   </span>
-                )} */}
+                )}
               </div>
               <div className="w-full md:w-1/2 px-3 mb-6">
                 <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                  Number of Products
+                  Number of Categories
                 </label>
                 <input
                   className={` appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
@@ -198,11 +314,12 @@ const AddProduct: React.FC<Props> = ({ }) => {
                   type="number"
                   placeholder="180"
                   onChange={handleChange}
-                  name="Price"
+                  name="numberOfProducts"
+                  value={category.numberOfProducts}
                 />
-                {/* {errors.Price && (
-                  <span className="text-red-600 text-sm">{errors.Price}</span>
-                )} */}
+                {errors.numberOfProducts && (
+                  <span className="text-red-600 text-sm">{errors.numberOfProducts}</span>
+                )}
               </div>
 
               <div className="w-full md:w-1/2 px-3 mb-6">
@@ -210,10 +327,11 @@ const AddProduct: React.FC<Props> = ({ }) => {
                   Status
                 </label>
                 <select
-                  name="Status"
+                  name="status"
+                  value={category.status}
                   className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
-                >
-                  <option className="" value="In Stock">
+                  onChange={(e) => handleChange(e)}                >
+                  <option className="" value="In Stock" >
                     In Stock
                   </option>
                   <option className="" value="Out of Stock">
@@ -221,6 +339,9 @@ const AddProduct: React.FC<Props> = ({ }) => {
                   </option>
                 </select>
               </div>
+              {errors.status && (
+                <span className="text-red-600 text-sm">{errors.status}</span>
+              )}
 
             </div>
           </form>
@@ -235,7 +356,7 @@ const AddProduct: React.FC<Props> = ({ }) => {
           }}
           onClick={handleSubmit}
         >
-          Save Product
+          Save Category
         </button>
         <ToastContainer
           position="top-right"
@@ -250,13 +371,14 @@ const AddProduct: React.FC<Props> = ({ }) => {
             boxShadow: "2px 2px 25px 2px #94CD0099",
             fontFamily: "Bai Jamjuree",
           }}
+          onClick={handleUpdate}
         >
-          Update Product
+          Update Category
         </button>
       </div>
-      {/* DialogBox For Add Product */}
+      {/* DialogBox For Add Category */}
     </div>
   );
 };
 
-export default AddProduct;
+export default AddCategory;

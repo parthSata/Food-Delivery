@@ -25,7 +25,7 @@ function Dashboard() {
             const jsonData = await response.json();
             setDashboardData(jsonData);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            // console.error('Error fetching data:', error);
         }
     };
     return (
