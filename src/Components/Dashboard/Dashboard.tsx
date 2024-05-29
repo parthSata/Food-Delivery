@@ -10,7 +10,6 @@ import { useEffect, useState } from 'react';
 
 
 function Dashboard() {
-    // @ts-ignore
     const [dashboardData, setDashboardData] = useState(null);
 
     useEffect(() => {
