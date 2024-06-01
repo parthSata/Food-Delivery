@@ -8,6 +8,7 @@ import { Product } from './ProductAdd';
 
 function Category() {
     const { CategoryId } = useParams()
+    console.log("🚀 ~ Category ~ CategoryId:", CategoryId)
     // @ts-ignore
     const [productUpdateId, setProductUpdateId] = useState("")
     const navigate = useNavigate()
@@ -119,7 +120,7 @@ function Category() {
                                         <button className="" onClick={() => handleDeleteProduct(item.id)}><i className="fa-solid fa-trash fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                     </div>
                                     <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
-                                        <button className="" onClick={() => handleUpdateProduct(item.id)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
+                                        <button className="" onClick={() => handleUpdateProduct(CategoryId)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                     </div>
                                 </div>
                             </div>

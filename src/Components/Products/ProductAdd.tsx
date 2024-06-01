@@ -26,8 +26,7 @@ type ProductAddProps = {
 
 const ProductAdd: React.FC<ProductAddProps> = () => {
     const location = useLocation()
-    const { CategoryId } = location.state || []
-
+    const { CategoryId } = location.state?.CategoryId || []
     console.log("🚀 ~ CategoryId:", CategoryId)
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";

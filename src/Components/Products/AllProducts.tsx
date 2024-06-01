@@ -54,7 +54,7 @@ function AllProducts() {
         } catch (error) {
             console.error('Error deleting Products:', error);
         }
-        navigate(`/products/${id}`)
+        navigate(`/products`)
     }
 
     return (

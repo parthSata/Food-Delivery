@@ -1,66 +1,36 @@
 {
   "categories": [
     {
-      "id": "433d4cda-3b49-41f6-bf38-ba0e5496d707",
-      "categoryName": "Burger",
-      "description": "Nulla repudiandae pe",
-      "numberOfProducts": "4",
+      "id": "02c272db-a95c-49df-b539-f09f9b819bde",
+      "categoryName": "Pizza",
+      "description": "Molestiae quis ab la",
+      "numberOfProducts": "68",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717220733/Categories/HamBurger_wmab7p.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717244371/Categories/hawaiian_fm3rbg.png",
       "categoryId": ""
     },
     {
-      "id": "8b15c345-d03c-4f4c-8c8d-9189fd7a1ee9",
-      "categoryName": "Pizza",
-      "description": "Quas ullamco amet c",
-      "numberOfProducts": "765",
-      "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717220759/Categories/pepperoni_raz7m6.png",
+      "id": "76f35087-35b4-458c-a3aa-36a67d694b43",
+      "categoryName": "Burger Masala",
+      "description": "Tempor quam qui volu",
+      "numberOfProducts": "89",
+      "status": "Out of Stock",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717244398/Categories/HamBurger_cwysj1.png",
       "categoryId": ""
     }
   ],
   "products": [
     {
-      "id": "56289adf-284b-4742-8857-a7d74e6d3541",
-      "name": "Renee Lindsey",
-      "price": "436",
-      "discountPrice": "914",
-      "weight": "41",
-      "unit": "Sint excepteur simil",
-      "packagingCharges": "35",
-      "description": "Delectus eligendi q",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717220779/Products/HamBurger_rdb27e.png"
-      ],
-      "categoryId": "8b15c345-d03c-4f4c-8c8d-9189fd7a1ee9"
-    },
-    {
-      "id": "ec84ea49-0ac8-45c1-8326-f0976e18ce36",
-      "name": "Peproni",
-      "price": "69",
-      "discountPrice": "617",
-      "weight": "87",
-      "unit": "Ducimus nisi aliqui",
-      "packagingCharges": "99",
-      "description": "Dolor occaecat autem",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717221008/Products/pepperoni_xgwbef.png"
-      ],
-      "categoryId": "433d4cda-3b49-41f6-bf38-ba0e5496d707"
-    },
-    {
-      "id": "1c8c2812-007b-4476-a9e6-52ca42ce9c6e",
-      "name": "Ora Lancaster",
-      "price": "146",
-      "discountPrice": "465",
-      "weight": "64",
-      "unit": "Ut quibusdam optio ",
-      "packagingCharges": "100",
-      "description": "Quia soluta a magna ",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717221043/Products/margherita_ezvi9j.png"
-      ],
-      "categoryId": "433d4cda-3b49-41f6-bf38-ba0e5496d707"
+      "id": "f5ce7901-a030-4eef-a478-8fab94e52ace",
+      "name": "September Keller",
+      "price": "222",
+      "discountPrice": "520",
+      "weight": "100",
+      "unit": "Eum aperiam quis cum",
+      "packagingCharges": "19",
+      "description": "Quis amet cupiditat",
+      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717249308/Products/margherita_tqcrzm.png",
+      "categoryId": ""
     }
   ],
   "recentOrders": [
