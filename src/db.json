@@ -21,30 +21,6 @@
   ],
   "products": [
     {
-      "id": "3cc46f5d-041b-475a-bad9-a45189d91da8",
-      "name": "Peproni",
-      "price": "729",
-      "discountPrice": "318",
-      "weight": "64",
-      "unit": "Ex facere sit ut qu",
-      "packagingCharges": "14",
-      "description": "Ab quos voluptas per",
-      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164937/Products/pepperoni_guisav.png",
-      "categoryId": ""
-    },
-    {
-      "id": "de32af4e-322b-4ad9-b798-083533abdb0d",
-      "name": "Damon Keller",
-      "price": "660",
-      "discountPrice": "681",
-      "weight": "16",
-      "unit": "Exercitation amet i",
-      "packagingCharges": "60",
-      "description": "Dolorem aliquip cons",
-      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164856/Products/pepperoni_ox7hcp.png",
-      "categoryId": ""
-    },
-    {
       "id": "80e095f8-d1bd-4b66-9710-7302b3221215",
       "name": "Kennan Bartlett",
       "price": "23",
@@ -56,18 +32,6 @@
       "images": [
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164279/Products/hawaiian_fgufaa.png"
       ]
-    },
-    {
-      "id": "75b46e6f-aef3-4e3c-b5db-1e6827126757",
-      "name": "Herrod Avery",
-      "price": "686",
-      "discountPrice": "403",
-      "weight": "89",
-      "unit": "Dolorum ipsam praese",
-      "packagingCharges": "89",
-      "description": "Et quo ex nulla ea d",
-      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164885/Products/margherita_kr0hfy.png",
-      "categoryId": ""
     },
     {
       "id": "1345bd9a-e865-4c02-96ec-26059e800bad",
@@ -94,6 +58,31 @@
       "images": [
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164527/Products/Burger_nbyghn.png"
       ]
+    },
+    {
+      "id": "cb8e68b2-4568-4107-a713-e7e7199501a0",
+      "name": "Kyla Stephens",
+      "price": "756",
+      "discountPrice": "249",
+      "weight": "17",
+      "unit": "Sed est sed cupidita",
+      "packagingCharges": "28",
+      "description": "Doloremque maiores v",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717215772/Products/CheeseBurger_mhndz8.png"
+      ]
+    },
+    {
+      "id": "7a603a93-60f3-47a6-b387-564b90f618f5",
+      "name": "Emi Schneider",
+      "price": "396",
+      "discountPrice": "972",
+      "weight": "84",
+      "unit": "Maiores magni a quas",
+      "packagingCharges": "69",
+      "description": "Mollit dolore saepe ",
+      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717215878/Products/margherita_utqbqt.png",
+      "categoryId": ""
     }
   ],
   "recentOrders": [
