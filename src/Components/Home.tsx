@@ -13,6 +13,7 @@ export interface CategoriesData {
   numberOfProducts: string;
   status: string;
   imageUrl: string;
+  categoryId: string
 }
 
 function Home(): JSX.Element {
@@ -30,7 +31,6 @@ function Home(): JSX.Element {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
-
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -102,7 +102,7 @@ function Home(): JSX.Element {
   };
 
   const handleViewCategories = (id: string) => {
-    navigate(`/categories/${id}`);
+    navigate(`/category/${id}`);
   };
 
   const handleNextPage = () => {

@@ -5,10 +5,11 @@ import Verification from "./Components/Verification";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Register from "./Components/Register";
-import Table from "./Components/Table";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Orders from "./Components/Orders/Orders";
 import Products from "./Components/Products/Products";
+import ProductAdd from "./Components/Products/ProductAdd";
+import Category from "./Components/Products/Category";
 
 function App() {
   return (
@@ -21,7 +22,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/table" element={<Table />} />
+        <Route path="/productsAdd/" element={<ProductAdd />} />
+        <Route path="/productsAdd/:updateId" element={<ProductAdd />} />
+        <Route path="/productsAdd/:CategoryId" element={<ProductAdd />} />
+        <Route path="/category/:CategoryId" element={<Category />} />
       </Routes>
     </BrowserRouter>
   );

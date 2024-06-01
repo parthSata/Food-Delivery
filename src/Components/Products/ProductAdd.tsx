@@ -1,9 +1,13 @@
+import { useNavigate, useParams } from 'react-router-dom';
 import DashboardHeader from '../Dashboard/Menu';
-// import ImagePng from '../../assets/Products/Image.png';
-import { useState } from 'react';
-// import { Cloudinary } from 'cloudinary-core';
+import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
-interface Product {
+
+export interface Product {
+    id: string,
     name: string;
     price: number | string;
     discountPrice: number | string;
@@ -12,15 +16,20 @@ interface Product {
     packagingCharges: number | string;
     description: string;
     images: string[];
-    categoryId: number | string,
+    categoryId: any,
 }
 
-function ProductAdd() {
+type ProductAddProps = {
+    updateId?: string;
+};
+
+const ProductAdd: React.FC<ProductAddProps> = () => {
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";
     const [errors, setErrors] = useState<Partial<Product>>({});
     const [product, setProduct] = useState<Product>({
+        id: '',
         name: '',
         price: '',
         discountPrice: '',
@@ -31,8 +40,83 @@ function ProductAdd() {
         images: [],
         categoryId: "",
     });
+
+    const navigate = useNavigate()
+    const { updateId , CategoryId } = useParams()
+    console.log("🚀 ~ CategoryId:", CategoryId)
+    console.log("🚀 ~ updateId:", updateId)
+    const [imageFile, setImageFile] = useState<File | null>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [productImages, setProductImages] = useState([]);
+    // @ts-ignore
+
+    const handleUpdate = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const newErrors: Partial<Product> = {};
+        if (isFieldEmpty(product.name)) newErrors.name = "Product Name is required";
+        if (isFieldEmpty(product.price)) newErrors.price = "Price is required";
+        if (isFieldEmpty(product.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+        if (isFieldEmpty(product.weight)) newErrors.weight = "Weight is required";
+        if (isFieldEmpty(product.unit)) newErrors.unit = "Unit is required";
+        if (isFieldEmpty(product.packagingCharges)) newErrors.packagingCharges = "Packaging Charges is required";
+        if (isFieldEmpty(product.description)) newErrors.description = "Discription is required";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        setErrors({});
+
+        let imageUrl: any = product.images;
+        if (imageFile) {
+            imageUrl = await uploadImageToCloudinary(imageFile);
+        }
+
+        const updatedProducts = { ...product, images: imageUrl, id: product.id };
+        console.log("🚀 ~ handleUpdate ~ updatedProducts:", updatedProducts);
+
+        try {
+            const response = await fetch(`http://localhost:3000/products/${updateId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedProducts)
+            });
+            console.log("🚀 ~ handleUpdate ~ response:", response)
+
+            if (response.status === 200) {
+                const data = await response.json();
+                console.log("data ", data)
+                toast.success('Products successfully updated');
+            } else {
+                toast.warn('Failed to update!');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Error updating product.");
+        }
+    };
+
+    useEffect(() => {
+        if (updateId) {
+            fetchProductData()
+        }
+    }, [updateId])
+
+    const fetchProductData = async () => {
+        try {
+            const response = await fetch(`http://localhost:3000/products${updateId}`);
+            if (response.ok) {
+                const data = await response.json();
+                setProduct(data);
+                setProductImages(data.images || [])
+            }
+        } catch (error) {
+            console.error("Error fetching product:", error);
+        }
+    }
 
     const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
         try {
@@ -50,32 +134,17 @@ function ProductAdd() {
             const imgData = await response.json();
             return imgData.url;
         } catch (error) {
-            console.error('Error uploading image to Cloudinary:', error);
             return null;
         }
+
     };
 
-    //     const file = e.target.files[0];
-    //     if (file) {
-    //         const imageUrl = await uploadImageToCloudinary(file);
-    //         if (imageUrl) {
-    //             const newImages = [...product.images];
-    //             newImages[index] = imageUrl;
-    //             setProduct((prevState) => ({
-    //                 ...prevState,
-    //                 images: newImages
-    //             }));
-    //             setPreviewImage(imageUrl);
-    //             e.target.disabled = true; // Disable input after selecting an image
-    //         }
-    //     }
-    // };
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
         if (!e.target.files) return;
-
         const file = e.target.files[0];
+        setImageFile(file)
         if (file) {
-            const imageUrl = await uploadImageToCloudinary(file);
+            const imageUrl: any = await uploadImageToCloudinary(file);
             if (imageUrl) {
                 const newImages = [...product.images];
                 newImages[index] = imageUrl;
@@ -90,7 +159,7 @@ function ProductAdd() {
                     return updatedImages;
                 });
                 setPreviewImage(imageUrl);
-                e.target.disabled = true; // Disable input after selecting an image
+                e.target.disabled = true;
             }
         }
     };
@@ -146,21 +215,29 @@ function ProductAdd() {
         }
         setErrors({});
 
+
+        const newProduct: Product = {
+            ...product,
+            id: uuidv4(),
+            categoryId: CategoryId,
+        };
+
         try {
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(product),
+                body: JSON.stringify(newProduct),
             });
             const result = await response.json();
             console.log('Product saved:', result);
         } catch (error) {
             console.error('Error saving the product:', error);
         }
-
+        navigate('/category')
         setProduct({
+            id: '',
             name: '',
             price: "",
             discountPrice: "",
@@ -407,16 +484,34 @@ function ProductAdd() {
                                         )}
                                     </div>
                                 </div>
-                                <button
-                                    className="rounded-[60px] text-xl ml-5 text-[#FFFFFF] bg-[#DF201F] h-[70px] w-full"
-                                    style={{
-                                        boxShadow: "2px 2px 20px 2px #DF201F66",
-                                        fontFamily: "Bai Jamjuree",
-                                    }}
-                                    onClick={handleSubmit}
-                                >
-                                    SAVE
-                                </button>
+                                <div className="flex w-full">
+                                    <button
+                                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                                        style={{
+                                            boxShadow: "2px 2px 20px 2px #DF201F66",
+                                            fontFamily: "Bai Jamjuree",
+                                        }}
+                                        onClick={handleSubmit}
+                                    >
+                                        Add Product
+                                    </button>
+                                    <button
+                                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                                        style={{
+                                            boxShadow: "2px 2px 20px 2px #DF201F66",
+                                            fontFamily: "Bai Jamjuree",
+                                        }}
+                                        onClick={handleUpdate}
+                                    >
+                                        Update Product
+                                    </button>
+                                    <ToastContainer
+                                        position="top-right"
+                                        autoClose={1000}
+                                        pauseOnFocusLoss={false}
+                                        limit={1}
+                                    />
+                                </div>
                             </form>
                         </div>
                     </div>
