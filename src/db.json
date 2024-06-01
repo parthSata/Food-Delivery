@@ -1,88 +1,66 @@
 {
   "categories": [
     {
-      "id": "7b2b876d-4107-4f1c-a77a-87f5191c47c5",
+      "id": "433d4cda-3b49-41f6-bf38-ba0e5496d707",
       "categoryName": "Burger",
-      "description": "Dolore laudantium e",
-      "numberOfProducts": "774",
+      "description": "Nulla repudiandae pe",
+      "numberOfProducts": "4",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717159656/Categories/HamBurger_akjqfp.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717220733/Categories/HamBurger_wmab7p.png",
       "categoryId": ""
     },
     {
-      "id": "dceef2e5-5ddf-4dcc-b8a4-534d907ee4e1",
+      "id": "8b15c345-d03c-4f4c-8c8d-9189fd7a1ee9",
       "categoryName": "Pizza",
-      "description": "Omnis quia officia v",
-      "numberOfProducts": "369",
+      "description": "Quas ullamco amet c",
+      "numberOfProducts": "765",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717160384/Categories/pepperoni_hbqipc.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717220759/Categories/pepperoni_raz7m6.png",
       "categoryId": ""
     }
   ],
   "products": [
     {
-      "id": "80e095f8-d1bd-4b66-9710-7302b3221215",
-      "name": "Kennan Bartlett",
-      "price": "23",
-      "discountPrice": "439",
-      "weight": "74",
-      "unit": "Aute cumque laborum ",
-      "packagingCharges": "34",
-      "description": "Dicta nostrum est ut",
+      "id": "56289adf-284b-4742-8857-a7d74e6d3541",
+      "name": "Renee Lindsey",
+      "price": "436",
+      "discountPrice": "914",
+      "weight": "41",
+      "unit": "Sint excepteur simil",
+      "packagingCharges": "35",
+      "description": "Delectus eligendi q",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164279/Products/hawaiian_fgufaa.png"
-      ]
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717220779/Products/HamBurger_rdb27e.png"
+      ],
+      "categoryId": "8b15c345-d03c-4f4c-8c8d-9189fd7a1ee9"
     },
     {
-      "id": "1345bd9a-e865-4c02-96ec-26059e800bad",
-      "name": "Odysseus Chandler",
-      "price": "343",
-      "discountPrice": "855",
-      "weight": "78",
-      "unit": "Omnis anim exercitat",
-      "packagingCharges": "16",
-      "description": "Ipsa tempora deleni",
+      "id": "ec84ea49-0ac8-45c1-8326-f0976e18ce36",
+      "name": "Peproni",
+      "price": "69",
+      "discountPrice": "617",
+      "weight": "87",
+      "unit": "Ducimus nisi aliqui",
+      "packagingCharges": "99",
+      "description": "Dolor occaecat autem",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164485/Products/hawaiian_s0x2f9.png"
-      ]
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717221008/Products/pepperoni_xgwbef.png"
+      ],
+      "categoryId": "433d4cda-3b49-41f6-bf38-ba0e5496d707"
     },
     {
-      "id": "ae73a112-741d-4060-af86-6547373b807f",
-      "name": "Ulla Bullock",
-      "price": "164",
-      "discountPrice": "105",
-      "weight": "73",
-      "unit": "Voluptas vero omnis ",
-      "packagingCharges": "75",
-      "description": "Atque dolor quos aut",
+      "id": "1c8c2812-007b-4476-a9e6-52ca42ce9c6e",
+      "name": "Ora Lancaster",
+      "price": "146",
+      "discountPrice": "465",
+      "weight": "64",
+      "unit": "Ut quibusdam optio ",
+      "packagingCharges": "100",
+      "description": "Quia soluta a magna ",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717164527/Products/Burger_nbyghn.png"
-      ]
-    },
-    {
-      "id": "cb8e68b2-4568-4107-a713-e7e7199501a0",
-      "name": "Kyla Stephens",
-      "price": "756",
-      "discountPrice": "249",
-      "weight": "17",
-      "unit": "Sed est sed cupidita",
-      "packagingCharges": "28",
-      "description": "Doloremque maiores v",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717215772/Products/CheeseBurger_mhndz8.png"
-      ]
-    },
-    {
-      "id": "7a603a93-60f3-47a6-b387-564b90f618f5",
-      "name": "Emi Schneider",
-      "price": "396",
-      "discountPrice": "972",
-      "weight": "84",
-      "unit": "Maiores magni a quas",
-      "packagingCharges": "69",
-      "description": "Mollit dolore saepe ",
-      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717215878/Products/margherita_utqbqt.png",
-      "categoryId": ""
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717221043/Products/margherita_ezvi9j.png"
+      ],
+      "categoryId": "433d4cda-3b49-41f6-bf38-ba0e5496d707"
     }
   ],
   "recentOrders": [

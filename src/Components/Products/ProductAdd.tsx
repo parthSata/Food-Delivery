@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import DashboardHeader from '../Dashboard/Menu';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -21,9 +21,14 @@ export interface Product {
 
 type ProductAddProps = {
     updateId?: string;
+
 };
 
 const ProductAdd: React.FC<ProductAddProps> = () => {
+    const location = useLocation()
+    const { CategoryId } = location.state || []
+
+    console.log("🚀 ~ CategoryId:", CategoryId)
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";
@@ -42,8 +47,7 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
     });
 
     const navigate = useNavigate()
-    const { updateId , CategoryId } = useParams()
-    console.log("🚀 ~ CategoryId:", CategoryId)
+    const { updateId } = useParams()
     console.log("🚀 ~ updateId:", updateId)
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -221,6 +225,7 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
             id: uuidv4(),
             categoryId: CategoryId,
         };
+        console.log("🚀 ~ handleSubmit ~ newProduct:", newProduct)
 
         try {
             const response = await fetch(apiUrl, {
@@ -235,7 +240,7 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
         } catch (error) {
             console.error('Error saving the product:', error);
         }
-        navigate('/category')
+        navigate(`/category/${CategoryId}`)
         setProduct({
             id: '',
             name: '',

@@ -22,7 +22,7 @@ function Category() {
     })
     const [products, setProducts] = useState<Product[]>([])
 
-    
+
     useEffect(() => {
         if (CategoryId) {
             fetchCategoryData(CategoryId)
@@ -43,7 +43,7 @@ function Category() {
     }
 
     const handleAddProduct = (id: any) => {
-        navigate(`/productsAdd/${id}`)
+        navigate(`/productsAdd/${id}`, { state: { CategoryId: id } })
     }
 
     useEffect(() => {
@@ -58,7 +58,9 @@ function Category() {
             if (response.ok) {
                 const data = await response.json();
                 console.log("🚀 ~ fetchProducts ~ data:", data)
-                setProducts(data);
+                const filteredProducts = data.filter((product: any) => product.categoryId === CategoryId)
+                console.log("🚀 ~ fetchProducts ~ filteredProducts:", filteredProducts)
+                setProducts(filteredProducts);
             }
         } catch (error) {
             console.error("Error fetching Products:", error);
@@ -128,7 +130,7 @@ function Category() {
                             <div className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-[180px] " style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}>
                                 <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                                        <button className="flex self-center" onClick={() => handleAddProduct(categoryData.categoryId)}><i className="fa-duotone fa-plus fa-2xl " style={{ color: "#e8eaed" }}></i></button>
+                                        <button className="flex self-center" onClick={() => handleAddProduct(CategoryId)}><i className="fa-duotone fa-plus fa-2xl " style={{ color: "#e8eaed" }}></i></button>
                                     </div>
                                     <p className="">Add New</p>
                                 </div>
