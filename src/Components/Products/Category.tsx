@@ -44,7 +44,7 @@ function Category() {
     }
 
     const handleAddProduct = (id: any) => {
-        navigate(`/productsAdd/${id}`, { state: { CategoryId: id } })
+        navigate(`/productsAdd/${id}`, { state: { CategoryId } })
     }
 
     useEffect(() => {
@@ -58,9 +58,7 @@ function Category() {
             const response = await fetch(`http://localhost:3000/products`);
             if (response.ok) {
                 const data = await response.json();
-                console.log("🚀 ~ fetchProducts ~ data:", data)
                 const filteredProducts = data.filter((product: any) => product.categoryId === CategoryId)
-                console.log("🚀 ~ fetchProducts ~ filteredProducts:", filteredProducts)
                 setProducts(filteredProducts);
             }
         } catch (error) {
@@ -74,13 +72,11 @@ function Category() {
     }
 
     const handleDeleteProduct = async (id: any) => {
-        console.log("🚀 ~ handleDeleteProduct ~ id:", id)
 
         try {
             const response = await fetch(`http://localhost:3000/products/${id}`, {
                 method: 'DELETE',
             });
-            console.log("🚀 ~ handleDeleteProduct ~ response:", response)
             if (response.ok) {
                 fetchProducts();
             } else {
@@ -120,7 +116,7 @@ function Category() {
                                         <button className="" onClick={() => handleDeleteProduct(item.id)}><i className="fa-solid fa-trash fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                     </div>
                                     <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
-                                        <button className="" onClick={() => handleUpdateProduct(CategoryId)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
+                                        <button className="" onClick={() => handleUpdateProduct(item.id)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                     </div>
                                 </div>
                             </div>

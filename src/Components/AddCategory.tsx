@@ -52,7 +52,6 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Clicked");
 
     const newErrors: Partial<CategoriesData> = {};
     if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
@@ -72,7 +71,6 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     }
 
     const updatedCategory = { ...category, imageUrl };
-    console.log("🚀 ~ handleUpdate ~ updatedCategory:", updatedCategory);
 
     try {
       const response = await fetch(`http://localhost:3000/categories/${id}`, {
@@ -85,13 +83,11 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
 
       if (response.status === 200) {
         const data = await response.json();
-        console.log("data ", data)
         toast.success('Category successfully updated');
       } else {
         toast.warn('Failed to update!');
       }
     } catch (error) {
-      console.log(error);
       toast.error("Error updating category.");
     }
   };
@@ -100,12 +96,10 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const { name, value } = e.target;
     const updatedCategory: any = { ...category }
     updatedCategory[name] = value
-    console.log("🚀 ~ handleChange ~ updatedCategory:", updatedCategory)
 
     setCategory(updatedCategory)
   };
 
-  console.log("category", category)
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

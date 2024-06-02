@@ -19,14 +19,11 @@ export interface Product {
     categoryId: any,
 }
 
-type ProductAddProps = {
-    updateId?: string;
 
-};
 
-const ProductAdd: React.FC<ProductAddProps> = () => {
+const ProductAdd: React.FC = () => {
     const location = useLocation()
-    const { CategoryId } = location.state?.CategoryId || []
+    const { CategoryId } = location.state || []
     console.log("🚀 ~ CategoryId:", CategoryId)
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
@@ -76,8 +73,7 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
             imageUrl = await uploadImageToCloudinary(imageFile);
         }
 
-        const updatedProducts = { ...product, images: imageUrl, id: product.id };
-        console.log("🚀 ~ handleUpdate ~ updatedProducts:", updatedProducts);
+        const updatedProducts = { ...product, imageUrl, id: product.id };
 
         try {
             const response = await fetch(`http://localhost:3000/products/${updateId}`, {
@@ -87,17 +83,14 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
                 },
                 body: JSON.stringify(updatedProducts)
             });
-            console.log("🚀 ~ handleUpdate ~ response:", response)
 
             if (response.status === 200) {
                 const data = await response.json();
-                console.log("data ", data)
                 toast.success('Products successfully updated');
             } else {
                 toast.warn('Failed to update!');
             }
         } catch (error) {
-            console.log(error);
             toast.error("Error updating product.");
         }
     };
@@ -110,14 +103,14 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
 
     const fetchProductData = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/products${updateId}`);
+            const response = await fetch(`${apiUrl}/${updateId}`);
             if (response.ok) {
                 const data = await response.json();
                 setProduct(data);
                 setProductImages(data.images || [])
             }
         } catch (error) {
-            console.error("Error fetching product:", error);
+
         }
     }
 
@@ -167,7 +160,6 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
         }
     };
 
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setProduct((prevState) => ({
@@ -175,6 +167,14 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
             [name]: value
         }));
     };
+
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    //     const { name, value } = e.target;
+    //     const updatedProducts: any = { ...product }
+    //     updatedProducts[name] = value
+
+    //     setProduct(updatedProducts)
+    // };
 
     const isFieldEmpty = (value: string | number) => {
         return value === "" || value === null || value === undefined;
@@ -235,9 +235,8 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
                 body: JSON.stringify(newProduct),
             });
             const result = await response.json();
-            console.log('Product saved:', result);
+            toast.success("Product Added", result)
         } catch (error) {
-            console.error('Error saving the product:', error);
         }
         navigate(`/category/${CategoryId}`)
         setProduct({
@@ -347,7 +346,7 @@ const ProductAdd: React.FC<ProductAddProps> = () => {
                                         <input
                                             className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
                                             type="text"
-                                            placeholder="name"
+                                            placeholder="Name"
                                             name="name"
                                             value={product.name}
                                             onChange={handleChange}
