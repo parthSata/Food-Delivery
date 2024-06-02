@@ -82,6 +82,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
       });
 
       if (response.status === 200) {
+        // @ts-ignore
         const data = await response.json();
         toast.success('Category successfully updated');
       } else {

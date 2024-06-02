@@ -1,66 +1,95 @@
 {
   "categories": [
     {
-      "id": "02c272db-a95c-49df-b539-f09f9b819bde",
+      "id": "e15a19f0-7612-46a2-a900-9bc5ad456460",
       "categoryName": "Pizza",
-      "description": "Molestiae quis ab la",
-      "numberOfProducts": "68",
+      "description": "Consectetur omnis c",
+      "numberOfProducts": "992",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717244371/Categories/hawaiian_fm3rbg.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717302756/Categories/pepperoni_tauh3r.png",
       "categoryId": ""
     },
     {
-      "id": "76f35087-35b4-458c-a3aa-36a67d694b43",
-      "categoryName": "Burger Masala",
-      "description": "Tempor quam qui volu",
-      "numberOfProducts": "89",
+      "id": "8228e163-5cd3-41b1-a889-bcb5dbde90cf",
+      "categoryName": "Burger",
+      "description": "Sed officiis irure e",
+      "numberOfProducts": "625",
       "status": "Out of Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717244398/Categories/HamBurger_cwysj1.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717302771/Categories/HamBurger_uaodye.png",
       "categoryId": ""
     }
   ],
   "products": [
     {
-      "id": "f5ce7901-a030-4eef-a478-8fab94e52ace",
-      "name": "September Keller",
-      "price": "222",
-      "discountPrice": "520",
-      "weight": "100",
-      "unit": "Eum aperiam quis cum",
-      "packagingCharges": "19",
-      "description": "Quis amet cupiditat",
-      "images": "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717249308/Products/margherita_tqcrzm.png",
-      "categoryId": ""
-    },
-    {
-      "id": "00a8f9e6-e46c-41d4-a048-894a3da8bf37",
-      "name": "Helen Simon",
-      "price": "948",
-      "discountPrice": "273",
-      "weight": "36",
-      "unit": "Aut voluptatem ex co",
-      "packagingCharges": "62",
-      "description": "Pariatur Quo omnis ",
+      "id": "5bf39039-288c-407e-8109-bbbc8e0960f2",
+      "name": "Margreta",
+      "price": "170",
+      "discountPrice": "971",
+      "weight": "3",
+      "unit": "Modi quibusdam culpa",
+      "packagingCharges": "24",
+      "description": "Et aut Nam esse err",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717249572/Products/margherita_jbp15j.png"
-      ]
-    },
-    {
-      "id": "69f21971-91a7-4db2-9482-6c1b44920e8b",
-      "name": "Peproni",
-      "price": "897",
-      "discountPrice": "636",
-      "weight": "1",
-      "unit": "Omnis obcaecati saep",
-      "packagingCharges": "42",
-      "description": "Ullam adipisci et no",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717249617/Products/pepperoni_mxk6hy.png"
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302783/Products/margherita_cmdiow.png"
       ],
-      "categoryId": "02c272db-a95c-49df-b539-f09f9b819bde",
-      "imageUrl": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717249617/Products/pepperoni_mxk6hy.png"
-      ]
+      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460"
+    },
+    {
+      "id": "ef8f026d-012e-4f20-bcdd-570a605dab2a",
+      "name": "Hawalion",
+      "price": "523",
+      "discountPrice": "900",
+      "weight": "54",
+      "unit": "Dolores quis perfere",
+      "packagingCharges": "35",
+      "description": "Quasi error exceptur",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
+      ],
+      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460"
+    },
+    {
+      "id": "b975fbd9-c567-4662-b8d8-5afb384825ef",
+      "name": "Hamburger",
+      "price": "857",
+      "discountPrice": "214",
+      "weight": "33",
+      "unit": "Ullam minim nihil fu",
+      "packagingCharges": "16",
+      "description": "Commodi nulla pariat",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302851/Products/HamBurger_h2fopl.png"
+      ],
+      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
+    },
+    {
+      "id": "ad4ead93-29ed-440f-a24e-6f29d16f2e5c",
+      "name": "Cheese Burger",
+      "price": "500",
+      "discountPrice": "685",
+      "weight": "65",
+      "unit": "Est consequat Maior",
+      "packagingCharges": "93",
+      "description": "Eos distinctio Ipsu",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302879/Products/CheeseBurger_avjnn5.png"
+      ],
+      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
+    },
+    {
+      "id": "19873f44-968a-4272-87c2-bfe9236e0e61",
+      "name": "Cheese Burger",
+      "price": "500",
+      "discountPrice": "685",
+      "weight": "65",
+      "unit": "Est consequat Maior",
+      "packagingCharges": "93",
+      "description": "Eos distinctio Ipsu",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302879/Products/CheeseBurger_avjnn5.png",
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302945/Products/CheeseBurger_zdirc6.png"
+      ],
+      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
     }
   ],
   "recentOrders": [

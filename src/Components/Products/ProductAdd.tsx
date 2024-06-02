@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
 
+
 export interface Product {
     id: string,
     name: string;
@@ -22,12 +23,15 @@ export interface Product {
 
 
 const ProductAdd: React.FC = () => {
+    const { updateId } = useParams()
     const location = useLocation()
     const { CategoryId } = location.state || []
-    console.log("🚀 ~ CategoryId:", CategoryId)
+    // @ts-ignore
+    const Categoryid = location.state?.CategoryId
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";
+    const ApiSecret = "z75WkiCdUNuNv_RzDp9pgu1AWdU"
     const [errors, setErrors] = useState<Partial<Product>>({});
     const [product, setProduct] = useState<Product>({
         id: '',
@@ -43,12 +47,9 @@ const ProductAdd: React.FC = () => {
     });
 
     const navigate = useNavigate()
-    const { updateId } = useParams()
-    console.log("🚀 ~ updateId:", updateId)
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    const [productImages, setProductImages] = useState([]);
-    // @ts-ignore
+    const [productImages, setProductImages] = useState<string[]>([]);
 
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -85,8 +86,10 @@ const ProductAdd: React.FC = () => {
             });
 
             if (response.status === 200) {
+                // @ts-ignore
                 const data = await response.json();
                 toast.success('Products successfully updated');
+                navigate(`/category/${CategoryId}`)
             } else {
                 toast.warn('Failed to update!');
             }
@@ -162,19 +165,11 @@ const ProductAdd: React.FC = () => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        setProduct((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
+        const updatedProducts: any = { ...product }
+        updatedProducts[name] = value
+
+        setProduct(updatedProducts)
     };
-
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    //     const { name, value } = e.target;
-    //     const updatedProducts: any = { ...product }
-    //     updatedProducts[name] = value
-
-    //     setProduct(updatedProducts)
-    // };
 
     const isFieldEmpty = (value: string | number) => {
         return value === "" || value === null || value === undefined;
@@ -224,7 +219,6 @@ const ProductAdd: React.FC = () => {
             id: uuidv4(),
             categoryId: CategoryId,
         };
-        console.log("🚀 ~ handleSubmit ~ newProduct:", newProduct)
 
         try {
             const response = await fetch(apiUrl, {
@@ -253,9 +247,47 @@ const ProductAdd: React.FC = () => {
         });
     };
 
-    const oncloseDelete = () => {
+    const oncloseDelete = async (imageUrl: string, index: number) => {
+        try {
+            const publicId = extractPublicIdFromUrl(imageUrl); // Assuming a helper function to extract public_id from URL
+            const auth = btoa(`${ApiSecret}`);
+            const response = await fetch(
+                `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy?public_id=${publicId}`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Basic ${auth}`
+                    },
+                }
+            );
 
-    }
+            if (response.ok) {
+                const newImages = [...product.images];
+                newImages.splice(index, 1); // Remove the deleted image URL
+                setProduct((prevState) => ({
+                    ...prevState,
+                    images: newImages,
+                }));
+                setProductImages(newImages);
+                toast.success("Image deleted successfully");
+            } else {
+                toast.warn('Failed to delete image');
+            }
+        } catch (error) {
+            toast.error("Error deleting image.");
+        }
+    };
+
+    const extractPublicIdFromUrl = (url: string) => {
+        const parts = url.split('/');
+        const versionIndex = parts.findIndex(part => part.startsWith('v'));
+        const publicIdParts = parts.slice(versionIndex + 1);
+        const publicId = publicIdParts.join('/').split('.')[0];
+        return publicId;
+    };
+
+
     return (
         <>
             <div className="">
@@ -279,7 +311,10 @@ const ProductAdd: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
-                                                    onClick={oncloseDelete}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        oncloseDelete(productImages[index], index)
+                                                    }}
                                                 >
                                                     <span className="sr-only ">Close</span>
                                                     <svg
