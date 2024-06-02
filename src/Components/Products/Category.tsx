@@ -68,7 +68,7 @@ function Category() {
 
     const handleUpdateProduct = (id: any) => {
         setProductUpdateId(id)
-        navigate(`/productsAdd/${id}`)
+        navigate(`/productsAdd/${id}`, { state: { CategoryId: CategoryId } })
     }
 
     const handleDeleteProduct = async (id: any) => {
