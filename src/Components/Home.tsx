@@ -130,14 +130,14 @@ function Home(): JSX.Element {
         {/* Body Part Started */}
         <div className="min-w-fit ">
           <div
-            className="flex justify-between items-center mt-10 flex-wrap"
+            className="flex justify-between items-center mt-10 flex-wrap gap-2"
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <div className="">
-              <span className="font-semibold text-[#161A1D]">Category List</span>
+              <span className="font-semibold  text-[#161A1D]">Category List</span>
             </div>
-            <div className="flex flex-wrap">
-              <div className="flex justify-evenly ">
+            <div className="flex ">
+              <div className="flex justify-evenly flex-wrap gap-4">
                 <div className="relative">
                   <input
                     type="text"
@@ -152,14 +152,16 @@ function Home(): JSX.Element {
                     className="absolute right-4 top-3 w-[14px] h-[14px]"
                   />
                 </div>
-                <button
-                  type="button"
-                  className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
-                  style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
-                  onClick={openAddCategoryDialog}
-                >
-                  Add New Category +
-                </button>
+                <div className="">
+                  <button
+                    type="button"
+                    className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
+                    style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
+                    onClick={openAddCategoryDialog}
+                  >
+                    Add New Category +
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -167,7 +169,7 @@ function Home(): JSX.Element {
 
           {/* table Start */}
           <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden relative overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden absolute overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
               <table
                 className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
                 style={{
@@ -204,7 +206,7 @@ function Home(): JSX.Element {
                       key={item.id}
                       className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
                     >
-                      <td className=" flex items-center p-6 sm:pr-16 border-opacity-10 border-[#A2A3A5]  ">
+                      <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
                         <img
                           src={item.imageUrl || Pizza}
                           className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"

@@ -36,7 +36,7 @@
     },
     {
       "id": "ef8f026d-012e-4f20-bcdd-570a605dab2a",
-      "name": "Hawalion",
+      "name": "Hawalion Pizza",
       "price": "523",
       "discountPrice": "900",
       "weight": "54",
@@ -46,7 +46,10 @@
       "images": [
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
       ],
-      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460"
+      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460",
+      "imageUrl": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
+      ]
     },
     {
       "id": "b975fbd9-c567-4662-b8d8-5afb384825ef",
@@ -90,6 +93,19 @@
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302945/Products/CheeseBurger_zdirc6.png"
       ],
       "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
+    },
+    {
+      "id": "f0baf7a9-4921-43b0-9bfa-aba8f1c2ca6e",
+      "name": "Hawalion Pizza",
+      "price": "523",
+      "discountPrice": "900",
+      "weight": "54",
+      "unit": "Dolores quis perfere",
+      "packagingCharges": "35",
+      "description": "Quasi error exceptur",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
+      ]
     }
   ],
   "recentOrders": [

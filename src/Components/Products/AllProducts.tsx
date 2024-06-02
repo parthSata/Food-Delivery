@@ -6,19 +6,15 @@ import { useEffect, useState } from 'react'
 import { Product } from './ProductAdd'
 
 
-
-
-
 function AllProducts() {
     const navigate = useNavigate()
     // @ts-ignore
     const [productUpdateId, setProductUpdateId] = useState("")
     const [products, setProducts] = useState<Product[]>([])
-    console.log("🚀 ~ AllProducts ~ products:", products)
 
 
-    const handleAddProduct = () => {
-        navigate("/productsAdd")
+    const handleAddProduct = (id: any) => {
+        navigate(`/productsAdd/${id}`)
     }
     useEffect(() => {
         fetchProducts();
@@ -38,7 +34,7 @@ function AllProducts() {
 
     const handleUpdateProduct = (id: any) => {
         setProductUpdateId(id)
-        navigate(`/productsAdd/:${id}`)
+        navigate(`/productsAdd/${id}`)
     }
 
     const handleDeleteProduct = async (id: any) => {
@@ -74,7 +70,7 @@ function AllProducts() {
             <div className="">
                 <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
                     {products.map((item) => (
-                        <div className="sm:w-1/5 mb-10" key={item.id}>
+                        <div className="sm:w-1/5 w-full mb-10 " key={item.id}>
                             <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                                 <img src={item.images[0]} alt="" className="h-20" />
                                 <p className="" style={{ fontFamily: "Bai Jamjuree" }}>{item.name}</p>
@@ -85,12 +81,12 @@ function AllProducts() {
                                     <button className="" onClick={() => handleDeleteProduct(item.id)}><i className="fa-solid fa-trash fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                 </div>
                                 <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
-                                    <button className="" onClick={() => handleUpdateProduct(item.categoryId)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
+                                    <button className="" onClick={() => handleUpdateProduct(item.id)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                 </div>
                             </div>
                         </div>
                     ))}
-                    <div className=" sm:w-1/5  mb-10 ">
+                    <div className=" sm:w-1/5 w-full mb-10 ">
                         <div className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full " style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}>
                             <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                                 <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">

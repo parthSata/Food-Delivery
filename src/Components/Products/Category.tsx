@@ -10,7 +10,6 @@ function Category() {
     const { CategoryId } = useParams()
     console.log("🚀 ~ Category ~ CategoryId:", CategoryId)
     // @ts-ignore
-    const [productUpdateId, setProductUpdateId] = useState("")
     const navigate = useNavigate()
     const [categoryData, setCategoryData] = useState<CategoriesData>({
         id: "",
@@ -44,7 +43,7 @@ function Category() {
     }
 
     const handleAddProduct = (id: any) => {
-        navigate(`/productsAdd/${id}`, { state: { CategoryId } })
+        navigate(`/productsAdd/${id}`)
     }
 
     useEffect(() => {
@@ -67,7 +66,6 @@ function Category() {
     }
 
     const handleUpdateProduct = (id: any) => {
-        setProductUpdateId(id)
         navigate(`/productsAdd/${id}`, { state: { CategoryId: CategoryId } })
     }
 
