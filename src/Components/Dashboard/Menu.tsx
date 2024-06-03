@@ -36,9 +36,15 @@ function DashboardHeader() {
                             }`}
                         style={{ fontFamily: "Bai Jamjuree" }}
                     >
-                        <ul className={`flex items-center   font-semibold text-[16px] gap-8`}>
+                        <ul className={`flex items-center   font-semibold text-[16px] gap-12`}>
                             <li
-                                className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                                className={` p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/home" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                                    } `}
+                            >
+                                <Link to="/home">Home</Link>
+                            </li>
+                            <li
+                                className={`  items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
                                 <Link to="/dashboard">Dashboard</Link>
@@ -65,7 +71,7 @@ function DashboardHeader() {
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/coupons" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/#">Coupons</Link>
+                                <Link to="/coupons">Coupons</Link>
                             </li>
                             <li
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurants" ? "text-red-500  border-b-2 border-[#DF201F]" : ""

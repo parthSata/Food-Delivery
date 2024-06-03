@@ -1,111 +1,29 @@
 {
   "categories": [
     {
-      "id": "e15a19f0-7612-46a2-a900-9bc5ad456460",
-      "categoryName": "Pizza",
-      "description": "Consectetur omnis c",
-      "numberOfProducts": "992",
+      "id": "2ec19794-99a3-4422-a27f-697f0952602f",
+      "categoryName": "Lawrence Brock",
+      "description": "Illum ullam ratione",
+      "numberOfProducts": "222",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717302756/Categories/pepperoni_tauh3r.png",
-      "categoryId": ""
-    },
-    {
-      "id": "8228e163-5cd3-41b1-a889-bcb5dbde90cf",
-      "categoryName": "Burger",
-      "description": "Sed officiis irure e",
-      "numberOfProducts": "625",
-      "status": "Out of Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717302771/Categories/HamBurger_uaodye.png",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717392159/Categories/hawaiian_rvbxrx.png",
       "categoryId": ""
     }
   ],
   "products": [
     {
-      "id": "5bf39039-288c-407e-8109-bbbc8e0960f2",
-      "name": "Margreta",
-      "price": "170",
-      "discountPrice": "971",
-      "weight": "3",
-      "unit": "Modi quibusdam culpa",
-      "packagingCharges": "24",
-      "description": "Et aut Nam esse err",
+      "id": "f412c7b3-4b82-4cfe-969a-7d7455137745",
+      "name": "Marghrita",
+      "price": "800",
+      "discountPrice": "618",
+      "weight": "4",
+      "unit": "Asperiores dolore qu",
+      "packagingCharges": "2",
+      "description": "Aliquip ipsa vel de",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302783/Products/margherita_cmdiow.png"
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717392922/Products/margherita_chy4dl.png"
       ],
-      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460"
-    },
-    {
-      "id": "ef8f026d-012e-4f20-bcdd-570a605dab2a",
-      "name": "Hawalion Pizza",
-      "price": "523",
-      "discountPrice": "900",
-      "weight": "54",
-      "unit": "Dolores quis perfere",
-      "packagingCharges": "35",
-      "description": "Quasi error exceptur",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
-      ],
-      "categoryId": "e15a19f0-7612-46a2-a900-9bc5ad456460",
-      "imageUrl": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
-      ]
-    },
-    {
-      "id": "b975fbd9-c567-4662-b8d8-5afb384825ef",
-      "name": "Hamburger",
-      "price": "857",
-      "discountPrice": "214",
-      "weight": "33",
-      "unit": "Ullam minim nihil fu",
-      "packagingCharges": "16",
-      "description": "Commodi nulla pariat",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302851/Products/HamBurger_h2fopl.png"
-      ],
-      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
-    },
-    {
-      "id": "ad4ead93-29ed-440f-a24e-6f29d16f2e5c",
-      "name": "Cheese Burger",
-      "price": "500",
-      "discountPrice": "685",
-      "weight": "65",
-      "unit": "Est consequat Maior",
-      "packagingCharges": "93",
-      "description": "Eos distinctio Ipsu",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302879/Products/CheeseBurger_avjnn5.png"
-      ],
-      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
-    },
-    {
-      "id": "19873f44-968a-4272-87c2-bfe9236e0e61",
-      "name": "Cheese Burger",
-      "price": "500",
-      "discountPrice": "685",
-      "weight": "65",
-      "unit": "Est consequat Maior",
-      "packagingCharges": "93",
-      "description": "Eos distinctio Ipsu",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302879/Products/CheeseBurger_avjnn5.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302945/Products/CheeseBurger_zdirc6.png"
-      ],
-      "categoryId": "8228e163-5cd3-41b1-a889-bcb5dbde90cf"
-    },
-    {
-      "id": "f0baf7a9-4921-43b0-9bfa-aba8f1c2ca6e",
-      "name": "Hawalion Pizza",
-      "price": "523",
-      "discountPrice": "900",
-      "weight": "54",
-      "unit": "Dolores quis perfere",
-      "packagingCharges": "35",
-      "description": "Quasi error exceptur",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717302801/Products/hawaiian_jnnemu.png"
-      ]
+      "categoryId": "2ec19794-99a3-4422-a27f-697f0952602f"
     }
   ],
   "recentOrders": [

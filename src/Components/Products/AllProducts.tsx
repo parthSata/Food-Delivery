@@ -11,6 +11,7 @@ function AllProducts() {
     // @ts-ignore
     const [productUpdateId, setProductUpdateId] = useState("")
     const [products, setProducts] = useState<Product[]>([])
+    console.log("🚀 ~ AllProducts ~ products:", products)
 
 
     const handleAddProduct = (id: any) => {

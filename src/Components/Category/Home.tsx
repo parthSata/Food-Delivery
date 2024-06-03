@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import search from "../assets/HomePage/search.png";
+import search from "../../assets/HomePage/search.png";
 import AddCategory from "./AddCategory";
-import Pizza from "../assets/HomePage/Pizza.png";
-import DashboardHeader from "./Dashboard/Menu";
+import Pizza from "../../assets/HomePage/Pizza.png";
+import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,13 +13,13 @@ export interface CategoriesData {
   numberOfProducts: string;
   status: string;
   imageUrl: string;
-  categoryId: string
 }
 
 function Home(): JSX.Element {
   const [showAddCategoryDialog, setShowAddCategoryDialog] = useState<boolean>(false);
   const [updateCategoryId, setUpdateCategoryId] = useState<string>("");
   const [categories, setCategories] = useState<CategoriesData[]>([]);
+  console.log("🚀 ~ Home ~ categories:", categories)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
@@ -169,7 +169,7 @@ function Home(): JSX.Element {
 
           {/* table Start */}
           <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden absolute overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+            <div className="mt-4 flex rounded-[10px] overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
               <table
                 className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
                 style={{
@@ -180,10 +180,10 @@ function Home(): JSX.Element {
               >
                 <thead className="rounded-full bg-[#DF201F] ">
                   <tr className="text-[#FFFFFF] font-semibold ">
-                    <th className="border-r-1 py-2 px-4 rounded-tl-lg border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Category Name
                     </th>
-                    <th className="border-r-1 py-2 px-4 rounded-tl-lg border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
                       Category Id
                     </th>
                     <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">

@@ -24,10 +24,12 @@ export interface Product {
 
 const ProductAdd: React.FC = () => {
     const { updateId } = useParams()
+    console.log("🚀 ~ updateId:", updateId)
     const location = useLocation()
     const { CategoryId } = location.state || []
     // @ts-ignore
     const Categoryid = location.state?.CategoryId
+    console.log("🚀 ~ Categoryid:", Categoryid)
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";

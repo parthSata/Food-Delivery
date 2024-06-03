@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import DashboardHeader from '../Dashboard/Menu'
 import HamBurger from '../../assets/Products/HamBurger.png'
 import { useNavigate, useParams } from 'react-router-dom'
-import { CategoriesData } from '../Home';
+import { CategoriesData } from '../Category/Home';
 import { Product } from './ProductAdd';
 
 
@@ -18,7 +18,6 @@ function Category() {
         numberOfProducts: "",
         status: "In Stock",
         imageUrl: "",
-        categoryId: ""
     })
     const [products, setProducts] = useState<Product[]>([])
 
@@ -43,7 +42,7 @@ function Category() {
     }
 
     const handleAddProduct = (id: any) => {
-        navigate(`/productsAdd/${id}`)
+        navigate(`/productsAdd/${id}`, { state: { CategoryId } })
     }
 
     useEffect(() => {
