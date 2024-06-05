@@ -24,16 +24,13 @@ export interface Product {
 
 const ProductAdd: React.FC = () => {
     const { updateId } = useParams()
-    console.log("🚀 ~ updateId:", updateId)
     const location = useLocation()
     const { CategoryId } = location.state || []
     // @ts-ignore
     const Categoryid = location.state?.CategoryId
-    console.log("🚀 ~ Categoryid:", Categoryid)
     const presetKey = "ml_default";
     const cloudName = "dwxhjomtn";
     const apiUrl = "http://localhost:3000/products";
-    const ApiSecret = "z75WkiCdUNuNv_RzDp9pgu1AWdU"
     const [errors, setErrors] = useState<Partial<Product>>({});
     const [product, setProduct] = useState<Product>({
         id: '',
@@ -249,32 +246,29 @@ const ProductAdd: React.FC = () => {
         });
     };
 
-    const oncloseDelete = async (imageUrl: string, index: number) => {
+    const onCloseDelete = async (imageUrl: string, index: number) => {
         try {
-            const publicId = extractPublicIdFromUrl(imageUrl); // Assuming a helper function to extract public_id from URL
-            const auth = btoa(`${ApiSecret}`);
-            const response = await fetch(
-                `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy?public_id=${publicId}`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Basic ${auth}`
-                    },
-                }
-            );
+            const publicId = extractPublicIdFromUrl(imageUrl);
+            const response = await fetch('http://localhost:3000/products/delete-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ publicId }),
+            });
 
-            if (response.ok) {
+            const result = await response.json();
+            if (result.message === 'Image deleted successfully') {
                 const newImages = [...product.images];
-                newImages.splice(index, 1); // Remove the deleted image URL
+                newImages.splice(index, 1);
                 setProduct((prevState) => ({
                     ...prevState,
                     images: newImages,
                 }));
                 setProductImages(newImages);
-                toast.success("Image deleted successfully");
+                toast.success(result.message);
             } else {
-                toast.warn('Failed to delete image');
+                toast.warn(result.message);
             }
         } catch (error) {
             toast.error("Error deleting image.");
@@ -288,6 +282,7 @@ const ProductAdd: React.FC = () => {
         const publicId = publicIdParts.join('/').split('.')[0];
         return publicId;
     };
+
 
 
     return (
@@ -309,13 +304,13 @@ const ProductAdd: React.FC = () => {
                                                 className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden cursor-pointer"
                                                 onClick={() => setPreviewImage(productImages[index])}
                                             >
-                                                <img src={productImages[index]} alt={`Preview ${index}`} className="h-full w-full object-cover" />
+                                                <img src={productImages[index]} alt={`Preview ${index}`} className="h-auto w-auto object-cover" />
                                                 <button
                                                     type="button"
                                                     className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        oncloseDelete(productImages[index], index)
+                                                        onCloseDelete(productImages[index], index)
                                                     }}
                                                 >
                                                     <span className="sr-only ">Close</span>
@@ -341,7 +336,7 @@ const ProductAdd: React.FC = () => {
                                             <>
                                                 <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
                                                     <label className='flex'>
-                                                        <span className="flex self-center">
+                                                        <span className="flex self-center cursor-pointer">
                                                             <i className="fa-solid fa-plus fa-2xl" style={{ color: "#e8eaed" }}></i>
                                                         </span>
                                                         <input type="file" onChange={(e) => handleImageUpload(e, index)} style={{ display: 'none' }} />
@@ -361,7 +356,7 @@ const ProductAdd: React.FC = () => {
                             <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]" style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}>
                                 <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                                     {previewImage ? (
-                                        <img src={previewImage} alt="Preview" className="h-full w-full object-cover" />
+                                        <img src={previewImage} alt="Preview" className="h-[250px] w-auto object-cover" />
                                     ) : (
                                         <p>No image uploaded</p>
                                     )}

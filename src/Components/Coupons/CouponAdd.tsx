@@ -1,0 +1,308 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+
+export interface Coupon {
+    id: string,
+    offerCode: string;
+    discountPrice: string | number;
+    offerPrice: string | number;
+    expiryDate: string;
+    discription: string;
+}
+
+interface AddProps {
+    onClose: () => void;
+    isOpen: boolean;
+}
+
+const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
+    const apiUrl = "http://localhost:3000/coupons";
+    const navigate = useNavigate()
+    const { updateId } = useParams()
+    const [errors, setErrors] = useState<Partial<Coupon>>({})
+    const [coupon, setCoupon] = useState<Coupon>({
+        id: "",
+        offerCode: "",
+        discountPrice: 0,
+        offerPrice: 0,
+        expiryDate: "",
+        discription: "",
+    })
+
+
+    if (!isOpen) return null;
+
+    const isFieldEmpty = (value: string | number) => {
+        return value === "" || value === null || value === undefined;
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        const updatedCoupons: any = { ...coupon }
+        updatedCoupons[name] = value
+
+        setCoupon(updatedCoupons)
+    }
+
+    useEffect(() => {
+        if (updateId) {
+            fetchCouponData()
+        }
+    }, [updateId])
+
+    const fetchCouponData = async () => {
+        try {
+            const response = await fetch(`${apiUrl}/${updateId}`);
+            if (response.ok) {
+                const data = await response.json();
+                setCoupon(data);
+            }
+        } catch (error) {
+
+        }
+    }
+
+    const handleUpdateCoupon = async (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const newErrors: Partial<Coupon> = {};
+        if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
+        if (isFieldEmpty(coupon.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+        if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
+        if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
+        if (isFieldEmpty(coupon.discription)) newErrors.discription = "Discription is required";
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        setErrors({});
+
+
+        const updatedCoupon = { ...coupon, id: coupon.id };
+
+        try {
+            const response = await fetch(`http://localhost:3000/coupons/${updateId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedCoupon)
+            });
+
+            if (response.status === 200) {
+                // @ts-ignore
+                const data = await response.json();
+                toast.success('Coupon successfully updated');
+                navigate(`/coupons`)
+            } else {
+                toast.warn('Failed to update!');
+            }
+        } catch (error) {
+            toast.error("Error updating Coupon.");
+        }
+    }
+
+    const handleAddCoupon = async (e: React.FormEvent) => {
+        e.preventDefault()
+
+        const newErrors: Partial<Coupon> = {};
+
+        if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
+        if (isFieldEmpty(coupon.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+        if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
+        if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
+        if (isFieldEmpty(coupon.discription)) newErrors.discription = "Discription is required";
+
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            return;
+        }
+        setErrors({});
+
+
+        const newCoupon: Coupon = {
+            ...coupon,
+            id: uuidv4(),
+        };
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newCoupon),
+            });
+            const result = await response.json();
+            toast.success("Product Added", result)
+        } catch (error) {
+        }
+        navigate(`/coupons`)
+        setCoupon({
+            id: "",
+            offerCode: "",
+            discountPrice: '',
+            offerPrice: '',
+            expiryDate: "",
+            discription: "",
+        });
+    }
+    return (
+        <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
+            <div className="">
+                <button
+                    className="absolute top-4 right-[10px] sm:top-[10px] sm:right-[480px] text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
+                    onClick={onClose}
+                >
+                    <svg
+                        className="h-[26px] w-[26px] p-[4px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
+            </div>
+            <div className="bg-white w-[430px] gap-2  h-[570px] rounded-lg shadow-lg p-6 relative">
+                <form className="space-y-4 ">
+                    <div className="flex flex-col  font-semibold gap-1">
+                        <label className="self-start">Offer Code</label>
+                        <input
+                            type="text"
+                            placeholder="Offer Code Here.."
+                            onChange={handleChange}
+                            value={coupon.offerCode}
+                            name="offerCode"
+                            className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+                        />
+                        {errors.offerCode && (
+                            <span
+                                className={`text-red-600 text-sm ${coupon.offerCode ? "" : "hidden"
+                                    }}`}
+                            >
+                                {errors.offerCode}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-col  font-semibold gap-1">
+                        <label className="self-start">Discount Price</label>
+                        <input
+                            type="number"
+                            placeholder="Discount Here.."
+                            name="discountPrice"
+                            onChange={handleChange}
+                            value={coupon.discountPrice}
+                            className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+                        />
+                        {errors.discountPrice && (
+                            <span
+                                className={`text-red-600 text-sm ${coupon.discountPrice ? "" : "hidden"
+                                    }}`}
+                            >
+                                {errors.discountPrice}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-col  font-semibold gap-1">
+                        <label className="self-start">Offer Price</label>
+                        <input
+                            type="number"
+                            placeholder="Offer Price Here.."
+                            name="offerPrice"
+                            onChange={handleChange}
+                            value={coupon.offerPrice}
+                            className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+                        />
+                        {errors.offerPrice && (
+                            <span
+                                className={`text-red-600 text-sm ${coupon.offerPrice ? "" : "hidden"
+                                    }}`}
+                            >
+                                {errors.offerPrice}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-col  font-semibold gap-1">
+                        <label className="self-start">Expiry Date</label>
+                        <input
+                            type="date"
+                            placeholder="Date Here.."
+                            name="expiryDate"
+                            onChange={handleChange}
+                            value={coupon.expiryDate}
+                            className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] placeholder:text- focus:outline-none border-gray-300 "
+                        />
+                        {errors.expiryDate && (
+                            <span
+                                className={`text-red-600 text-sm ${coupon.expiryDate ? "" : "hidden"
+                                    }}`}
+                            >
+                                {errors.expiryDate}
+                            </span>
+                        )}
+                    </div>
+                    <div className="flex flex-col  font-semibold gap-1">
+                        <label className="self-start">Description</label>
+                        <textarea
+                            placeholder="Type Here.."
+                            name="discription"
+                            rows={2}
+                            onChange={handleChange}
+                            value={coupon.discription}
+                            className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+                        />
+                        {errors.discription && (
+                            <span
+                                className={`text-red-600 text-sm ${coupon.discription ? "" : "hidden"
+                                    }}`}
+                            >
+                                {errors.discription}
+                            </span>
+                        )}
+                    </div>
+                    {updateId ? (
+
+                        <button
+                            type="submit"
+                            className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
+                            style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                            onClick={handleUpdateCoupon}
+                        >
+                            Update
+                        </button>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
+                            style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                            onClick={handleAddCoupon}
+                        >
+                            Save
+                        </button>
+                    )}
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        pauseOnFocusLoss={false}
+                        limit={1}
+                    />
+                </form>
+            </div>
+        </div>
+    )
+}
+
+export default Add

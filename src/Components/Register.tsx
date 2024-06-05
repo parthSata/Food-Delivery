@@ -56,7 +56,6 @@ function Register() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Submit button clicked");
 
     if (isValidMobileNumber && isValidEmail && passcode === confirmPasscode) {
       const userData = {
@@ -298,13 +297,12 @@ function Register() {
                   fontFamily: "Bai Jamjuree",
                   boxShadow: " 2px 2px 25px 2px #DF201F80",
                 }}
-                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
-                  isValidMobileNumber &&
-                  isValidEmail &&
-                  passcode === confirmPasscode
+                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber &&
+                    isValidEmail &&
+                    passcode === confirmPasscode
                     ? ""
                     : "cursor-not-allowed opacity-50"
-                }`}
+                  }`}
                 disabled={
                   !isValidMobileNumber ||
                   !isValidEmail ||

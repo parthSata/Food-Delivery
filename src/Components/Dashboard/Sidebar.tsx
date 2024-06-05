@@ -52,6 +52,14 @@ function Sidebar() {
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-4 hover:bg-red-200 rounded-lg p-4">
                             <img src={Dashboard} className="h-6 w-6" alt="" />
+                            <Link to="/">
+                                Home
+                            </Link>
+                        </span>
+                    </li>
+                    <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
+                        <span className="flex flex-row gap-4 hover:bg-red-200 rounded-lg p-4">
+                            <img src={Dashboard} className="h-6 w-6" alt="" />
                             <Link to="/dashboard">
                                 Dashboard
                             </Link>

@@ -19,7 +19,6 @@ function Home(): JSX.Element {
   const [showAddCategoryDialog, setShowAddCategoryDialog] = useState<boolean>(false);
   const [updateCategoryId, setUpdateCategoryId] = useState<string>("");
   const [categories, setCategories] = useState<CategoriesData[]>([]);
-  console.log("🚀 ~ Home ~ categories:", categories)
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 5;
   const [searchInput, setSearchInput] = useState("");
@@ -169,7 +168,7 @@ function Home(): JSX.Element {
 
           {/* table Start */}
           <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+            <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
               <table
                 className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
                 style={{

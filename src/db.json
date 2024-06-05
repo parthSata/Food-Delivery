@@ -12,20 +12,21 @@
   ],
   "products": [
     {
-      "id": "f412c7b3-4b82-4cfe-969a-7d7455137745",
-      "name": "Marghrita",
-      "price": "800",
-      "discountPrice": "618",
-      "weight": "4",
-      "unit": "Asperiores dolore qu",
-      "packagingCharges": "2",
-      "description": "Aliquip ipsa vel de",
+      "id": "7ab67d0e-c0d7-419d-8ae1-5e83d5ae7c5d",
+      "name": "Xantha Keller",
+      "price": "289",
+      "discountPrice": "587",
+      "weight": "10",
+      "unit": "Consequatur Iste es",
+      "packagingCharges": "16",
+      "description": "Enim exercitationem ",
       "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717392922/Products/margherita_chy4dl.png"
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717563135/Products/Mushroom_yrs5ge.png"
       ],
       "categoryId": "2ec19794-99a3-4422-a27f-697f0952602f"
     }
   ],
+  "coupons": [],
   "recentOrders": [
     {
       "orderId": "ORD000003",
@@ -74,48 +75,6 @@
       "day": "Su",
       "amount": 44620,
       "id": "8f0c"
-    }
-  ],
-  "placedOrders": [
-    {
-      "order": "French Fries",
-      "customerName": "Jhon Leo",
-      "status": "Pending",
-      "time": "10:05",
-      "discountPrice": 200,
-      "id": "9234"
-    },
-    {
-      "order": "French Crostini",
-      "customerName": "Kristien",
-      "status": "Cancelled",
-      "time": "12:05",
-      "discountPrice": 150,
-      "id": "bb9f"
-    },
-    {
-      "order": "Noodles",
-      "customerName": "Jack Suit",
-      "status": "Delivered",
-      "time": "15:35",
-      "discountPrice": 500,
-      "id": "55e2"
-    },
-    {
-      "order": "Garlic Bread",
-      "customerName": "Alesdro Guitto",
-      "status": "Delivered",
-      "time": "16:05",
-      "discountPrice": 150,
-      "id": "d7bb"
-    },
-    {
-      "order": "Pizza",
-      "customerName": "Peter Gill",
-      "status": "Delivered",
-      "time": "10:50",
-      "discountPrice": 150,
-      "id": "a4e0"
     }
   ],
   "orders": [

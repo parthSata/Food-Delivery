@@ -8,8 +8,8 @@ import OtpInput from "react-otp-input";
 function Verification() {
   const location = useLocation();
   const { mobileNumber, callingCode } = location.state || {};
+  // @ts-ignore
   const CallingCode = location.state?.callingCode;
-  console.log(CallingCode);
   const [otp, setOtp] = useState("");
 
   const navigate = useNavigate();

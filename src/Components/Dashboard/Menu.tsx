@@ -32,16 +32,16 @@ function DashboardHeader() {
                         <span className="text-xl sm:text-2xl md:text-lg font-bold">Food Delivery</span>
                     </div>
                     <div
-                        className={`  md:flex item-center   text-[14px] ${showSideMenu ? "" : "hidden"
+                        className={`sm:flex item-center   text-[14px] ${showSideMenu ? "" : "hidden"
                             }`}
                         style={{ fontFamily: "Bai Jamjuree" }}
                     >
                         <ul className={`flex items-center   font-semibold text-[16px] gap-12`}>
                             <li
-                                className={` p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/home" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                                className={` py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/home" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/home">Home</Link>
+                                <Link to="/">Home</Link>
                             </li>
                             <li
                                 className={`  items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
@@ -65,7 +65,7 @@ function DashboardHeader() {
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/customers" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/productsAdd">Customers</Link>
+                                <Link to="/customers">Customers</Link>
                             </li>
                             <li
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/coupons" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
@@ -77,7 +77,7 @@ function DashboardHeader() {
                                 className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurants" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
-                                <Link to="/#">Restaurants</Link>
+                                <Link to="/restaurants">Restaurants</Link>
                             </li>
                         </ul>
                     </div>
@@ -103,7 +103,7 @@ function DashboardHeader() {
                             alt="Notification icon"
                             className="absolute ml-4 h-[45px] w-[45px] top-[-10px] "
                         />
-                        <div className="relative rounded-full p-[2px] left-[14px] top-[-10px] sm:top-[-20px] ml-2 h-[24px] w-[30px] text-[14px] bg-[#DF201F] text-white text-center z-[1]">
+                        <div className="absolute -top-1 right-0 left-[15px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                             10+
                         </div>
                     </div>
