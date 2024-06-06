@@ -353,7 +353,7 @@ const ProductAdd: React.FC = () => {
                         </div>
                         {/* Preview Image */}
                         <div className="flex items-center w-full order-1" style={{ fontFamily: "Bai Jamjuree" }}>
-                            <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]" style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}>
+                            <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-full xl:w-[480px]" style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}>
                                 <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                                     {previewImage ? (
                                         <img src={previewImage} alt="Preview" className="h-[250px] w-auto object-cover" />

@@ -26,7 +26,32 @@
       "categoryId": "2ec19794-99a3-4422-a27f-697f0952602f"
     }
   ],
-  "coupons": [],
+  "coupons": [
+    {
+      "id": "79693bdb-e10e-403b-90c7-b477f128339c",
+      "offerCode": "Big500",
+      "discount": "63",
+      "offerPrice": "219",
+      "expiryDate": "1987-04-06",
+      "discription": "Aliqua Excepteur iu"
+    },
+    {
+      "id": "5f4676ad-1913-4c98-92d0-67bf9cf5c8aa",
+      "offerCode": "Error omnis minus eu",
+      "discount": "26",
+      "offerPrice": "985",
+      "expiryDate": "2004-07-01",
+      "discription": "Dolore error magni q"
+    },
+    {
+      "id": "c56171eb-2b0d-4e50-af7a-f222c2ddd30a",
+      "offerCode": "Omnis error qui numq",
+      "discount": "67",
+      "offerPrice": "477",
+      "expiryDate": "2023-08-03",
+      "discription": "Eos voluptate suscip"
+    }
+  ],
   "recentOrders": [
     {
       "orderId": "ORD000003",

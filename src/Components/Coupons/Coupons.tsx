@@ -8,8 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 function Coupons() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const navigate = useNavigate()
+    // @ts-ignore
     const { updateId } = useParams()
-    console.log("🚀 ~ Coupons ~ updateId:", updateId)
     const [coupons, setCoupons] = useState<Coupon[]>([])
 
     const handleUpdateCoupons = (id: any) => {
@@ -31,6 +31,10 @@ function Coupons() {
             console.error('Error deleting Coupons:', error);
         }
         navigate(`/coupons`)
+    }
+
+    const handleCouponView = (id: string) => {
+        navigate(`/couponView/${id}`, { state: { couponId: id } })
     }
 
 
@@ -73,22 +77,22 @@ function Coupons() {
                 <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
                     {coupons.map((item) => (
 
-                        <div className="sm:w-1/5 mb-10 flex-col  w-full cursor-pointer" key={item.id} style={{ fontFamily: "Montserrat Alternates" }} >
+                        <div className="sm:w-1/5  mb-10 flex-col  w-full cursor-pointer" onClick={() => handleCouponView(item.id)} key={item.id} style={{ fontFamily: "Montserrat Alternates" }} >
                             <div className="flex justify-center font-semibold flex-col gap-2   items-center bg-[#FFF3E5] h-full w-full rounded-[20px]">
-                                <div className="flex flex-col ">
+                                <div className="flex flex-col p-4">
                                     <span className="text-[16px] text-[#A2A3A5] ">New Offer</span>
-                                    <span className="text-[20px] text-[#161A1D]">Try New</span>
+                                    <span className="text-[16px]  text-[#161A1D]">{item.offerCode.toUpperCase()}</span>
                                 </div>
                                 <div className="flex gap-4 flex-col mb-4">
-                                    <span className=" text-[#DF201F] text-sm">50% Off</span>
+                                    <span className=" text-[#DF201F] text-sm">{item.discount}%</span>
                                     <p className="text-justify text-sm pl-6 pr-6 text-[#938D8E]  ">{item.discription}</p>
                                 </div>
                             </div>
                             <div className="relative flex justify-center w-full gap-2  -top-6">
-                                <div className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl " >
+                                <div className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl " onClick={() => handleDeleteCoupons(item.id)} >
                                     <button className="" ><i className="fa-solid fa-trash fa-lg" onClick={() => handleDeleteCoupons(item.id)} style={{ color: "#d4d9de" }}></i></button>
                                 </div>
-                                <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl" >
+                                <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl" onClick={() => handleUpdateCoupons(item.id)}>
                                     <button className=""><i className="fa-solid fa-pen fa-lg" onClick={() => handleUpdateCoupons(item.id)} style={{ color: "#d4d9de" }}></i></button>
                                 </div>
                             </div>

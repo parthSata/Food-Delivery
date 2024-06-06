@@ -13,6 +13,7 @@ import Category from "./Components/Category/Category";
 import ProductView from "./Components/Products/ProductView";
 import Coupons from "./Components/Coupons/Coupons";
 import CouponAdd from './Components/Coupons/CouponAdd'
+import CouponView from "./Components/Coupons/CouponView";
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/products" element={<Products />} />
         <Route path="/coupons" element={<Coupons />} />
+        <Route path="/couponview" element={<CouponView />} />
+        <Route path="/couponview/:couponId" element={<CouponView />} />
         <Route path="/productView" element={<ProductView />} />
         <Route path="/productView/:productId" element={<ProductView />} />
         <Route path="/productsAdd" element={<ProductAdd />} />

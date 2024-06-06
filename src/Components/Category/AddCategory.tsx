@@ -21,7 +21,6 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     numberOfProducts: "",
     status: "In Stock",
     imageUrl: "",
-    categoryId: ""
   });
 
   const [errors, setErrors] = useState<Partial<CategoriesData>>({});
@@ -124,8 +123,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
       numberOfProducts: "",
       status: "In Stock",
       id: "",
-      imageUrl: "",
-      categoryId: ""
+      imageUrl: ""
     });
     setImagePreview(null);
     setImageFile(null);

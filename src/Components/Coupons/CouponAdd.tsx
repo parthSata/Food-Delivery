@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 export interface Coupon {
     id: string,
     offerCode: string;
-    discountPrice: string | number;
+    discount: string | number;
     offerPrice: string | number;
     expiryDate: string;
     discription: string;
@@ -26,7 +26,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     const [coupon, setCoupon] = useState<Coupon>({
         id: "",
         offerCode: "",
-        discountPrice: 0,
+        discount: 0,
         offerPrice: 0,
         expiryDate: "",
         discription: "",
@@ -70,7 +70,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
         const newErrors: Partial<Coupon> = {};
         if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
-        if (isFieldEmpty(coupon.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+        if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount  is required";
         if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
         if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
         if (isFieldEmpty(coupon.discription)) newErrors.discription = "Discription is required";
@@ -112,7 +112,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
         const newErrors: Partial<Coupon> = {};
 
         if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
-        if (isFieldEmpty(coupon.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+        if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount is required";
         if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
         if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
         if (isFieldEmpty(coupon.discription)) newErrors.discription = "Discription is required";
@@ -139,14 +139,14 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 body: JSON.stringify(newCoupon),
             });
             const result = await response.json();
-            toast.success("Product Added", result)
+            toast.success("Coupon Added", result)
         } catch (error) {
         }
         navigate(`/coupons`)
         setCoupon({
             id: "",
             offerCode: "",
-            discountPrice: '',
+            discount: '',
             offerPrice: '',
             expiryDate: "",
             discription: "",
@@ -154,29 +154,27 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     }
     return (
         <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
-            <div className="">
-                <button
-                    className="absolute top-4 right-[10px] sm:top-[10px] sm:right-[480px] text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
-                    onClick={onClose}
+            <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
+            <button
+                className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
+                onClick={onClose}
+            >
+                <svg
+                    className="h-[26px] w-[26px] p-[4px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
                 >
-                    <svg
-                        className="h-[26px] w-[26px] p-[4px]"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        aria-hidden="true"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                        />
-                    </svg>
-                </button>
-            </div>
-            <div className="bg-white w-[430px] gap-2  h-[570px] rounded-lg shadow-lg p-6 relative">
+                    <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                    />
+                </svg>
+            </button>
                 <form className="space-y-4 ">
                     <div className="flex flex-col  font-semibold gap-1">
                         <label className="self-start">Offer Code</label>
@@ -198,21 +196,21 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
                         )}
                     </div>
                     <div className="flex flex-col  font-semibold gap-1">
-                        <label className="self-start">Discount Price</label>
+                        <label className="self-start">Discount </label>
                         <input
                             type="number"
                             placeholder="Discount Here.."
-                            name="discountPrice"
+                            name="discount"
                             onChange={handleChange}
-                            value={coupon.discountPrice}
+                            value={coupon.discount}
                             className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
                         />
-                        {errors.discountPrice && (
+                        {errors.discount && (
                             <span
-                                className={`text-red-600 text-sm ${coupon.discountPrice ? "" : "hidden"
+                                className={`text-red-600 text-sm ${coupon.discount ? "" : "hidden"
                                     }}`}
                             >
-                                {errors.discountPrice}
+                                {errors.discount}
                             </span>
                         )}
                     </div>

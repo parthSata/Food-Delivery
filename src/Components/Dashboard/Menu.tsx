@@ -24,7 +24,7 @@ function DashboardHeader() {
             <div className="h-full w-full ">
                 <Sidebar />
                 <nav
-                    className="flex flex-nowrap   bg-[#FFFFFF]   justify-between "
+                    className="flex bg-[#FFFFFF] flex-wrap  justify-between "
                     style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
                 >
                     <div className="flex items-center flex-row">
@@ -32,11 +32,11 @@ function DashboardHeader() {
                         <span className="text-xl sm:text-2xl md:text-lg font-bold">Food Delivery</span>
                     </div>
                     <div
-                        className={`sm:flex item-center   text-[14px] ${showSideMenu ? "" : "hidden"
+                        className={`md:flex item-center   text-[14px]  ${showSideMenu ? "" : "hidden"
                             }`}
                         style={{ fontFamily: "Bai Jamjuree" }}
                     >
-                        <ul className={`flex items-center   font-semibold text-[16px] gap-12`}>
+                        <ul className={`flex items-center   font-semibold text-[16px] gap-8`}>
                             <li
                                 className={` py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/home" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
@@ -44,7 +44,7 @@ function DashboardHeader() {
                                 <Link to="/">Home</Link>
                             </li>
                             <li
-                                className={`  items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                                className={`p-6  items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
                                     } `}
                             >
                                 <Link to="/dashboard">Dashboard</Link>
@@ -103,7 +103,7 @@ function DashboardHeader() {
                             alt="Notification icon"
                             className="absolute ml-4 h-[45px] w-[45px] top-[-10px] "
                         />
-                        <div className="absolute -top-1 right-0 left-[15px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+                        <div className="relative -top-2  left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                             10+
                         </div>
                     </div>

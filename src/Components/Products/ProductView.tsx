@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Product } from './ProductAdd';
 import DashboardHeader from '../Dashboard/Menu';
 import { useParams } from 'react-router-dom';
-import Footer from '../Footer';
+// import Footer from '../Footer';
 
 
 const ProductView: React.FC = () => {
@@ -69,7 +69,7 @@ const ProductView: React.FC = () => {
                             {[0, 1, 2, 3].map((index) => (
                                 <div
                                     key={index}
-                                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index] ? 'border-[#DF201F]' : 'border-[#161A1D]'}`}
+                                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index] ? 'border-[3px] border-[#DF201F]' : ' outline-none border-[#161A1D]'}`}
                                 >
                                     {productImages[index] && (
                                         <div
@@ -84,9 +84,9 @@ const ProductView: React.FC = () => {
                         </div>
                     </div>
                     {/* Preview Image */}
-                    <div className="flex items-start w-full order-1" style={{ fontFamily: "Bai Jamjuree" }}>
+                    <div className="flex items-start w-full  order-1" style={{ fontFamily: "Bai Jamjuree" }}>
                         <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px]" style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}>
-                            <div className=" bg-[#F5F5F5] rounded-[15px] border-4 h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
+                            <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                                 {previewImage ? (
                                     <img src={previewImage} alt="Preview" className="h-[240px] w-auto object-cover" />
                                 ) : (
@@ -101,7 +101,7 @@ const ProductView: React.FC = () => {
                 {/* Order Details */}
                 <div className="w-full flex flex-col mt-[50px] gap-12 flex-wrap  font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>
                     <div className="flex flex-col gap-2 ">
-                        <p className="text-2xl self-start">{product.name}</p>
+                        <p className="text-2xl self-start" >{product.name}</p>
                         <p className="text-[#DF201F] flex gap-1" style={{ fontFamily: "Montserrat Alternates" }}><span className="">₹{product.price}</span><span className="line-through">₹{product.discountPrice}</span></p>
                     </div>
                     <div className="flex gap-28 flex-row">
@@ -143,7 +143,7 @@ const ProductView: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 };
