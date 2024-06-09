@@ -37,6 +37,9 @@ const ProductView: React.FC = () => {
                 const data = await response.json();
                 setProduct(data);
                 setProductImages(data.images || [])
+                if (data.images && data.images.length > 0) {
+                    setPreviewImage(data.images[0]);
+                }
             }
         } catch (error) {
 

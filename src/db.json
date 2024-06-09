@@ -18,35 +18,7 @@
       "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717858409/Categories/Rectangle_79_thgvph.png"
     }
   ],
-  "products": [
-    {
-      "id": "7ab67d0e-c0d7-419d-8ae1-5e83d5ae7c5d",
-      "name": "Xantha Keller",
-      "price": "289",
-      "discountPrice": "587",
-      "weight": "10",
-      "unit": "Consequatur Iste es",
-      "packagingCharges": "16",
-      "description": "Enim exercitationem ",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717563135/Products/Mushroom_yrs5ge.png"
-      ],
-      "categoryId": "2ec19794-99a3-4422-a27f-697f0952602f"
-    },
-    {
-      "id": "a5131087-c04e-4f2d-afb8-a2d8c891eb7a",
-      "name": "Adam Morrison",
-      "price": "293",
-      "discountPrice": "768",
-      "weight": "64",
-      "unit": "Ut amet quidem vita",
-      "packagingCharges": "23",
-      "description": "Eos id error non nih",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717858591/Products/Rectangle_79_s322mu.png"
-      ]
-    }
-  ],
+  "products": [],
   "coupons": [
     {
       "id": "79693bdb-e10e-403b-90c7-b477f128339c",
@@ -97,117 +69,40 @@
       "imageUrl": [
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717830907/Restaurants/istockphoto-1079901206-612x612_gkxapw.jpg"
       ]
+    },
+    {
+      "id": "bfab4f03-32d0-460a-8ba2-9b80aeefee0e",
+      "restaurantName": "Charlotte Schmidt",
+      "address": "Molestiae aut in et ",
+      "mobilenumber": "668",
+      "ratings": 0,
+      "description": "Magna eos fuga Fugi",
+      "images": [],
+      "latitude": "22",
+      "longitude": "4"
     }
   ],
-  "revenue": [
+  "gallary": [
     {
-      "day": "Mo",
-      "amount": 14300,
-      "id": "d03c"
-    },
-    {
-      "day": "Tu",
-      "amount": 15000,
-      "id": "942a"
-    },
-    {
-      "day": "We",
-      "amount": 20000,
-      "id": "0941"
-    },
-    {
-      "day": "Th",
-      "amount": 25000,
-      "id": "1266"
-    },
-    {
-      "day": "Fr",
-      "amount": 30000,
-      "id": "5ea0"
-    },
-    {
-      "day": "Sa",
-      "amount": 35000,
-      "id": "29c2"
-    },
-    {
-      "day": "Su",
-      "amount": 44620,
-      "id": "8f0c"
-    }
-  ],
-  "orders": [
-    {
-      "id": "ORD000003",
-      "date": "2022-03-25",
-      "time": "03:25 PM",
-      "items": [
-        {
-          "name": "Hamburger",
-          "price": 100
-        },
-        {
-          "name": "Vegetarian Pizza",
-          "price": 100
-        },
-        {
-          "name": "Chicken Biryani",
-          "price": 150
-        }
+      "id": "2b7d72ed-cea3-4519-8284-f9f29b9d569e",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717911129/Gallary/Rectangle_73_ynixqg.png"
       ],
-      "status": "Accepted"
+      "title": "Anim anim doloribus "
     },
     {
-      "id": "ORD000002",
-      "date": "2022-03-25",
-      "time": "12:01 PM",
-      "items": [
-        {
-          "name": "Best Veg Dum Biryani",
-          "price": 200
-        },
-        {
-          "name": "Vegetarian Pizza",
-          "price": 100
-        }
+      "id": "4495f5c5-e627-4d9f-8c77-260c050646c4",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717917272/Gallary/CheeseBurger_jwd9iv.png"
       ],
-      "status": "Cancelled"
+      "title": "Rerum nulla sed even"
     },
     {
-      "id": "ORD000003",
-      "date": "2022-03-24",
-      "time": "03:25 PM",
-      "items": [
-        {
-          "name": "Hamburger",
-          "price": 100
-        },
-        {
-          "name": "Vegetarian Pizza",
-          "price": 100
-        },
-        {
-          "name": "Chicken Biryani",
-          "price": 150
-        }
+      "id": "0e79a17d-26be-4d22-aeae-4f9b8d038493",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717917272/Gallary/CheeseBurger_xfl4uw.png"
       ],
-      "status": "Accepted"
-    },
-    {
-      "id": "ORD000002",
-      "date": "2022-03-24",
-      "time": "12:01 PM",
-      "items": [
-        {
-          "name": "Best Veg Dum Biryani",
-          "price": 200
-        },
-        {
-          "name": "Vegetarian Pizza",
-          "price": 100
-        }
-      ],
-      "status": "Cancelled"
+      "title": "Rerum nulla sed even"
     }
   ]
 }

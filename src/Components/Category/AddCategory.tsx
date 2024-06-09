@@ -92,45 +92,6 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    const updatedCategory: any = { ...category }
-    updatedCategory[name] = value
-
-    setCategory(updatedCategory)
-  };
-
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const isFieldEmpty = (value: string | number) => {
-    return value === "" || value === null || value === undefined;
-  };
-
-  const resetForm = () => {
-    setCategory({
-      categoryName: "",
-      description: "",
-      numberOfProducts: "",
-      status: "In Stock",
-      id: "",
-      imageUrl: ""
-    });
-    setImagePreview(null);
-    setImageFile(null);
-  };
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Partial<CategoriesData> = {};
@@ -190,6 +151,45 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
 
     resetForm();
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    const updatedCategory: any = { ...category }
+    updatedCategory[name] = value
+
+    setCategory(updatedCategory)
+  };
+
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const isFieldEmpty = (value: string | number) => {
+    return value === "" || value === null || value === undefined;
+  };
+
+  const resetForm = () => {
+    setCategory({
+      categoryName: "",
+      description: "",
+      numberOfProducts: "",
+      status: "In Stock",
+      id: "",
+      imageUrl: ""
+    });
+    setImagePreview(null);
+    setImageFile(null);
+  };
+
+
 
   const uploadImageToCloudinary = async (file: File) => {
     const formData = new FormData();

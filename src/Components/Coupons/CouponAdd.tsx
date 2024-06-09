@@ -151,30 +151,31 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             expiryDate: "",
             discription: "",
         });
+        onClose()
     }
     return (
         <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
             <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
-            <button
-                className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
-                onClick={onClose}
-            >
-                <svg
-                    className="h-[26px] w-[26px] p-[4px]"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
+                <button
+                    className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
+                    onClick={onClose}
                 >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                    />
-                </svg>
-            </button>
+                    <svg
+                        className="h-[26px] w-[26px] p-[4px]"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        aria-hidden="true"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M6 18L18 6M6 6l12 12"
+                        />
+                    </svg>
+                </button>
                 <form className="space-y-4 ">
                     <div className="flex flex-col  font-semibold gap-1">
                         <label className="self-start">Offer Code</label>

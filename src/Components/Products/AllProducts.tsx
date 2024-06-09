@@ -52,11 +52,16 @@ function AllProducts() {
         navigate(`/products`)
     }
 
+    const handleProductView = (id: string) => {
+        navigate(`/productView/${id}`, { state: { productId: id } })
+    }
+
+
     return (
         <div className="">
             <DashboardHeader />
             {/* Product Heading */}
-            <div className="relative bg-black opacity-90 ">
+            <div className="relative mt-4 bg-black opacity-90 ">
                 <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
                 <div className=" flex justify-start pl-16">
                     <span className="absolute bottom-20 text-white text-2xl"
@@ -69,18 +74,19 @@ function AllProducts() {
             <div className="">
                 <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
                     {products.map((item) => (
-                        <div className="sm:w-1/5 w-full mb-10 " key={item.id}>
+                        <div className="sm:w-1/5 w-full mb-10 " onClick={() => handleProductView(item.id)} key={item.id}>
                             <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
-                                <img src={item.images[0]} alt="" className="h-20" />
+                                {/* @ts-ignore */}
+                                <img src={item.images} alt="" className="h-20" />
                                 <p className="" style={{ fontFamily: "Bai Jamjuree" }}>{item.name}</p>
                                 <p className="flex gap-2 items-center text-[#DF201F]" style={{ fontFamily: "Montserrat Alternates" }}>₹{item.price}<span className="text-xs line-through">₹{item.discountPrice}</span></p>
                             </div>
                             <div className="relative flex justify-center w-full gap-2  -top-6">
                                 <div className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl ">
-                                    <button className="" onClick={() => handleDeleteProduct(item.id)}><i className="fa-solid fa-trash fa-lg" style={{ color: "#d4d9de" }}></i></button>
+                                    <button className="" onClick={(e) => (e.stopPropagation(), handleDeleteProduct(item.id))}><i className="fa-solid fa-trash fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                 </div>
                                 <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
-                                    <button className="" onClick={() => handleUpdateProduct(item.id)}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
+                                    <button className="" onClick={(e) => (e.stopPropagation(), handleUpdateProduct(item.id))}><i className="fa-solid fa-pen fa-lg" style={{ color: "#d4d9de" }}></i></button>
                                 </div>
                             </div>
                         </div>

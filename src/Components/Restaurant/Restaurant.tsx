@@ -91,7 +91,7 @@ function Restaurant() {
         <div>
             <DashboardHeader />
 
-            <div className="relative bg-black opacity-90 w-full">
+            <div className="relative mt-4 bg-black opacity-90 w-full">
                 <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
                 <div className=" flex justify-start pl-16 ">
                     <span className="absolute bottom-20 text-white text-2xl"
