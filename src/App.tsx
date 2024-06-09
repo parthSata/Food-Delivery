@@ -41,6 +41,7 @@ function App() {
         <Route path="/restaurants" element={<Restaurant />} />
         <Route path="/addrestaurants" element={<AddRestaurants />} />
         <Route path="/addrestaurants/:updateId" element={<AddRestaurants />} />
+        {/* @ts-ignore */}
         <Route path="/gallary" element={<Gallary onClose={function (): void {
           throw new Error("Function not implemented.");
         }} isOpen={true} />} />
