@@ -84,8 +84,8 @@ function Sidebar() {
                     <li className="hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full">
                         <span className="flex flex-row gap-2 hover:bg-red-200 rounded-lg p-4">
                             <img src={Restaurant} className="h-10 w-10" alt="" />
-                            <Link to="/customers">
-                                Customers
+                            <Link to="/gallary">
+                                Gallary
                             </Link>
                         </span>
                     </li>

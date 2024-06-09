@@ -54,20 +54,7 @@ function UserProducts() {
                             </div>
                         </div>
                     </div>
-                    <div className="sm:w-1/5 mb-10  ">
-                        <div className="h-full w-full rounded-[15px] border-2">
-                            <img src={Noodles} alt="" className="h-[150px] rounded-t-[15px] w-full" />
-                            <div className="flex flex-col items-start p-2 font-semibold" >
-                                <span className="">Noodles</span>
-                                <div className="flex text-red-500 gap-1 items-center">
-                                    <span className="">₹500</span><span className="text-xs line-through">₹400</span>
-                                </div>
-                                <p className="font-bold">
-                                    This easy stir fried veggie noodles recipe has just the right level of spice.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div className=" sm:w-1/5  mb-10 ">
                         <div className="flex justify-center font-semibold flex-col text-md items-center  h-auto w-full " style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}>

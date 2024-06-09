@@ -14,6 +14,9 @@ import ProductView from "./Components/Products/ProductView";
 import Coupons from "./Components/Coupons/Coupons";
 import CouponAdd from './Components/Coupons/CouponAdd'
 import CouponView from "./Components/Coupons/CouponView";
+import Restaurant from "./Components/Restaurant/Restaurant";
+import AddRestaurants from "./Components/Restaurant/AddRestaurants";
+import Gallary from "./Components/Restaurant/Gallary";
 
 function App() {
   return (
@@ -35,6 +38,15 @@ function App() {
         <Route path="/productsAdd/:updateId" element={<ProductAdd />} />
         <Route path="/productsAdd/:CategoryId" element={<ProductAdd />} />
         <Route path="/category/:CategoryId" element={<Category />} />
+        <Route path="/restaurants" element={<Restaurant />} />
+        <Route path="/addrestaurants" element={<AddRestaurants />} />
+        <Route path="/addrestaurants/:updateId" element={<AddRestaurants />} />
+        <Route path="/gallary" element={<Gallary onClose={function (): void {
+          throw new Error("Function not implemented.");
+        }} isOpen={true} />} />
+
+
+
         <Route path="/couponAdd" element={<CouponAdd onClose={function (): void {
           throw new Error("Function not implemented.");
         }} isOpen={false} />} />
