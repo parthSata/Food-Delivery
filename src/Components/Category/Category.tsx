@@ -92,7 +92,7 @@ function Category() {
                 <DashboardHeader />
                 {/* Product Heading */}
 
-                <div className="bg-[#fcbc65]  h-52 w-full  sm:w-full ">
+                <div className="bg-[#fcbc65]  h-52 w-full  sm:w-full " style={{ fontFamily: "Bai Jamjuree" }}>
                     <div className="flex justify-between  items-center w-full">
                         <span className="text-3xl pl-28 text-white">{categoryData.categoryName}</span>
                         <img src={categoryData.imageUrl} alt="" className="visible sm:visible md:visible lg:visible xl:visible h-[205px] w-fit " />
@@ -105,7 +105,7 @@ function Category() {
                             <div className="sm:w-1/5 mb-10  w-full cursor-pointer" onClick={() => handleProductView(item.id)} key={item.id}>
                                 <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                                     {/* @ts-ignore */}
-                                    <img src={item.images} alt="" className="h-20" />
+                                    <img src={item.images[0]} alt="" className="h-20" />
                                     <p className="" style={{ fontFamily: "Bai Jamjuree" }}>{item.name} </p>
                                     <p className="flex gap-2 items-center text-[#DF201F]" style={{ fontFamily: "Montserrat Alternates" }}>₹{item.price}<span className="text-xs line-through">₹{item.discountPrice} </span></p>
                                 </div>

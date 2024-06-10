@@ -81,6 +81,12 @@ function DashboardHeader() {
                             >
                                 <Link to="/restaurants">Restaurants</Link>
                             </li>
+                            <li
+                                className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/team" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
+                                    } `}
+                            >
+                                <Link to="/team">Our Team</Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="flex items-center">

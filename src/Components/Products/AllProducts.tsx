@@ -61,7 +61,7 @@ function AllProducts() {
         <div className="">
             <DashboardHeader />
             {/* Product Heading */}
-            <div className="relative mt-4 bg-black opacity-90 ">
+            <div className="relative mt-4 bg-black opacity-90 " style={{ fontFamily: "Bai Jamjuree" }}>
                 <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
                 <div className=" flex justify-start pl-16">
                     <span className="absolute bottom-20 text-white text-2xl"
@@ -77,7 +77,7 @@ function AllProducts() {
                         <div className="sm:w-1/5 w-full mb-10 " onClick={() => handleProductView(item.id)} key={item.id}>
                             <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                                 {/* @ts-ignore */}
-                                <img src={item.images} alt="" className="h-20" />
+                                <img src={item.images[0]} alt="" className="h-20" />
                                 <p className="" style={{ fontFamily: "Bai Jamjuree" }}>{item.name}</p>
                                 <p className="flex gap-2 items-center text-[#DF201F]" style={{ fontFamily: "Montserrat Alternates" }}>₹{item.price}<span className="text-xs line-through">₹{item.discountPrice}</span></p>
                             </div>

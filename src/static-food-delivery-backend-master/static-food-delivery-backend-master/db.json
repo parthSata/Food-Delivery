@@ -1,41 +1,24 @@
 {
   "categories": [
     {
-      "id": "6af39ddf-e949-4e87-a16e-3b7966a72fc2",
-      "categoryName": "Pizza",
-      "description": "Laborum Vel id quid",
-      "numberOfProducts": "478",
+      "id": "2ec19794-99a3-4422-a27f-697f0952602f",
+      "categoryName": "Lawrence Brock",
+      "description": "Illum ullam ratione",
+      "numberOfProducts": "222",
       "status": "In Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717994453/Categories/hawaiian_byozg7.png"
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717392159/Categories/hawaiian_rvbxrx.png",
+      "categoryId": ""
     },
     {
-      "id": "e05040ef-58d9-4934-96d7-5fb31445bfa3",
-      "categoryName": "Burger",
-      "description": "Dignissimos ex accus",
-      "numberOfProducts": "288",
+      "id": "dfe7e001-9515-4bc7-9346-01cb5801226a",
+      "categoryName": "Kasper Henson",
+      "description": "Eos sed eos tempora ",
+      "numberOfProducts": "483",
       "status": "Out of Stock",
-      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717994487/Categories/Vegetable_Burger_ya47bs.png"
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717858409/Categories/Rectangle_79_thgvph.png"
     }
   ],
-  "products": [
-    {
-      "id": "ecbd68f2-2321-46a4-9a9b-20e37a6e2a46",
-      "name": "Carly Buchanan",
-      "price": "89",
-      "discountPrice": "503",
-      "weight": "18",
-      "unit": "Repellendus Cum ani",
-      "packagingCharges": "52",
-      "description": "Tenetur eius perspic",
-      "images": [
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717995050/Products/pepperoni_pqfdin.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717995052/Products/Mushroom_r8y4c1.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717995057/Products/margherita_zo391d.png",
-        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717995062/Products/hawaiian_qv7eos.png"
-      ],
-      "categoryId": "6af39ddf-e949-4e87-a16e-3b7966a72fc2"
-    }
-  ],
+  "products": [],
   "coupons": [
     {
       "id": "79693bdb-e10e-403b-90c7-b477f128339c",
@@ -68,14 +51,6 @@
       "offerPrice": "316",
       "expiryDate": "1983-05-08",
       "discription": "Nisi Nam officia off"
-    },
-    {
-      "id": "25e6f04c-d6d7-492d-88a0-444d6121e08d",
-      "offerCode": "Dolorum tenetur sit ",
-      "discount": "82",
-      "offerPrice": "458",
-      "expiryDate": "1990-05-20",
-      "discription": "Sit quis ex sunt ac"
     }
   ],
   "restaurants": [
@@ -128,38 +103,6 @@
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717917272/Gallary/CheeseBurger_xfl4uw.png"
       ],
       "title": "Rerum nulla sed even"
-    }
-  ],
-  "team": [
-    {
-      "id": "60fd895f-9f0d-4208-b30f-59bf8995287b",
-      "name": "Emily Branch",
-      "position": "Irure sit quis amet",
-      "images": []
-    },
-    {
-      "id": "0b760021-d536-414c-8350-bdb4de156253",
-      "name": "Duncan Brady",
-      "position": "Repudiandae voluptas",
-      "images": []
-    },
-    {
-      "id": "f81ed29d-ce8d-44cc-bc99-1a7d517a1e65",
-      "name": "Kibo Sheppard",
-      "position": "Ut sunt qui voluptat",
-      "images": []
-    },
-    {
-      "id": "fdad86bb-8b39-44ee-a532-2f981297a843",
-      "name": "Cheryl Mccullough",
-      "position": "Quae esse minima eu ",
-      "images": []
-    },
-    {
-      "id": "c6ae38de-a713-4e5b-a206-1e0811bc760b",
-      "name": "Harsh",
-      "position": "Manager",
-      "images": []
     }
   ]
 }

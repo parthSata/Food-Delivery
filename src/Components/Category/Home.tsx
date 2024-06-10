@@ -62,7 +62,7 @@ function Home(): JSX.Element {
         });
       } else {
         // Add new category
-        response = await fetch('http://localhost:3000/CategoryName', {
+        response = await fetch('http://localhost:3000/categories', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newCategory),
