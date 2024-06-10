@@ -5,7 +5,6 @@ import Pizza from "../../assets/HomePage/Pizza.png";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
 
-
 export interface CategoriesData {
   id: string;
   categoryName: string;
@@ -16,7 +15,8 @@ export interface CategoriesData {
 }
 
 function Home(): JSX.Element {
-  const [showAddCategoryDialog, setShowAddCategoryDialog] = useState<boolean>(false);
+  const [showAddCategoryDialog, setShowAddCategoryDialog] =
+    useState<boolean>(false);
   const [updateCategoryId, setUpdateCategoryId] = useState<string>("");
   const [categories, setCategories] = useState<CategoriesData[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -29,14 +29,17 @@ function Home(): JSX.Element {
   const totalPages = Math.ceil(filteredCategories.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredCategories.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/categories`);
+      const response = await fetch(`http://localhost:5000/categories`);
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
@@ -55,16 +58,19 @@ function Home(): JSX.Element {
       let response;
       if (newCategory.id) {
         // Update category
-        response = await fetch(`http://localhost:3000/categories/${newCategory.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newCategory),
-        });
+        response = await fetch(
+          `http://localhost:5000/categories/${newCategory.id}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newCategory),
+          }
+        );
       } else {
         // Add new category
-        response = await fetch('http://localhost:3000/categories', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        response = await fetch("http://localhost:5000/categories", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newCategory),
         });
       }
@@ -80,20 +86,19 @@ function Home(): JSX.Element {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/categories/${id}`, {
-        method: 'DELETE',
+      const response = await fetch(`http://localhost:5000/categories/${id}`, {
+        method: "DELETE",
       });
 
       if (response.ok) {
         fetchCategories();
       } else {
-        console.error('Failed to delete category:', response.statusText);
+        console.error("Failed to delete category:", response.statusText);
       }
     } catch (error) {
-      console.error('Error deleting category:', error);
+      console.error("Error deleting category:", error);
     }
   };
-
 
   const handleUpdate = (id: string) => {
     setUpdateCategoryId(id);
@@ -133,7 +138,9 @@ function Home(): JSX.Element {
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <div className="">
-              <span className="font-semibold  text-[#161A1D]">Category List</span>
+              <span className="font-semibold  text-[#161A1D]">
+                Category List
+              </span>
             </div>
             <div className="flex ">
               <div className="flex justify-evenly flex-wrap gap-4">
@@ -229,16 +236,17 @@ function Home(): JSX.Element {
                         <i
                           className="fa-solid fa-trash fa-xl cursor-pointer "
                           onClick={() => handleDelete(item.id)}
-                        // Delete Category
+                          // Delete Category
                         ></i>
                         <i
                           className="fa-solid fa-pen fa-xl cursor-pointer "
                           onClick={() => handleUpdate(item.id)}
-                        // Update Category
+                          // Update Category
                         ></i>{" "}
-                        <i className="fa-solid fa-eye fa-xl cursor-pointer"
+                        <i
+                          className="fa-solid fa-eye fa-xl cursor-pointer"
                           onClick={() => handleViewCategories(item.id)}
-                        // View  Category Categories
+                          // View  Category Categories
                         ></i>
                       </td>
                     </tr>
@@ -272,8 +280,9 @@ function Home(): JSX.Element {
                   <a
                     href="#"
                     onClick={() => handlePageChange(index + 1)}
-                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
-                      }`}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
+                      currentPage === index + 1 ? "font-bold" : ""
+                    }`}
                   >
                     {index + 1}
                   </a>
