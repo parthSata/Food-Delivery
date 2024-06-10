@@ -126,9 +126,10 @@ function Home(): JSX.Element {
 
   return (
     <>
-      <div className="min-w-fit ">
+      <DashboardHeader />
+
+      <div className="min-w-fit max-w-[1280px] mx-auto px-6">
         {/* Header Started Here */}
-        <DashboardHeader />
         {/* Header End Here */}
 
         {/* Body Part Started */}

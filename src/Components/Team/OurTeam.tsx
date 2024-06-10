@@ -73,10 +73,10 @@ function OurTeam() {
             <span className="">Add New</span>
           </div>
         </div>
-        <div className="flex flex-wrap gap-16 mt-6">
+        <div className="flex flex-wrap gap-16 mt-6 justify-center">
           {member.map((item) => (
             <div
-              className="relative sm:w-1/5 flex mt-8  py-10 justify-center w-full h-[350px]"
+              className="relative sm:w-1/5 flex py-10 justify-center w-full h-[350px] "
               key={item.id}
             >
               <div className="w-full flex justify-center ">
