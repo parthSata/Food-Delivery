@@ -61,7 +61,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
         const data = await response.json();
         setMembers(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleUpdateMember = async (e: React.FormEvent) => {
@@ -122,7 +122,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
       return;
     }
     setErrors({});
-
+    // @ts-ignore
     let imageUrl = "";
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
@@ -144,7 +144,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
       });
       const result = await response.json();
       toast.success("Member Added", result);
-    } catch (error) {}
+    } catch (error) { }
     navigate(`/team`);
     setMembers({
       id: "",
@@ -255,9 +255,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.name && (
               <span
-                className={`text-red-600 text-sm ${
-                  members.name ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${members.name ? "" : "hidden"
+                  }}`}
               >
                 {errors.name}
               </span>
@@ -275,9 +274,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.position && (
               <span
-                className={`text-red-600 text-sm ${
-                  members.position ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${members.position ? "" : "hidden"
+                  }}`}
               >
                 {errors.position}
               </span>

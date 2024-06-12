@@ -34,6 +34,20 @@
         "http://res.cloudinary.com/dwxhjomtn/image/upload/v1717995062/Products/hawaiian_qv7eos.png"
       ],
       "categoryId": "6af39ddf-e949-4e87-a16e-3b7966a72fc2"
+    },
+    {
+      "id": "4a66d603-b2dc-4ae9-8a12-cceebb50ea80",
+      "name": "Nissim Woods",
+      "price": "561",
+      "discountPrice": "710",
+      "weight": "16",
+      "unit": "Obcaecati laboris eo",
+      "packagingCharges": "4",
+      "description": "Est recusandae Vol",
+      "images": [
+        "http://res.cloudinary.com/dwxhjomtn/image/upload/v1718197691/Products/Mushroom_hglofd.png"
+      ],
+      "categoryId": "6af39ddf-e949-4e87-a16e-3b7966a72fc2"
     }
   ],
   "coupons": [
@@ -147,12 +161,6 @@
       "id": "f81ed29d-ce8d-44cc-bc99-1a7d517a1e65",
       "name": "Kibo Sheppard",
       "position": "Ut sunt qui voluptat",
-      "images": []
-    },
-    {
-      "id": "fdad86bb-8b39-44ee-a532-2f981297a843",
-      "name": "Cheryl Mccullough",
-      "position": "Quae esse minima eu ",
       "images": []
     }
   ]
