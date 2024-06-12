@@ -26,7 +26,7 @@ const ProductAdd: React.FC = () => {
   const Categoryid = location.state?.CategoryId;
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:5000/products";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/products";
   const [errors, setErrors] = useState<Partial<Product>>({});
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -76,7 +76,7 @@ const ProductAdd: React.FC = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/products/${updateId}`,
+        `https://static-food-delivery-backend.vercel.app/products/${updateId}`,
         {
           method: "PUT",
           headers: {
@@ -264,7 +264,7 @@ const ProductAdd: React.FC = () => {
     try {
       const publicId = extractPublicIdFromUrl(imageUrl);
       const response = await fetch(
-        "http://localhost:5000/products/delete-image",
+        "https://static-food-delivery-backend.vercel.app/products/delete-image",
         {
           method: "POST",
           headers: {

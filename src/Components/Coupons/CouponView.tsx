@@ -14,7 +14,7 @@ function CouponView() {
     expiryDate: "",
     discription: "",
   });
-  const apiUrl = "http://localhost:5000/coupons";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/coupons";
 
   useEffect(() => {
     fetchCouponData();
@@ -26,7 +26,7 @@ function CouponView() {
 
   const handleDeleteCoupons = async (id: any) => {
     try {
-      const response = await fetch(`http://localhost:5000/coupons/${id}`, {
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/coupons/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

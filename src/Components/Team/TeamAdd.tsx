@@ -17,7 +17,7 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
-  const apiUrl = "http://localhost:5000/team";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/team";
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();

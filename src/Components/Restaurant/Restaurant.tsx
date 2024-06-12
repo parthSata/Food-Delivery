@@ -21,7 +21,7 @@ function Restaurant() {
     longitude: "",
   });
 
-  const apiUrl = "`http://localhost:5000/restaurants";
+  const apiUrl = "`https://static-food-delivery-backend.vercel.app/restaurants";
 
   console.log("🚀 ~ Restaurant ~ restarants:", restarants);
 
@@ -51,7 +51,7 @@ function Restaurant() {
 
   const fetchRestaurant = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/restaurants`);
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/restaurants`);
       if (response.ok) {
         const data = await response.json();
         setRestarants(data);
@@ -67,7 +67,7 @@ function Restaurant() {
 
   const handleDeleteRestaurant = async (id: any) => {
     try {
-      const response = await fetch(`http://localhost:5000/restaurants/${id}`, {
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/restaurants/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

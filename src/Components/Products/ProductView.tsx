@@ -23,7 +23,7 @@ const ProductView: React.FC = () => {
     categoryId: "",
   });
 
-  const apiUrl = "http://localhost:5000/products";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/products";
 
   useEffect(() => {
     fetchProductData();

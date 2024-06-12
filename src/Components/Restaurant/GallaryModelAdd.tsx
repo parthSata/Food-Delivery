@@ -27,7 +27,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:5000/gallary";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/gallary";
 
   if (!isOpen) return null;
   const uploadImageToCloudinary = async (

@@ -25,7 +25,7 @@ function AddRestaurants() {
   const { updateId } = useParams();
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:5000/restaurants";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/restaurants";
   const [errors, setErrors] = useState<Partial<Restaurant>>({});
   const [restaurant, setRestaurant] = useState<Restaurant>({
     id: "",
@@ -197,7 +197,7 @@ function AddRestaurants() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/restaurants/${updateId}`,
+        `https://static-food-delivery-backend.vercel.app/restaurants/${updateId}`,
         {
           method: "PUT",
           headers: {

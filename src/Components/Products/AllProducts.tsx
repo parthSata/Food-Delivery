@@ -20,7 +20,7 @@ function AllProducts() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/products`);
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);
@@ -37,7 +37,7 @@ function AllProducts() {
 
   const handleDeleteProduct = async (id: any) => {
     try {
-      const response = await fetch(`http://localhost:5000/products/${id}`, {
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

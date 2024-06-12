@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 const Gallary: React.FC<GallaryInterface> = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
-  const apiUrl = "http://localhost:5000/gallary";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/gallary";
 
   useEffect(() => {
     fetchGallaryImage();

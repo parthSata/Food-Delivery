@@ -10,7 +10,7 @@ function OurTeam() {
   // @ts-ignore
   const { updateId } = useParams();
   const [member, setMember] = useState<Team[]>([]);
-  const apiUrl = "http://localhost:5000/team";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/team";
 
   const handleUpdateMember = (id: any) => {
     navigate(`/teamAdd/${id}`);
