@@ -1,8 +1,8 @@
 import DashboardHeader from "../Dashboard/Menu";
-import DummyImg from "../../assets/All Product/DummyFood.png";
+import { DummyImg } from "../images";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import { useNavigate, useParams } from "react-router-dom";
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

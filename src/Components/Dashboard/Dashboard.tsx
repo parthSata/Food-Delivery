@@ -1,8 +1,4 @@
-import Cart from "../../assets/Dashboard/Cart.png";
-import Revenue from "../../assets/Dashboard/Revenue.png";
-import Customer from "../../assets/Dashboard/Customer.png";
-import TotalShops from "../../assets/Dashboard/TotalShops.png";
-import Pizza from "../../assets/HomePage/Pizza.png";
+import { Cart, Revenue, Customer, TotalShops, Pizza } from '../images'
 // import LineChart from '../Chart/Line'
 import DashboardHeader from "./Menu";
 import { useEffect, useState } from "react";
@@ -37,7 +33,7 @@ function Dashboard() {
         >
           <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
             <div className="flex flex-col">
-              <span className="self-start">{}</span>
+              <span className="self-start">{ }</span>
               <span className="">Recent Order</span>
             </div>
             <span className="">

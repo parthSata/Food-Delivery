@@ -12,7 +12,7 @@ interface Props {
 const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:3000/categories";
+  const apiUrl = "http://localhost:5000/categories";
 
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
@@ -72,7 +72,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const updatedCategory = { ...category, imageUrl };
 
     try {
-      const response = await fetch(`http://localhost:3000/categories/${id}`, {
+      const response = await fetch(`http://localhost:5000/categories/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'

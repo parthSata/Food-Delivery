@@ -1,15 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/Login/Logo1.png";
-import Online from "../assets/Login/OnlineShoping.png";
-import Phone from "../assets/Login/Phone.png";
-import flag from "../assets/Login/Flag.png";
-import uk from "../assets/Login/uk.png";
-import us from "../assets/Login/us.png";
-import united from "../assets/Login/united.png";
-import uruguay from "../assets/Login/uruguay.png";
-import Customer from "../assets/Login/User.png";
-import Seller from "../assets/Login/Seller.png";
+import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller, } from './images'
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
 
@@ -168,9 +159,8 @@ function Login() {
                   fontFamily: "Bai Jamjuree",
                   boxShadow: " 2px 2px 25px 2px #DF201F80",
                 }}
-                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
-                  isValid ? "" : "cursor-not-allowed opacity-50"
-                }`}
+                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
+                  }`}
                 disabled={!isValid}
               >
                 LOGIN

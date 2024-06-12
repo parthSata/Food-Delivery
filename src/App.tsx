@@ -1,24 +1,7 @@
 import "./App.css";
-import Login from "./Components/Login";
-import Home from "./Components/Category/Home";
-import Verification from "./Components/Verification";
+import { AddRestaurants, Category, CouponAdd, CouponView, Coupons, Dashboard, Gallary, Orders, OurTeam, ProductAdd, ProductView, Products, Register, Restaurant, TeamAdd, Home, Verification, Login } from './Components/index'
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Register from "./Components/Register";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import Orders from "./Components/Orders/Orders";
-import Products from "./Components/Products/Products";
-import ProductAdd from "./Components/Products/ProductAdd";
-import Category from "./Components/Category/Category";
-import ProductView from "./Components/Products/ProductView";
-import Coupons from "./Components/Coupons/Coupons";
-import CouponAdd from './Components/Coupons/CouponAdd'
-import CouponView from "./Components/Coupons/CouponView";
-import Restaurant from "./Components/Restaurant/Restaurant";
-import AddRestaurants from "./Components/Restaurant/AddRestaurants";
-import Gallary from "./Components/Restaurant/Gallary";
-import OurTeam from "./Components/Team/OurTeam";
-import TeamAdd from "./Components/Team/TeamAdd";
 
 function App() {
   return (

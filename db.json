@@ -15,6 +15,14 @@
       "numberOfProducts": "288",
       "status": "Out of Stock",
       "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1717994487/Categories/Vegetable_Burger_ya47bs.png"
+    },
+    {
+      "id": "9ec971ad-1953-4f5d-8992-a587604f589c",
+      "categoryName": "Vernon Day",
+      "description": "Omnis laudantium ut",
+      "numberOfProducts": "153",
+      "status": "In Stock",
+      "imageUrl": "https://res.cloudinary.com/dwxhjomtn/image/upload/v1718198658/Categories/Pizza_gow7dp.png"
     }
   ],
   "products": [

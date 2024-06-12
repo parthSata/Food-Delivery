@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import search from "../../assets/HomePage/search.png";
 import AddCategory from "./AddCategory";
-import Pizza from "../../assets/HomePage/Pizza.png";
+import { search, Pizza } from "../images";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
 
@@ -237,17 +236,17 @@ function Home(): JSX.Element {
                         <i
                           className="fa-solid fa-trash fa-xl cursor-pointer "
                           onClick={() => handleDelete(item.id)}
-                          // Delete Category
+                        // Delete Category
                         ></i>
                         <i
                           className="fa-solid fa-pen fa-xl cursor-pointer "
                           onClick={() => handleUpdate(item.id)}
-                          // Update Category
+                        // Update Category
                         ></i>{" "}
                         <i
                           className="fa-solid fa-eye fa-xl cursor-pointer"
                           onClick={() => handleViewCategories(item.id)}
-                          // View  Category Categories
+                        // View  Category Categories
                         ></i>
                       </td>
                     </tr>
@@ -281,9 +280,8 @@ function Home(): JSX.Element {
                   <a
                     href="#"
                     onClick={() => handlePageChange(index + 1)}
-                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
-                      currentPage === index + 1 ? "font-bold" : ""
-                    }`}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                      }`}
                   >
                     {index + 1}
                   </a>
