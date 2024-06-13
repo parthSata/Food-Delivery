@@ -130,7 +130,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
     const newCoupon: Team = {
       ...members,
-
+      images: [imageUrl],
       id: uuidv4(),
     };
 
@@ -196,8 +196,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     }
   };
   return (
-    <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
-      <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
+    <div className="fixed  inset-0 flex  items-center px-4 justify-center bg-black bg-opacity-70">
+      <div className="bg-white w-[400px] h-[350px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
         <button
           className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
           onClick={onClose}

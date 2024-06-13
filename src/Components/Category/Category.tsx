@@ -16,6 +16,7 @@ function Category() {
     imageUrl: "",
   });
   const [products, setProducts] = useState<Product[]>([]);
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories"
 
   useEffect(() => {
     if (CategoryId) {
@@ -25,7 +26,7 @@ function Category() {
 
   const fetchCategoryData = async (id: any) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/categories/${id}`);
+      const response = await fetch(`${apiUrl}/${id}`);
       if (response.ok) {
         const data = await response.json();
         setCategoryData(data);

@@ -102,8 +102,7 @@ function Restaurant() {
       <div className="">
         <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
           {restarants.map((item) => (
-            <div
-              className="sm:w-1/4 mb-10 font-semibold"
+            <div className="sm:w-1/4 mb-10 font-semibold"
               key={item.id}
               style={{
                 fontFamily: "Bai Jamjuree",
@@ -113,11 +112,11 @@ function Restaurant() {
               <img
                 src={item.images[0] || Noodles}
                 alt=""
-                className="h-[190px] w-full rounded-2xl"
+                className="h-[190px] w-full max-w-[340px] rounded-2xl"
               />
-              <div className="flex flex-col gap-1 p-3">
+              <div className="flex flex-col gap-1  p-3">
                 <span className="self-start">{item.restaurantName}</span>
-                <span className="flex flex-row gap-[120px]">
+                <span className="flex flex-row flex-wrap justify-between">
                   <div className="flex gap-2">
                     <img src={Star} alt="" className="h-6" />
                     <span className="text-lg">{item.ratings}</span>

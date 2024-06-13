@@ -10,6 +10,7 @@ function AllProducts() {
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/products"
 
   const handleAddProduct = (id: any) => {
     navigate(`/productsAdd/${id}`);
@@ -20,7 +21,7 @@ function AllProducts() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products`);
+      const response = await fetch(`${apiUrl}`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);

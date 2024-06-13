@@ -55,24 +55,7 @@ function OurTeam() {
     <div>
       <DashboardHeader />
 
-      <div className="mt-8">
-        <div
-          className="flex justify-end font-semibold"
-          style={{ fontFamily: "Bai Jamjuree" }}
-        >
-          <div
-            className="border-dashed p-2 flex justify-center border-2 items-center gap-4 border-[2px solid #161A1D]  h-14 w-36 "
-            onClick={openDialog}
-          >
-            <button className="bg-[#DF201F] h-10 w-10 rounded-full">
-              <i
-                className="fa-solid fa-plus fa-xl"
-                style={{ color: "#e8eaed" }}
-              ></i>
-            </button>
-            <span className="">Add New</span>
-          </div>
-        </div>
+      <div className="mt-14">
         <div className="flex flex-wrap gap-16 mt-6 justify-center">
           {member.map((item) => (
             <div
@@ -80,7 +63,7 @@ function OurTeam() {
               key={item.id}
             >
               <div className="w-full flex justify-center ">
-                <div className="absolute -top-10">
+                <div className="absolute -top-10 ">
                   <img
                     src={item.images[0] || EmployeImg}
                     alt="No Image Found"
@@ -127,6 +110,27 @@ function OurTeam() {
               </div>
             </div>
           ))}
+        </div>
+        <div className=" sm:w-1/5 w-full mb-10 ">
+          <div
+            className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full "
+            style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}
+          >
+            <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
+              <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
+                <button
+                  className="flex self-center"
+                  onClick={openDialog}
+                >
+                  <i
+                    className="fa-duotone fa-plus fa-2xl "
+                    style={{ color: "#e8eaed" }}
+                  ></i>
+                </button>
+              </div>
+              <p className="">Add New</p>
+            </div>
+          </div>
         </div>
 
         {isDialogOpen && (

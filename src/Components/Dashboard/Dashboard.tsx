@@ -24,8 +24,8 @@ function Dashboard() {
   };
   return (
     <>
-      <div className="h-full w-full">
-        <DashboardHeader />
+      <DashboardHeader />
+      <div className="h-full w-full px-10">
         {/* {dashboardData && ( */}
         <div
           className="flex justify-between  mt-8 flex-wrap text-lg"

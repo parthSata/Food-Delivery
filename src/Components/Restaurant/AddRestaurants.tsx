@@ -134,6 +134,7 @@ function AddRestaurants() {
 
     const newRestaurant: Restaurant = {
       ...restaurant,
+
       id: uuidv4(),
     };
 
@@ -147,7 +148,7 @@ function AddRestaurants() {
       });
       const result = await response.json();
       toast.success("Restaurant Added", result);
-    } catch (error) {}
+    } catch (error) { }
     navigate(`/restaurants`);
     setRestaurant({
       id: "",
@@ -233,13 +234,17 @@ function AddRestaurants() {
         const data = await response.json();
         setRestaurant(data);
         setRestaurantImages(data.images || []);
+        if (data.images && data.images.length > 0) {
+          setPreviewImage(data.images[0]);
+        }
       }
-    } catch (error) {}
+    } catch (error) { }
   };
+
   return (
     <div>
       <DashboardHeader />
-      <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
+      <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row px-10">
         {/* Upload Restaurant Image */}
         <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
           <div className="flex  flex-wrap">
@@ -250,11 +255,10 @@ function AddRestaurants() {
               {[0].map((index) => (
                 <div
                   key={index}
-                  className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${
-                    restaurantImages[index]
-                      ? "border-[#DF201F]"
-                      : "border-[#161A1D]"
-                  }`}
+                  className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${restaurantImages[index]
+                    ? "border-[#DF201F]"
+                    : "border-[#161A1D]"
+                    }`}
                 >
                   {restaurantImages[index] ? (
                     <div
@@ -264,7 +268,7 @@ function AddRestaurants() {
                       <img
                         src={restaurantImages[index]}
                         alt={`Preview ${index}`}
-                        className="h-auto w-auto object-cover"
+                        className="h-auto w-auto object-cover "
                       />
                       <button
                         type="button"
@@ -365,9 +369,8 @@ function AddRestaurants() {
                   />
                   {errors.restaurantName && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.restaurantName ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.restaurantName ? "" : "hidden"
+                        }}`}
                     >
                       {errors.restaurantName}
                     </span>
@@ -387,9 +390,8 @@ function AddRestaurants() {
                   />
                   {errors.address && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.address ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.address ? "" : "hidden"
+                        }}`}
                     >
                       {errors.address}
                     </span>
@@ -409,9 +411,8 @@ function AddRestaurants() {
                   />
                   {errors.latitude && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.latitude ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.latitude ? "" : "hidden"
+                        }}`}
                     >
                       {errors.latitude}
                     </span>
@@ -431,9 +432,8 @@ function AddRestaurants() {
                   />
                   {errors.longitude && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.longitude ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.longitude ? "" : "hidden"
+                        }}`}
                     >
                       {errors.longitude}
                     </span>
@@ -454,9 +454,8 @@ function AddRestaurants() {
                   />
                   {errors.mobilenumber && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.mobilenumber ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.mobilenumber ? "" : "hidden"
+                        }}`}
                     >
                       {errors.mobilenumber}
                     </span>
@@ -488,11 +487,10 @@ function AddRestaurants() {
                         />
                         <label htmlFor={`star${rating}`}>
                           <svg
-                            className={`h-8 w-8 cursor-pointer ${
-                              Number(restaurant.ratings) >= rating
-                                ? "text-yellow-400"
-                                : "text-gray-400"
-                            }`}
+                            className={`h-8 w-8 cursor-pointer ${Number(restaurant.ratings) >= rating
+                              ? "text-yellow-400"
+                              : "text-gray-400"
+                              }`}
                             fill="currentColor"
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
@@ -505,9 +503,8 @@ function AddRestaurants() {
                   </div>
                   {errors.ratings && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.ratings ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.ratings ? "" : "hidden"
+                        }}`}
                     >
                       {errors.ratings}
                     </span>
@@ -528,9 +525,8 @@ function AddRestaurants() {
                   />
                   {errors.description && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        restaurant.description ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${restaurant.description ? "" : "hidden"
+                        }}`}
                     >
                       {errors.description}
                     </span>

@@ -32,13 +32,14 @@ function Home(): JSX.Element {
     indexOfFirstItem,
     indexOfLastItem
   );
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories"
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/categories`);
+      const response = await fetch(`${apiUrl}`);
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
@@ -58,7 +59,7 @@ function Home(): JSX.Element {
       if (newCategory.id) {
         // Update category
         response = await fetch(
-          `https://static-food-delivery-backend.vercel.app/categories/${newCategory.id}`,
+          `${apiUrl}/${newCategory.id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -85,7 +86,7 @@ function Home(): JSX.Element {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/categories/${id}`, {
+      const response = await fetch(`${apiUrl}/${id}`, {
         method: "DELETE",
       });
 
