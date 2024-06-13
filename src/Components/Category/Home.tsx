@@ -4,6 +4,7 @@ import AddCategory from "./AddCategory";
 import Pizza from "../../assets/HomePage/Pizza.png";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
+import Container from "../Container";
 
 export interface CategoriesData {
   id: string;
@@ -125,141 +126,130 @@ function Home(): JSX.Element {
   const closeAddCategoryDialog = () => setShowAddCategoryDialog(false);
 
   return (
-    <>
-      <DashboardHeader />
-
-      <div className="min-w-fit max-w-[1280px] mx-auto px-6">
-        {/* Header Started Here */}
-        {/* Header End Here */}
-
-        {/* Body Part Started */}
-        <div className="min-w-fit ">
-          <div
-            className="flex justify-between items-center mt-10 flex-wrap gap-2"
-            style={{ fontFamily: "Bai Jamjuree" }}
-          >
-            <div className="">
-              <span className="font-semibold  text-[#161A1D]">
-                Category List
-              </span>
-            </div>
-            <div className="flex ">
-              <div className="flex justify-evenly flex-wrap gap-4">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search.."
-                    disabled
-                    className="border-gray-400 border-[1px] p-4 text-[#A2A3A5] focus:border-none pr-12 hover:border-[1px solid #E7E7E9] h-10 rounded-full"
-                    onChange={(e) => setSearchInput(e.target.value)}
-                  />
-                  <img
-                    src={search}
-                    alt="Search"
-                    className="absolute right-4 top-3 w-[14px] h-[14px]"
-                  />
-                </div>
-                <div className="">
-                  <button
-                    type="button"
-                    className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
-                    style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
-                    onClick={openAddCategoryDialog}
-                  >
-                    Add New Category +
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* <Table /> */}
-
-          {/* table Start */}
-          <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
-              <table
-                className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
-                style={{
-                  fontFamily: "Bai Jamjuree",
-                  boxShadow: "2px 2px 30px 2px #FFF3E5",
-                  minWidth: "100%",
-                }}
-              >
-                <thead className="rounded-full bg-[#DF201F] ">
-                  <tr className="text-[#FFFFFF] font-semibold ">
-                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Category Name
-                    </th>
-                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Category Id
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Description
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Number of Products
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Status
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems?.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
-                    >
-                      <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
-                        <img
-                          src={item.imageUrl || Pizza}
-                          className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
-                          alt=""
-                        />
-                        {item.categoryName}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.id}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.description}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.numberOfProducts}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.status}
-                      </td>
-                      <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
-                        <i
-                          className="fa-solid fa-trash fa-xl cursor-pointer "
-                          onClick={() => handleDelete(item.id)}
-                          // Delete Category
-                        ></i>
-                        <i
-                          className="fa-solid fa-pen fa-xl cursor-pointer "
-                          onClick={() => handleUpdate(item.id)}
-                          // Update Category
-                        ></i>{" "}
-                        <i
-                          className="fa-solid fa-eye fa-xl cursor-pointer"
-                          onClick={() => handleViewCategories(item.id)}
-                          // View  Category Categories
-                        ></i>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {/* table End */}
+    <Container>
+      {/* Body Part Started */}
+      <div
+        className="flex justify-between items-center mt-10 flex-wrap gap-2"
+        style={{ fontFamily: "Bai Jamjuree" }}
+      >
+        <div className="">
+          <span className="font-semibold  text-[#161A1D]">Category List</span>
         </div>
-        {/* table End */}
+        <div className="flex ">
+          <div className="flex justify-evenly flex-wrap gap-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search.."
+                disabled
+                className="border-gray-400 border-[1px] p-4 text-[#A2A3A5] focus:border-none pr-12 hover:border-[1px solid #E7E7E9] h-10 rounded-full"
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <img
+                src={search}
+                alt="Search"
+                className="absolute right-4 top-3 w-[14px] h-[14px]"
+              />
+            </div>
+            <div className="">
+              <button
+                type="button"
+                className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
+                style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
+                onClick={openAddCategoryDialog}
+              >
+                Add New Category +
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* <Table /> */}
+
+      {/* table Start */}
+      <div className="flex flex-col relative ">
+        <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+          <table
+            className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+            style={{
+              fontFamily: "Bai Jamjuree",
+              boxShadow: "2px 2px 30px 2px #FFF3E5",
+              minWidth: "100%",
+            }}
+          >
+            <thead className="rounded-full bg-[#DF201F] ">
+              <tr className="text-[#FFFFFF] font-semibold ">
+                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Category Name
+                </th>
+                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Category Id
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Description
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Number of Products
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Status
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems?.map((item) => (
+                <tr
+                  key={item.id}
+                  className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
+                >
+                  <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
+                    <img
+                      src={item.imageUrl || Pizza}
+                      className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
+                      alt=""
+                    />
+                    {item.categoryName}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.id}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.description}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.numberOfProducts}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.status}
+                  </td>
+                  <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
+                    <i
+                      className="fa-solid fa-trash fa-xl cursor-pointer "
+                      onClick={() => handleDelete(item.id)}
+                      // Delete Category
+                    ></i>
+                    <i
+                      className="fa-solid fa-pen fa-xl cursor-pointer "
+                      onClick={() => handleUpdate(item.id)}
+                      // Update Category
+                    ></i>{" "}
+                    <i
+                      className="fa-solid fa-eye fa-xl cursor-pointer"
+                      onClick={() => handleViewCategories(item.id)}
+                      // View  Category Categories
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {/* table End */}
+      {/* table End */}
       {/* Pagination */}
 
       {totalPages > 1 && (
@@ -349,7 +339,7 @@ function Home(): JSX.Element {
           </div>
         </div>
       )}
-    </>
+    </Container>
   );
 }
 
