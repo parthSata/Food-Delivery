@@ -1,8 +1,4 @@
-import Cart from "../../assets/Dashboard/Cart.png";
-import Revenue from "../../assets/Dashboard/Revenue.png";
-import Customer from "../../assets/Dashboard/Customer.png";
-import TotalShops from "../../assets/Dashboard/TotalShops.png";
-import Pizza from "../../assets/HomePage/Pizza.png";
+import { Cart, Revenue, Customer, TotalShops, Pizza } from "../images";
 // import LineChart from '../Chart/Line'
 import DashboardHeader from "./Menu";
 import { useEffect, useState } from "react";

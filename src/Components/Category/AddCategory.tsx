@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 import { CategoriesData } from "./Home";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
-  id: string;
+  id: string
 }
 
 const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:5000/categories";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories";
 
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
@@ -26,6 +26,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const [errors, setErrors] = useState<Partial<CategoriesData>>({});
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+
 
   useEffect(() => {
     if (id) {
@@ -52,12 +53,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     e.preventDefault();
 
     const newErrors: Partial<CategoriesData> = {};
-    if (isFieldEmpty(category.categoryName))
-      newErrors.categoryName = "Category Name is required";
-    if (isFieldEmpty(category.description))
-      newErrors.description = "Description is required";
-    if (isFieldEmpty(category.numberOfProducts))
-      newErrors.numberOfProducts = "Number Of Products is required";
+    if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
+    if (isFieldEmpty(category.description)) newErrors.description = "Description is required";
+    if (isFieldEmpty(category.numberOfProducts)) newErrors.numberOfProducts = "Number Of Products is required";
     if (isFieldEmpty(category.status)) newErrors.status = "Status is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -74,20 +72,20 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const updatedCategory = { ...category, imageUrl };
 
     try {
-      const response = await fetch(`http://localhost:5000/categories/${id}`, {
-        method: "PUT",
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/categories/${id}`, {
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updatedCategory),
+        body: JSON.stringify(updatedCategory)
       });
 
       if (response.status === 200) {
         // @ts-ignore
         const data = await response.json();
-        toast.success("Category successfully updated");
+        toast.success('Category successfully updated');
       } else {
-        toast.warn("Failed to update!");
+        toast.warn('Failed to update!');
       }
     } catch (error) {
       toast.error("Error updating category.");
@@ -154,17 +152,14 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     resetForm();
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const updatedCategory: any = { ...category };
-    updatedCategory[name] = value;
+    const updatedCategory: any = { ...category }
+    updatedCategory[name] = value
 
-    setCategory(updatedCategory);
+    setCategory(updatedCategory)
   };
+
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -188,27 +183,26 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
       numberOfProducts: "",
       status: "In Stock",
       id: "",
-      imageUrl: "",
+      imageUrl: ""
     });
     setImagePreview(null);
     setImageFile(null);
   };
+
+
 
   const uploadImageToCloudinary = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", presetKey);
     formData.append("cloud_name", cloudName);
-    formData.append("folder", "Categories");
+    formData.append("folder", "Categories")
 
     try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: formData,
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -244,11 +238,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
           <div className="">
             <div className="flex justify-center items-starts flex-col ">
               {imagePreview ? (
-                <img
-                  src={imagePreview}
-                  alt="Selected"
-                  className="w-full h-64 object-cover rounded-lg"
-                />
+                <img src={imagePreview} alt="Selected" className="w-full h-64 object-cover rounded-lg" />
               ) : (
                 <input
                   type="file"
@@ -280,9 +270,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
                 />
                 {errors.categoryName && (
                   <span
-                    className={`text-red-600 text-sm ${
-                      category.categoryName ? "" : "hidden"
-                    }}`}
+                    className={`text-red-600 text-sm ${category.categoryName ? "" : "hidden"
+                      }}`}
                   >
                     {errors.categoryName}
                   </span>
@@ -324,9 +313,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
                   value={category.numberOfProducts}
                 />
                 {errors.numberOfProducts && (
-                  <span className="text-red-600 text-sm">
-                    {errors.numberOfProducts}
-                  </span>
+                  <span className="text-red-600 text-sm">{errors.numberOfProducts}</span>
                 )}
               </div>
 
@@ -338,9 +325,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
                   name="status"
                   value={category.status}
                   className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
-                  onChange={(e) => handleChange(e)}
-                >
-                  <option className="" value="In Stock">
+                  onChange={(e) => handleChange(e)}                >
+                  <option className="" value="In Stock" >
                     In Stock
                   </option>
                   <option className="" value="Out of Stock">
@@ -351,6 +337,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
               {errors.status && (
                 <span className="text-red-600 text-sm">{errors.status}</span>
               )}
+
             </div>
           </form>
         </div>

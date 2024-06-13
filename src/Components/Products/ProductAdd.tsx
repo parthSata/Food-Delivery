@@ -26,7 +26,7 @@ const ProductAdd: React.FC = () => {
   const Categoryid = location.state?.CategoryId;
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "http://localhost:5000/products";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/products";
   const [errors, setErrors] = useState<Partial<Product>>({});
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -76,7 +76,7 @@ const ProductAdd: React.FC = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/products/${updateId}`,
+        `https://static-food-delivery-backend.vercel.app/products/${updateId}`,
         {
           method: "PUT",
           headers: {
@@ -116,7 +116,7 @@ const ProductAdd: React.FC = () => {
           setPreviewImage(data.images[0]);
         }
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const resetform = () => {
@@ -255,8 +255,8 @@ const ProductAdd: React.FC = () => {
       });
       const result = await response.json();
       toast.success("Product Added", result);
-    } catch (error) {}
-    navigate(`/category/${CategoryId}`);
+      CategoryId ? navigate(`/category/${CategoryId}`) : navigate('/products')
+    } catch (error) { }
     resetform();
   };
 
@@ -264,7 +264,7 @@ const ProductAdd: React.FC = () => {
     try {
       const publicId = extractPublicIdFromUrl(imageUrl);
       const response = await fetch(
-        "http://localhost:5000/products/delete-image",
+        "https://static-food-delivery-backend.vercel.app/products/delete-image",
         {
           method: "POST",
           headers: {
@@ -315,11 +315,10 @@ const ProductAdd: React.FC = () => {
                 {[0, 1, 2, 3].map((index) => (
                   <div
                     key={index}
-                    className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${
-                      productImages[index]
-                        ? "border-[#DF201F]"
-                        : "border-[#161A1D]"
-                    }`}
+                    className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
+                      ? "border-[#DF201F]"
+                      : "border-[#161A1D]"
+                      }`}
                   >
                     {productImages[index] ? (
                       <div
@@ -430,9 +429,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.name && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.name ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.name ? "" : "hidden"
+                          }}`}
                       >
                         {errors.name}
                       </span>
@@ -452,9 +450,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.price && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.price ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.price ? "" : "hidden"
+                          }}`}
                       >
                         {errors.price}
                       </span>
@@ -474,9 +471,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.discountPrice && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.discountPrice ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
+                          }}`}
                       >
                         {errors.discountPrice}
                       </span>
@@ -496,9 +492,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.weight && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.weight ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
+                          }}`}
                       >
                         {errors.weight}
                       </span>
@@ -518,9 +513,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.unit && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.unit ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
+                          }}`}
                       >
                         {errors.unit}
                       </span>
@@ -540,9 +534,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.packagingCharges && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.packagingCharges ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
+                          }}`}
                       >
                         {errors.packagingCharges}
                       </span>
@@ -562,9 +555,8 @@ const ProductAdd: React.FC = () => {
                     />
                     {errors.description && (
                       <span
-                        className={`text-red-600 text-sm ${
-                          product.description ? "" : "hidden"
-                        }}`}
+                        className={`text-red-600 text-sm ${product.description ? "" : "hidden"
+                          }}`}
                       >
                         {errors.description}
                       </span>

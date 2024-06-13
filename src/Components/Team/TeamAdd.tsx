@@ -17,7 +17,7 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
-  const apiUrl = "http://localhost:5000/team";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/team";
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
         const data = await response.json();
         setMembers(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleUpdateMember = async (e: React.FormEvent) => {
@@ -122,7 +122,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
       return;
     }
     setErrors({});
-
+    // @ts-ignore
     let imageUrl = "";
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
@@ -130,7 +130,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
     const newCoupon: Team = {
       ...members,
-
+      images: [imageUrl],
       id: uuidv4(),
     };
 
@@ -144,7 +144,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
       });
       const result = await response.json();
       toast.success("Member Added", result);
-    } catch (error) {}
+    } catch (error) { }
     navigate(`/team`);
     setMembers({
       id: "",
@@ -196,8 +196,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     }
   };
   return (
-    <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
-      <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
+    <div className="fixed  inset-0 flex  items-center px-4 justify-center bg-black bg-opacity-70">
+      <div className="bg-white w-[400px] h-[350px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
         <button
           className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
           onClick={onClose}
@@ -255,9 +255,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.name && (
               <span
-                className={`text-red-600 text-sm ${
-                  members.name ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${members.name ? "" : "hidden"
+                  }}`}
               >
                 {errors.name}
               </span>
@@ -275,9 +274,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.position && (
               <span
-                className={`text-red-600 text-sm ${
-                  members.position ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${members.position ? "" : "hidden"
+                  }}`}
               >
                 {errors.position}
               </span>

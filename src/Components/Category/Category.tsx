@@ -16,6 +16,7 @@ function Category() {
     imageUrl: "",
   });
   const [products, setProducts] = useState<Product[]>([]);
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories"
 
   useEffect(() => {
     if (CategoryId) {
@@ -25,7 +26,7 @@ function Category() {
 
   const fetchCategoryData = async (id: any) => {
     try {
-      const response = await fetch(`http://localhost:5000/categories/${id}`);
+      const response = await fetch(`${apiUrl}/${id}`);
       if (response.ok) {
         const data = await response.json();
         setCategoryData(data);
@@ -47,7 +48,7 @@ function Category() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/products`);
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products`);
       if (response.ok) {
         const data = await response.json();
         const filteredProducts = data.filter(
@@ -66,7 +67,7 @@ function Category() {
 
   const handleDeleteProduct = async (id: any) => {
     try {
-      const response = await fetch(`http://localhost:5000/products/${id}`, {
+      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {

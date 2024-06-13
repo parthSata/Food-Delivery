@@ -1,7 +1,5 @@
 import { useState } from "react";
-import Notification from "../assets/HomePage/Notification.png";
-import Profile from "../assets/HomePage/Profile.png";
-import Logo from "../assets/Login/Logo1.png";
+import { Notification, Profile, Logo } from "../images";
 import { Link, useLocation } from "react-router-dom";
 import SideMenu from "./SideMenu";
 

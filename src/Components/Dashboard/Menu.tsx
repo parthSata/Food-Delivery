@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Notification from "../../assets/HomePage/Notification.png";
-import Profile from "../../assets/HomePage/Profile.png";
-import Logo from "../../assets/Login/Logo1.png";
-import menu from "../../assets/Dashboard/menu.png";
+import { Notification, Profile, Logo, menu } from "../images";
 import Sidebar from "./Sidebar";
 
 function DashboardHeader() {
@@ -34,81 +31,72 @@ function DashboardHeader() {
           </Link>
         </div>
         <div
-          className={`md:flex item-center   text-[14px]  ${
-            showSideMenu ? "" : "hidden"
-          }`}
+          className={`md:flex item-center   text-[14px]  ${showSideMenu ? "" : "hidden"
+            }`}
           style={{ fontFamily: "Bai Jamjuree" }}
         >
           <ul className={`flex items-center   font-semibold text-[16px] gap-8`}>
             <li
-              className={`py-6  items-center hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/dashboard"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6  items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li
-              className={` py-6 items-center hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={` py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/">Category</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/orders"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/orders"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/orders">Orders</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/products"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/products"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/products">Products</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/gallary"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/gallary"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/gallary">Gallary</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/coupons"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/coupons"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/coupons">Coupons</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/restaurants"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurants"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/restaurants">Restaurants</Link>
             </li>
             <li
-              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/team"
-                  ? "text-red-500  border-b-2 border-[#DF201F]"
-                  : ""
-              } `}
+              className={`py-6 hover:text-red-500 hover:underline-offset-8 ${pathname === "/team"
+                ? "text-red-500  border-b-2 border-[#DF201F]"
+                : ""
+                } `}
             >
               <Link to="/team">Our Team</Link>
             </li>

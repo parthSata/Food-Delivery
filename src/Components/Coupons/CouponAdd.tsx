@@ -19,7 +19,7 @@ interface AddProps {
 }
 
 const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
-  const apiUrl = "http://localhost:5000/coupons";
+  const apiUrl = "https://static-food-delivery-backend.vercel.app/coupons";
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});
@@ -89,7 +89,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/coupons/${updateId}`,
+        `https://static-food-delivery-backend.vercel.app/coupons/${updateId}`,
         {
           method: "PUT",
           headers: {
