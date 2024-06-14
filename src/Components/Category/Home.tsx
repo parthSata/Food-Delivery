@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import AddCategory from "./AddCategory";
 import { search, Pizza } from "../Config/images";
-import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import apiUrl from "../Config/apiUrl";
-=======
 import Container from "../Container";
->>>>>>> 32eaf17bc21223c17ab96613174d42cda383a180
+import apiUrl from "../Config/apiUrl";
 
 export interface CategoriesData {
   id: string;
@@ -169,181 +165,184 @@ function Home(): JSX.Element {
       </div>
       {/* <Table /> */}
 
-          {/* table Start */}
-          <div className="flex flex-col relative ">
-            <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
-              <table
-                className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
-                style={{
-                  fontFamily: "Bai Jamjuree",
-                  boxShadow: "2px 2px 30px 2px #FFF3E5",
-                  minWidth: "100%",
-                }}
-              >
-                <thead className="rounded-full bg-[#DF201F] ">
-                  <tr className="text-[#FFFFFF] font-semibold ">
-                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Category Name
-                    </th>
-                    <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Category Id
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Description
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Number of Products
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Status
-                    </th>
-                    <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems?.map((item) => (
-                    <tr
-                      key={item.id}
-                      className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
-                    >
-                      <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
-                        <img
-                          src={item.imageUrl || Pizza}
-                          className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
-                          alt=""
-                        />
-                        {item.categoryName}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.id}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.description}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.numberOfProducts}
-                      </td>
-                      <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                        {item.status}
-                      </td>
-                      <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
-                        <i
-                          className="fa-solid fa-trash fa-xl cursor-pointer "
-                          onClick={() => handleDelete(item.id)}
-                        // Delete Category
-                        ></i>
-                        <i
-                          className="fa-solid fa-pen fa-xl cursor-pointer "
-                          onClick={() => handleUpdate(item.id)}
-                        // Update Category
-                        ></i>{" "}
-                        <i
-                          className="fa-solid fa-eye fa-xl cursor-pointer"
-                          onClick={() => handleViewCategories(item.id)}
-                        // View  Category Categories
-                        ></i>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {/* table End */}
+      {/* table Start */}
+      <div className="flex flex-col relative ">
+        <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+          <table
+            className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+            style={{
+              fontFamily: "Bai Jamjuree",
+              boxShadow: "2px 2px 30px 2px #FFF3E5",
+              minWidth: "100%",
+            }}
+          >
+            <thead className="rounded-full bg-[#DF201F] ">
+              <tr className="text-[#FFFFFF] font-semibold ">
+                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Category Name
+                </th>
+                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Category Id
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Description
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Number of Products
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Status
+                </th>
+                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentItems?.map((item) => (
+                <tr
+                  key={item.id}
+                  className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
+                >
+                  <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
+                    <img
+                      src={item.imageUrl || Pizza}
+                      className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
+                      alt=""
+                    />
+                    {item.categoryName}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.id}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.description}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.numberOfProducts}
+                  </td>
+                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                    {item.status}
+                  </td>
+                  <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
+                    <i
+                      className="fa-solid fa-trash fa-xl cursor-pointer "
+                      onClick={() => handleDelete(item.id)}
+                    // Delete Category
+                    ></i>
+                    <i
+                      className="fa-solid fa-pen fa-xl cursor-pointer "
+                      onClick={() => handleUpdate(item.id)}
+                    // Update Category
+                    ></i>{" "}
+                    <i
+                      className="fa-solid fa-eye fa-xl cursor-pointer"
+                      onClick={() => handleViewCategories(item.id)}
+                    // View  Category Categories
+                    ></i>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-        {/* table End */}
       </div>
+      {/* table End */}
+
+      {/* table End */}
       {/* Pagination */}
 
-      {totalPages > 1 && (
-        <div className="flex justify-end">
-          <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
-            <button
-              className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
-              onClick={() => handlePreviousPage()}
-              disabled={currentPage === 1}
-            >
-              <i
-                className="fa-solid fa-angle-left"
-                style={{ color: "#8f9194" }}
-              ></i>
-            </button>
-            <ul className="flex items-end justify-around w-[80px] top-[]">
-              {[...Array(totalPages)].map((_, index) => (
-                <li key={index} className="page flex flex-grow">
-                  <a
-                    href="#"
-                    onClick={() => handlePageChange(index + 1)}
-                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
-                      }`}
-                  >
-                    {index + 1}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <button
-              className="ml-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
-              onClick={() => handleNextPage()}
-              disabled={currentPage === totalPages}
-            >
-              <i
-                className="fa-solid fa-angle-right"
-                style={{ color: "#8f9194" }}
-              ></i>
-            </button>
+      {
+        totalPages > 1 && (
+          <div className="flex justify-end">
+            <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
+              <button
+                className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
+                onClick={() => handlePreviousPage()}
+                disabled={currentPage === 1}
+              >
+                <i
+                  className="fa-solid fa-angle-left"
+                  style={{ color: "#8f9194" }}
+                ></i>
+              </button>
+              <ul className="flex items-end justify-around w-[80px] top-[]">
+                {[...Array(totalPages)].map((_, index) => (
+                  <li key={index} className="page flex flex-grow">
+                    <a
+                      href="#"
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                        }`}
+                    >
+                      {index + 1}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <button
+                className="ml-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
+                onClick={() => handleNextPage()}
+                disabled={currentPage === totalPages}
+              >
+                <i
+                  className="fa-solid fa-angle-right"
+                  style={{ color: "#8f9194" }}
+                ></i>
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       {/* Pagination */}
       {/* Body Ended Started */}
-      {showAddCategoryDialog && (
-        <div className="fixed rounded-[10px] z-10 inset-0 overflow-x-hidden bg-red">
-          <div className="flex items-center justify-center h-full ">
-            <div
-              className="fixed inset-0 transition-opacity "
-              aria-hidden="true"
-            >
-              <div className="absolute inset-0 bg-[#161A1D] opacity-75"></div>
-            </div>
-
-            <div className="bg-white rounded-lg shadow-xl transform transition-all p-6 relative m-8">
-              <button
-                type="button"
-                className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute top-[-10px] right-[-10px]
-                   mt-0`}
-                onClick={closeAddCategoryDialog}
+      {
+        showAddCategoryDialog && (
+          <div className="fixed rounded-[10px] z-10 inset-0 overflow-x-hidden bg-red">
+            <div className="flex items-center justify-center h-full ">
+              <div
+                className="fixed inset-0 transition-opacity "
+                aria-hidden="true"
               >
-                <span className="sr-only ">Close</span>
-                <svg
-                  className="h-[26px] w-[26px] p-[4px]"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
+                <div className="absolute inset-0 bg-[#161A1D] opacity-75"></div>
+              </div>
 
-              <AddCategory
-                id={updateCategoryId}
-                onAddCategory={handleAddOrUpdateCategory}
-              />
+              <div className="bg-white rounded-lg shadow-xl transform transition-all p-6 relative m-8">
+                <button
+                  type="button"
+                  className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute top-[-10px] right-[-10px]
+                   mt-0`}
+                  onClick={closeAddCategoryDialog}
+                >
+                  <span className="sr-only ">Close</span>
+                  <svg
+                    className="h-[26px] w-[26px] p-[4px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+
+                <AddCategory
+                  id={updateCategoryId}
+                  onAddCategory={handleAddOrUpdateCategory}
+                />
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </Container>
+        )
+      }
+    </Container >
   );
 }
 
