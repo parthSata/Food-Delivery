@@ -197,7 +197,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
   };
   return (
     <div className="fixed  inset-0 flex  items-center px-4 justify-center bg-black bg-opacity-70">
-      <div className="bg-white w-[400px] h-[350px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
+      <div className="bg-white w-[400px] h-[420px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
         <button
           className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
           onClick={onClose}
@@ -234,14 +234,14 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
                 onChange={handleImageChange}
               />
             )}
-            {/* {errors.offerCode && (
-                            <span
-                                className={`text-red-600 text-sm ${members.offerCode ? "" : "hidden"
-                                    }}`}
-                            >
-                                {errors.offerCode}
-                            </span>
-                        )} */}
+            {errors.images && (
+              <span
+                className={`text-red-600 text-sm ${members.images ? "" : "hidden"
+                  }}`}
+              >
+                {errors.images}
+              </span>
+            )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
             <label className="self-start">Name</label>

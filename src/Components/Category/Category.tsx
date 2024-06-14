@@ -72,9 +72,10 @@ function Category() {
 
   const handleDeleteProduct = async (id: any) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products/${id}`, {
+      const response = await fetch(`${apiUrl}/products/${id}`, {
         method: "DELETE",
       });
+      console.log("🚀 ~ handleDeleteProduct ~ response:", response)
       if (response.ok) {
         fetchProducts();
       } else {

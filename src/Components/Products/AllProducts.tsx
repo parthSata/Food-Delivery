@@ -20,7 +20,7 @@ function AllProducts() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${apiUrl}`);
+      const response = await fetch(`${apiUrl}/products`);
       if (response.ok) {
         const data = await response.json();
         setProducts(data);

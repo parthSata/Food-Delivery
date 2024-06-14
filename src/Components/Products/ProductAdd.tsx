@@ -76,7 +76,7 @@ const ProductAdd: React.FC = () => {
 
     try {
       const response = await fetch(
-        `https://static-food-delivery-backend.vercel.app/products/${updateId}`,
+        `${apiUrl}/products/${updateId}`,
         {
           method: "PUT",
           headers: {
@@ -107,7 +107,7 @@ const ProductAdd: React.FC = () => {
 
   const fetchProductData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`);
+      const response = await fetch(`${apiUrl}/products/${updateId}`);
       if (response.ok) {
         const data = await response.json();
         setProduct(data);
@@ -246,7 +246,7 @@ const ProductAdd: React.FC = () => {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -264,7 +264,7 @@ const ProductAdd: React.FC = () => {
     try {
       const publicId = extractPublicIdFromUrl(imageUrl);
       const response = await fetch(
-        "https://static-food-delivery-backend.vercel.app/products/delete-image",
+        `${apiUrl}/products/delete-image`,
         {
           method: "POST",
           headers: {
@@ -304,297 +304,297 @@ const ProductAdd: React.FC = () => {
     <>
       <div className="">
         <Container >
-        <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
-          {/* Upload Product Image */}
-          <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
-            <div className="flex  flex-wrap">
+          <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
+            {/* Upload Product Image */}
+            <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
+              <div className="flex  flex-wrap">
+                <div
+                  className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold"
+                  style={{ fontFamily: "Bai Jamjuree" }}
+                >
+                  {[0, 1, 2, 3].map((index) => (
+                    <div
+                      key={index}
+                      className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
+                        ? "border-[#DF201F]"
+                        : "border-[#161A1D]"
+                        }`}
+                    >
+                      {productImages[index] ? (
+                        <div
+                          className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden cursor-pointer"
+                          onClick={() => setPreviewImage(productImages[index])}
+                        >
+                          <img
+                            src={productImages[index]}
+                            alt={`Preview ${index}`}
+                            className="h-auto w-auto object-cover"
+                          />
+                          <button
+                            type="button"
+                            className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onCloseDelete(productImages[index], index);
+                            }}
+                          >
+                            <span className="sr-only ">Close</span>
+                            <svg
+                              className="h-[26px] w-[26px] p-[4px]"
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              aria-hidden="true"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M6 18L18 6M6 6l12 12"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
+                            <label className="flex">
+                              <span className="flex self-center cursor-pointer">
+                                <i
+                                  className="fa-solid fa-plus fa-2xl"
+                                  style={{ color: "#e8eaed" }}
+                                ></i>
+                              </span>
+                              <input
+                                type="file"
+                                onChange={(e) => handleImageUpload(e, index)}
+                                style={{ display: "none" }}
+                              />
+                            </label>
+                          </div>
+                          <p>Upload New</p>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* Preview Image */}
               <div
-                className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold"
+                className="flex items-center w-full order-1"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                {[0, 1, 2, 3].map((index) => (
-                  <div
-                    key={index}
-                    className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
-                      ? "border-[#DF201F]"
-                      : "border-[#161A1D]"
-                      }`}
-                  >
-                    {productImages[index] ? (
-                      <div
-                        className="relative h-full w-full flex justify-center items-center rounded-[15px] overflow-hidden cursor-pointer"
-                        onClick={() => setPreviewImage(productImages[index])}
-                      >
-                        <img
-                          src={productImages[index]}
-                          alt={`Preview ${index}`}
-                          className="h-auto w-auto object-cover"
-                        />
-                        <button
-                          type="button"
-                          className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onCloseDelete(productImages[index], index);
-                          }}
-                        >
-                          <span className="sr-only ">Close</span>
-                          <svg
-                            className="h-[26px] w-[26px] p-[4px]"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
-                        </button>
-                      </div>
+                <div
+                  className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]"
+                  style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}
+                >
+                  <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
+                    {previewImage ? (
+                      <img
+                        src={previewImage}
+                        alt="Preview"
+                        className="h-[250px]  object-cover"
+                      />
                     ) : (
-                      <>
-                        <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
-                          <label className="flex">
-                            <span className="flex self-center cursor-pointer">
-                              <i
-                                className="fa-solid fa-plus fa-2xl"
-                                style={{ color: "#e8eaed" }}
-                              ></i>
-                            </span>
-                            <input
-                              type="file"
-                              onChange={(e) => handleImageUpload(e, index)}
-                              style={{ display: "none" }}
-                            />
-                          </label>
-                        </div>
-                        <p>Upload New</p>
-                      </>
+                      <p>No image uploaded</p>
                     )}
+                    <p className="text-[#A4A1A1] text-[16px] font-semibold">
+                      Supported files PNG, JPEG, SVG, WEBP
+                    </p>
                   </div>
-                ))}
-              </div>
-            </div>
-            {/* Preview Image */}
-            <div
-              className="flex items-center w-full order-1"
-              style={{ fontFamily: "Bai Jamjuree" }}
-            >
-              <div
-                className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]"
-                style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}
-              >
-                <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
-                  {previewImage ? (
-                    <img
-                      src={previewImage}
-                      alt="Preview"
-                      className="h-[250px]  object-cover"
-                    />
-                  ) : (
-                    <p>No image uploaded</p>
-                  )}
-                  <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    Supported files PNG, JPEG, SVG, WEBP
-                  </p>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Form */}
-          <div className="w-full flex flex-row flex-wrap items-center">
-            <div className="flex   w-full ">
-              <form
-                className="w-full flex flex-wrap  justify-center font-semibold"
-                style={{ fontFamily: "Montserrat Alternates" }}
-              >
-                <div className="flex flex-wrap  mb-6 w-full">
-                  <div className="w-full px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Name
-                    </label>
-                    <input
-                      className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
-                      type="text"
-                      placeholder="Name"
-                      name="name"
-                      value={product.name}
-                      onChange={handleChange}
-                    />
-                    {errors.name && (
-                      <span
-                        className={`text-red-600 text-sm ${product.name ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.name}
-                      </span>
-                    )}
+            {/* Form */}
+            <div className="w-full flex flex-row flex-wrap items-center">
+              <div className="flex   w-full ">
+                <form
+                  className="w-full flex flex-wrap  justify-center font-semibold"
+                  style={{ fontFamily: "Montserrat Alternates" }}
+                >
+                  <div className="flex flex-wrap  mb-6 w-full">
+                    <div className="w-full px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Name
+                      </label>
+                      <input
+                        className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
+                        type="text"
+                        placeholder="Name"
+                        name="name"
+                        value={product.name}
+                        onChange={handleChange}
+                      />
+                      {errors.name && (
+                        <span
+                          className={`text-red-600 text-sm ${product.name ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.name}
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full  md:w-1/2 px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Price
+                      </label>
+                      <input
+                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        type="number"
+                        placeholder="0"
+                        name="price"
+                        value={product.price}
+                        onChange={handleChange}
+                      />
+                      {errors.price && (
+                        <span
+                          className={`text-red-600 text-sm ${product.price ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.price}
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full md:w-1/2 px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Discount Price
+                      </label>
+                      <input
+                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        type="number"
+                        placeholder="0"
+                        name="discountPrice"
+                        value={product.discountPrice}
+                        onChange={handleChange}
+                      />
+                      {errors.discountPrice && (
+                        <span
+                          className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.discountPrice}
+                        </span>
+                      )}
+                    </div>
+                    <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Weight
+                      </label>
+                      <input
+                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        type="number"
+                        placeholder="0"
+                        name="weight"
+                        value={product.weight}
+                        onChange={handleChange}
+                      />
+                      {errors.weight && (
+                        <span
+                          className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.weight}
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Unit
+                      </label>
+                      <input
+                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        type="text"
+                        placeholder="0"
+                        name="unit"
+                        value={product.unit}
+                        onChange={handleChange}
+                      />
+                      {errors.unit && (
+                        <span
+                          className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.unit}
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full   px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Packaging Charges
+                      </label>
+                      <input
+                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        type="number"
+                        placeholder="0"
+                        name="packagingCharges"
+                        value={product.packagingCharges}
+                        onChange={handleChange}
+                      />
+                      {errors.packagingCharges && (
+                        <span
+                          className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.packagingCharges}
+                        </span>
+                      )}
+                    </div>
+                    <div className="w-full px-3 mb-6">
+                      <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                        Description
+                      </label>
+                      <textarea
+                        className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none"
+                        placeholder="Type Here..."
+                        rows={5}
+                        name="description"
+                        value={product.description}
+                        onChange={handleChange}
+                      />
+                      {errors.description && (
+                        <span
+                          className={`text-red-600 text-sm ${product.description ? "" : "hidden"
+                            }}`}
+                        >
+                          {errors.description}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className="w-full  md:w-1/2 px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Price
-                    </label>
-                    <input
-                      className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                      type="number"
-                      placeholder="0"
-                      name="price"
-                      value={product.price}
-                      onChange={handleChange}
+                  <div className="flex w-full">
+                    <button
+                      className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                      style={{
+                        boxShadow: "2px 2px 20px 2px #DF201F66",
+                        fontFamily: "Bai Jamjuree",
+                      }}
+                      onClick={handleSubmit}
+                    >
+                      Add Product
+                    </button>
+                    <button
+                      className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                      style={{
+                        boxShadow: "2px 2px 20px 2px #DF201F66",
+                        fontFamily: "Bai Jamjuree",
+                      }}
+                      onClick={handleUpdate}
+                    >
+                      Update Product
+                    </button>
+                    <ToastContainer
+                      position="top-right"
+                      autoClose={1000}
+                      pauseOnFocusLoss={false}
+                      limit={1}
                     />
-                    {errors.price && (
-                      <span
-                        className={`text-red-600 text-sm ${product.price ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.price}
-                      </span>
-                    )}
                   </div>
-                  <div className="w-full md:w-1/2 px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Discount Price
-                    </label>
-                    <input
-                      className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                      type="number"
-                      placeholder="0"
-                      name="discountPrice"
-                      value={product.discountPrice}
-                      onChange={handleChange}
-                    />
-                    {errors.discountPrice && (
-                      <span
-                        className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.discountPrice}
-                      </span>
-                    )}
-                  </div>
-                  <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Weight
-                    </label>
-                    <input
-                      className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                      type="number"
-                      placeholder="0"
-                      name="weight"
-                      value={product.weight}
-                      onChange={handleChange}
-                    />
-                    {errors.weight && (
-                      <span
-                        className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.weight}
-                      </span>
-                    )}
-                  </div>
-                  <div className="w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Unit
-                    </label>
-                    <input
-                      className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                      type="text"
-                      placeholder="0"
-                      name="unit"
-                      value={product.unit}
-                      onChange={handleChange}
-                    />
-                    {errors.unit && (
-                      <span
-                        className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.unit}
-                      </span>
-                    )}
-                  </div>
-                  <div className="w-full   px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Packaging Charges
-                    </label>
-                    <input
-                      className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                      type="number"
-                      placeholder="0"
-                      name="packagingCharges"
-                      value={product.packagingCharges}
-                      onChange={handleChange}
-                    />
-                    {errors.packagingCharges && (
-                      <span
-                        className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.packagingCharges}
-                      </span>
-                    )}
-                  </div>
-                  <div className="w-full px-3 mb-6">
-                    <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Description
-                    </label>
-                    <textarea
-                      className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none"
-                      placeholder="Type Here..."
-                      rows={5}
-                      name="description"
-                      value={product.description}
-                      onChange={handleChange}
-                    />
-                    {errors.description && (
-                      <span
-                        className={`text-red-600 text-sm ${product.description ? "" : "hidden"
-                          }}`}
-                      >
-                        {errors.description}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="flex w-full">
-                  <button
-                    className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
-                    style={{
-                      boxShadow: "2px 2px 20px 2px #DF201F66",
-                      fontFamily: "Bai Jamjuree",
-                    }}
-                    onClick={handleSubmit}
-                  >
-                    Add Product
-                  </button>
-                  <button
-                    className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
-                    style={{
-                      boxShadow: "2px 2px 20px 2px #DF201F66",
-                      fontFamily: "Bai Jamjuree",
-                    }}
-                    onClick={handleUpdate}
-                  >
-                    Update Product
-                  </button>
-                  <ToastContainer
-                    position="top-right"
-                    autoClose={1000}
-                    pauseOnFocusLoss={false}
-                    limit={1}
-                  />
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
         </Container>
       </div>
     </>

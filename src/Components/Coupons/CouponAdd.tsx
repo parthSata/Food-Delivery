@@ -56,7 +56,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
   const fetchCouponData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`);
+      const response = await fetch(`${apiUrl}/coupons/${updateId}`);
       if (response.ok) {
         const data = await response.json();
         setCoupon(data);
@@ -89,7 +89,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
     try {
       const response = await fetch(
-        `https://static-food-delivery-backend.vercel.app/coupons/${updateId}`,
+        `${apiUrl}/coupons/${updateId}`,
         {
           method: "PUT",
           headers: {
@@ -140,7 +140,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/coupons`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

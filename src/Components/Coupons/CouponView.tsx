@@ -42,7 +42,7 @@ function CouponView() {
 
   const fetchCouponData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${couponId}`);
+      const response = await fetch(`${apiUrl}/coupons/${couponId}`);
       if (response.ok) {
         const data = await response.json();
         setCouponDetail(data);
