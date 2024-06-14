@@ -1,4 +1,4 @@
-import { Cart, Revenue, Customer, TotalShops, Pizza } from '../images'
+import { Cart, Revenue, Customer, TotalShops, Pizza } from '../Config/images'
 // import LineChart from '../Chart/Line'
 import DashboardHeader from "./Menu";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ function Dashboard() {
   }, []);
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:5000");
+      const response = await fetch("${apiUrl}");
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }

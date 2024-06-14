@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import Dashboard from "../../assets/HomePage/Dashboard.png";
-import { Orders, Restaurant, Menu, Logo } from "../images";
+import { Orders, Restaurant, Menu, Logo } from "../Config/images";
 import { Link } from "react-router-dom";
 
 function Sidebar() {

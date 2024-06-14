@@ -5,11 +5,11 @@ import Link from "../../assets/Restaurant/Link.png";
 import GallaryModelAdd from "./GallaryModelAdd";
 import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
+import apiUrl from "../Config/apiUrl";
 
 const Gallary: React.FC<GallaryInterface> = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/gallary";
 
   useEffect(() => {
     fetchGallaryImage();
@@ -17,7 +17,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
 
   const fetchGallaryImage = async () => {
     try {
-      const response = await fetch(`${apiUrl}`);
+      const response = await fetch(`${apiUrl}/gallary`);
       if (response.ok) {
         const data = await response.json();
         setGallaryImage(data);

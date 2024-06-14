@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Notification, Profile, Logo } from "../images";
+import { Notification, Profile, Logo } from "../Config/images";
 import { Link, useLocation } from "react-router-dom";
 import SideMenu from "./SideMenu";
 

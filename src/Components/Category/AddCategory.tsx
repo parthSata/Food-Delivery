@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from 'uuid';
 import { CategoriesData } from "./Home";
+import apiUrl from "../Config/apiUrl";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
@@ -12,7 +13,6 @@ interface Props {
 const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories";
 
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
@@ -36,7 +36,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
 
   const fetchCategoryById = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/${id}`);
+      const response = await fetch(`${apiUrl}/categories/${id}`);
       if (response.ok) {
         const data = await response.json();
         setCategory(data);
@@ -72,7 +72,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const updatedCategory = { ...category, imageUrl };
 
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/categories/${id}`, {
+      const response = await fetch(`${apiUrl}/categories/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -131,7 +131,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/categories`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

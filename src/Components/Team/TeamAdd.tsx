@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import apiUrl from "../Config/apiUrl";
 
 export interface Team {
   id: string;
@@ -17,7 +18,6 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/team";
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
   const fetchMemberData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`);
+      const response = await fetch(`${apiUrl}/team/${updateId}`);
       if (response.ok) {
         const data = await response.json();
         setMembers(data);
@@ -87,7 +87,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     const updatedCoupon = { ...members, imageUrl, id: members.id };
 
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`, {
+      const response = await fetch(`${apiUrl}/team/${updateId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -135,7 +135,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/team`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

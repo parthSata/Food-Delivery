@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate, useParams } from "react-router-dom";
 import { Coupon } from "./CouponAdd";
+import apiUrl from "../Config/apiUrl";
 
 function CouponView() {
   const { couponId } = useParams();
@@ -14,7 +15,6 @@ function CouponView() {
     expiryDate: "",
     discription: "",
   });
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/coupons";
 
   useEffect(() => {
     fetchCouponData();
@@ -26,7 +26,7 @@ function CouponView() {
 
   const handleDeleteCoupons = async (id: any) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/coupons/${id}`, {
+      const response = await fetch(`${apiUrl}/coupons/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -47,7 +47,7 @@ function CouponView() {
         const data = await response.json();
         setCouponDetail(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
   return (
     <div>

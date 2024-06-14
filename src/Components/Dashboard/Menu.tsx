@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Notification, Profile, Logo, menu } from "../images";
+import { Notification, Profile, Logo, menu } from "../Config/images";
 import Sidebar from "./Sidebar";
 
 function DashboardHeader() {

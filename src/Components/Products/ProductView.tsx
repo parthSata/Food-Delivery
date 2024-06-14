@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Product } from "./ProductAdd";
 import DashboardHeader from "../Dashboard/Menu";
 import { useParams } from "react-router-dom";
+import apiUrl from "../Config/apiUrl";
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
@@ -23,7 +24,6 @@ const ProductView: React.FC = () => {
     categoryId: "",
   });
 
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/products";
 
   useEffect(() => {
     fetchProductData();
@@ -31,7 +31,7 @@ const ProductView: React.FC = () => {
 
   const fetchProductData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${productId}`);
+      const response = await fetch(`${apiUrl}/products/${productId}`);
       if (response.ok) {
         const data = await response.json();
         setProduct(data);
@@ -40,7 +40,7 @@ const ProductView: React.FC = () => {
           setPreviewImage(data.images[0]);
         }
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const incrementQuantity = () => {
@@ -51,9 +51,9 @@ const ProductView: React.FC = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  const handleEditOrder = () => {};
+  const handleEditOrder = () => { };
 
-  const handleDeleteOrder = () => {};
+  const handleDeleteOrder = () => { };
   return (
     <div className="">
       <DashboardHeader />
@@ -68,11 +68,10 @@ const ProductView: React.FC = () => {
               {[0, 1, 2, 3].map((index) => (
                 <div
                   key={index}
-                  className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${
-                    productImages[index]
-                      ? "border-[3px] border-[#DF201F]"
-                      : " outline-none border-[#161A1D]"
-                  }`}
+                  className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index]
+                    ? "border-[3px] border-[#DF201F]"
+                    : " outline-none border-[#161A1D]"
+                    }`}
                 >
                   {productImages[index] && (
                     <div

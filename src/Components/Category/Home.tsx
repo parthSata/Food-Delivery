@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import AddCategory from "./AddCategory";
-import { search, Pizza } from "../images";
+import { search, Pizza } from "../Config/images";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
+import apiUrl from "../Config/apiUrl";
 
 export interface CategoriesData {
   id: string;
@@ -32,14 +33,13 @@ function Home(): JSX.Element {
     indexOfFirstItem,
     indexOfLastItem
   );
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories"
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${apiUrl}`);
+      const response = await fetch(`${apiUrl}/categories`);
       if (response.ok) {
         const data = await response.json();
         setCategories(data);
@@ -68,7 +68,7 @@ function Home(): JSX.Element {
         );
       } else {
         // Add new category
-        response = await fetch("https://static-food-delivery-backend.vercel.app/categories", {
+        response = await fetch("${apiUrl}/categories", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newCategory),
@@ -86,7 +86,7 @@ function Home(): JSX.Element {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/${id}`, {
+      const response = await fetch(`${apiUrl}/categories/${id}`, {
         method: "DELETE",
       });
 

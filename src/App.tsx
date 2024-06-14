@@ -1,5 +1,5 @@
 import "./App.css";
-import { AddRestaurants, Category, CouponAdd, CouponView, Coupons, Dashboard, Gallary, Orders, OurTeam, ProductAdd, ProductView, Products, Register, Restaurant, TeamAdd, Home, Verification, Login } from './Components/index'
+import { AddRestaurants, Category, CouponAdd, CouponView, Coupons, Dashboard, Gallary, Orders, OurTeam, ProductAdd, ProductView, Products, Register, Restaurant, TeamAdd, Home, Verification, Login } from './Components/Config/index'
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

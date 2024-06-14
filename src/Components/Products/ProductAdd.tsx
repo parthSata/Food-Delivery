@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import apiUrl from "../Config/apiUrl";
 
 export interface Product {
   id: string;
@@ -26,7 +27,6 @@ const ProductAdd: React.FC = () => {
   const Categoryid = location.state?.CategoryId;
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/products";
   const [errors, setErrors] = useState<Partial<Product>>({});
   const [product, setProduct] = useState<Product>({
     id: "",

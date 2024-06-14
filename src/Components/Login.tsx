@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller, } from './images'
+import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller, } from './Config/images'
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
 

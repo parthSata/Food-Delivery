@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import apiUrl from "../Config/apiUrl";
 
 export interface Coupon {
   id: string;
@@ -19,7 +20,6 @@ interface AddProps {
 }
 
 const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/coupons";
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});
@@ -61,7 +61,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
         const data = await response.json();
         setCoupon(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const handleUpdateCoupon = async (e: React.FormEvent) => {
@@ -149,7 +149,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
       });
       const result = await response.json();
       toast.success("Coupon Added", result);
-    } catch (error) {}
+    } catch (error) { }
     navigate(`/coupons`);
     setCoupon({
       id: "",
@@ -197,9 +197,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             />
             {errors.offerCode && (
               <span
-                className={`text-red-600 text-sm ${
-                  coupon.offerCode ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${coupon.offerCode ? "" : "hidden"
+                  }}`}
               >
                 {errors.offerCode}
               </span>
@@ -217,9 +216,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             />
             {errors.discount && (
               <span
-                className={`text-red-600 text-sm ${
-                  coupon.discount ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${coupon.discount ? "" : "hidden"
+                  }}`}
               >
                 {errors.discount}
               </span>
@@ -237,9 +235,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             />
             {errors.offerPrice && (
               <span
-                className={`text-red-600 text-sm ${
-                  coupon.offerPrice ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${coupon.offerPrice ? "" : "hidden"
+                  }}`}
               >
                 {errors.offerPrice}
               </span>
@@ -257,9 +254,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             />
             {errors.expiryDate && (
               <span
-                className={`text-red-600 text-sm ${
-                  coupon.expiryDate ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${coupon.expiryDate ? "" : "hidden"
+                  }}`}
               >
                 {errors.expiryDate}
               </span>
@@ -277,9 +273,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
             />
             {errors.discription && (
               <span
-                className={`text-red-600 text-sm ${
-                  coupon.discription ? "" : "hidden"
-                }}`}
+                className={`text-red-600 text-sm ${coupon.discription ? "" : "hidden"
+                  }}`}
               >
                 {errors.discription}
               </span>

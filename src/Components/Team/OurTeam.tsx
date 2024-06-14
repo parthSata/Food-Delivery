@@ -3,6 +3,7 @@ import EmployeImg from "../../assets/OurTeam/Ellipse 7.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
+import apiUrl from "../Config/apiUrl";
 
 function OurTeam() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -10,7 +11,6 @@ function OurTeam() {
   // @ts-ignore
   const { updateId } = useParams();
   const [member, setMember] = useState<Team[]>([]);
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/team";
 
   const handleUpdateMember = (id: any) => {
     navigate(`/teamAdd/${id}`);
@@ -18,7 +18,7 @@ function OurTeam() {
 
   const handleDeleteMember = async (id: any) => {
     try {
-      const response = await fetch(`${apiUrl}/${id}`, {
+      const response = await fetch(`${apiUrl}/team/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -38,7 +38,7 @@ function OurTeam() {
 
   const fetchMembers = async () => {
     try {
-      const response = await fetch(`${apiUrl}`);
+      const response = await fetch(`${apiUrl}/team`);
       if (response.ok) {
         const data = await response.json();
         setMember(data);

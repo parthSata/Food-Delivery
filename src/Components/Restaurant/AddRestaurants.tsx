@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import apiUrl from "../Config/apiUrl";
 
 export interface Restaurant {
   id: string;
@@ -25,7 +26,6 @@ function AddRestaurants() {
   const { updateId } = useParams();
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/restaurants";
   const [errors, setErrors] = useState<Partial<Restaurant>>({});
   const [restaurant, setRestaurant] = useState<Restaurant>({
     id: "",
@@ -139,7 +139,7 @@ function AddRestaurants() {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/restaurants/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -229,7 +229,7 @@ function AddRestaurants() {
 
   const fetchRestaurantData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`);
+      const response = await fetch(`${apiUrl}/restaurants/${updateId}`);
       if (response.ok) {
         const data = await response.json();
         setRestaurant(data);

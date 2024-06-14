@@ -3,6 +3,8 @@ import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoriesData } from "../Category/Home";
 import { Product } from "../Products/ProductAdd";
+import apiUrl from "../Config/apiUrl";
+// import { Loaders } from '../Config/images'
 
 function Category() {
   const { CategoryId } = useParams();
@@ -15,8 +17,8 @@ function Category() {
     status: "In Stock",
     imageUrl: "",
   });
+  // const [Loader, setLoader] = useState(false)
   const [products, setProducts] = useState<Product[]>([]);
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/categories"
 
   useEffect(() => {
     if (CategoryId) {
@@ -25,14 +27,17 @@ function Category() {
   }, []);
 
   const fetchCategoryData = async (id: any) => {
+    // setLoader(true);
     try {
-      const response = await fetch(`${apiUrl}/${id}`);
+      const response = await fetch(`${apiUrl}/categories/${id}`);
       if (response.ok) {
         const data = await response.json();
         setCategoryData(data);
       }
     } catch (error) {
       console.error("Error fetching categories:", error);
+    } finally {
+      // setLoader(false)
     }
   };
 
@@ -48,7 +53,7 @@ function Category() {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products`);
+      const response = await fetch(`${apiUrl}/products`);
       if (response.ok) {
         const data = await response.json();
         const filteredProducts = data.filter(
@@ -108,6 +113,9 @@ function Category() {
         </div>
         {/* Products */}
         <div className="">
+          {/* {Loader ? (
+            <div className=""><img src={Loaders} alt="" /></div>
+          ) : ( */}
           <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
             {products.map((item) => (
               <div
@@ -184,6 +192,7 @@ function Category() {
               </div>
             </div>
           </div>
+          {/* )} */}
         </div>
       </div>
     </>

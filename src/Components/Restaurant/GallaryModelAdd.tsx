@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import apiUrl from "../Config/apiUrl";
 
 export interface Gallary {
   id: string;
@@ -27,7 +28,6 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/gallary";
 
   if (!isOpen) return null;
   const uploadImageToCloudinary = async (
@@ -79,7 +79,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     const updatedGallary = { ...gallary, imageUrl };
 
     try {
-      const response = await fetch(`${apiUrl}/${updateId}`, {
+      const response = await fetch(`${apiUrl}/gallary/${updateId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -128,7 +128,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/gallary`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -261,9 +261,8 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                       />
                       {errors.title && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            gallary.title ? "" : "hidden"
-                          }}`}
+                          className={`text-red-600 text-sm ${gallary.title ? "" : "hidden"
+                            }}`}
                         >
                           {errors.title}
                         </span>

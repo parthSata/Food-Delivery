@@ -4,13 +4,13 @@ import DummyImg from "../../assets/All Product/DummyFood.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
+import apiUrl from "../Config/apiUrl";
 
 function AllProducts() {
   const navigate = useNavigate();
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
-  const apiUrl = "https://static-food-delivery-backend.vercel.app/products"
 
   const handleAddProduct = (id: any) => {
     navigate(`/productsAdd/${id}`);

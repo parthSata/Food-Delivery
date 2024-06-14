@@ -5,6 +5,7 @@ import Star from "../../assets/Restaurant/Star (2).png";
 import { Restaurant as RestaurantInterface } from "./AddRestaurants";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import apiUrl from "../Config/apiUrl";
 
 function Restaurant() {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ function Restaurant() {
     longitude: "",
   });
 
-  const apiUrl = "`https://static-food-delivery-backend.vercel.app/restaurants";
 
   console.log("🚀 ~ Restaurant ~ restarants:", restarants);
 
@@ -31,7 +31,7 @@ function Restaurant() {
 
   const fetchRestaurantList = async () => {
     try {
-      const response = await fetch(`${apiUrl}`);
+      const response = await fetch(`${apiUrl}/restaurants`);
       if (response.ok) {
         const data = await response.json();
         setRestarantList(data);

@@ -1,8 +1,9 @@
 import DashboardHeader from "../Dashboard/Menu";
-import { DummyImg } from "../images";
+import { DummyImg } from "../Config/images";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
+import apiUrl from "../Config/apiUrl";
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -17,7 +18,7 @@ function Coupons() {
 
   const handleDeleteCoupons = async (id: any) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/coupons/${id}`, {
+      const response = await fetch(`${apiUrl}/coupons/${id}`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -41,7 +42,7 @@ function Coupons() {
 
   const fetchCoupons = async () => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/coupons`);
+      const response = await fetch(`${apiUrl}/coupons`);
       if (response.ok) {
         const data = await response.json();
         setCoupons(data);
