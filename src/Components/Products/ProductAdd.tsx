@@ -1,10 +1,10 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import DashboardHeader from "../Dashboard/Menu";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import apiUrl from "../Config/apiUrl";
+import Container from "../Container";
 
 export interface Product {
   id: string;
@@ -303,7 +303,7 @@ const ProductAdd: React.FC = () => {
   return (
     <>
       <div className="">
-        <DashboardHeader />
+        <Container >
         <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
           {/* Upload Product Image */}
           <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
@@ -595,6 +595,7 @@ const ProductAdd: React.FC = () => {
             </div>
           </div>
         </div>
+        </Container>
       </div>
     </>
   );

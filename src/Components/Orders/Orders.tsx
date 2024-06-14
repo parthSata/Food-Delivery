@@ -1,8 +1,8 @@
-import DashboardHeader from '../Dashboard/Menu'
 import Burger from '../../assets/Orders/Burger.png'
 import Pizza from '../../assets/Orders/Pizza.png'
 import Accepted from '../../assets/Orders/OrderAccepted.png'
 import Cancel from '../../assets/Orders/OrderCancel.png'
+import Container from '../Container'
 // import { useState } from 'react'
 
 function Orders() {
@@ -39,213 +39,213 @@ function Orders() {
     return (
         <>
             <div className="">
-                <DashboardHeader />
-                <div className="flex flex-col flex-wrap">
-                    <div className="">
-                        <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
-                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>Today , 25th March 2022</span>
-                            <span className="">
-                                {/* Search Input */}
+                <Container >
+                    <div className="flex flex-col flex-wrap">
+                        <div className="">
+                            <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
+                                <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>Today , 25th March 2022</span>
+                                <span className="">
+                                    {/* Search Input */}
 
-                                <form className="max-w-md mx-auto ">
-                                    <div className="relative ">
-                                        <div className="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                            <svg className="w-4 h-4  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                            </svg>
-                                        </div>
-                                        <input type="search"
-                                            className="block w-full p-4 ps-10 text-sm  text-gray-500 border border-[1px solid #E7E7E9] rounded-lg "
-                                            style={{ fontFamily: "Montserrat Alternates" }}
-                                            placeholder="Search"
-                                        // onChange={(e) => setSearchInput(e.target.value)}
-                                        />
-                                    </div>
-                                </form>
-                                {/* Search Input */}
-                            </span>
-                        </div>
-                        <div className="flex flex-wrap  item-center">
-                            <div className="w-full flex flex-wrap  p-2 ">
-                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
-                                    <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
-                                        <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
-                                            <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Accepted} alt="" className="h-5" />Accepted Order
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex  flex-wrap  gap-4">
-                                        <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
+                                    <form className="max-w-md mx-auto ">
+                                        <div className="relative ">
+                                            <div className="absolute  inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                                <svg className="w-4 h-4  text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                </svg>
                                             </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
-                                            </div>
-
-
+                                            <input type="search"
+                                                className="block w-full p-4 ps-10 text-sm  text-gray-500 border border-[1px solid #E7E7E9] rounded-lg "
+                                                style={{ fontFamily: "Montserrat Alternates" }}
+                                                placeholder="Search"
+                                            // onChange={(e) => setSearchInput(e.target.value)}
+                                            />
                                         </div>
-                                    </div>
-                                </div>
+                                    </form>
+                                    {/* Search Input */}
+                                </span>
                             </div>
-
-                        </div>
-                        <div className="flex flex-wrap  item-center">
-                            <div className="w-full flex flex-wrap  p-2 ">
-                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
-                                    <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
-                                        <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
-                                            <span className="flex justify-center items-center text-[#DF201F] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Cancel} alt="" className="h-5" />Accepted Order
-                                            </span>
+                            <div className="flex flex-wrap  item-center">
+                                <div className="w-full flex flex-wrap  p-2 ">
+                                    <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                        <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                                            <div className="flex flex-col  gap-1">
+                                                <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
+                                                <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
+                                                <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Accepted} alt="" className="h-5" />Accepted Order
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex  flex-wrap  gap-4">
-                                        <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                        <div className="flex  flex-wrap  gap-4">
+                                            <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
+                            <div className="flex flex-wrap  item-center">
+                                <div className="w-full flex flex-wrap  p-2 ">
+                                    <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                        <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                                            <div className="flex flex-col  gap-1">
+                                                <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
+                                                <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
+                                                <span className="flex justify-center items-center text-[#DF201F] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Cancel} alt="" className="h-5" />Accepted Order
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex  flex-wrap  gap-4">
+                                            <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex flex-col flex-wrap">
-                    <div className="">
-                        <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
-                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>Yesterday , 24th March 2022</span>
+                    <div className="flex flex-col flex-wrap">
+                        <div className="">
+                            <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
+                                <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>Yesterday , 24th March 2022</span>
 
-                        </div>
-                        <div className="flex flex-wrap  item-center">
-                            <div className="w-full flex flex-wrap  p-2 ">
-                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
-                                    <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
-                                        <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
-                                            <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Accepted} alt="" className="h-5" />Accepted Order
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="flex  flex-wrap  gap-4">
-                                        <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Burger} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Hamburger</span>
-                                                    <span className="text-[#DF201F] self-start text-sm">₹100</span>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-
-                        </div>
-                        <div className="flex flex-wrap  item-center">
-                            <div className="w-full flex flex-wrap  p-2 ">
-                                <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
-                                    <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
-                                        <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
-                                            <span className="flex justify-center items-center text-[#DF201F] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Cancel} alt="" className="h-5" />Accepted Order
-                                            </span>
+                            <div className="flex flex-wrap  item-center">
+                                <div className="w-full flex flex-wrap  p-2 ">
+                                    <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                        <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                                            <div className="flex flex-col  gap-1">
+                                                <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
+                                                <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
+                                                <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Accepted} alt="" className="h-5" />Accepted Order
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="flex  flex-wrap  gap-4">
-                                        <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                        <div className="flex  flex-wrap  gap-4">
+                                            <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Pizza} alt="" className="h-[40px]" />
-                                                <div className="flex flex-col ">
-                                                    <span className="">Pizza</span>
-                                                    <span className="text-[#DF201F] self-start ">₹500</span>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Burger} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Hamburger</span>
+                                                        <span className="text-[#DF201F] self-start text-sm">₹100</span>
+                                                    </div>
                                                 </div>
+
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
+                            <div className="flex flex-wrap  item-center">
+                                <div className="w-full flex flex-wrap  p-2 ">
+                                    <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
+                                        <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                                            <div className="flex flex-col  gap-1">
+                                                <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
+                                                <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
+                                                <span className="flex justify-center items-center text-[#DF201F] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Cancel} alt="" className="h-5" />Accepted Order
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="flex  flex-wrap  gap-4">
+                                            <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                                <div className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center" style={{ fontFamily: "Bai Jamjuree" }}>
+                                                    <img src={Pizza} alt="" className="h-[40px]" />
+                                                    <div className="flex flex-col ">
+                                                        <span className="">Pizza</span>
+                                                        <span className="text-[#DF201F] self-start ">₹500</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>
-                {/* Pagination */}
+                    {/* Pagination */}
 
-                {/* {totalPages > 1 && (
+                    {/* {totalPages > 1 && (
                         <div className="flex justify-end">
                             <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
                                 <button
@@ -286,7 +286,8 @@ function Orders() {
                         </div>
                     )} */}
 
-                {/* Pagination */}
+                    {/* Pagination */}
+                </Container>
             </div>
         </>
     )

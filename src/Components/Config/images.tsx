@@ -26,5 +26,5 @@ import Loaders from '../../assets/Loader.png'
 
 
 export {
-    Logo, Online, Loadersṭ, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
+    Logo, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
 }
