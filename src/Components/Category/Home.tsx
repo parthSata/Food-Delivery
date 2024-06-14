@@ -3,7 +3,11 @@ import AddCategory from "./AddCategory";
 import { search, Pizza } from "../Config/images";
 import DashboardHeader from "../Dashboard/Menu";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import apiUrl from "../Config/apiUrl";
+=======
+import Container from "../Container";
+>>>>>>> 32eaf17bc21223c17ab96613174d42cda383a180
 
 export interface CategoriesData {
   id: string;
@@ -125,54 +129,45 @@ function Home(): JSX.Element {
   const closeAddCategoryDialog = () => setShowAddCategoryDialog(false);
 
   return (
-    <>
-      <DashboardHeader />
-
-      <div className="min-w-fit max-w-[1280px] mx-auto px-6">
-        {/* Header Started Here */}
-        {/* Header End Here */}
-
-        {/* Body Part Started */}
-        <div className="min-w-fit ">
-          <div
-            className="flex justify-between items-center mt-10 flex-wrap gap-2"
-            style={{ fontFamily: "Bai Jamjuree" }}
-          >
-            <div className="">
-              <span className="font-semibold  text-[#161A1D]">
-                Category List
-              </span>
+    <Container>
+      {/* Body Part Started */}
+      <div
+        className="flex justify-between items-center mt-10 flex-wrap gap-2"
+        style={{ fontFamily: "Bai Jamjuree" }}
+      >
+        <div className="">
+          <span className="font-semibold  text-[#161A1D]">Category List</span>
+        </div>
+        <div className="flex ">
+          <div className="flex justify-evenly flex-wrap gap-4">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search.."
+                disabled
+                className="border-gray-400 border-[1px] p-4 text-[#A2A3A5] focus:border-none pr-12 hover:border-[1px solid #E7E7E9] h-10 rounded-full"
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+              <img
+                src={search}
+                alt="Search"
+                className="absolute right-4 top-3 w-[14px] h-[14px]"
+              />
             </div>
-            <div className="flex ">
-              <div className="flex justify-evenly flex-wrap gap-4">
-                <div className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search.."
-                    disabled
-                    className="border-gray-400 border-[1px] p-4 text-[#A2A3A5] focus:border-none pr-12 hover:border-[1px solid #E7E7E9] h-10 rounded-full"
-                    onChange={(e) => setSearchInput(e.target.value)}
-                  />
-                  <img
-                    src={search}
-                    alt="Search"
-                    className="absolute right-4 top-3 w-[14px] h-[14px]"
-                  />
-                </div>
-                <div className="">
-                  <button
-                    type="button"
-                    className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
-                    style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
-                    onClick={openAddCategoryDialog}
-                  >
-                    Add New Category +
-                  </button>
-                </div>
-              </div>
+            <div className="">
+              <button
+                type="button"
+                className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
+                style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
+                onClick={openAddCategoryDialog}
+              >
+                Add New Category +
+              </button>
             </div>
           </div>
-          {/* <Table /> */}
+        </div>
+      </div>
+      {/* <Table /> */}
 
           {/* table Start */}
           <div className="flex flex-col relative ">
@@ -348,7 +343,7 @@ function Home(): JSX.Element {
           </div>
         </div>
       )}
-    </>
+    </Container>
   );
 }
 
