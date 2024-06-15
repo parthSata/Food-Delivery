@@ -23,7 +23,6 @@ function Restaurant() {
   });
 
 
-  console.log("🚀 ~ Restaurant ~ restarants:", restarants);
 
   useEffect(() => {
     fetchRestaurantList();
@@ -51,7 +50,7 @@ function Restaurant() {
 
   const fetchRestaurant = async () => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/restaurants`);
+      const response = await fetch(`${apiUrl}/restaurants`);
       if (response.ok) {
         const data = await response.json();
         setRestarants(data);

@@ -75,7 +75,6 @@ function Category() {
       const response = await fetch(`${apiUrl}/products/${id}`, {
         method: "DELETE",
       });
-      console.log("🚀 ~ handleDeleteProduct ~ response:", response)
       if (response.ok) {
         fetchProducts();
       } else {
