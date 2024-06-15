@@ -16,7 +16,7 @@ function DashboardHeader() {
   const location = useLocation();
   const { pathname } = location;
   return (
-    <div className="h-full w-full ">
+    <div className="h-full w-full mt-4">
       <Sidebar />
       <nav
         className="flex  flex-wrap  justify-between px-4"

@@ -99,7 +99,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
         // @ts-ignore
         const data = await response.json();
         toast.success("Coupon successfully updated");
-        navigate(`/coupons`);
+        navigate(`/team`);
       } else {
         toast.warn("Failed to update!");
       }
@@ -197,7 +197,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
   };
   return (
     <div className="fixed  inset-0 flex  items-center px-4 justify-center bg-black bg-opacity-70">
-      <div className="bg-white w-[400px] h-[420px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
+      <div className="bg-white w-[500px] h-[420px]  gap-2 rounded-[30px] shadow-lg p-6 relative">
         <button
           className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
           onClick={onClose}

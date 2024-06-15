@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 function GallaryHeader() {
     const sideMenuRef = useRef<HTMLDivElement>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleOutsideClick = (event: MouseEvent) => {
         if (
@@ -21,17 +22,17 @@ function GallaryHeader() {
     }, []);
 
     const closeSideMenu = () => {
-        if (sideMenuRef.current) {
-            sideMenuRef.current.classList.add("hidden");
-        }
+        setIsMenuOpen(false);
     };
     return (
         <div className='bg-[#D9D9D9]'>
-            <nav className="flex flex-row  justify-between flex-wrap items-center mt-4 p-4 " style={{ fontFamily: "Bai Jamjuree" }}>
+            <nav className="flex flex-row  justify-between gap-4 flex-wrap items-center mt-4 p-4 " style={{ fontFamily: "Bai Jamjuree" }}>
                 <div className="text-2xl">
                     <span className="border-b-4 rounded-[0px, 60px, 60px, 0px] pb-4 border-[#DF201F] mb-4">Gallary</span>
                 </div>
-                <ul className="flex gap-10    items-center text-lg ">
+
+                {/* @ts-ignore */}
+                <ul className={`lg:flex gap-10 items-center text-lg ${isMenuOpen ? 'block' : 'hidden'} lg:block`} ref={sideMenuRef}>
                     <li className="text-[#fefefe] items-center flex justify-center h-14 w-28  rounded-[60px] bg-[#94CD00] ">
                         <Link to="/">All</Link>
                     </li>
@@ -51,8 +52,26 @@ function GallaryHeader() {
                         <Link to="/">Chinese</Link>
                     </li>
                 </ul>
-                <div className="md:hidden ">
-                    <button className=""><i className="fa-solid fa-bars hover:fa-shake fa-lg" style={{ color: "#232424" }}></i></button>
+                <div className="lg:hidden relative">
+                    <select
+                        onChange={(e) => {
+                            const selectedPath = e.target.value;
+                            if (selectedPath) {
+                                window.location.href = selectedPath;
+                            }
+                        }}
+                        className="block  w-full bg-blue-600 text-white border border-gray-400 hover:border-gray-500 px-2 py-2 pr-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    >
+                        <option value="">Select a category</option>
+                        <option value="/">All</option>
+                        <option value="/veg">Veg</option>
+                        <option value="/non-veg">Non Veg</option>
+                        <option value="/dishes">Dishes</option>
+                        <option value="/restaurant">Restaurant</option>
+                        <option value="/chinese">Chinese</option>
+                    </select>
+
+
                 </div>
             </nav>
         </div>

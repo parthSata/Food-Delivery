@@ -32,17 +32,16 @@ const Gallary: React.FC<GallaryInterface> = () => {
   return (
     <>
       <Container >
-        <div className="px-10">
-
+        <div className="">
           <GallaryHeader />
           <div className="bg-[#D9D9D9] flex flex-row flex-wrap h-full w-full ">
             {gallaryImage.map((item) => (
-              <div className="relative sm:w-1/4 p-4 h-[290px] w-full" key={item.id}>
+              <div className="relative sm:w-1/4 p-4 h-full w-full" key={item.id}>
                 <div className="">
                   <img
                     src={item.images[0] || Burger}
                     alt="Sandwich and fries"
-                    className="w-[270px]  h-[260px] object-cover rounded-lg"
+                    className="w-[300px]   h-[260px] object-cover rounded-lg"
                   />
                 </div>
                 <div className="absolute   inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
