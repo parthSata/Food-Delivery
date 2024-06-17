@@ -1,3 +1,4 @@
-const apiUrl = "https://food-delivery-backend-website-vczv.onrender.com";
+const firebaseDatabaseURL =
+  "https://food-delivery-backend-9cdf5-default-rtdb.firebaseio.com";
 
-export default apiUrl;
+export default firebaseDatabaseURL;

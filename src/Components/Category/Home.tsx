@@ -3,7 +3,7 @@ import AddCategory from "./AddCategory";
 import { search, Pizza } from "../Config/images";
 import { useNavigate } from "react-router-dom";
 import Container from "../Container";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl";
 
 export interface CategoriesData {
   id: string;
@@ -39,13 +39,52 @@ function Home(): JSX.Element {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${apiUrl}/categories`);
-      if (response.ok) {
-        const data = await response.json();
-        setCategories(data);
+      const response = await fetch(`${firebaseDatabaseURL}/categories.json`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch categories");
       }
+      const data = await response.json();
+      const categoriesData = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      }));
+      setCategories(categoriesData);
     } catch (error) {
       console.error("Error fetching categories:", error);
+    }
+  };
+
+  const handleAddOrUpdateCategory = async (newCategory: CategoriesData) => {
+    try {
+      if (newCategory.id) {
+        // Update category
+        const response = await fetch(`${firebaseDatabaseURL}/categories/${newCategory.id}.json`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newCategory),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to update category");
+        }
+      } else {
+        // Add new category
+        const response = await fetch(`${firebaseDatabaseURL}/categories.json`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newCategory),
+        });
+        if (!response.ok) {
+          throw new Error("Failed to add category");
+        }
+      }
+      fetchCategories();
+      setShowAddCategoryDialog(false);
+    } catch (error) {
+      console.error("Error adding/updating category:", error);
     }
   };
 
@@ -53,53 +92,19 @@ function Home(): JSX.Element {
     setCurrentPage(pageNumber);
   };
 
-  const handleAddOrUpdateCategory = async (newCategory: CategoriesData) => {
-    try {
-      let response;
-      if (newCategory.id) {
-        // Update category
-        response = await fetch(
-          `${apiUrl}/${newCategory.id}`,
-          {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(newCategory),
-          }
-        );
-      } else {
-        // Add new category
-        response = await fetch("${apiUrl}/categories", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newCategory),
-        });
-      }
-
-      if (response.ok) {
-        fetchCategories();
-        setShowAddCategoryDialog(false);
-      }
-    } catch (error) {
-      console.error("Error adding/updating category:", error);
-    }
-  };
-
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/categories/${id}`, {
+      const response = await fetch(`${firebaseDatabaseURL}/categories/${id}.json`, {
         method: "DELETE",
       });
-
-      if (response.ok) {
-        fetchCategories();
-      } else {
-        console.error("Failed to delete category:", response.statusText);
+      if (!response.ok) {
+        throw new Error("Failed to delete category");
       }
+      fetchCategories();
     } catch (error) {
       console.error("Error deleting category:", error);
     }
   };
-
   const handleUpdate = (id: string) => {
     setUpdateCategoryId(id);
     setShowAddCategoryDialog(true);

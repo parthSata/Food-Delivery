@@ -3,17 +3,27 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from 'uuid';
 import { CategoriesData } from "./Home";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from '../Config/apiUrl'
+console.log("🚀 ~ firebaseDatabaseURL:", firebaseDatabaseURL)
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
   id: string
 }
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyCO9lm7TAT-W757pmY_fT1xZIqb2kPQ_1A",
+  authDomain: "food-delivery-backend-9cdf5.firebaseapp.com",
+  projectId: "food-delivery-backend-9cdf5",
+  storageBucket: "food-delivery-backend-9cdf5.appspot.com",
+  messagingSenderId: "385448496698",
+  appId: "1:385448496698:web:e0d7cd0878285f96126f03",
+  measurementId: "G-S7CKGELNXB",
+};
+
 const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
     categoryName: "",
@@ -22,11 +32,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     status: "In Stock",
     imageUrl: "",
   });
-
   const [errors, setErrors] = useState<Partial<CategoriesData>>({});
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
 
   useEffect(() => {
     if (id) {
@@ -36,14 +44,13 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
 
   const fetchCategoryById = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/categories/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setCategory(data);
-        setImagePreview(data.imageUrl || null);
-      } else {
-        toast.error("Failed to fetch category.");
+      const response = await fetch(`${firebaseDatabaseURL}/categories/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch category");
       }
+      const data = await response.json();
+      setCategory(data as CategoriesData);
+      setImagePreview(data.imageUrl || null);
     } catch (error) {
       toast.error("Error fetching category.");
     }
@@ -72,21 +79,19 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const updatedCategory = { ...category, imageUrl };
 
     try {
-      const response = await fetch(`${apiUrl}/categories/${id}`, {
-        method: 'PUT',
+      const response = await fetch(`${firebaseDatabaseURL}/categories/${id}`, {
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedCategory)
+        body: JSON.stringify(updatedCategory),
       });
 
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
-        toast.success('Category successfully updated');
-      } else {
-        toast.warn('Failed to update!');
+      if (!response.ok) {
+        throw new Error("Failed to update category");
       }
+
+      toast.success('Category successfully updated');
     } catch (error) {
       toast.error("Error updating category.");
     }
@@ -96,22 +101,10 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     e.preventDefault();
     const newErrors: Partial<CategoriesData> = {};
 
-    switch (true) {
-      case isFieldEmpty(category.categoryName):
-        newErrors.categoryName = "Category Name is required";
-        break;
-      case isFieldEmpty(category.description):
-        newErrors.description = "Description is required";
-        break;
-      case isFieldEmpty(category.numberOfProducts):
-        newErrors.numberOfProducts = "Number Of Products is required";
-        break;
-      case isFieldEmpty(category.status):
-        newErrors.status = "Status is required";
-        break;
-      default:
-        break;
-    }
+    if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
+    if (isFieldEmpty(category.description)) newErrors.description = "Description is required";
+    if (isFieldEmpty(category.numberOfProducts)) newErrors.numberOfProducts = "Number Of Products is required";
+    if (isFieldEmpty(category.status)) newErrors.status = "Status is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -131,7 +124,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     };
 
     try {
-      const response = await fetch(`${apiUrl}/categories`, {
+      const response = await fetch(`${firebaseDatabaseURL}/categories.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -139,12 +132,12 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
         body: JSON.stringify(newCategory),
       });
 
-      if (response.ok) {
-        toast.success("Category added successfully!");
-        onAddCategory(newCategory);
-      } else {
-        toast.error("Failed to add category.");
+      if (!response.ok) {
+        throw new Error("Failed to add category");
       }
+
+      toast.success("Category added successfully!");
+      onAddCategory(newCategory);
     } catch (error) {
       toast.error("Error adding category.");
     }
