@@ -2,8 +2,9 @@ import { DummyImg } from "../Config/images";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import firebaseDatabaseURL from "../Config/apiUrl";
 import Container from "../Container";
+import { db } from '../../Firebase/firebase';
+import { ref, onValue, remove } from 'firebase/database';
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -15,42 +16,38 @@ function Coupons() {
   const handleUpdateCoupons = (id: any) => {
     navigate(`/couponAdd/${id}`);
   };
-
+  
+  const handleCouponView = (id: string) => {
+    navigate(`/couponView/${id}`, { state: { couponId: id } });
+  };
   const handleDeleteCoupons = async (id: string) => {
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/coupons/${id}.json`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        fetchCoupons();
-      } else {
-        console.error("Failed to delete Coupons:", response.statusText);
-      }
+      const couponRef = ref(db, `coupons/${id}`);
+      await remove(couponRef);
+      fetchCoupons(); // Optionally, update state directly instead of re-fetching
     } catch (error) {
       console.error("Error deleting Coupons:", error);
     }
     navigate(`/coupons`);
   };
 
-  // const handleCouponView = (id: string) => {
-  //   navigate(`/couponView/${id}`, { state: { couponId: id } });
-  // };
-
   useEffect(() => {
     fetchCoupons();
   }, []);
 
-  const fetchCoupons = async () => {
-    try {
-      const response = await fetch(`${firebaseDatabaseURL}/coupons.json`);
-      if (response.ok) {
-        const data = await response.json();
-        const couponsArray = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+  const fetchCoupons = () => {
+    const couponsRef = ref(db, 'coupons');
+    onValue(couponsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const couponsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
         setCoupons(couponsArray);
+      } else {
+        setCoupons([]);
       }
-    } catch (error) {
+    }, (error) => {
       console.error("Error fetching Coupons:", error);
-    }
+    });
   };
 
   const openDialog = () => setIsDialogOpen(true);
@@ -77,7 +74,7 @@ function Coupons() {
             {coupons.map((item) => (
               <div
                 className="sm:w-1/5  mb-10 flex-col  w-full cursor-pointer"
-                // onClick={() => handleCouponView(item.id)}
+                onClick={() => handleCouponView(item.id)}
                 key={item.id}
                 style={{ fontFamily: "Montserrat Alternates" }}
               >

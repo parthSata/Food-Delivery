@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import firebaseDatabaseURL from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase'; // Ensure this points to your Firebase initialization
+import { ref, set, onValue } from 'firebase/database';
 
 export interface Coupon {
   id: string;
@@ -52,18 +53,18 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     }
   }, [updateId]);
 
-  const fetchCouponData = async () => {
-    try {
-      const response = await fetch(`${firebaseDatabaseURL}/coupons/${updateId}.json`);
-      if (response.ok) {
-        const data = await response.json();
+  const fetchCouponData = () => {
+    const couponRef = ref(db, `coupons/${updateId}`);
+    onValue(couponRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
         setCoupon(data);
       } else {
-        console.error("Failed to fetch coupon data:", response.statusText);
+        console.error("No data available");
       }
-    } catch (error) {
+    }, (error) => {
       console.error("Error fetching coupon data:", error);
-    }
+    });
   };
 
   const handleUpdateCoupon = async (e: React.FormEvent) => {
@@ -85,23 +86,10 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     const updatedCoupon = { ...coupon };
 
     try {
-      const response = await fetch(
-        `${firebaseDatabaseURL}/coupons/${updateId}.json`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedCoupon),
-        }
-      );
-
-      if (response.ok) {
-        toast.success("Coupon successfully updated");
-        navigate(`/coupons`);
-      } else {
-        toast.warn("Failed to update!");
-      }
+      const couponRef = ref(db, `coupons/${updateId}`);
+      await set(couponRef, updatedCoupon);
+      toast.success("Coupon successfully updated");
+      navigate(`/coupons`);
     } catch (error) {
       toast.error("Error updating Coupon.");
     }
@@ -129,20 +117,10 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/coupons.json`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCoupon),
-      });
-
-      if (response.ok) {
-        toast.success("Coupon added successfully");
-        navigate(`/coupons`);
-      } else {
-        toast.warn("Failed to add coupon!");
-      }
+      const newCouponRef = ref(db, `coupons/${newCoupon.id}`);
+      await set(newCouponRef, newCoupon);
+      toast.success("Coupon added successfully");
+      navigate(`/coupons`);
     } catch (error) {
       toast.error("Error adding coupon.");
     }
