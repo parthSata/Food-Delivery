@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl";
 
 export interface Team {
   id: string;
@@ -56,12 +56,16 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
   const fetchMemberData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/team/${updateId}`);
+      const response = await fetch(`${firebaseDatabaseURL}/team/${updateId}.json`);
       if (response.ok) {
         const data = await response.json();
         setMembers(data);
+      } else {
+        console.error("Failed to fetch member data:", response.statusText);
       }
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error fetching member data:", error);
+    }
   };
 
   const handleUpdateMember = async (e: React.FormEvent) => {
@@ -79,32 +83,34 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     }
     setErrors({});
 
-    let imageUrl = "";
+    let imageUrl = members.images && members.images.length > 0 ? members.images[0] : "";
+
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
     }
 
-    const updatedCoupon = { ...members, imageUrl, id: members.id };
+    const updatedMember: Team = {
+      ...members,
+      images: [imageUrl],
+    };
 
     try {
-      const response = await fetch(`${apiUrl}/team/${updateId}`, {
+      const response = await fetch(`${firebaseDatabaseURL}/team/${updateId}.json`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedCoupon),
+        body: JSON.stringify(updatedMember),
       });
 
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
-        toast.success("Coupon successfully updated");
+      if (response.ok) {
+        toast.success("Member successfully updated");
         navigate(`/team`);
       } else {
-        toast.warn("Failed to update!");
+        toast.warn("Failed to update member!");
       }
     } catch (error) {
-      toast.error("Error updating members.");
+      toast.error("Error updating member.");
     }
   };
 
@@ -122,30 +128,37 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
       return;
     }
     setErrors({});
-    // @ts-ignore
+
     let imageUrl = "";
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
     }
 
-    const newCoupon: Team = {
+    const newMember: Team = {
       ...members,
       images: [imageUrl],
       id: uuidv4(),
     };
 
     try {
-      const response = await fetch(`${apiUrl}/team`, {
+      const response = await fetch(`${firebaseDatabaseURL}/team.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newCoupon),
+        body: JSON.stringify(newMember),
       });
-      const result = await response.json();
-      toast.success("Member Added", result);
-    } catch (error) { }
-    navigate(`/team`);
+
+      if (response.ok) {
+        toast.success("Member added successfully");
+        navigate(`/team`);
+      } else {
+        toast.warn("Failed to add member!");
+      }
+    } catch (error) {
+      toast.error("Error adding member.");
+    }
+
     setMembers({
       id: "",
       name: "",

@@ -2,8 +2,8 @@ import EmployeImg from "../../assets/OurTeam/Ellipse 7.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
-import apiUrl from "../Config/apiUrl";
 import Container from "../Container";
+import firebaseDatabaseURL from "../Config/apiUrl";
 
 function OurTeam() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -16,20 +16,21 @@ function OurTeam() {
     navigate(`/teamAdd/${id}`);
   };
 
-  const handleDeleteMember = async (id: any) => {
+  const handleDeleteMember = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/team/${id}`, {
-        method: "DELETE",
+      const response = await fetch(`${firebaseDatabaseURL}/team/${id}.json`, {
+        method: 'DELETE',
       });
       if (response.ok) {
-        fetchMembers();
+        setMember((prevMembers) => prevMembers.filter((member) => member.id !== id));
+        console.log('Member deleted successfully');
       } else {
-        console.error("Failed to delete Member:", response.statusText);
+        console.error('Failed to delete Member:', response.statusText);
       }
     } catch (error) {
-      console.error("Error deleting Member:", error);
+      console.error('Error deleting Member:', error);
     }
-    navigate(`/team`);
+    navigate('/team');
   };
 
   useEffect(() => {
@@ -38,15 +39,24 @@ function OurTeam() {
 
   const fetchMembers = async () => {
     try {
-      const response = await fetch(`${apiUrl}/team`);
+      const response = await fetch(`${firebaseDatabaseURL}/team.json`);
       if (response.ok) {
         const data = await response.json();
-        setMember(data);
+        if (data) {
+          const membersArray = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
+          setMember(membersArray);
+        }
+      } else {
+        console.error("Failed to fetch Members:", response.statusText);
       }
     } catch (error) {
-      console.error("Error fetching Member:", error);
+      console.error("Error fetching Members:", error);
     }
   };
+
 
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);

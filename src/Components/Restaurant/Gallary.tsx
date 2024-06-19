@@ -4,7 +4,8 @@ import Link from "../../assets/Restaurant/Link.png";
 import GallaryModelAdd from "./GallaryModelAdd";
 import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
-import apiUrl from "../Config/apiUrl";
+import { ref, get } from 'firebase/database';
+import { db } from '../../Firebase/firebase';
 import Container from "../Container";
 
 const Gallary: React.FC<GallaryInterface> = () => {
@@ -12,18 +13,25 @@ const Gallary: React.FC<GallaryInterface> = () => {
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
 
   useEffect(() => {
-    fetchGallaryImage();
+    fetchGallaryImages();
   }, []);
 
-  const fetchGallaryImage = async () => {
+  const fetchGallaryImages = async () => {
     try {
-      const response = await fetch(`${apiUrl}/gallary`);
-      if (response.ok) {
-        const data = await response.json();
-        setGallaryImage(data);
+      const gallaryRef = ref(db, 'gallary');
+      const snapshot = await get(gallaryRef);
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const gallaryArray = data ? Object.keys(data).map(key => ({
+          id: key,
+          ...data[key],
+        })) : [];
+        setGallaryImage(gallaryArray);
+      } else {
+        console.error("No gallary images available");
       }
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error("Error fetching gallary images:", error);
     }
   };
 

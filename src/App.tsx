@@ -44,7 +44,7 @@ function App() {
         }} isOpen={true} />} />
         <Route path="/couponAdd" element={<CouponAdd onClose={function (): void {
           throw new Error("Function not implemented.");
-        }} isOpen={false} />} />
+        }} isOpen={true} />} />
         <Route path="/couponAdd/:updateId" element={<CouponAdd onClose={function (): void {
           throw new Error("Function not implemented.");
         }} isOpen={true} />} />

@@ -2,7 +2,7 @@ import { DummyImg } from "../Config/images";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl";
 import Container from "../Container";
 
 function Coupons() {
@@ -16,9 +16,9 @@ function Coupons() {
     navigate(`/couponAdd/${id}`);
   };
 
-  const handleDeleteCoupons = async (id: any) => {
+  const handleDeleteCoupons = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/coupons/${id}`, {
+      const response = await fetch(`${firebaseDatabaseURL}/coupons/${id}.json`, {
         method: "DELETE",
       });
       if (response.ok) {
@@ -32,9 +32,9 @@ function Coupons() {
     navigate(`/coupons`);
   };
 
-  const handleCouponView = (id: string) => {
-    navigate(`/couponView/${id}`, { state: { couponId: id } });
-  };
+  // const handleCouponView = (id: string) => {
+  //   navigate(`/couponView/${id}`, { state: { couponId: id } });
+  // };
 
   useEffect(() => {
     fetchCoupons();
@@ -42,10 +42,11 @@ function Coupons() {
 
   const fetchCoupons = async () => {
     try {
-      const response = await fetch(`${apiUrl}/coupons`);
+      const response = await fetch(`${firebaseDatabaseURL}/coupons.json`);
       if (response.ok) {
         const data = await response.json();
-        setCoupons(data);
+        const couponsArray = data ? Object.keys(data).map(key => ({ id: key, ...data[key] })) : [];
+        setCoupons(couponsArray);
       }
     } catch (error) {
       console.error("Error fetching Coupons:", error);
@@ -76,7 +77,7 @@ function Coupons() {
             {coupons.map((item) => (
               <div
                 className="sm:w-1/5  mb-10 flex-col  w-full cursor-pointer"
-                onClick={() => handleCouponView(item.id)}
+                // onClick={() => handleCouponView(item.id)}
                 key={item.id}
                 style={{ fontFamily: "Montserrat Alternates" }}
               >
@@ -104,7 +105,6 @@ function Coupons() {
                     <button className="">
                       <i
                         className="fa-solid fa-trash fa-lg"
-                        onClick={() => handleDeleteCoupons(item.id)}
                         style={{ color: "#d4d9de" }}
                       ></i>
                     </button>
@@ -116,7 +116,6 @@ function Coupons() {
                     <button className="">
                       <i
                         className="fa-solid fa-pen fa-lg"
-                        onClick={() => handleUpdateCoupons(item.id)}
                         style={{ color: "#d4d9de" }}
                       ></i>
                     </button>

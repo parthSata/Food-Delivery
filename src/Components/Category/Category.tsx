@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoriesData } from "../Category/Home";
 import { Product } from "../Products/ProductAdd";
-import apiUrl from "../Config/apiUrl";
 import Container from "../Container";
+import { db } from '../../Firebase/firebase';
+import { ref, onValue, remove } from 'firebase/database';
 // import { Loaders } from '../Config/images'
 
+
+
 function Category() {
-  const { CategoryId } = useParams();
+  const { CategoryId } = useParams<{ CategoryId?: any }>();
   const navigate = useNavigate();
   const [categoryData, setCategoryData] = useState<CategoriesData>({
     id: "",
@@ -23,66 +26,60 @@ function Category() {
   useEffect(() => {
     if (CategoryId) {
       fetchCategoryData(CategoryId);
-    }
-  }, []);
-
-  const fetchCategoryData = async (id: any) => {
-    // setLoader(true);
-    try {
-      const response = await fetch(`${apiUrl}/categories/${id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setCategoryData(data);
-      }
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    } finally {
-      // setLoader(false)
-    }
-  };
-
-  const handleAddProduct = (id: any) => {
-    navigate(`/productsAdd/${id}`, { state: { CategoryId } });
-  };
-
-  useEffect(() => {
-    if (CategoryId) {
-      fetchProducts();
+      fetchProducts(CategoryId);
     }
   }, [CategoryId]);
 
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/products`);
-      if (response.ok) {
-        const data = await response.json();
-        const filteredProducts = data.filter(
-          (product: any) => product.categoryId === CategoryId
-        );
-        setProducts(filteredProducts);
+  const fetchCategoryData = (id: string) => {
+    const categoryRef = ref(db, `categories/${id}`);
+    onValue(categoryRef, (snapshot) => {
+      const data = snapshot.val();
+      setCategoryData({ id, ...data });
+    }, {
+      onlyOnce: true
+    });
+  };
+
+  const fetchProducts = (categoryId: string) => {
+    const productsRef = ref(db, 'products');
+    onValue(productsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (!data) {
+        console.error("Data is null or undefined");
+        return;
       }
-    } catch (error) {
-      console.error("Error fetching Products:", error);
-    }
+
+      const productsData = Object.keys(data).map((key) => ({
+        id: key,
+        ...data[key],
+      }));
+
+      const filteredProductsData = productsData.filter(
+        (product) => product.categoryId === categoryId
+      );
+      setProducts(filteredProductsData);
+    }, {
+      onlyOnce: true
+    });
   };
 
-  const handleUpdateProduct = (id: any) => {
-    navigate(`/productsAdd/${id}`, { state: { CategoryId: CategoryId } });
+  const handleAddProduct = (id: string) => {
+    navigate(`/productsAdd/${id}`, { state: { CategoryId } });
   };
 
-  const handleDeleteProduct = async (id: any) => {
-    try {
-      const response = await fetch(`${apiUrl}/products/${id}`, {
-        method: "DELETE",
+  const handleUpdateProduct = (id: string) => {
+    navigate(`/productsAdd/${id}`, { state: { CategoryId } });
+  };
+
+  const handleDeleteProduct = (id: string) => {
+    const productRef = ref(db, `products/${id}`);
+    remove(productRef)
+      .then(() => {
+        fetchProducts(CategoryId!);
+      })
+      .catch((error) => {
+        console.error("Error deleting product:", error);
       });
-      if (response.ok) {
-        fetchProducts();
-      } else {
-        console.error("Failed to delete Products:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error deleting Products:", error);
-    }
     navigate(`/category/${CategoryId}`);
   };
 
@@ -125,7 +122,7 @@ function Category() {
                 >
                   <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                     {/* @ts-ignore */}
-                    <img src={item.images[0]} alt="" className="h-20" />
+                    <img src={item.images?.[0]} alt="" className="h-20" />
                     <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
                       {item.name}{" "}
                     </p>
