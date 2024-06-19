@@ -3,25 +3,20 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from 'uuid';
 import { CategoriesData } from "./Home";
-import firebaseDatabaseURL from '../Config/apiUrl'
-console.log("🚀 ~ firebaseDatabaseURL:", firebaseDatabaseURL)
+import { db } from '../../Firebase/firebase';
+import { set, ref, onValue, update } from 'firebase/database';
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
   id: string
+  onClose: () => void;
 }
 
-export const firebaseConfig = {
-  apiKey: "AIzaSyCO9lm7TAT-W757pmY_fT1xZIqb2kPQ_1A",
-  authDomain: "food-delivery-backend-9cdf5.firebaseapp.com",
-  projectId: "food-delivery-backend-9cdf5",
-  storageBucket: "food-delivery-backend-9cdf5.appspot.com",
-  messagingSenderId: "385448496698",
-  appId: "1:385448496698:web:e0d7cd0878285f96126f03",
-  measurementId: "G-S7CKGELNXB",
-};
 
-const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
+
+
+
+const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const [category, setCategory] = useState<CategoriesData>({
@@ -36,6 +31,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
+
   useEffect(() => {
     if (id) {
       fetchCategoryById(id);
@@ -43,17 +39,18 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
   }, [id]);
 
   const fetchCategoryById = async (id: string) => {
-    try {
-      const response = await fetch(`${firebaseDatabaseURL}/categories/${id}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch category");
+    const categoryRef = ref(db, `categories/${id}`);
+    onValue(categoryRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        setCategory(data as CategoriesData);
+        setImagePreview(data.imageUrl || null);
+      } else {
+        toast.error("Error fetching category.");
       }
-      const data = await response.json();
-      setCategory(data as CategoriesData);
-      setImagePreview(data.imageUrl || null);
-    } catch (error) {
-      toast.error("Error fetching category.");
-    }
+    }, {
+      onlyOnce: true
+    });
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
@@ -79,22 +76,13 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     const updatedCategory = { ...category, imageUrl };
 
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/categories/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedCategory),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update category");
-      }
-
+      const categoryRef = ref(db, `categories/${id}`);
+      await update(categoryRef, updatedCategory);
       toast.success('Category successfully updated');
     } catch (error) {
       toast.error("Error updating category.");
     }
+    onClose()
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -124,25 +112,15 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id }) => {
     };
 
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/categories.json`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCategory),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to add category");
-      }
-
+      const categoryRef = ref(db, `categories/${newCategory.id}`);
+      await set(categoryRef, newCategory);
       toast.success("Category added successfully!");
       onAddCategory(newCategory);
     } catch (error) {
       toast.error("Error adding category.");
     }
-
     resetForm();
+    onClose()
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

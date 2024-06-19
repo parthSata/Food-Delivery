@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Coupon } from "./CouponAdd";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl";
 import Container from "../Container";
 
 function CouponView() {
@@ -18,37 +18,39 @@ function CouponView() {
 
   useEffect(() => {
     fetchCouponData();
-  }, []);
+  }, [couponId]);
 
-  const handleUpdateCoupons = (id: any) => {
+  const handleUpdateCoupons = (id: string) => {
     navigate(`/couponAdd/${id}`);
   };
 
-  const handleDeleteCoupons = async (id: any) => {
+  const handleDeleteCoupons = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/coupons/${id}`, {
+      const response = await fetch(`${firebaseDatabaseURL}/coupons/${id}.json`, {
         method: "DELETE",
       });
       if (response.ok) {
-        fetchCouponData();
+        navigate(`/coupons`);
       } else {
-        console.error("Failed to delete Coupons:", response.statusText);
+        console.error("Failed to delete coupon:", response.statusText);
       }
     } catch (error) {
-      console.error("Error deleting Coupons:", error);
+      console.error("Error deleting coupon:", error);
     }
-    navigate(`/coupons`);
   };
 
   const fetchCouponData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/coupons/${couponId}`);
+      const response = await fetch(`${firebaseDatabaseURL}/coupons/${couponId}.json`);
       if (response.ok) {
         const data = await response.json();
-        setCouponDetail(data);
+        setCouponDetail({ id: couponId, ...data });
       }
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error fetching coupon data:", error);
+    }
   };
+
   return (
     <div>
       <Container>

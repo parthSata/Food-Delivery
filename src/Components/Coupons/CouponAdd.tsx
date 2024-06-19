@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl";
 
 export interface Coupon {
   id: string;
@@ -38,14 +38,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     return value === "" || value === null || value === undefined;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const updatedCoupons: any = { ...coupon };
-    updatedCoupons[name] = value;
-
-    setCoupon(updatedCoupons);
+    setCoupon(prevCoupon => ({
+      ...prevCoupon,
+      [name]: value,
+    }));
   };
 
   useEffect(() => {
@@ -56,28 +54,27 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
   const fetchCouponData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/coupons/${updateId}`);
+      const response = await fetch(`${firebaseDatabaseURL}/coupons/${updateId}.json`);
       if (response.ok) {
         const data = await response.json();
         setCoupon(data);
+      } else {
+        console.error("Failed to fetch coupon data:", response.statusText);
       }
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error fetching coupon data:", error);
+    }
   };
 
   const handleUpdateCoupon = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
-    if (isFieldEmpty(coupon.offerCode))
-      newErrors.offerCode = "Offer Code is required";
-    if (isFieldEmpty(coupon.discount))
-      newErrors.discount = "Discount  is required";
-    if (isFieldEmpty(coupon.offerPrice))
-      newErrors.offerPrice = "Offer Price is required";
-    if (isFieldEmpty(coupon.expiryDate))
-      newErrors.expiryDate = "Expiry Date is required";
-    if (isFieldEmpty(coupon.discription))
-      newErrors.discription = "Discription is required";
+    if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
+    if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount is required";
+    if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
+    if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
+    if (isFieldEmpty(coupon.discription)) newErrors.discription = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -85,11 +82,11 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     }
     setErrors({});
 
-    const updatedCoupon = { ...coupon, id: coupon.id };
+    const updatedCoupon = { ...coupon };
 
     try {
       const response = await fetch(
-        `${apiUrl}/coupons/${updateId}`,
+        `${firebaseDatabaseURL}/coupons/${updateId}.json`,
         {
           method: "PUT",
           headers: {
@@ -99,9 +96,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
         }
       );
 
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
+      if (response.ok) {
         toast.success("Coupon successfully updated");
         navigate(`/coupons`);
       } else {
@@ -116,17 +111,11 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
-
-    if (isFieldEmpty(coupon.offerCode))
-      newErrors.offerCode = "Offer Code is required";
-    if (isFieldEmpty(coupon.discount))
-      newErrors.discount = "Discount is required";
-    if (isFieldEmpty(coupon.offerPrice))
-      newErrors.offerPrice = "Offer Price is required";
-    if (isFieldEmpty(coupon.expiryDate))
-      newErrors.expiryDate = "Expiry Date is required";
-    if (isFieldEmpty(coupon.discription))
-      newErrors.discription = "Discription is required";
+    if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
+    if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount is required";
+    if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
+    if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
+    if (isFieldEmpty(coupon.discription)) newErrors.discription = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -140,17 +129,23 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(`${apiUrl}/coupons`, {
+      const response = await fetch(`${firebaseDatabaseURL}/coupons.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(newCoupon),
       });
-      const result = await response.json();
-      toast.success("Coupon Added", result);
-    } catch (error) { }
-    navigate(`/coupons`);
+
+      if (response.ok) {
+        toast.success("Coupon added successfully");
+        navigate(`/coupons`);
+      } else {
+        toast.warn("Failed to add coupon!");
+      }
+    } catch (error) {
+      toast.error("Error adding coupon.");
+    }
     setCoupon({
       id: "",
       offerCode: "",
@@ -161,6 +156,8 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     });
     onClose();
   };
+
+
   return (
     <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
       <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
@@ -191,13 +188,13 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
               type="text"
               placeholder="Offer Code Here.."
               onChange={handleChange}
-              value={coupon.offerCode}
+              value={coupon?.offerCode}
               name="offerCode"
               className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
             />
             {errors.offerCode && (
               <span
-                className={`text-red-600 text-sm ${coupon.offerCode ? "" : "hidden"
+                className={`text-red-600 text-sm ${coupon?.offerCode ? "" : "hidden"
                   }}`}
               >
                 {errors.offerCode}
@@ -211,12 +208,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
               placeholder="Discount Here.."
               name="discount"
               onChange={handleChange}
-              value={coupon.discount}
+              value={coupon?.discount}
               className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
             />
             {errors.discount && (
               <span
-                className={`text-red-600 text-sm ${coupon.discount ? "" : "hidden"
+                className={`text-red-600 text-sm ${coupon?.discount ? "" : "hidden"
                   }}`}
               >
                 {errors.discount}
@@ -230,12 +227,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
               placeholder="Offer Price Here.."
               name="offerPrice"
               onChange={handleChange}
-              value={coupon.offerPrice}
+              value={coupon?.offerPrice}
               className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
             />
             {errors.offerPrice && (
               <span
-                className={`text-red-600 text-sm ${coupon.offerPrice ? "" : "hidden"
+                className={`text-red-600 text-sm ${coupon?.offerPrice ? "" : "hidden"
                   }}`}
               >
                 {errors.offerPrice}
@@ -249,12 +246,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
               placeholder="Date Here.."
               name="expiryDate"
               onChange={handleChange}
-              value={coupon.expiryDate}
+              value={coupon?.expiryDate}
               className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] placeholder:text- focus:outline-none border-gray-300 "
             />
             {errors.expiryDate && (
               <span
-                className={`text-red-600 text-sm ${coupon.expiryDate ? "" : "hidden"
+                className={`text-red-600 text-sm ${coupon?.expiryDate ? "" : "hidden"
                   }}`}
               >
                 {errors.expiryDate}
@@ -268,12 +265,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
               name="discription"
               rows={2}
               onChange={handleChange}
-              value={coupon.discription}
+              value={coupon?.discription}
               className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
             />
             {errors.discription && (
               <span
-                className={`text-red-600 text-sm ${coupon.discription ? "" : "hidden"
+                className={`text-red-600 text-sm ${coupon?.discription ? "" : "hidden"
                   }}`}
               >
                 {errors.discription}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import apiUrl from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase';
+import { set, ref } from 'firebase/database';
 
 export interface Gallary {
   id: string;
@@ -17,7 +17,6 @@ interface AddProps {
 }
 
 const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
-  const { updateId } = useParams();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [gallary, setGallary] = useState<Gallary>({
     id: "",
@@ -59,46 +58,6 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     return value === "" || value === null || value === undefined;
   };
 
-  const handleUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newErrors: Partial<Gallary> = {};
-    if (isFieldEmpty(gallary.title)) newErrors.title = "Title is required";
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    setErrors({});
-
-    let imageUrl: any = gallary.images;
-    if (imageFile) {
-      imageUrl = await uploadImageToCloudinary(imageFile);
-    }
-
-    const updatedGallary = { ...gallary, imageUrl };
-
-    try {
-      const response = await fetch(`${apiUrl}/gallary/${updateId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedGallary),
-      });
-
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
-        toast.success("Gallary successfully updated");
-      } else {
-        toast.warn("Failed to update!");
-      }
-    } catch (error) {
-      toast.error("Error updating Gallary.");
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Partial<Gallary> = {};
@@ -111,9 +70,8 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     }
     setErrors({});
 
-    let imageUrl: string | string[] = gallary.images;
+    let imageUrl: any = gallary.images;
     if (imageFile) {
-      // @ts-ignore
       imageUrl = await uploadImageToCloudinary(imageFile);
       if (!imageUrl) {
         toast.error("Error uploading image.");
@@ -123,36 +81,29 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
 
     const newGallary: Gallary = {
       ...gallary,
-      id: uuidv4(),
+      id: gallary.id || uuidv4(),
       images: Array.isArray(imageUrl) ? imageUrl : [imageUrl],
     };
 
     try {
-      const response = await fetch(`${apiUrl}/gallary`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newGallary),
-      });
-
-      if (response.ok) {
-        toast.success("Title added successfully!");
-        setGallary(newGallary);
-      } else {
-        toast.error("Failed to add Title.");
-      }
+      const gallaryRef = ref(db, `gallary/${newGallary.id}`);
+      await set(gallaryRef, newGallary);
+      toast.success("Gallery item saved successfully!");
+      setGallary(newGallary);
     } catch (error) {
-      toast.error("Error adding Title.");
+      toast.error("Failed to save gallery item.");
+      console.error("Error saving gallery item:", error);
     }
+
     setGallary({
       id: "",
       images: [],
       title: "",
     });
+    setImageFile(null);
+    setImagePreview(null);
     onClose();
   };
-
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -273,30 +224,16 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               </div>
             </div>
             <div className="flex justify-center">
-              {!updateId ? (
-                <button
-                  className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
-                  style={{
-                    boxShadow: "2px 2px 25px 2px #94CD0099",
-                    fontFamily: "Bai Jamjuree",
-                  }}
-                  onClick={handleSubmit}
-                >
-                  Save
-                </button>
-              ) : (
-                <button
-                  type="submit"
-                  className={`rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] `}
-                  style={{
-                    boxShadow: "2px 2px 25px 2px #94CD0099",
-                    fontFamily: "Bai Jamjuree",
-                  }}
-                  onClick={handleUpdate}
-                >
-                  Update
-                </button>
-              )}
+              <button
+                className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
+                style={{
+                  boxShadow: "2px 2px 25px 2px #94CD0099",
+                  fontFamily: "Bai Jamjuree",
+                }}
+                onClick={handleSubmit}
+              >
+                Save
+              </button>
               <ToastContainer
                 position="top-right"
                 autoClose={1000}

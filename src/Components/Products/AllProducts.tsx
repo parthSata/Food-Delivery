@@ -2,7 +2,8 @@ import DummyImg from "../../assets/All Product/DummyFood.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
-import apiUrl from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase';
+import { ref, remove, get } from 'firebase/database';
 import Container from "../Container";
 
 function AllProducts() {
@@ -14,19 +15,28 @@ function AllProducts() {
   const handleAddProduct = (id: any) => {
     navigate(`/productsAdd/${id}`);
   };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${apiUrl}/products`);
-      if (response.ok) {
-        const data = await response.json();
-        setProducts(data);
+      const productsRef = ref(db, 'products');
+      const snapshot = await get(productsRef);
+      
+      if (snapshot.exists()) {
+        const productsData = snapshot.val();
+        const productsArray = Object.keys(productsData).map(key => ({
+          id: key,
+          ...productsData[key],
+        }));
+        setProducts(productsArray);
+      } else {
+        console.error("No products available");
       }
     } catch (error) {
-      console.error("Error fetching Products:", error);
+      console.error("Error fetching products:", error);
     }
   };
 
@@ -37,18 +47,18 @@ function AllProducts() {
 
   const handleDeleteProduct = async (id: any) => {
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/products/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        fetchProducts();
-      } else {
-        console.error("Failed to delete Products:", response.statusText);
-      }
+      // Delete product from Firebase Realtime Database
+      const productRef = ref(db, `products/${id}`);
+      await remove(productRef);
+
+      // Fetch updated product list
+      fetchProducts();
+
+      // Navigate to products page
+      navigate(`/products`);
     } catch (error) {
-      console.error("Error deleting Products:", error);
+      console.error("Error deleting product:", error);
     }
-    navigate(`/products`);
   };
 
   const handleProductView = (id: string) => {
@@ -84,7 +94,7 @@ function AllProducts() {
               >
                 <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                   {/* @ts-ignore */}
-                  <img src={item.images[0]} alt="" className="h-20" />
+                  <img src={item.images?.[0]} alt="" className="h-20" />
                   <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
                     {item.name}
                   </p>

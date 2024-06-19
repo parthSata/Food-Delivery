@@ -4,7 +4,8 @@ import Star from "../../assets/Restaurant/Star (2).png";
 import { Restaurant as RestaurantInterface } from "./AddRestaurants";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import apiUrl from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase';
+import { ref, onValue, remove } from 'firebase/database';
 import Container from "../Container";
 
 function Restaurant() {
@@ -22,62 +23,45 @@ function Restaurant() {
     longitude: "",
   });
 
-
-
-  useEffect(() => {
-    fetchRestaurantList();
-  }, []);
-
-  const fetchRestaurantList = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/restaurants`);
-      if (response.ok) {
-        const data = await response.json();
-        setRestarantList(data);
-      }
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-    }
-  };
-
   const handleAddRestaurant = (id: any) => {
     navigate(`/addrestaurants/${id}`);
   };
 
   useEffect(() => {
-    fetchRestaurant();
+    fetchRestaurants();
   }, []);
 
-  const fetchRestaurant = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/restaurants`);
-      if (response.ok) {
-        const data = await response.json();
-        setRestarants(data);
+  const fetchRestaurants = async () => {
+    const restaurantRef = ref(db, 'restaurants');
+    onValue(restaurantRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const restaurantArray: any = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        setRestarants(restaurantArray);
+        setRestarantList(restaurantArray);
       }
-    } catch (error) {
-      console.error("Error fetching Restaurant:", error);
-    }
+    }, (error) => {
+      console.error("Error fetching restaurants:", error);
+    });
   };
 
   const handleUpdateRestaurant = (id: any) => {
     navigate(`/addrestaurants/${id}`);
   };
 
-  const handleDeleteRestaurant = async (id: any) => {
+  const handleDeleteRestaurant = async (id: string) => {
+    const restaurantRef = ref(db, `restaurants/${id}`);
     try {
-      const response = await fetch(`https://static-food-delivery-backend.vercel.app/restaurants/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        fetchRestaurant();
-      } else {
-        console.error("Failed to delete Restaurant:", response.statusText);
-      }
+      await remove(restaurantRef);
+      // Update state after successful deletion
+      fetchRestaurants();
+      navigate(`/restaurants`);
     } catch (error) {
-      console.error("Error deleting Restaurant:", error);
+      console.error("Error deleting restaurant:", error);
     }
-    navigate(`/restaurants`);
   };
 
   return (

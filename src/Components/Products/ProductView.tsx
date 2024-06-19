@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
-import apiUrl from "../Config/apiUrl";
+import firebaseDatabaseURL from "../Config/apiUrl"; 
 import Container from "../Container";
+
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [productImages, setProductImages] = useState<string[]>([]);
-  const { productId } = useParams();
+  const { productId } = useParams<{ productId?: string }>();
   const [quantity, setQuantity] = useState<number>(1);
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -26,23 +27,33 @@ const ProductView: React.FC = () => {
 
 
   useEffect(() => {
-    fetchProductData();
-  }, []);
+    if (productId) {
+      fetchProductData(productId);
+    }
+  }, [productId]);
 
-  const fetchProductData = async () => {
+  const fetchProductData = async (id: string) => {
     try {
-      const response = await fetch(`${apiUrl}/products/${productId}`);
+      const response = await fetch(`${firebaseDatabaseURL}/products/${id}.json`);
       if (response.ok) {
         const data = await response.json();
-        setProduct(data);
-        setProductImages(data.images || []);
-        if (data.images && data.images.length > 0) {
-          setPreviewImage(data.images[0]);
+        if (data) {
+          setProduct(data);
+          setProductImages(data.images || []);
+          if (data.images && data.images.length > 0) {
+            setPreviewImage(data.images[0]);
+          }
+        } else {
+          console.log("No such document!");
         }
+      } else {
+        console.error("Error fetching product: ", response.statusText);
       }
-    } catch (error) { }
+    } catch (error) {
+      console.error("Error fetching product:", error);
+    }
   };
-
+  
   const incrementQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };

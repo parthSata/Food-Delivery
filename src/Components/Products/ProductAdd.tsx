@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import apiUrl from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase';
+import { set, ref, onValue, update } from 'firebase/database';
 import Container from "../Container";
 
 export interface Product {
@@ -23,8 +24,7 @@ const ProductAdd: React.FC = () => {
   const { updateId } = useParams();
   const location = useLocation();
   const { CategoryId } = location.state || [];
-  // @ts-ignore
-  const Categoryid = location.state?.CategoryId;
+  location.state?.CategoryId;
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const [errors, setErrors] = useState<Partial<Product>>({});
@@ -48,18 +48,14 @@ const ProductAdd: React.FC = () => {
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const newErrors: Partial<Product> = {};
     if (isFieldEmpty(product.name)) newErrors.name = "Product Name is required";
     if (isFieldEmpty(product.price)) newErrors.price = "Price is required";
-    if (isFieldEmpty(product.discountPrice))
-      newErrors.discountPrice = "Discount Price is required";
+    if (isFieldEmpty(product.discountPrice)) newErrors.discountPrice = "Discount Price is required";
     if (isFieldEmpty(product.weight)) newErrors.weight = "Weight is required";
     if (isFieldEmpty(product.unit)) newErrors.unit = "Unit is required";
-    if (isFieldEmpty(product.packagingCharges))
-      newErrors.packagingCharges = "Packaging Charges is required";
-    if (isFieldEmpty(product.description))
-      newErrors.description = "Discription is required";
+    if (isFieldEmpty(product.packagingCharges)) newErrors.packagingCharges = "Packaging Charges is required";
+    if (isFieldEmpty(product.description)) newErrors.description = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -72,28 +68,12 @@ const ProductAdd: React.FC = () => {
       imageUrl = await uploadImageToCloudinary(imageFile);
     }
 
-    const updatedProducts = { ...product, imageUrl, id: product.id };
+    const updatedProduct = { ...product, images: imageUrl, id: product.id };
 
     try {
-      const response = await fetch(
-        `${apiUrl}/products/${updateId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedProducts),
-        }
-      );
-
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
-        toast.success("Products successfully updated");
-        navigate(`/category/${CategoryId}`);
-      } else {
-        toast.warn("Failed to update!");
-      }
+      await update(ref(db, `products/${updateId}`), updatedProduct);
+      toast.success("Product successfully updated");
+      navigate(`/category/${CategoryId}`);
     } catch (error) {
       toast.error("Error updating product.");
     }
@@ -105,18 +85,55 @@ const ProductAdd: React.FC = () => {
     }
   }, [updateId]);
 
-  const fetchProductData = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/products/${updateId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setProduct(data);
+  const fetchProductData = () => {
+    const productRef = ref(db, `products/${updateId}`);
+    onValue(productRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
         setProductImages(data.images || []);
         if (data.images && data.images.length > 0) {
           setPreviewImage(data.images[0]);
         }
+        setProduct(data);
       }
-    } catch (error) { }
+    }, {
+      onlyOnce: true
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors: Partial<Product> = {};
+
+    if (isFieldEmpty(product.name)) newErrors.name = "Product Name is required";
+    if (isFieldEmpty(product.price)) newErrors.price = "Price is required";
+    if (isFieldEmpty(product.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+    if (isFieldEmpty(product.weight)) newErrors.weight = "Weight is required";
+    if (isFieldEmpty(product.unit)) newErrors.unit = "Unit is required";
+    if (isFieldEmpty(product.packagingCharges)) newErrors.packagingCharges = "Packaging Charges is required";
+    if (isFieldEmpty(product.description)) newErrors.description = "Description is required";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    setErrors({});
+
+    const newProduct: Product = {
+      ...product,
+      id: uuidv4(),
+      categoryId: CategoryId,
+    };
+
+    try {
+      await set(ref(db, `products/${newProduct.id}`), newProduct);
+      toast.success("Product Added");
+      CategoryId ? navigate(`/category/${CategoryId}`) : navigate('/products');
+    } catch (error) {
+      toast.error("Error adding product.");
+    }
+    resetform();
   };
 
   const resetform = () => {
@@ -134,9 +151,7 @@ const ProductAdd: React.FC = () => {
     });
   };
 
-  const uploadImageToCloudinary = async (
-    file: File
-  ): Promise<string | null> => {
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
     try {
       const data = new FormData();
       data.append("file", file);
@@ -144,13 +159,10 @@ const ProductAdd: React.FC = () => {
       data.append("cloud_name", cloudName);
       data.append("folder", "Products");
 
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-          method: "POST",
-          body: data,
-        }
-      );
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: data,
+      });
 
       const imgData = await response.json();
       return imgData.url;
@@ -159,10 +171,7 @@ const ProductAdd: React.FC = () => {
     }
   };
 
-  const handleImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     setImageFile(file);
@@ -177,7 +186,6 @@ const ProductAdd: React.FC = () => {
         }));
         setProductImages((prevImages) => {
           const updatedImages = [...prevImages];
-          // @ts-ignore
           updatedImages[index] = imageUrl;
           return updatedImages;
         });
@@ -187,9 +195,7 @@ const ProductAdd: React.FC = () => {
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     const updatedProducts: any = { ...product };
     updatedProducts[name] = value;
@@ -201,104 +207,35 @@ const ProductAdd: React.FC = () => {
     return value === "" || value === null || value === undefined;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const newErrors: Partial<Product> = {};
-
-    switch (true) {
-      case isFieldEmpty(product.name):
-        newErrors.name = "Product Name is required";
-        break;
-      case isFieldEmpty(product.price):
-        newErrors.price = "Price is required";
-        break;
-      case isFieldEmpty(product.discountPrice):
-        newErrors.discountPrice = "Discount Price is required";
-        break;
-      case isFieldEmpty(product.weight):
-        newErrors.weight = "Weight is required";
-        break;
-      case isFieldEmpty(product.unit):
-        newErrors.unit = "Unit is required";
-        break;
-      case isFieldEmpty(product.packagingCharges):
-        newErrors.packagingCharges = "Packaging Charges is required";
-        break;
-      case isFieldEmpty(product.description):
-        newErrors.description = "Discription  is required";
-        break;
-
-      default:
-        break;
-    }
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-    setErrors({});
-
-    const newProduct: Product = {
-      ...product,
-      id: uuidv4(),
-      categoryId: CategoryId,
-    };
-
+  const deleteImageFromCloudinary = async (imageUrl: string) => {
     try {
-      const response = await fetch(`${apiUrl}/products`, {
+      const publicId = extractPublicIdFromUrl(imageUrl);
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newProduct),
+        body: JSON.stringify({ public_id: publicId }),
       });
-      const result = await response.json();
-      toast.success("Product Added", result);
-      CategoryId ? navigate(`/category/${CategoryId}`) : navigate('/products')
-    } catch (error) { }
-    resetform();
-  };
 
-  const onCloseDelete = async (imageUrl: string, index: number) => {
-    try {
-      const publicId = extractPublicIdFromUrl(imageUrl);
-      const response = await fetch(
-        `${apiUrl}/products/delete-image`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ publicId }),
-        }
-      );
-
-      const result = await response.json();
-      if (result.message === "Image deleted successfully") {
-        const newImages = [...product.images];
-        newImages.splice(index, 1);
-        setProduct((prevState) => ({
-          ...prevState,
-          images: newImages,
-        }));
-        setProductImages(newImages);
-        toast.success(result.message);
+      const data = await response.json();
+      if (data.result === "ok") {
+        console.log(`Image ${publicId} deleted successfully from Cloudinary`);
       } else {
-        toast.warn(result.message);
+        console.warn(`Failed to delete image ${publicId} from Cloudinary`);
       }
     } catch (error) {
-      toast.error("Error deleting image.");
+      console.error("Error deleting image from Cloudinary:", error);
     }
   };
 
-  const extractPublicIdFromUrl = (url: string) => {
+  const extractPublicIdFromUrl = (url: string): string => {
     const parts = url.split("/");
-    const versionIndex = parts.findIndex((part) => part.startsWith("v"));
-    const publicIdParts = parts.slice(versionIndex + 1);
-    const publicId = publicIdParts.join("/").split(".")[0];
+    const fileName = parts[parts.length - 1];
+    const publicId = fileName.split(".")[0];
     return publicId;
   };
+
 
   return (
     <>
@@ -335,7 +272,7 @@ const ProductAdd: React.FC = () => {
                             className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
                             onClick={(e) => {
                               e.stopPropagation();
-                              onCloseDelete(productImages[index], index);
+                              deleteImageFromCloudinary(product.id);
                             }}
                           >
                             <span className="sr-only ">Close</span>

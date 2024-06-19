@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import apiUrl from "../Config/apiUrl";
+import { db } from '../../Firebase/firebase';
+import { set, ref, onValue, update } from 'firebase/database';
 import Container from "../Container";
 
 export interface Restaurant {
@@ -19,6 +20,7 @@ export interface Restaurant {
 }
 
 function AddRestaurants() {
+  // @ts-ignore
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [restaurantImages, setRestaurantImages] = useState<string[]>([]);
@@ -39,15 +41,13 @@ function AddRestaurants() {
     longitude: "",
   });
 
-  const uploadImageToCloudinary = async (
-    file: File
-  ): Promise<string | null> => {
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
     try {
       const data = new FormData();
       data.append("file", file);
       data.append("upload_preset", presetKey);
       data.append("cloud_name", cloudName);
-      data.append("folder", "Restaurants");
+      data.append("folder", "Products");
 
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
@@ -60,19 +60,17 @@ function AddRestaurants() {
       const imgData = await response.json();
       return imgData.url;
     } catch (error) {
+      console.error("Error uploading image:", error);
       return null;
     }
   };
 
-  const handleImageUpload = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     setImageFile(file);
     if (file) {
-      const imageUrl: any = await uploadImageToCloudinary(file);
+      const imageUrl = await uploadImageToCloudinary(file);
       if (imageUrl) {
         const newImages = [...restaurant.images];
         newImages[index] = imageUrl;
@@ -80,35 +78,26 @@ function AddRestaurants() {
           ...prevState,
           images: newImages,
         }));
-        setRestaurantImages((prevImages) => {
-          const updatedImages = [...prevImages];
-          // @ts-ignore
-          updatedImages[index] = imageUrl;
-          return updatedImages;
-        });
+        setRestaurantImages(newImages);
         setPreviewImage(imageUrl);
         e.target.disabled = true;
       }
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    const updatedRestaurants: any = { ...restaurant };
-    updatedRestaurants[name] = value;
-
-    setRestaurant(updatedRestaurants);
+    setRestaurant((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const isFieldEmpty = (value: string | number) => {
     return value === "" || value === null || value === undefined;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const validateFields = (): Partial<Restaurant> => {
     const newErrors: Partial<Restaurant> = {};
 
     if (isFieldEmpty(restaurant.restaurantName))
@@ -124,8 +113,15 @@ function AddRestaurants() {
     if (isFieldEmpty(restaurant.ratings))
       newErrors.ratings = "Ratings is required";
     if (isFieldEmpty(restaurant.description))
-      newErrors.description = "Discription is required";
+      newErrors.description = "Description is required";
 
+    return newErrors;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = validateFields();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -134,111 +130,74 @@ function AddRestaurants() {
 
     const newRestaurant: Restaurant = {
       ...restaurant,
-
       id: uuidv4(),
     };
 
     try {
-      const response = await fetch(`${apiUrl}/restaurants/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newRestaurant),
+      const restaurantRef = ref(db, `restaurants/${newRestaurant.id}`);
+      await set(restaurantRef, newRestaurant);
+
+      toast.success("Restaurant Added");
+      navigate(`/restaurants`);
+      setRestaurant({
+        id: "",
+        restaurantName: "",
+        address: "",
+        mobilenumber: 0,
+        ratings: 0,
+        description: "",
+        images: [],
+        latitude: "",
+        longitude: "",
       });
-      const result = await response.json();
-      toast.success("Restaurant Added", result);
-    } catch (error) { }
-    navigate(`/restaurants`);
-    setRestaurant({
-      id: "",
-      restaurantName: "",
-      address: "",
-      mobilenumber: 0,
-      ratings: 0,
-      description: "",
-      images: [],
-      latitude: "",
-      longitude: "",
-    });
+    } catch (error) {
+      console.error("Error adding restaurant:", error);
+      toast.error("Error adding restaurant");
+    }
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newErrors: Partial<Restaurant> = {};
-
-    if (isFieldEmpty(restaurant.restaurantName))
-      newErrors.restaurantName = "Restaurant Name is required";
-    if (isFieldEmpty(restaurant.address))
-      newErrors.address = "Address is required";
-    if (isFieldEmpty(restaurant.latitude))
-      newErrors.latitude = "Latitude is required";
-    if (isFieldEmpty(restaurant.longitude))
-      newErrors.longitude = "Longitude is required";
-    if (isFieldEmpty(restaurant.mobilenumber))
-      newErrors.mobilenumber = "Mobile Number is required";
-    if (isFieldEmpty(restaurant.ratings))
-      newErrors.ratings = "Ratings is required";
-    if (isFieldEmpty(restaurant.description))
-      newErrors.description = "Discription is required";
-
+    const newErrors = validateFields();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
     setErrors({});
 
-    let imageUrl: any = restaurant.images;
-    if (imageFile) {
-      imageUrl = await uploadImageToCloudinary(imageFile);
-    }
-
-    const updatedRestaurants = { ...restaurant, imageUrl, id: restaurant.id };
+    const updatedRestaurant = { ...restaurant };
 
     try {
-      const response = await fetch(
-        `https://static-food-delivery-backend.vercel.app/restaurants/${updateId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedRestaurants),
-        }
-      );
+      const restaurantRef = ref(db, `restaurants/${updateId}`);
+      await update(restaurantRef, updatedRestaurant);
 
-      if (response.status === 200) {
-        // @ts-ignore
-        const data = await response.json();
-        toast.success("Restaurant successfully updated");
-        navigate(`/restaurants`);
-      } else {
-        toast.warn("Failed to update!");
-      }
+      toast.success("Restaurant updated successfully");
+      navigate(`/restaurants`);
     } catch (error) {
-      toast.error("Error updating restaurant.");
+      console.error("Error updating restaurant:", error);
+      toast.error("Error updating restaurant");
     }
   };
 
   useEffect(() => {
     if (updateId) {
-      fetchRestaurantData();
+      fetchRestaurantData(updateId);
     }
   }, [updateId]);
 
-  const fetchRestaurantData = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/restaurants/${updateId}`);
-      if (response.ok) {
-        const data = await response.json();
+  const fetchRestaurantData = async (id: string) => {
+    const restaurantRef = ref(db, `restaurants/${id}`);
+    onValue(restaurantRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
         setRestaurant(data);
         setRestaurantImages(data.images || []);
         if (data.images && data.images.length > 0) {
           setPreviewImage(data.images[0]);
         }
       }
-    } catch (error) { }
+    });
   };
 
   return (
@@ -364,12 +323,12 @@ function AddRestaurants() {
                       type="text"
                       placeholder="Restaurant Name"
                       name="restaurantName"
-                      value={restaurant.restaurantName}
+                      value={restaurant?.restaurantName}
                       onChange={handleChange}
                     />
                     {errors.restaurantName && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.restaurantName ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.restaurantName ? "" : "hidden"
                           }}`}
                       >
                         {errors.restaurantName}
@@ -385,12 +344,12 @@ function AddRestaurants() {
                       type="text"
                       placeholder="Address"
                       name="address"
-                      value={restaurant.address}
+                      value={restaurant?.address}
                       onChange={handleChange}
                     />
                     {errors.address && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.address ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.address ? "" : "hidden"
                           }}`}
                       >
                         {errors.address}
@@ -406,12 +365,12 @@ function AddRestaurants() {
                       type="number"
                       placeholder="Latitude"
                       name="latitude"
-                      value={restaurant.latitude}
+                      value={restaurant?.latitude}
                       onChange={handleChange}
                     />
                     {errors.latitude && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.latitude ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.latitude ? "" : "hidden"
                           }}`}
                       >
                         {errors.latitude}
@@ -427,12 +386,12 @@ function AddRestaurants() {
                       type="number"
                       placeholder="Longitude"
                       name="longitude"
-                      value={restaurant.longitude}
+                      value={restaurant?.longitude}
                       onChange={handleChange}
                     />
                     {errors.longitude && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.longitude ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.longitude ? "" : "hidden"
                           }}`}
                       >
                         {errors.longitude}
@@ -449,12 +408,12 @@ function AddRestaurants() {
                       placeholder="Mobile Number"
                       name="mobilenumber"
                       maxLength={10}
-                      value={restaurant.mobilenumber}
+                      value={restaurant?.mobilenumber}
                       onChange={handleChange}
                     />
                     {errors.mobilenumber && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.mobilenumber ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.mobilenumber ? "" : "hidden"
                           }}`}
                       >
                         {errors.mobilenumber}
@@ -470,7 +429,7 @@ function AddRestaurants() {
                                         type="number"
                                         placeholder="Ratings"
                                         name="ratings"
-                                        value={restaurant.ratings}
+                                        value={restaurant?.ratings}
                                         onChange={handleChange}
                                     /> */}
                     <div className="flex items-center justify-start">
@@ -480,14 +439,14 @@ function AddRestaurants() {
                             type="radio"
                             name="ratings"
                             value={rating}
-                            checked={Number(restaurant.ratings) === rating}
+                            checked={Number(restaurant?.ratings) === rating}
                             onChange={handleChange}
                             className="hidden"
                             id={`star${rating}`}
                           />
                           <label htmlFor={`star${rating}`}>
                             <svg
-                              className={`h-8 w-8 cursor-pointer ${Number(restaurant.ratings) >= rating
+                              className={`h-8 w-8 cursor-pointer ${Number(restaurant?.ratings) >= rating
                                 ? "text-yellow-400"
                                 : "text-gray-400"
                                 }`}
@@ -503,7 +462,7 @@ function AddRestaurants() {
                     </div>
                     {errors.ratings && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.ratings ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.ratings ? "" : "hidden"
                           }}`}
                       >
                         {errors.ratings}
@@ -520,12 +479,12 @@ function AddRestaurants() {
                       placeholder="Type Here..."
                       rows={5}
                       name="description"
-                      value={restaurant.description}
+                      value={restaurant?.description}
                       onChange={handleChange}
                     />
                     {errors.description && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant.description ? "" : "hidden"
+                        className={`text-red-600 text-sm ${restaurant?.description ? "" : "hidden"
                           }}`}
                       >
                         {errors.description}
