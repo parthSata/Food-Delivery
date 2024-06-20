@@ -21,7 +21,7 @@ import Dashboard from "../../assets/HomePage/Dashboard.png";
 import Orders from "../../assets/HomePage/Orders.png";
 import Restaurant from "../../assets/HomePage/Restaurant.png";
 import Menu from "../../assets/HomePage/Menu.png";
-import Loaders from '../../assets/Loader.png'
+import Loaders from '../../assets/Loader.gif'
 
 
 
