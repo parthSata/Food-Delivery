@@ -5,6 +5,7 @@ import CouponAdd, { Coupon } from "./CouponAdd";
 import Container from "../Container";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
+import Loader from "../Loader";
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -12,15 +13,18 @@ function Coupons() {
   // @ts-ignore
   const { updateId } = useParams();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [isLoading, setisLoading] = useState(false)
 
   const handleUpdateCoupons = (id: any) => {
     navigate(`/couponAdd/${id}`);
   };
-  
+
   const handleCouponView = (id: string) => {
     navigate(`/couponView/${id}`, { state: { couponId: id } });
   };
   const handleDeleteCoupons = async (id: string) => {
+    setisLoading(true)
+
     try {
       const couponRef = ref(db, `coupons/${id}`);
       await remove(couponRef);
@@ -28,6 +32,7 @@ function Coupons() {
     } catch (error) {
       console.error("Error deleting Coupons:", error);
     }
+    setisLoading(false)
     navigate(`/coupons`);
   };
 
@@ -36,6 +41,8 @@ function Coupons() {
   }, []);
 
   const fetchCoupons = () => {
+    setisLoading(true)
+
     const couponsRef = ref(db, 'coupons');
     onValue(couponsRef, (snapshot) => {
       const data = snapshot.val();
@@ -48,6 +55,8 @@ function Coupons() {
     }, (error) => {
       console.error("Error fetching Coupons:", error);
     });
+    setisLoading(false)
+
   };
 
   const openDialog = () => setIsDialogOpen(true);
@@ -69,7 +78,7 @@ function Coupons() {
 
         {/* Coupons */}
 
-        <div className="">
+        <Loader isLoading={isLoading}>
           <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
             {coupons.map((item) => (
               <div
@@ -141,7 +150,7 @@ function Coupons() {
               </div>
             </div>
           </div>
-        </div>
+        </Loader>
 
         {isDialogOpen && (
           <CouponAdd isOpen={isDialogOpen} onClose={closeDialog} />

@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from '../../Firebase/firebase'; // Ensure this points to your Firebase initialization
 import { ref, set, onValue } from 'firebase/database';
+import Loader from "../Loader";
 
 export interface Coupon {
   id: string;
@@ -32,6 +33,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     expiryDate: "",
     discription: "",
   });
+  const [isLoading, setisLoading] = useState(false)
 
   if (!isOpen) return null;
 
@@ -54,6 +56,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
   }, [updateId]);
 
   const fetchCouponData = () => {
+    setisLoading(true)
     const couponRef = ref(db, `coupons/${updateId}`);
     onValue(couponRef, (snapshot) => {
       const data = snapshot.val();
@@ -65,9 +68,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     }, (error) => {
       console.error("Error fetching coupon data:", error);
     });
+    setisLoading(false)
   };
 
   const handleUpdateCoupon = async (e: React.FormEvent) => {
+    setisLoading(true)
+
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
@@ -93,9 +99,12 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
     } catch (error) {
       toast.error("Error updating Coupon.");
     }
+    setisLoading(false)
   };
 
   const handleAddCoupon = async (e: React.FormEvent) => {
+    setisLoading(true)
+
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
@@ -133,155 +142,159 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
       discription: "",
     });
     onClose();
+    setisLoading(false)
   };
 
 
   return (
     <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
-      <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
-        <button
-          className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
-          onClick={onClose}
-        >
-          <svg
-            className="h-[26px] w-[26px] p-[4px]"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
+      <Loader isLoading={isLoading}>
+        <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
+          <button
+            className="absolute -top-8 right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
+            onClick={onClose}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-        <form className="space-y-4 ">
-          <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Offer Code</label>
-            <input
-              type="text"
-              placeholder="Offer Code Here.."
-              onChange={handleChange}
-              value={coupon?.offerCode}
-              name="offerCode"
-              className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
-            />
-            {errors.offerCode && (
-              <span
-                className={`text-red-600 text-sm ${coupon?.offerCode ? "" : "hidden"
-                  }}`}
-              >
-                {errors.offerCode}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Discount </label>
-            <input
-              type="number"
-              placeholder="Discount Here.."
-              name="discount"
-              onChange={handleChange}
-              value={coupon?.discount}
-              className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
-            />
-            {errors.discount && (
-              <span
-                className={`text-red-600 text-sm ${coupon?.discount ? "" : "hidden"
-                  }}`}
-              >
-                {errors.discount}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Offer Price</label>
-            <input
-              type="number"
-              placeholder="Offer Price Here.."
-              name="offerPrice"
-              onChange={handleChange}
-              value={coupon?.offerPrice}
-              className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
-            />
-            {errors.offerPrice && (
-              <span
-                className={`text-red-600 text-sm ${coupon?.offerPrice ? "" : "hidden"
-                  }}`}
-              >
-                {errors.offerPrice}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Expiry Date</label>
-            <input
-              type="date"
-              placeholder="Date Here.."
-              name="expiryDate"
-              onChange={handleChange}
-              value={coupon?.expiryDate}
-              className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] placeholder:text- focus:outline-none border-gray-300 "
-            />
-            {errors.expiryDate && (
-              <span
-                className={`text-red-600 text-sm ${coupon?.expiryDate ? "" : "hidden"
-                  }}`}
-              >
-                {errors.expiryDate}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Description</label>
-            <textarea
-              placeholder="Type Here.."
-              name="discription"
-              rows={2}
-              onChange={handleChange}
-              value={coupon?.discription}
-              className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
-            />
-            {errors.discription && (
-              <span
-                className={`text-red-600 text-sm ${coupon?.discription ? "" : "hidden"
-                  }}`}
-              >
-                {errors.discription}
-              </span>
-            )}
-          </div>
-          {updateId ? (
-            <button
-              type="submit"
-              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-              style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
-              onClick={handleUpdateCoupon}
+            <svg
+              className="h-[26px] w-[26px] p-[4px]"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
             >
-              Update
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-              style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
-              onClick={handleAddCoupon}
-            >
-              Save
-            </button>
-          )}
-          <ToastContainer
-            position="top-right"
-            autoClose={1000}
-            pauseOnFocusLoss={false}
-            limit={1}
-          />
-        </form>
-      </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <form className="space-y-4 ">
+            <div className="flex flex-col  font-semibold gap-1">
+              <label className="self-start">Offer Code</label>
+              <input
+                type="text"
+                placeholder="Offer Code Here.."
+                onChange={handleChange}
+                value={coupon?.offerCode}
+                name="offerCode"
+                className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+              />
+              {errors.offerCode && (
+                <span
+                  className={`text-red-600 text-sm ${coupon?.offerCode ? "" : "hidden"
+                    }}`}
+                >
+                  {errors.offerCode}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col  font-semibold gap-1">
+              <label className="self-start">Discount </label>
+              <input
+                type="number"
+                placeholder="Discount Here.."
+                name="discount"
+                onChange={handleChange}
+                value={coupon?.discount}
+                className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+              />
+              {errors.discount && (
+                <span
+                  className={`text-red-600 text-sm ${coupon?.discount ? "" : "hidden"
+                    }}`}
+                >
+                  {errors.discount}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col  font-semibold gap-1">
+              <label className="self-start">Offer Price</label>
+              <input
+                type="number"
+                placeholder="Offer Price Here.."
+                name="offerPrice"
+                onChange={handleChange}
+                value={coupon?.offerPrice}
+                className="w-full [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+              />
+              {errors.offerPrice && (
+                <span
+                  className={`text-red-600 text-sm ${coupon?.offerPrice ? "" : "hidden"
+                    }}`}
+                >
+                  {errors.offerPrice}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col  font-semibold gap-1">
+              <label className="self-start">Expiry Date</label>
+              <input
+                type="date"
+                placeholder="Date Here.."
+                name="expiryDate"
+                onChange={handleChange}
+                value={coupon?.expiryDate}
+                className="w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] placeholder:text- focus:outline-none border-gray-300 "
+              />
+              {errors.expiryDate && (
+                <span
+                  className={`text-red-600 text-sm ${coupon?.expiryDate ? "" : "hidden"
+                    }}`}
+                >
+                  {errors.expiryDate}
+                </span>
+              )}
+            </div>
+            <div className="flex flex-col  font-semibold gap-1">
+              <label className="self-start">Description</label>
+              <textarea
+                placeholder="Type Here.."
+                name="discription"
+                rows={2}
+                onChange={handleChange}
+                value={coupon?.discription}
+                className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none w-full  p-3 border rounded-[10px] text-md placeholder:text-[#A2A3A5] focus:outline-none border-gray-300 "
+              />
+              {errors.discription && (
+                <span
+                  className={`text-red-600 text-sm ${coupon?.discription ? "" : "hidden"
+                    }}`}
+                >
+                  {errors.discription}
+                </span>
+              )}
+            </div>
+            {updateId ? (
+              <button
+                type="submit"
+                className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
+                style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                onClick={handleUpdateCoupon}
+              >
+                Update
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
+                style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                onClick={handleAddCoupon}
+              >
+                Save
+              </button>
+
+            )}
+            <ToastContainer
+              position="top-right"
+              autoClose={1000}
+              pauseOnFocusLoss={false}
+              limit={1}
+            />
+          </form>
+        </div>
+      </Loader>
     </div>
   );
 };

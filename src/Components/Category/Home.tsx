@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Container from "../Container";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
+import Loader from "../Loader";
 
 export interface CategoriesData {
   id: string;
@@ -34,11 +35,15 @@ function Home(): JSX.Element {
     indexOfFirstItem,
     indexOfLastItem
   );
+  const [isLoading, setisLoading] = useState(false)
+
+
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = () => {
+    setisLoading(true)
     const categoriesRef = ref(db, "categories");
     onValue(categoriesRef, (snapshot) => {
       const data = snapshot.val();
@@ -48,11 +53,14 @@ function Home(): JSX.Element {
           ...data[key],
         }));
         setCategories(categoriesData);
+        setisLoading(false)
       }
     });
+
   };
 
   const handleAddOrUpdateCategory = async (newCategory: CategoriesData) => {
+    setisLoading(true)
     try {
       if (newCategory.id) {
         // Update category
@@ -67,6 +75,7 @@ function Home(): JSX.Element {
       setShowAddCategoryDialog(false);
     } catch (error) {
       console.error("Error adding/updating category:", error);
+      setisLoading(false)
     }
   };
 
@@ -75,6 +84,7 @@ function Home(): JSX.Element {
   };
 
   const handleDelete = async (id: string) => {
+    setisLoading(true)
     console.log("🚀 ~ handleDelete ~ id:", id)
     try {
       const categoryRef = ref(db, `categories/${id}`);
@@ -82,6 +92,9 @@ function Home(): JSX.Element {
       fetchCategories();
     } catch (error) {
       console.error("Error deleting category:", error);
+    } finally {
+      setisLoading(false)
+
     }
   };
 
@@ -151,87 +164,89 @@ function Home(): JSX.Element {
       {/* <Table /> */}
 
       {/* table Start */}
-      <div className="flex flex-col relative ">
-        <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
-          <table
-            className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
-            style={{
-              fontFamily: "Bai Jamjuree",
-              boxShadow: "2px 2px 30px 2px #FFF3E5",
-              minWidth: "100%",
-            }}
-          >
-            <thead className="rounded-full bg-[#DF201F] ">
-              <tr className="text-[#FFFFFF] font-semibold ">
-                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Category Name
-                </th>
-                <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Category Id
-                </th>
-                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Description
-                </th>
-                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Number of Products
-                </th>
-                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Status
-                </th>
-                <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems?.map((item) => (
-                <tr
-                  key={item.id}
-                  className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
-                >
-                  <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
-                    <img
-                      src={item.imageUrl || Pizza}
-                      className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
-                      alt=""
-                    />
-                    {item.categoryName}
-                  </td>
-                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                    {item.id}
-                  </td>
-                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                    {item.description}
-                  </td>
-                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                    {item.numberOfProducts}
-                  </td>
-                  <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                    {item.status}
-                  </td>
-                  <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
-                    <i
-                      className="fa-solid fa-trash fa-xl cursor-pointer "
-                      onClick={() => handleDelete(item.id)}
-                    // Delete Category
-                    ></i>
-                    <i
-                      className="fa-solid fa-pen fa-xl cursor-pointer "
-                      onClick={() => handleUpdate(item.id)}
-                    // Update Category
-                    ></i>{" "}
-                    <i
-                      className="fa-solid fa-eye fa-xl cursor-pointer"
-                      onClick={() => handleViewCategories(item.id)}
-                    // View  Category Categories
-                    ></i>
-                  </td>
+      <Loader isLoading={isLoading}>
+        <div className="flex flex-col relative ">
+          <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
+            <table
+              className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+              style={{
+                fontFamily: "Bai Jamjuree",
+                boxShadow: "2px 2px 30px 2px #FFF3E5",
+                minWidth: "100%",
+              }}
+            >
+              <thead className="rounded-full bg-[#DF201F] ">
+                <tr className="text-[#FFFFFF] font-semibold ">
+                  <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Category Name
+                  </th>
+                  <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Category Id
+                  </th>
+                  <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Description
+                  </th>
+                  <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Number of Products
+                  </th>
+                  <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Status
+                  </th>
+                  <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
+                    Actions
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentItems?.map((item) => (
+                  <tr
+                    key={item.id}
+                    className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
+                  >
+                    <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
+                      <img
+                        src={item.imageUrl || Pizza}
+                        className="ml-2 mr-2 w-[42px] h-[42px] rounded-3xl"
+                        alt=""
+                      />
+                      {item.categoryName}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.id}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.description}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.numberOfProducts}
+                    </td>
+                    <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
+                      {item.status}
+                    </td>
+                    <td className="p-4 py-2 px-4 border-opacity-10 flex gap-4 w-full">
+                      <i
+                        className="fa-solid fa-trash fa-xl cursor-pointer "
+                        onClick={() => handleDelete(item.id)}
+                      // Delete Category
+                      ></i>
+                      <i
+                        className="fa-solid fa-pen fa-xl cursor-pointer "
+                        onClick={() => handleUpdate(item.id)}
+                      // Update Category
+                      ></i>{" "}
+                      <i
+                        className="fa-solid fa-eye fa-xl cursor-pointer"
+                        onClick={() => handleViewCategories(item.id)}
+                      // View  Category Categories
+                      ></i>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </Loader>
       {/* table End */}
 
       {/* table End */}
