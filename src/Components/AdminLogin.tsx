@@ -1,12 +1,14 @@
-import firebase from "firebase/compat/app";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo, Online, Phone, flag, uk, us, united, uruguay, } from './Config/images'
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
-import { RecaptchaVerifier } from "firebase/auth";
 import { auth } from "../Firebase/firebase";
-import React from "react";
+import { db } from '../Firebase/firebase';
+import { ref, get, child } from 'firebase/database';
+import { ToastContainer, toast } from "react-toastify";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
 
 function AdminLogin() {
     const navigate = useNavigate();
@@ -17,24 +19,30 @@ function AdminLogin() {
         "Please enter a valid 10-digit phone number."
     );
     const [otp, setOtp] = useState("");
-    // @ts-ignore
-    const [confirmationResult, setConfirmationResult] = useState(null);
+    const [passcode, setPasscode] = useState<string>("");
+
 
 
     useEffect(() => {
+        ConfigureCaptcha()
+    }, []);
+
+    const ConfigureCaptcha = () => {
         if (!window.recaptchaVerifier) {
-            window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha - container", {
+            window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
                 size: 'invisible',
-                // @ts-ignore
+                // @ts-ignoreF
                 callback: (response: any) => {
                     console.log("reCAPTCHA solved");
+                    // @ts-ignore
+                    handleLogin()
                 },
                 'expired-callback': () => {
                     console.log("reCAPTCHA expired");
                 }
             });
         }
-    }, []);
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const number = e.target.value;
@@ -43,21 +51,54 @@ function AdminLogin() {
         setMobileNumber(number);
     };
 
-    const handleSignIn = async (e: any) => {
+
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (isValid) {
+        ConfigureCaptcha()
+        if (isValid && passcode !== "") {
             const phoneNumber = `${callingCode}${mobileNumber}`;
+            const appVerifier = window.recaptchaVerifier
             try {
-                const result: any = await firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
-                setConfirmationResult(result);
-                navigate("/Verification", { state: { mobileNumber, callingCode } });
+                // Verify phone number with OTP
+                var confirmationResult;
+                const result: any = await signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
+                    window.confirmationResult = confirmationResult;
+                    console.log("Otp Send...")
+                })
+                console.log("🚀 ~ constresult:any=awaitsignInWithPhoneNumber ~ result:", result)
+
+
+                // Check if the user exists in the database
+                const userDataRef = ref(db, 'users');
+                const snapshot = await get(child(userDataRef, `${mobileNumber}`));
+
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+
+                    if (userData.passcode === passcode) {
+                        toast.success("Login successful!");
+                        navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult } }); // Redirect to verification page after successful login
+                    } else {
+                        toast.warn("Invalid passcode. Please try again.");
+                    }
+                } else {
+                    toast.warn("User not found. Please register first.");
+                }
             } catch (error) {
-                console.error("Error during signInWithPhoneNumber", error);
+                toast.error("An error occurred. Please try again.");
             }
+        } else {
+            toast.warn("Invalid inputs. Please check your mobile number and passcode.");
         }
     };
 
 
+    const handlePasscodeChange = (otp: string | null) => {
+        if (otp !== null && otp !== undefined) {
+            setOtp(otp);
+            setPasscode(otp);
+        }
+    };
 
     const handleCallingCodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedCallingCode = e.target.value;
@@ -88,7 +129,7 @@ function AdminLogin() {
             <div className="flex flex-row  justify-center items-center gap-5 h-screen w-full flex-wrap-reverse xl:flex-wrap">
                 {/* Login */}
                 <form
-                    onSubmit={handleSignIn}
+                    onSubmit={handleLogin}
                     style={{ fontFamily: "Montserrat Alternates" }}
                 >
                     <div className="border-black flex flex-col justify-center items-center">
@@ -155,7 +196,7 @@ function AdminLogin() {
                                 <div className="flex ">
                                     <OtpInput
                                         value={otp}
-                                        onChange={setOtp}
+                                        onChange={handlePasscodeChange}
                                         numInputs={6}
                                         inputType="password"
                                         renderInput={(props, index) => (
@@ -185,6 +226,12 @@ function AdminLogin() {
                             >
                                 LOGIN
                             </button>
+                            <ToastContainer
+                                position="top-right"
+                                autoClose={1000}
+                                pauseOnFocusLoss={false}
+                                limit={1}
+                            />
                         </div>
                     </div>
                 </form>

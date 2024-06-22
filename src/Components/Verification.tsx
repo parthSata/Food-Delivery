@@ -4,6 +4,7 @@ import OtpInput from "react-otp-input";
 import Logo from "../assets/Login/Logo1.png";
 import Resend from "../assets/Login/Resend.png";
 import image from "../assets/Login/img.png";
+import { toast } from "react-toastify";
 
 function Verification() {
   const location = useLocation();
@@ -15,10 +16,15 @@ function Verification() {
 
 
   const handleSubmit = async () => {
+
     try {
-      await confirmationResult.confirm(otp);
-      console.log("OTP verified successfully!");
-      navigate("/nextScreen"); // navigate to the desired screen after successful verification
+      await window.confirmationResult.confirm(otp).then((result: any) => {
+        // @ts-ignore
+        const user = result.user;
+        console.log(JSON.stringify(user))
+        toast.success("User is verified");
+        navigate("/");
+      });
     } catch (error) {
       console.error("Error during OTP verification", error);
       setError("Invalid OTP!!");

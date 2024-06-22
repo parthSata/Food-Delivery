@@ -75,7 +75,7 @@ function Register() {
 
       try {
         // Store user data in Firebase
-       
+
         // @ts-ignore
         const dbRef = ref(db);
         await set(ref(db, 'users/' + mobileNumber), userData);
@@ -311,9 +311,9 @@ function Register() {
                 type="submit"
                 style={{
                   fontFamily: "Bai Jamjuree",
-                  boxShadow: " 2px 2px 25px 2px #DF201F80",
+                  boxShadow: "  2px 2px 25px 2px #94CD0099",
                 }}
-                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber &&
+                className={`bg-[#94CD00] h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber &&
                   isValidEmail &&
                   passcode === confirmPasscode
                   ? ""
@@ -325,7 +325,7 @@ function Register() {
                   passcode !== confirmPasscode
                 }
               >
-                LOGIN
+                Register
               </button>
               <ToastContainer
                 position="top-right"
