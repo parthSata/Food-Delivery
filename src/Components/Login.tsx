@@ -29,7 +29,6 @@ const Login: React.FC = () => {
         size: 'invisible',
         // @ts-ignoreF
         callback: (response: any) => {
-          console.log("reCAPTCHA solved");
           // @ts-ignore
           handleLogin()
         },
@@ -59,8 +58,8 @@ const Login: React.FC = () => {
         // @ts-ignore
         const result: any = await signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
+          toast.success("Otp Send Successfully")
         })
-
 
         // Check if the user exists in the database
         const userDataRef = ref(db, 'users');

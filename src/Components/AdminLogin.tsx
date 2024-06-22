@@ -19,7 +19,6 @@ function AdminLogin() {
         "Please enter a valid 10-digit phone number."
     );
     const [otp, setOtp] = useState("");
-    // @ts-ignore
     const [passcode, setPasscode] = useState<string>("");
 
 
@@ -64,7 +63,7 @@ function AdminLogin() {
                 var confirmationResult;
                 // @ts-ignore
                 const result: any = await signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
-                    toast.success("Otp Send...")
+                    toast.success("Otp Send Successfully")
                 })
 
 
