@@ -19,6 +19,7 @@ function AdminLogin() {
         "Please enter a valid 10-digit phone number."
     );
     const [otp, setOtp] = useState("");
+    // @ts-ignore
     const [passcode, setPasscode] = useState<string>("");
 
 
