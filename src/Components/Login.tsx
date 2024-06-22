@@ -1,18 +1,37 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller, } from './Config/images'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller } from './Config/images';
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
+import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../Firebase/firebase";
+import { db } from '../Firebase/firebase';
+import { ref, get, child } from 'firebase/database';
+import { ToastContainer, toast } from "react-toastify";
 
-function Login() {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [callingCode, setCallingCode] = useState<string>("+91");
   const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage] = useState<string>(
-    "Please enter a valid 10-digit phone number."
-  );
-  const [otp, setOtp] = useState("");
+  const [errorMessage] = useState<string>("Please enter a valid 10-digit phone number.");
+  const [otp, setOtp] = useState<string>("");
+  const [confirmationResult, setConfirmationResult] = useState(null);
+  const [passcode, setPasscode] = useState<string>("");
+
+  useEffect(() => {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible',
+        // @ts-ignore
+        callback: (response: any) => {
+          console.log("reCAPTCHA solved");
+        },
+        'expired-callback': () => {
+          console.log("reCAPTCHA expired");
+        }
+      });
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -21,10 +40,61 @@ function Login() {
     setMobileNumber(number);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   if (isValid) {
+  //     const phoneNumber = `${callingCode}${mobileNumber}`;
+  //     try {
+  //       const result: any = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+  //       setConfirmationResult(result);
+  //       navigate("/Verification", { state: { mobileNumber, callingCode } });
+  //     } catch (error) {
+  //       console.error("Error during signInWithPhoneNumber", error);
+  //     }
+  //   }
+  // };
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isValid) {
-      navigate("/Verification", { state: { mobileNumber, callingCode } });
+    if (isValid && passcode !== "") {
+      const phoneNumber = `${callingCode}${mobileNumber}`;
+      try {
+        // Verify phone number with OTP
+        const result: any = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
+        console.log("🚀 ~ handleLogin ~ result:", result) 
+        setConfirmationResult(result);
+
+        // Check if the user exists in the database
+        const userDataRef = ref(db, 'users');
+        console.log("🚀 ~ handleLogin ~ userDataRef:", userDataRef)
+        const snapshot = await get(child(userDataRef, `${mobileNumber}`));
+        console.log("🚀 ~ handleLogin ~ snapshot:", snapshot)
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+          if (userData.passcode === passcode) {
+            console.log("🚀 ~ handleLogin ~ passcode:", passcode)
+            console.log("🚀 ~ handleLogin ~ userData.passcode:", userData.passcode)
+            toast.success("Login successful!");
+            navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult: result } }); // Redirect to verification page after successful login
+          } else {
+            toast.warn("Invalid passcode. Please try again.");
+          }
+        } else {
+          toast.warn("User not found. Please register first.");
+        }
+      } catch (error) {
+        console.error("Error during signInWithPhoneNumber or fetching user data:", error);
+        toast.error("An error occurred. Please try again.");
+      }
+    } else {
+      toast.warn("Invalid inputs. Please check your mobile number and passcode.");
+    }
+  };
+
+  const handlePasscodeChange = (otp: string | null) => {
+    if (otp !== null && otp !== undefined) {
+      setOtp(otp);
+      setPasscode(otp);
     }
   };
 
@@ -53,53 +123,30 @@ function Login() {
 
   return (
     <>
-      <div className="flex flex-row  justify-center items-center gap-5 h-full w-screen flex-wrap-reverse xl:flex-wrap">
+      <div className="flex flex-row justify-center items-center gap-5 h-screen w-full flex-wrap-reverse xl:flex-wrap">
         {/* Login */}
-        <form
-          onSubmit={handleSubmit}
-          style={{ fontFamily: "Montserrat Alternates" }}
-        >
+        <form onSubmit={handleLogin} style={{ fontFamily: "Montserrat Alternates" }}>
           <div className="border-black flex flex-col justify-center items-center">
-            <div className="flex flex-col justify-center items-center ">
+            <div className="flex flex-col justify-center items-center">
               <img className="h-[80px] w-[80px]" src={Logo} alt="" />
-              <p
-                className="text-[30px] font-semibold"
-                style={{ fontFamily: "Bai Jamjuree" }}
-              >
-                Login
-              </p>
-              <p
-                className="text-[#A2A3A5] mt-0  text-[16px] font-semibold"
-                style={{ fontFamily: "Bai Jamjuree" }}
-              >
-                Welcome Back!
-              </p>
+              <p className="text-[30px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Login</p>
+              <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Welcome Back!</p>
 
               {/* Country dropdown */}
-              <div className="flex mt-5 border-b-2 ">
+              <div className="flex mt-5 border-b-2">
                 <div className="flex justify-center items-center">
                   <img src={renderFlag(callingCode)} className="h-8 w-8" />
                   <select
                     onChange={handleCallingCodeChange}
-                    className="rounded-lg px-1 py-1  cursor-pointer outline-none bg-white"
+                    className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white"
                     style={{ fontFamily: "Bai Jamjuree" }}
                     value={callingCode}
                   >
-                    <option className="h-8 w-8" value="+91">
-                      +91
-                    </option>
-                    <option className="h-8 w-8" value="+1">
-                      +1
-                    </option>
-                    <option className="h-8 w-8" value="+971">
-                      +971
-                    </option>
-                    <option className="h-8 w-8" value="+44">
-                      +44
-                    </option>
-                    <option className="h-8 w-8" value="+598">
-                      +598
-                    </option>
+                    <option className="h-8 w-8" value="+91">+91</option>
+                    <option className="h-8 w-8" value="+1">+1</option>
+                    <option className="h-8 w-8" value="+971">+971</option>
+                    <option className="h-8 w-8" value="+44">+44</option>
+                    <option className="h-8 w-8" value="+598">+598</option>
                   </select>
                 </div>
                 <div className="flex items-center justify-center">
@@ -117,13 +164,13 @@ function Login() {
               {!isValid && <p className="text-red-600">{errorMessage}</p>}
 
               <div className="mt-5 md:shrink flex flex-col gap-2">
-                <div className="flex justify-start  gap-6">
+                <div className="flex justify-start gap-6">
                   <label className="font-semibold">Passcode:</label>
                 </div>
-                <div className="flex ">
+                <div className="flex">
                   <OtpInput
                     value={otp}
-                    onChange={setOtp}
+                    onChange={handlePasscodeChange}
                     numInputs={6}
                     inputType="password"
                     renderInput={(props, index) => (
@@ -131,18 +178,13 @@ function Login() {
                         {...props}
                         key={index}
                         className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
-                        style={{
-                          width: 50,
-                          fontFamily: "Montserrat Alternates",
-                        }}
+                        style={{ width: 50, fontFamily: "Montserrat Alternates" }}
                       />
                     )}
                   />
                 </div>
-                <p className="font-semibold text-[#DF201F] self-end">
-                  Forgot Passcode
-                </p>
-                <div className="flex mt-2 justify-between gap-1 item-center  sm:justify-around  font-semibold">
+                <p className="font-semibold text-[#DF201F] self-end">Forgot Passcode</p>
+                <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
                   <div className="flex flex-row gap-3 items-center">
                     <img src={Customer} alt="" className="" />
                     <label className="">Create Customer</label>
@@ -155,41 +197,37 @@ function Login() {
               </div>
               <button
                 type="submit"
-                style={{
-                  fontFamily: "Bai Jamjuree",
-                  boxShadow: " 2px 2px 25px 2px #DF201F80",
-                }}
-                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
-                  }`}
+                style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
+                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
                 disabled={!isValid}
               >
                 LOGIN
               </button>
+              <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                pauseOnFocusLoss={false}
+                limit={1}
+              />
             </div>
             <div className="mt-4">
               <p className="text-gray-400 text-lg">
-                Don’t Have acount?
-                <span className="text-[#161A1D] font-semibold">
-                  {" "}
-                  Register now?
-                </span>
+                Don’t Have an account?
+                <span className="text-[#161A1D] font-semibold"><Link to="/register"> Register now?</Link></span>
               </p>
             </div>
           </div>
         </form>
 
         {/* image */}
-
-        <div className="flex justify ">
-          <img
-            src={Online}
-            className="h-full  w-[425px] md:w-[435px] md:h-[400px]"
-            alt=""
-          />
+        <div className="flex justify">
+          <img src={Online} className="h-full w-[425px] md:w-[435px] md:h-[400px]" alt="" />
         </div>
+
+        <div id="recaptcha-container"></div>
       </div>
     </>
   );
-}
+};
 
 export default Login;

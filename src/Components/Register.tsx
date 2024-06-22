@@ -13,6 +13,10 @@ import uruguay from "../assets/Login/uruguay.png";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { v4 as uuidv4 } from "uuid";
+import { db } from '../Firebase/firebase';
+import { ref, set } from 'firebase/database';
+
 
 function Register() {
   const navigate = useNavigate();
@@ -28,6 +32,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [selectedState, setSelectedState] = useState<string>("Gujrat");
   const [name, setName] = useState("");
+  // const [isLoading, setIsLoading] = useState(false)
 
   const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
@@ -39,6 +44,7 @@ function Register() {
     setIsValidMobileNumber(mobileNumberPattern.test(number));
     setMobileNumber(number);
   };
+
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
@@ -64,11 +70,21 @@ function Register() {
         email,
         passcode,
         state: selectedState,
+        id: uuidv4(),
       };
-      let users = JSON.parse(localStorage.getItem("users") || "[]");
-      users.push(userData);
-      localStorage.setItem("users", JSON.stringify(users));
-      navigate("/");
+
+      try {
+        // Store user data in Firebase
+       
+        // @ts-ignore
+        const dbRef = ref(db);
+        await set(ref(db, 'users/' + mobileNumber), userData);
+        toast.success("Registration successful!");
+        navigate("/login"); // Navigate to home page or wherever you want after registration
+      } catch (error) {
+        console.error("Error storing user data:", error);
+        toast.error("Failed to register user. Please try again.");
+      }
     } else {
       toast.warn("Passcode and Confirm Passcode must match.");
     }
@@ -298,10 +314,10 @@ function Register() {
                   boxShadow: " 2px 2px 25px 2px #DF201F80",
                 }}
                 className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber &&
-                    isValidEmail &&
-                    passcode === confirmPasscode
-                    ? ""
-                    : "cursor-not-allowed opacity-50"
+                  isValidEmail &&
+                  passcode === confirmPasscode
+                  ? ""
+                  : "cursor-not-allowed opacity-50"
                   }`}
                 disabled={
                   !isValidMobileNumber ||
@@ -336,3 +352,5 @@ function Register() {
 }
 
 export default Register;
+
+

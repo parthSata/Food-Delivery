@@ -2,7 +2,7 @@ import Noodles from '../../assets/All Product/Noodles.jpg'
 import DummyImg from '../../assets/All Product/DummyFood.png'
 import { useState } from 'react';
 import search from "../../assets/HomePage/search.png";
-import Container from '../../Container';
+import Container from '../../Components/Container';
 
 
 function UserProducts() {

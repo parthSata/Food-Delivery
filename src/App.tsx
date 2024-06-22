@@ -1,14 +1,17 @@
 import "./App.css";
-import { AddRestaurants, Category, CouponAdd, CouponView, Coupons, Dashboard, Gallary, Orders, OurTeam, ProductAdd, ProductView, Products, Register, Restaurant, TeamAdd, Home, Verification, Login } from './Components/Config/index'
+import { AddRestaurants, Category, CouponAdd, CouponView, Coupons, Dashboard, Gallary, Orders, OurTeam, ProductAdd, ProductView, Products, Register, Restaurant, TeamAdd, CategoryPage, Verification, Login, AdminLogin } from './Components/Config/index'
+import { HomePage } from './User/Config/Index'
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
+      {/* Admin */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<CategoryPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/login/adminLogin" element={<AdminLogin />} />
         <Route path="/register" element={<Register />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -35,9 +38,6 @@ function App() {
         }} isOpen={true} />} />
 
 
-
-
-
         {/* @ts-ignore */}
         <Route path="/gallary" element={<Gallary onClose={function (): void {
           throw new Error("Function not implemented.");
@@ -48,8 +48,19 @@ function App() {
         <Route path="/couponAdd/:updateId" element={<CouponAdd onClose={function (): void {
           throw new Error("Function not implemented.");
         }} isOpen={true} />} />
+
+
+
+
+
+
+        {/* User Side Routes */}
+        <Route path="/homepage" element={<HomePage />} />
+
+
+
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

@@ -1,12 +1,12 @@
 import Login from "../Login";
-import Home from "../Category/Home";
+import CategoryPage from "../Category/CategoryPage";
 import Verification from "../Verification";
 import Register from "../Register";
 import Dashboard from "../Dashboard/Dashboard";
 import Orders from "../Orders/Orders";
 import Products from "../Products/Products";
 import ProductAdd from "../Products/ProductAdd";
-import Category from "../Category/Category";
+import Category from "../Category/Products";
 import ProductView from "../Products/ProductView";
 import Coupons from "../Coupons/Coupons";
 import CouponAdd from '../Coupons/CouponAdd'
@@ -16,11 +16,13 @@ import AddRestaurants from "../Restaurant/AddRestaurants";
 import Gallary from "../Restaurant/Gallary";
 import OurTeam from "../Team/OurTeam";
 import TeamAdd from "../Team/TeamAdd";
+import AdminLogin from '../AdminLogin'
 
 
 export {
     Login,
-    Home,
+    AdminLogin,
+    CategoryPage,
     Verification,
     Register,
     Dashboard,
