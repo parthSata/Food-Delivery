@@ -19,6 +19,7 @@ function AdminLogin() {
         "Please enter a valid 10-digit phone number."
     );
     const [otp, setOtp] = useState("");
+    // @ts-ignore
     const [passcode, setPasscode] = useState<string>("");
 
 
@@ -61,11 +62,10 @@ function AdminLogin() {
             try {
                 // Verify phone number with OTP
                 var confirmationResult;
+                // @ts-ignore
                 const result: any = await signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
-                    window.confirmationResult = confirmationResult;
-                    console.log("Otp Send...")
+                    toast.success("Otp Send...")
                 })
-                console.log("🚀 ~ constresult:any=awaitsignInWithPhoneNumber ~ result:", result)
 
 
                 // Check if the user exists in the database
