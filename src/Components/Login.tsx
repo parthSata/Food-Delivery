@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller } from './Config/images';
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
-import { auth, RecaptchaVerifier, signInWithPhoneNumber } from "../Firebase/firebase";
+import { auth } from "../Firebase/firebase";
 import { db } from '../Firebase/firebase';
 import { ref, get, child } from 'firebase/database';
 import { ToastContainer, toast } from "react-toastify";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -15,23 +17,28 @@ const Login: React.FC = () => {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage] = useState<string>("Please enter a valid 10-digit phone number.");
   const [otp, setOtp] = useState<string>("");
-  const [confirmationResult, setConfirmationResult] = useState(null);
   const [passcode, setPasscode] = useState<string>("");
 
   useEffect(() => {
+    ConfigureCaptcha()
+  }, []);
+
+  const ConfigureCaptcha = () => {
     if (!window.recaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
         size: 'invisible',
-        // @ts-ignore
+        // @ts-ignoreF
         callback: (response: any) => {
           console.log("reCAPTCHA solved");
+          // @ts-ignore
+          handleLogin()
         },
         'expired-callback': () => {
           console.log("reCAPTCHA expired");
         }
       });
     }
-  }, []);
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -40,42 +47,31 @@ const Login: React.FC = () => {
     setMobileNumber(number);
   };
 
-  // const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   if (isValid) {
-  //     const phoneNumber = `${callingCode}${mobileNumber}`;
-  //     try {
-  //       const result: any = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-  //       setConfirmationResult(result);
-  //       navigate("/Verification", { state: { mobileNumber, callingCode } });
-  //     } catch (error) {
-  //       console.error("Error during signInWithPhoneNumber", error);
-  //     }
-  //   }
-  // };
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    ConfigureCaptcha()
     if (isValid && passcode !== "") {
       const phoneNumber = `${callingCode}${mobileNumber}`;
+      const appVerifier = window.recaptchaVerifier
       try {
-        // Verify phone number with OTP
-        const result: any = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-        console.log("🚀 ~ handleLogin ~ result:", result) 
-        setConfirmationResult(result);
+        var confirmationResult;
+        // @ts-ignore
+        const result: any = await signInWithPhoneNumber(auth, phoneNumber, appVerifier).then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+        })
+
 
         // Check if the user exists in the database
         const userDataRef = ref(db, 'users');
-        console.log("🚀 ~ handleLogin ~ userDataRef:", userDataRef)
         const snapshot = await get(child(userDataRef, `${mobileNumber}`));
-        console.log("🚀 ~ handleLogin ~ snapshot:", snapshot)
+
         if (snapshot.exists()) {
           const userData = snapshot.val();
+
           if (userData.passcode === passcode) {
-            console.log("🚀 ~ handleLogin ~ passcode:", passcode)
-            console.log("🚀 ~ handleLogin ~ userData.passcode:", userData.passcode)
             toast.success("Login successful!");
-            navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult: result } }); // Redirect to verification page after successful login
+            navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult } }); // Redirect to verification page after successful login
           } else {
             toast.warn("Invalid passcode. Please try again.");
           }
@@ -83,7 +79,6 @@ const Login: React.FC = () => {
           toast.warn("User not found. Please register first.");
         }
       } catch (error) {
-        console.error("Error during signInWithPhoneNumber or fetching user data:", error);
         toast.error("An error occurred. Please try again.");
       }
     } else {
