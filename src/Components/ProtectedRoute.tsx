@@ -21,7 +21,7 @@ const ProtectedRoute = ({ element, roles }: ProtectedRouteProps) => {
     };
 
     checkToken();
-  }, [refreshToken]);
+  }, []);
 
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} />;
