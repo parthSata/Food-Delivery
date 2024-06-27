@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import User from "../assets/Register/Person.png";
-import Shop from "../assets/Register/Shop.png";
-import Email from "../assets/Register/Email.png";
-import Phone from "../assets/Login/Phone.png";
+import { Person, Shop, Store, Email, Phone, flag, uk, us, united, uruguay } from "./Config/images";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
-import flag from "../assets/Login/Flag.png";
-import uk from "../assets/Login/uk.png";
-import us from "../assets/Login/us.png";
-import united from "../assets/Login/united.png";
-import uruguay from "../assets/Login/uruguay.png";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,19 +16,27 @@ function Register() {
   const [callingCode, setCallingCode] = useState<string>("+91");
   const [isValidMobileNumber, setIsValidMobileNumber] = useState<boolean>(true);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
+  const [email, setEmail] = useState("");
   const [passcode, setPasscode] = useState("");
   const [confirmPasscode, setConfirmPasscode] = useState("");
   const [errorMessage] = useState<string>(
     "Please enter a valid 10-digit phone number."
   );
-  const [email, setEmail] = useState("");
   const [selectedState, setSelectedState] = useState<string>("Gujrat");
   const [name, setName] = useState("");
   // const [isLoading, setIsLoading] = useState(false)
+  const [role, setRole] = useState<string>("customer");
+
 
   const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
   };
+
+  const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRole(e.target.value);
+
+  };
+  console.log("🚀 ~ handleRoleChange ~ setRole:", role)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -68,10 +68,12 @@ function Register() {
         name,
         mobileNumber,
         email,
+        role,
         passcode,
         state: selectedState,
         id: uuidv4(),
       };
+      console.log("🚀 ~ handleSubmit ~ userData:", userData)
 
       try {
         // Store user data in Firebase
@@ -112,6 +114,8 @@ function Register() {
         return flag;
     }
   };
+
+
   return (
     <div>
       <div className="flex flex-row   justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
@@ -140,6 +144,48 @@ function Register() {
                 <div className="flex items-center justify-center flex-col gap-6">
                   {/* Name */}
 
+                  <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
+                    <div className="flex flex-row gap-3 items-center">
+                      <input
+                        type="radio"
+                        value="customer"
+                        checked={role === "customer"}
+                        onChange={handleRoleChange}
+                        className="hidden"
+                        id="customer-role"
+                      />
+                      <label
+                        htmlFor="customer-role"
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <div className="hover:bg-[#E23635] flex justify-center items-center rounded-full bg-[#A2A3A5] h-10 w-10">
+                          <img src={Person} alt="" className="h-5" />
+                        </div>
+                        Customer
+                      </label>
+                    </div>
+                    <div className="flex flex-row gap-3 items-center">
+                      <input
+                        type="radio"
+                        value="seller"
+                        checked={role === "seller"}
+                        onChange={handleRoleChange}
+                        className="hidden"
+                        id="seller-role"
+                      />
+                      <label
+                        htmlFor="seller-role"
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <div className="hover:bg-[#E23635] flex justify-center items-center rounded-full bg-[#A2A3A5] h-10 w-10">
+                          <img src={Store} alt="" className="h-5" />
+                        </div>
+                        Seller
+                      </label>
+                    </div>
+                  </div>
+
+
                   <div className="flex items-center border-b">
                     <input
                       type="text"
@@ -150,7 +196,7 @@ function Register() {
                       onChange={handleNameChange}
                     />
                     <img
-                      src={User}
+                      src={Person}
                       className="h-[24px]  ml-2 w-[24px]"
                       alt=""
                     />
@@ -335,19 +381,19 @@ function Register() {
               />
             </div>
           </div>
-        </form>
+        </form >
 
         {/* image */}
 
-        <div className="flex justify-center ">
+        <div className="flex justify-center " >
           <img
             src={Shop}
             className="h-[600px] w-[500px] sm:h-[600px] sm:w-[550px] md:w-[600px] md:h-[600px] lg:h-[700px] lg:w-[700px] xl:h-[700px] xl:w-[650px]"
             alt=""
           />
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

@@ -17,10 +17,12 @@ import Gallary from "../Restaurant/Gallary";
 import OurTeam from "../Team/OurTeam";
 import TeamAdd from "../Team/TeamAdd";
 import AdminLogin from '../AdminLogin'
+import BusinessDetails from "../../Seller/BusinessDetail";
 
 
 export {
     Login,
+    BusinessDetails,
     AdminLogin,
     CategoryPage,
     Verification,

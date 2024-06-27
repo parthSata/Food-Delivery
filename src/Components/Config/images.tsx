@@ -22,9 +22,24 @@ import Orders from "../../assets/HomePage/Orders.png";
 import Restaurant from "../../assets/HomePage/Restaurant.png";
 import Menu from "../../assets/HomePage/Menu.png";
 import Loaders from '../../assets/Loader.gif'
+import Shop from "../../assets/Register/Shop.png";
+import Store from "../../assets/Register/Store.png";
+import Email from "../../assets/Register/Email.png";
+import Person from "../../assets/Register/Person.png";
+import RestaurantImg from '../../assets/Restaurant/RestaurantImg.png'
+import CloudUpload from '../../assets/Buidness Detail/Cloud upload.png'
+import ImageOfRestaurant from '../../assets/Buidness Detail/RestaurantImg.png'
+import BuisnessName from '../../assets/Buidness Detail/BuisnessName.png'
+import GSTNO from '../../assets/Buidness Detail/GSTNO.png'
+import uploadDocument from '../../assets/Buidness Detail/upload (4) 1.png'
+import Address from '../../assets/Buidness Detail/Address.png'
+import Owner from '../../assets/Buidness Detail/Person.png'
+import Attach from '../../assets/Buidness Detail/Attach.png'
+
+
 
 
 
 export {
-    Logo, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
+    Logo, Shop, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
 }
