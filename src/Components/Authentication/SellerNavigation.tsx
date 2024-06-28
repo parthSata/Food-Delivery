@@ -3,6 +3,7 @@ import { BusinessDetails, Dashboard, Orders, Products, ProductAdd, ProductView, 
 import ProtectedRoute from '../ProtectedRoute';
 
 const SellerNavigation = () => {
+    console.log("Seller Component Rendered ....")
     return (
         <Routes>
             <Route path="/businessDetail" element={<ProtectedRoute element={<BusinessDetails />} roles={['seller']} />} />
@@ -12,7 +13,7 @@ const SellerNavigation = () => {
             <Route path="/productView/:productId" element={<ProtectedRoute element={<ProductView />} roles={['seller']} />} />
             <Route path="/productsAdd" element={<ProtectedRoute element={<ProductAdd />} roles={['seller']} />} />
             <Route path="/coupons" element={<ProtectedRoute element={<Coupons />} roles={['seller']} />} />
-            <Route path="/couponAdd" element={<ProtectedRoute element={<CouponAdd onClose={() => {}} isOpen={true} />} roles={['seller']} />} />
+            <Route path="/couponAdd" element={<ProtectedRoute element={<CouponAdd onClose={() => { }} isOpen={true} />} roles={['seller']} />} />
             <Route path="/couponview/:couponId" element={<ProtectedRoute element={<CouponView />} roles={['seller']} />} />
         </Routes>
     );

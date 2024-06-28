@@ -37,20 +37,17 @@ function Verification() {
 
         if (snapshot.exists()) {
           const userData = snapshot.val()
-          console.log("🚀 ~ handleSubmit ~ userData:", userData)
 
           const firebaseUser = auth.currentUser;
           if (firebaseUser) {
             const token = await firebaseUser.getIdToken(true);
             const idTokenResult = await firebaseUser.getIdTokenResult();
             const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
-            console.log("🚀 ~ handleSubmit ~ role:", role)
 
             const user = {
               uid: firebaseUser.uid,
               role: role
             }
-            console.log("🚀 ~ handleSubmit ~ user:", user)
 
             login(user)
 

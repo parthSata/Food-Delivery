@@ -9,6 +9,8 @@ import Register from './Components/Register';
 import Verification from './Components/Verification';
 import NotAuthorized from './Components/NotAuthorized';
 import { useAuth, AuthProvider } from './Components/AuthContext';
+import ProtectedRoute from "./Components/ProtectedRoute";
+import Payment from "./Components/Payment/Payment";
 
 function App() {
   return (
@@ -20,11 +22,14 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
+          <Route path="/payment" element={<Payment />} />
 
-          <Route path="/admin" element={<AdminNavigation />} />
-          <Route path="/seller" element={<SellerNavigation />} />
-          <Route path="/customer" element={<CustomerNavigation />} />
-          <Route path="/*" element={<RoleBasedNavigation />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin/*" element={<AdminNavigation />} />
+            <Route path="/seller/*" element={<SellerNavigation />} />
+            <Route path="/customer/*" element={<CustomerNavigation />} />
+            <Route path="/*" element={<RoleBasedNavigation />} />
+          </Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

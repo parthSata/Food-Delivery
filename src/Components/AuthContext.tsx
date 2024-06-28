@@ -27,10 +27,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (firebaseUser) {
         const token = await getIdToken(firebaseUser, true); // force refresh token
         const idTokenResult = await firebaseUser.getIdTokenResult();
+
         const userData: User = {
           uid: firebaseUser.uid,
           role: idTokenResult.claims.role as User['role'] || 'customer'
         };
+
+
         localStorage.setItem('accessToken', token);
         setUser(userData);
       } else {

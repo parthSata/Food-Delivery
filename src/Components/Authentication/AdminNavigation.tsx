@@ -3,6 +3,7 @@ import { CategoryPage, Dashboard, Products, ProductAdd, ProductView, Restaurant,
 import ProtectedRoute from '../ProtectedRoute';
 
 const AdminNavigation = () => {
+  console.log("Admin Component Rendered ....")
   return (
     <Routes>
       <Route path="/" element={<ProtectedRoute element={<CategoryPage />} roles={['admin']} />} />
@@ -14,8 +15,7 @@ const AdminNavigation = () => {
       <Route path="/addrestaurants" element={<ProtectedRoute element={<AddRestaurants />} roles={['admin']} />} />
       <Route path="/team" element={<ProtectedRoute element={<OurTeam />} roles={['admin']} />} />
       <Route path="/teamAdd/:updateId" element={<ProtectedRoute element={<TeamAdd onClose={() => { }} isOpen={true} />} roles={['admin']} />} />
-        {/* @ts-ignore */}
-      <Route path="/gallary" element={<ProtectedRoute element={<Gallary onClose={() => { }}  isOpen={true} />} roles={['admin']} />} />
+      <Route path="/gallary" element={<ProtectedRoute element={<Gallary onClose={() => { }} isOpen={true} />} roles={['admin']} />} />
     </Routes>
   );
 };

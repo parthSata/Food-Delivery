@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 interface ProtectedRouteProps {
-  roles: Array<'admin' | 'seller' | 'customer'>;
-  element: React.ReactNode;
+  roles?: Array<'admin' | 'seller' | 'customer'>;
+  element?: React.ReactNode;
 }
 
-const ProtectedRoute = ({ element, roles }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ roles = [], element }: ProtectedRouteProps) => {
   const { user, refreshToken } = useAuth();
   const location = useLocation();
 
@@ -27,11 +27,11 @@ const ProtectedRoute = ({ element, roles }: ProtectedRouteProps) => {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
-  if (!roles.includes(user.role)) {
+  if (roles.length > 0 && !roles.includes(user.role)) {
     return <Navigate to="/not-authorized" />;
   }
 
-  return <>{element}</>;
+  return element ? <>{element}</> : <Outlet />;
 };
 
 const parseJwt = (token: string) => {
