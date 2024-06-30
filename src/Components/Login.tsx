@@ -79,6 +79,7 @@ const Login: React.FC = () => {
             toast.success("Login successful!");
 
             const firebaseUser = auth.currentUser;
+            console.log("🚀 ~ handleLogin ~ auth:", auth)
             console.log("🚀 ~ handleLogin ~ firebaseUser:", firebaseUser)
             if (firebaseUser) {
               const token = await firebaseUser.getIdToken(true);
