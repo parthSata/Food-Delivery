@@ -86,8 +86,6 @@ const Login: React.FC = () => {
               const idTokenResult = await firebaseUser.getIdTokenResult();
               const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
 
-              console.log("Role:", role);
-
               const user = {
                 uid: firebaseUser.uid,
                 role: role,
@@ -96,18 +94,8 @@ const Login: React.FC = () => {
 
               localStorage.setItem('accessToken', token);
               login(user);
-
-              switch (role) {
-                case 'admin':
-                  navigate('/admin');
-                  break;
-                case 'seller':
-                  navigate('/seller');
-                  break;
-                default:
-                  navigate('/customer');
-              }
             }
+            navigate("/verification", { state: { mobileNumber, callingCode } });
           } else {
             toast.warn("Invalid passcode. Please try again.");
           }
