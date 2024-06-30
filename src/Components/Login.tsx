@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const reCaptchaKey = "6LdYvQIqAAAAANxz-8Ml7UTEDeOg7OaXf2sdZHCA"
+  const reCaptchaKey = "6Ld_xgQqAAAAAFGB0u1Q_hTrBTZM0Ym7QMgXeo8I"
   // const [isLoading, setIsLoading] = useState(false)
 
 
