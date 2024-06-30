@@ -35,11 +35,15 @@ import uploadDocument from '../../assets/Buidness Detail/upload (4) 1.png'
 import Address from '../../assets/Buidness Detail/Address.png'
 import Owner from '../../assets/Buidness Detail/Person.png'
 import Attach from '../../assets/Buidness Detail/Attach.png'
+import BankAccount from '../../assets/Payment/BankAccount.png'
+import PaymentImage from '../../assets/Payment/PaymentImage.png'
+import UPI from '../../assets/Payment/UPI.png'
+import SBILogo from '../../assets/Payment/sbi-logo-744E8B0C10-seeklogo 1.png'
 
 
 
 
 
 export {
-    Logo, Shop, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
+    Logo, Shop, BankAccount, PaymentImage, UPI, SBILogo, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
 }

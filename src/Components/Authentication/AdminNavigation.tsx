@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { CategoryPage, Dashboard, Products, ProductAdd, ProductView, Restaurant, AddRestaurants, TeamAdd, OurTeam, Gallary } from '../Config/index';
+import { CategoryPage, Dashboard, Products, ProductAdd, ProductView, Restaurant, AddRestaurants, TeamAdd, OurTeam } from '../Config/index';
 import ProtectedRoute from '../ProtectedRoute';
 
 const AdminNavigation = () => {
@@ -15,7 +15,7 @@ const AdminNavigation = () => {
       <Route path="/addrestaurants" element={<ProtectedRoute element={<AddRestaurants />} roles={['admin']} />} />
       <Route path="/team" element={<ProtectedRoute element={<OurTeam />} roles={['admin']} />} />
       <Route path="/teamAdd/:updateId" element={<ProtectedRoute element={<TeamAdd onClose={() => { }} isOpen={true} />} roles={['admin']} />} />
-      <Route path="/gallary" element={<ProtectedRoute element={<Gallary onClose={() => { }} isOpen={true} />} roles={['admin']} />} />
+   
     </Routes>
   );
 };

@@ -10,7 +10,7 @@ import Verification from './Components/Verification';
 import NotAuthorized from './Components/NotAuthorized';
 import { useAuth, AuthProvider } from './Components/AuthContext';
 import ProtectedRoute from "./Components/ProtectedRoute";
-import Payment from "./Components/Payment/Payment";
+import RestaurantTypes from "./Seller/RestaurantTypes";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/restaurantType" element={<RestaurantTypes />} />
 
           <Route element={<ProtectedRoute />}>
             <Route path="/admin/*" element={<AdminNavigation />} />

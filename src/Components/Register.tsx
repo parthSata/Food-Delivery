@@ -18,7 +18,6 @@ function Register() {
   const [email, setEmail] = useState("");
   const [passcode, setPasscode] = useState("");
   const [confirmPasscode, setConfirmPasscode] = useState("");
-  const [errorMessage] = useState<string>("Please enter a valid 10-digit phone number.");
   const [selectedState, setSelectedState] = useState<string>("Gujrat");
   const [name, setName] = useState("");
   const [role, setRole] = useState<string>("customer");
