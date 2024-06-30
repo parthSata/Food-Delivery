@@ -40,29 +40,10 @@ function BusinessDetails() {
     const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([]);
 
 
-    // const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
-    //     try {
-    //         const data = new FormData();
-    //         data.append("file", file);
-    //         data.append("upload_preset", presetKey);
-    //         data.append("cloud_name", cloudName);
-    //         data.append("folder", "Business Image");
 
-    //         const response = await fetch(
-    //             `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-    //             {
-    //                 method: "POST",
-    //                 body: data,
-    //             }
-    //         );
+    // const buyProductFromStripe = () => {
 
-    //         const imgData = await response.json();
-    //         return imgData.url;
-    //     } catch (error) {
-    //         console.error("Error uploading image:", error);
-    //         return null;
-    //     }
-    // };
+    // }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;

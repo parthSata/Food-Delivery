@@ -40,6 +40,7 @@ function Verification() {
 
           const firebaseUser = auth.currentUser;
           if (firebaseUser) {
+            // @ts-ignore
             const token = await firebaseUser.getIdToken(true);
             const idTokenResult = await firebaseUser.getIdTokenResult();
             const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';

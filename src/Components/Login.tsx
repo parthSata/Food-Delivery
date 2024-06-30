@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const reCaptchaKey = "6LdYvQIqAAAAANxz-8Ml7UTEDeOg7OaXf2sdZHCA"
+  const reCaptchaKey = "6Ld_xgQqAAAAAFGB0u1Q_hTrBTZM0Ym7QMgXeo8I"
   // const [isLoading, setIsLoading] = useState(false)
 
 
@@ -79,12 +79,12 @@ const Login: React.FC = () => {
             toast.success("Login successful!");
 
             const firebaseUser = auth.currentUser;
+            console.log("🚀 ~ handleLogin ~ auth:", auth)
+            console.log("🚀 ~ handleLogin ~ firebaseUser:", firebaseUser)
             if (firebaseUser) {
               const token = await firebaseUser.getIdToken(true);
               const idTokenResult = await firebaseUser.getIdTokenResult();
               const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
-
-              console.log("Role:", role);
 
               const user = {
                 uid: firebaseUser.uid,
@@ -94,18 +94,8 @@ const Login: React.FC = () => {
 
               localStorage.setItem('accessToken', token);
               login(user);
-
-              switch (role) {
-                case 'admin':
-                  navigate('/admin');
-                  break;
-                case 'seller':
-                  navigate('/seller');
-                  break;
-                default:
-                  navigate('/customer');
-              }
             }
+            navigate("/verification", { state: { mobileNumber, callingCode } });
           } else {
             toast.warn("Invalid passcode. Please try again.");
           }
