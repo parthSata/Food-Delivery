@@ -22,7 +22,6 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
-          <Route path="/payment" element={<Payment />} />
           <Route
             path="/admin/*"
             element={
