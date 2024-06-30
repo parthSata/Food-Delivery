@@ -41,9 +41,9 @@ function BusinessDetails() {
 
 
 
-    const buyProductFromStripe = () => {
+    // const buyProductFromStripe = () => {
 
-    }
+    // }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
