@@ -1,22 +1,34 @@
-import { Routes, Route } from 'react-router-dom';
-import { BusinessDetails, Dashboard, Orders, Products, ProductAdd, ProductView, Coupons, CouponAdd, CouponView } from '../Config/index';
-import ProtectedRoute from '../ProtectedRoute';
+import { Routes, Route } from "react-router-dom";
+import {
+  BusinessDetails,
+  Dashboard,
+  Orders,
+  Products,
+  ProductAdd,
+  ProductView,
+  Coupons,
+  CouponAdd,
+  CouponView,
+} from "../Config/index";
 
 const SellerNavigation = () => {
-    console.log("Seller Component Rendered ....")
-    return (
-        <Routes>
-            <Route path="/businessDetail" element={<ProtectedRoute element={<BusinessDetails />} roles={['seller']} />} />
-            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} roles={['seller']} />} />
-            <Route path="/orders" element={<ProtectedRoute element={<Orders />} roles={['seller']} />} />
-            <Route path="/products" element={<ProtectedRoute element={<Products />} roles={['seller']} />} />
-            <Route path="/productView/:productId" element={<ProtectedRoute element={<ProductView />} roles={['seller']} />} />
-            <Route path="/productsAdd" element={<ProtectedRoute element={<ProductAdd />} roles={['seller']} />} />
-            <Route path="/coupons" element={<ProtectedRoute element={<Coupons />} roles={['seller']} />} />
-            <Route path="/couponAdd" element={<ProtectedRoute element={<CouponAdd onClose={() => { }} isOpen={true} />} roles={['seller']} />} />
-            <Route path="/couponview/:couponId" element={<ProtectedRoute element={<CouponView />} roles={['seller']} />} />
-        </Routes>
-    );
+  console.log("Seller Component Rendered ....");
+  return (
+    <Routes>
+      <Route path="/businessDetail" element={<BusinessDetails />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/orders" element={<Orders />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/productView/:productId" element={<ProductView />} />
+      <Route path="/productsAdd" element={<ProductAdd />} />
+      <Route path="/coupons" element={<Coupons />} />
+      <Route
+        path="/couponAdd"
+        element={<CouponAdd onClose={() => {}} isOpen={true} />}
+      />
+      <Route path="/couponview/:couponId" element={<CouponView />} />
+    </Routes>
+  );
 };
 
 export default SellerNavigation;
