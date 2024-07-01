@@ -10,7 +10,6 @@ import Verification from "./Components/Verification";
 import NotAuthorized from "./Components/NotAuthorized";
 import { AuthProvider } from "./Components/AuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import RestaurantTypes from "./Seller/RestaurantTypes";
 
 function App() {
   return (
