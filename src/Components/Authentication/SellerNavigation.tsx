@@ -16,6 +16,7 @@ const SellerNavigation = () => {
   console.log("Seller Component Rendered ....");
   return (
     <Routes>
+      <Route path="/" element={<CategoryPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/" element={<CategoryPage />} />
       <Route path="/businessDetail" element={<BusinessDetails />} />
