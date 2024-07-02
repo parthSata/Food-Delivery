@@ -22,10 +22,8 @@ const Login: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const reCaptchaKey = "6Ld_xgQqAAAAAFGB0u1Q_hTrBTZM0Ym7QMgXeo8I"
+  const reCaptchaKey = "6Le7MQYqAAAAAG26F7BTH40n67_y5F_4Yv-hUYfZ"
   const [role, setRole] = useState("")
-  console.log("🚀 ~ role:", role)
-  console.log("🚀 ~ setRole:", setRole)
   // const [isLoading, setIsLoading] = useState(false)
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

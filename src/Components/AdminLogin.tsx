@@ -8,10 +8,12 @@ import { db } from '../Firebase/firebase';
 import { ref, get, child } from 'firebase/database';
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import { useAuth } from "./AuthContext";
 
 
 function AdminLogin() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [mobileNumber, setMobileNumber] = useState<string>("");
     const [callingCode, setCallingCode] = useState<string>("+91");
     const [isValid, setIsValid] = useState<boolean>(true);
@@ -76,12 +78,30 @@ function AdminLogin() {
 
                     if (userData.passcode === passcode) {
                         toast.success("Login successful!");
-                        navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult } }); // Redirect to verification page after successful login
+                        const firebaseUser = auth.currentUser;
+                        console.log("🚀 ~ handleLogin ~ auth:", auth)
+                        console.log("🚀 ~ handleLogin ~ firebaseUser:", firebaseUser)
+                        if (firebaseUser) {
+                            const token = await firebaseUser.getIdToken(true);
+                            const idTokenResult = await firebaseUser.getIdTokenResult();
+                            const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
+                            console.log("🚀 ~ handleLogin ~ role:", role)
+
+                            const user = {
+                                uid: firebaseUser.uid,
+                                role: role,
+                            };
+                            console.log("🚀 ~ handleLogin ~ user:", user)
+
+                            localStorage.setItem('accessToken', token);
+                            login(user);
+                            navigate("/verification", { state: { mobileNumber, callingCode, confirmationResult } }); // Redirect to verification page after successful login
+                        } else {
+                            toast.warn("Invalid passcode. Please try again.");
+                        }
                     } else {
-                        toast.warn("Invalid passcode. Please try again.");
+                        toast.warn("User not found. Please register first.");
                     }
-                } else {
-                    toast.warn("User not found. Please register first.");
                 }
             } catch (error) {
                 toast.error("An error occurred. Please try again.");
