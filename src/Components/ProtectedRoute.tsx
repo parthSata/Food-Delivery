@@ -9,6 +9,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ roles = [], element }: ProtectedRouteProps) => {
   const { user, refreshToken } = useAuth();
+  console.log("🚀 ~ ProtectedRoute ~ user:", user)
   const location = useLocation();
 
   useEffect(() => {
@@ -23,10 +24,12 @@ const ProtectedRoute = ({ roles = [], element }: ProtectedRouteProps) => {
     checkToken();
   }, [refreshToken]);
 
+  console.log("🚀 ~ ProtectedRoute ~ user:", user)
   if (!user) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
+  console.log("🚀 ~ ProtectedRoute ~ user.role:", user.role)
   if (roles.length > 0 && !roles.includes(user.role)) {
     return <Navigate to="/not-authorized" />;
   }

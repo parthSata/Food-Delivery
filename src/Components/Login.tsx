@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Logo, Online, Phone, flag, uk, us, united, uruguay, Customer, Seller } from './Config/images';
+import { Logo, Online, Phone, flag, uk, us, united, uruguay, Store, Person } from './Config/images';
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
 import { auth, db } from "../Firebase/firebase";
@@ -23,8 +23,14 @@ const Login: React.FC = () => {
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const reCaptchaKey = "6Ld_xgQqAAAAAFGB0u1Q_hTrBTZM0Ym7QMgXeo8I"
+  const [role, setRole] = useState("")
+  console.log("🚀 ~ role:", role)
+  console.log("🚀 ~ setRole:", setRole)
   // const [isLoading, setIsLoading] = useState(false)
 
+  const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRole(e.target.value);
+  };
 
   useEffect(() => {
     ConfigureCaptcha()
@@ -85,6 +91,7 @@ const Login: React.FC = () => {
               const token = await firebaseUser.getIdToken(true);
               const idTokenResult = await firebaseUser.getIdTokenResult();
               const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
+              console.log("🚀 ~ handleLogin ~ role:", role)
 
               const user = {
                 uid: firebaseUser.uid,
@@ -207,29 +214,59 @@ const Login: React.FC = () => {
                   />
                 </div>
                 <p className="font-semibold text-[#DF201F] self-end">Forgot Passcode</p>
-                <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
-                  <div className="flex flex-row gap-3 items-center">
-                    <img src={Customer} alt="" className="" />
-                    <label className="">Create Customer</label>
-                  </div>
-                  <div className="flex flex-row gap-3 items-center">
-                    <img src={Seller} alt="" className="" />
-                    <label className="">Create Seller</label>
+                <div className="flex  flex-col ">
+                  <div className="flex items-center justify-center flex-col gap-6">
+                    <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
+                      <div className="flex flex-row gap-3 items-center">
+                        <input
+                          type="radio"
+                          value="customer"
+                          checked={role === "customer"}
+                          onChange={handleRoleChange}
+                          className="hidden"
+                          id="customer-role"
+                        />
+                        <label htmlFor="customer-role" className="flex items-center gap-3 cursor-pointer">
+                          <div className={`flex justify-center items-center rounded-full ${role === "customer" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                            <img src={Person} alt="" className="h-5" />
+                          </div>
+                          Customer
+                        </label>
+                      </div>
+                      <div className="flex flex-row gap-3 items-center">
+                        <input
+                          type="radio"
+                          value="seller"
+                          checked={role === "seller"}
+                          onChange={handleRoleChange}
+                          className="hidden"
+                          id="seller-role"
+                        />
+                        <label htmlFor="seller-role" className="flex items-center gap-3 cursor-pointer">
+                          <div className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                            <img src={Store} alt="" className="h-5" />
+                          </div>
+                          Seller
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <ReCAPTCHA
-                sitekey={reCaptchaKey}
-                onChange={onRecaptchaChange}
-              />
-              <button
-                type="submit"
-                style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
-                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
-                disabled={!isValid || !recaptchaToken}
-              >
-                LOGIN
-              </button>
+              <div className="flex justify-center flex-col m-4">
+                <ReCAPTCHA
+                  sitekey={reCaptchaKey}
+                  onChange={onRecaptchaChange}
+                />
+                <button
+                  type="submit"
+                  style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
+                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
+                  disabled={!isValid || !recaptchaToken}
+                >
+                  LOGIN
+                </button>
+              </div>
               <ToastContainer
                 position="top-right"
                 autoClose={1000}
@@ -244,15 +281,15 @@ const Login: React.FC = () => {
               </p>
             </div>
           </div>
-        </form>
+        </form >
 
         {/* image */}
-        <div className="flex justify">
+        <div className="flex justify" >
           <img src={Online} className="h-full w-[425px] md:w-[435px] md:h-[400px]" alt="" />
         </div>
 
         <div id="recaptcha-container"></div>
-      </div>
+      </div >
       {/* </Loader> */}
     </>
   );

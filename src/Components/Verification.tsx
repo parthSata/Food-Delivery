@@ -49,6 +49,7 @@ function Verification() {
               uid: firebaseUser.uid,
               role: role
             }
+            console.log("🚀 ~ handleSubmit ~ user:", user)
 
             login(user)
 
