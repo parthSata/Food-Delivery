@@ -9,13 +9,15 @@ import {
   Coupons,
   CouponAdd,
   CouponView,
+  CategoryPage,
 } from "../Config/index";
 
 const SellerNavigation = () => {
   console.log("Seller Component Rendered ....");
   return (
     <Routes>
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<CategoryPage />} />
       <Route path="/businessDetail" element={<BusinessDetails />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/products" element={<Products />} />
@@ -24,7 +26,7 @@ const SellerNavigation = () => {
       <Route path="/coupons" element={<Coupons />} />
       <Route
         path="/couponAdd"
-        element={<CouponAdd onClose={() => {}} isOpen={true} />}
+        element={<CouponAdd onClose={() => { }} isOpen={true} />}
       />
       <Route path="/couponview/:couponId" element={<CouponView />} />
     </Routes>

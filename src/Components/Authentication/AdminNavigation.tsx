@@ -14,7 +14,7 @@ import {
 const AdminNavigation = () => {
   return (
     <Routes>
-      <Route path="/" element={<CategoryPage />} />
+      <Route path="/categoryPage" element={<CategoryPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/products" element={<Products />} />
       <Route path="/productView/:productId" element={<ProductView />} />
