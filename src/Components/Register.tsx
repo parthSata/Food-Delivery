@@ -120,7 +120,7 @@ function Register() {
 
   return (
     <div>
-      <div className="flex flex-row justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
+      <div className="flex flex-row px-10 justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
         <form style={{ fontFamily: "Montserrat Alternates" }} onSubmit={handleSubmit}>
           <div className="border-black flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center ">

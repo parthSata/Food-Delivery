@@ -11,6 +11,7 @@ import NotAuthorized from "./Components/NotAuthorized";
 import { AuthProvider } from "./Components/AuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import RestaurantTypes from "./Seller/RestaurantTypes";
+import HomePage from "./User/Home/HomePage";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="/restaurantType" element={<RestaurantTypes />} />
+          <Route path="/home" element={<HomePage />} />
           <Route
             path="/admin/*"
             element={

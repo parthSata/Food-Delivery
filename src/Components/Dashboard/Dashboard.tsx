@@ -26,7 +26,7 @@ function Dashboard() {
     <Container>
       {/* {dashboardData && ( */}
       <div
-        className="flex justify-between  mt-8 flex-wrap text-lg"
+        className="flex justify-between  mt-8 w-full flex-wrap text-lg"
         style={{ fontFamily: "Bai Jamjuree" }}
       >
         <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">

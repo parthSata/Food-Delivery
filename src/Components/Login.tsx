@@ -22,7 +22,7 @@ const Login: React.FC = () => {
   const [otp, setOtp] = useState<string>("");
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const reCaptchaKey = "6Le7MQYqAAAAAG26F7BTH40n67_y5F_4Yv-hUYfZ"
+  const reCaptchaKey = "6LcHhgcqAAAAAPr24Nrt5JAx2-yV9H2PqsgJS0gr"
   const [role, setRole] = useState("")
   // const [isLoading, setIsLoading] = useState(false)
 
@@ -83,8 +83,6 @@ const Login: React.FC = () => {
             toast.success("Login successful!");
 
             const firebaseUser = auth.currentUser;
-            console.log("🚀 ~ handleLogin ~ auth:", auth)
-            console.log("🚀 ~ handleLogin ~ firebaseUser:", firebaseUser)
             if (firebaseUser) {
               const token = await firebaseUser.getIdToken(true);
               const idTokenResult = await firebaseUser.getIdTokenResult();
@@ -95,7 +93,6 @@ const Login: React.FC = () => {
                 uid: firebaseUser.uid,
                 role: role,
               };
-              console.log("🚀 ~ handleLogin ~ user:", user)
 
               localStorage.setItem('accessToken', token);
               login(user);

@@ -1,12 +1,17 @@
 import Container from "../../User/Components/Container"
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../Config/images"
+import AboutUs from "./AboutUs"
+import BestSeller from "./BestSeller"
+import ProductGallary from "./ProductGallary"
+import Team from "./Team"
+import TodaySpecial from "./TodaySpecial"
 
 
 function HomePage() {
 
     return (
         <Container>
-            <div className='h-full w-full overflow-x-auto'>
+            <div className='h-full w-full mb-20 overflow-x-auto'>
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">
                         <img src={HomeImg} alt="" className="h-[400px] w-full" />
@@ -29,20 +34,8 @@ function HomePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="mt-10">
-                            <div className="flex flex-row justify-center gap-8">
-                                <div className="flex flex-col justify-center">
-                                    <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                    <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
-                                </div>
-                                <div className="flex flex-col justify-center">
-                                    <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
-                                </div>
+                        <div className="mt-10 mb-10">
+                            <div className="flex  flex-row flex-wrap justify-center gap-8">
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
                                     <span className="">Pizza</span>
@@ -65,6 +58,32 @@ function HomePage() {
                                 </div>
                             </div>
                         </div>
+                        <div className="mb-4 flex  bottom-0   space-x-2 justify-center rtl:space-x-reverse">
+                            <button type="button" className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                            <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                            <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                            <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                        </div>
+
+                        <div className="">
+                            <AboutUs />
+                        </div>
+
+                        <div className="">
+                            <BestSeller />
+                        </div>
+
+                        <div className="">
+                            <TodaySpecial />
+                        </div>
+                        <div className="">
+                            <ProductGallary />
+                        </div>
+
+                        <div className="">
+                            <Team />
+                        </div>
+
                     </div>
                 </div>
             </div>
