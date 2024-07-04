@@ -49,20 +49,10 @@ function Verification() {
               uid: firebaseUser.uid,
               role: role
             }
-            console.log("🚀 ~ handleSubmit ~ user:", user)
 
             login(user)
-
-            if (role === 'admin') {
-              navigate('/admin');
-            } else if (role === 'seller') {
-              navigate('/seller');
-            } else {
-              navigate('/customer');
-            }
+            navigate(role === 'admin' ? '/admin' : role === 'seller' ? '/seller' : '/customer', { state: { mobileNumber, callingCode } });
           }
-
-
         }
       }
     } catch (error) {

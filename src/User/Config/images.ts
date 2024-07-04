@@ -7,5 +7,29 @@ import Pizza from "../../assets/UserSide/Home/Pizza.png";
 import Burger from "../../assets/UserSide/Home/Burger.png";
 import VegRoll from "../../assets/UserSide/Home/Veg Roll.png";
 import Veg from "../../assets/UserSide/Home/Veg.png";
+import Shafe from "../../assets/HomePage/Shafe.png";
+import Pizzza from "../../assets/HomePage/Pizzaa.png";
+import Burgger from "../../assets/HomePage/Burgger.png";
+import BhelPuri from "../../assets/HomePage/Bhelpuri.png";
+import PlayArrow from "../../assets/HomePage/Play arrow.png";
+import Manchurian from "../../assets/HomePage/Manchurian.png";
+import GallaryFood from "../../assets/HomePage/GallaryFood.png";
 
-export { HomeImg, AllFood, texture, Right, Left, Pizza, Burger, VegRoll, Veg };
+export {
+  GallaryFood,
+  HomeImg,
+  Manchurian,
+  Shafe,
+  Pizzza,
+  Burgger,
+  BhelPuri,
+  PlayArrow,
+  AllFood,
+  texture,
+  Right,
+  Left,
+  Pizza,
+  Burger,
+  VegRoll,
+  Veg,
+};
