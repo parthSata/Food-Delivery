@@ -4,6 +4,7 @@ import AboutUs from "./AboutUs"
 import BestSeller from "./BestSeller"
 import ProductGallary from "./ProductGallary"
 import Team from "./Team"
+import Testimonials from "./Testimonials"
 import TodaySpecial from "./TodaySpecial"
 
 
@@ -82,6 +83,10 @@ function HomePage() {
 
                         <div className="">
                             <Team />
+                        </div>
+
+                        <div className="">
+                            <Testimonials />
                         </div>
 
                     </div>

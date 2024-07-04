@@ -25,7 +25,7 @@ const ProductAdd: React.FC = () => {
   const { updateId } = useParams();
   const location = useLocation();
   const { CategoryId } = location.state || [];
-  location.state?.CategoryId;
+  console.log("🚀 ~ CategoryId:", CategoryId)
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const [errors, setErrors] = useState<Partial<Product>>({});
@@ -138,7 +138,7 @@ const ProductAdd: React.FC = () => {
     try {
       await set(ref(db, `products/${newProduct.id}`), newProduct);
       toast.success("Product Added");
-      CategoryId ? navigate(`/category/${CategoryId}`) : navigate('/products');
+      CategoryId ? navigate(`/seller/category/${CategoryId}`) : navigate('/products');
     } catch (error) {
       toast.error("Error adding product.");
     }
@@ -391,6 +391,8 @@ const ProductAdd: React.FC = () => {
                             {errors.name}
                           </span>
                         )}
+                      console.log("🚀 ~ CategoryId:", CategoryId)
+                      console.log("🚀 ~ CategoryId:", CategoryId)
                       </div>
                       <div className="w-full  md:w-1/2 px-3 mb-6">
                         <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">

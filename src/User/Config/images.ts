@@ -14,8 +14,12 @@ import BhelPuri from "../../assets/HomePage/Bhelpuri.png";
 import PlayArrow from "../../assets/HomePage/Play arrow.png";
 import Manchurian from "../../assets/HomePage/Manchurian.png";
 import GallaryFood from "../../assets/HomePage/GallaryFood.png";
+import TestimonialBg from "../../assets/HomePage/TestimonialBg.png";
+import Vector from "../../assets/HomePage/Testimonials.png";
 
 export {
+  Vector,
+  TestimonialBg,
   GallaryFood,
   HomeImg,
   Manchurian,

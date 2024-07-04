@@ -89,14 +89,14 @@ function Team() {
 
                         </div>
                     </div>
-                    <div className="mb-4 flex    space-x-2 justify-center rtl:space-x-reverse">
+
+                </div>
+                    <div className="mb-4 flex relative -top-24  space-x-2 justify-center rtl:space-x-reverse">
                         <button type="button" className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full" aria-label="Slide 1" data-carousel-slide-to="0"></button>
                         <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 2" data-carousel-slide-to="1"></button>
                         <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 3" data-carousel-slide-to="2"></button>
                         <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 4" data-carousel-slide-to="3"></button>
                     </div>
-
-                </div>
             </div>
         </div>
     )

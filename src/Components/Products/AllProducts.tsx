@@ -15,7 +15,7 @@ function AllProducts() {
   const [isLoading, setisLoading] = useState(false)
 
   const handleAddProduct = (id: any) => {
-    navigate(`/productsAdd/${id}`);
+    navigate(`/seller/productsAdd/${id}`);
   };
 
   useEffect(() => {
