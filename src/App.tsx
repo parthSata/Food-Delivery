@@ -13,6 +13,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 import RestaurantTypes from "./Seller/RestaurantTypes";
 import HomePage from "./User/Home/HomePage";
 
+
 function App() {
   return (
     <BrowserRouter>
