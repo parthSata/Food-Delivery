@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute";
-import ProtectedLayout from "../Dashboard/ProtectedLayout";
 import {
   BusinessDetails,
   Dashboard,
@@ -17,18 +15,16 @@ import {
 const SellerNavigation = () => {
   return (
     <Routes>
-      <Route path="/" element={<ProtectedRoute roles={['seller']} element={<ProtectedLayout />} />}>
-        <Route path="/" element={<CategoryPage />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="businessDetail" element={<BusinessDetails />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="products" element={<Products />} />
-        <Route path="productView/:productId" element={<ProductView />} />
-        <Route path="productsAdd" element={<ProductAdd />} />
-        <Route path="coupons" element={<Coupons />} />
-        <Route path="couponAdd" element={<CouponAdd onClose={() => {}} isOpen={true} />} />
-        <Route path="couponview/:couponId" element={<CouponView />} />
-      </Route>
+      <Route path="/" element={<CategoryPage />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="businessDetail" element={<BusinessDetails />} />
+      <Route path="orders" element={<Orders />} />
+      <Route path="products" element={<Products />} />
+      <Route path="productView/:productId" element={<ProductView />} />
+      <Route path="productsAdd" element={<ProductAdd />} />
+      <Route path="coupons" element={<Coupons />} />
+      <Route path="couponAdd" element={<CouponAdd onClose={() => { }} isOpen={true} />} />
+      <Route path="couponview/:couponId" element={<CouponView />} />
     </Routes>
   );
 };
