@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../Config/images"
 import AboutUs from "./AboutUs"
 import BestSeller from "./BestSeller"
@@ -9,6 +10,11 @@ import TodaySpecial from "./TodaySpecial"
 
 
 function HomePage() {
+    const navigate = useNavigate()
+
+    const handleSubmit = () => {
+        navigate('/login')
+    }
 
     return (
         <div>
@@ -21,7 +27,7 @@ function HomePage() {
                                 <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>Welcome to our food shop</span>
                                 <span className="text-white text-5xl    font-bold">we have best delicious food</span>
                                 <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>It is a long established fact that a reader will be distracted</p>
-                                <button className="w-[120px] text-white rounded-full self-center bg-[#94CD00] h-[50px]">Login Now</button>
+                                <button className="w-[120px] text-white rounded-full self-center bg-[#94CD00] h-[50px]" onClick={handleSubmit}>Login Now</button>
                             </div>
                         </div>
                         <div className="relative bg-[#DF201F] h-[210px] flex justify-center items-center " style={{ fontFamily: "Bai Jamjuree" }}>
