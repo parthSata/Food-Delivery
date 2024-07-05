@@ -2,6 +2,7 @@ import Container from "../../User/Components/Container"
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../Config/images"
 import AboutUs from "./AboutUs"
 import BestSeller from "./BestSeller"
+import LatestNews from "./LatestNews"
 import ProductGallary from "./ProductGallary"
 import Team from "./Team"
 import Testimonials from "./Testimonials"
@@ -12,14 +13,14 @@ function HomePage() {
 
     return (
         <Container>
-            <div className='h-full w-full mb-20 overflow-x-auto'>
+            <div className='h-full w-full mb-20 '>
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">
                         <img src={HomeImg} alt="" className="h-[400px] w-full" />
                         <div className="absolute  font-semibold w-full   flex-col justify-center top-28" style={{ fontFamily: "Bai Jamjuree" }}>
                             <div className="flex flex-col gap-2">
                                 <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>Welcome to our food shop</span>
-                                <span className="text-white text-5xl font-bold">we have best delicious food</span>
+                                <span className="text-white text-5xl    font-bold">we have best delicious food</span>
                                 <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>It is a long established fact that a reader will be distracted</p>
                                 <button className="w-[120px] text-white rounded-full self-center bg-[#94CD00] h-[50px]">Login Now</button>
                             </div>
@@ -87,6 +88,10 @@ function HomePage() {
 
                         <div className="">
                             <Testimonials />
+                        </div>
+
+                        <div className="">
+                            <LatestNews />
                         </div>
 
                     </div>

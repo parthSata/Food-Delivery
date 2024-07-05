@@ -16,8 +16,16 @@ import Manchurian from "../../assets/HomePage/Manchurian.png";
 import GallaryFood from "../../assets/HomePage/GallaryFood.png";
 import TestimonialBg from "../../assets/HomePage/TestimonialBg.png";
 import Vector from "../../assets/HomePage/Testimonials.png";
+import Dummy from "../../assets/HomePage/Dummy.png";
+import DummyImg from "../../assets/HomePage/DummyImg.png";
+import StraightQuotes from "../../assets/HomePage/StraightQuotes.png";
+import StraightQuotes2 from "../../assets/HomePage/StraightQuotes2.png";
 
 export {
+  Dummy,
+  DummyImg,
+  StraightQuotes,
+  StraightQuotes2,
   Vector,
   TestimonialBg,
   GallaryFood,
