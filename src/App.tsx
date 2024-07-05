@@ -26,7 +26,7 @@ function App() {
           <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="/restaurantType" element={<RestaurantTypes />} />
           <Route path="/home" element={<HomePage />} />
-]          <Route
+          <Route
             path="/admin/*"
             element={
               <ProtectedRoute roles={["admin"]} element={<AdminNavigation />} />
