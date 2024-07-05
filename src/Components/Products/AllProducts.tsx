@@ -1,4 +1,4 @@
-import DummyImg from "../../assets/All Product/DummyFood.png";
+const DummyImg = require("../../assets/All Product/DummyFood.png");
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
