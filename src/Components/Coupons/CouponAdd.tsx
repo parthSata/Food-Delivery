@@ -24,6 +24,7 @@ interface AddProps {
 const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
   const navigate = useNavigate();
   const { updateId } = useParams();
+  console.log("🚀 ~ updateId:", updateId)
   const [errors, setErrors] = useState<Partial<Coupon>>({});
   const [coupon, setCoupon] = useState<Coupon>({
     id: "",
@@ -95,7 +96,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
       const couponRef = ref(db, `coupons/${updateId}`);
       await set(couponRef, updatedCoupon);
       toast.success("Coupon successfully updated");
-      navigate(`/coupons`);
+      navigate(`/seller/coupons`);
     } catch (error) {
       toast.error("Error updating Coupon.");
     }
@@ -129,7 +130,7 @@ const Add: React.FC<AddProps> = ({ onClose, isOpen }) => {
       const newCouponRef = ref(db, `coupons/${newCoupon.id}`);
       await set(newCouponRef, newCoupon);
       toast.success("Coupon added successfully");
-      navigate(`/coupons`);
+      navigate(`/seller/coupons`);
     } catch (error) {
       toast.error("Error adding coupon.");
     }

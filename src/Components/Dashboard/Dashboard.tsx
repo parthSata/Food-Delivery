@@ -1,7 +1,6 @@
 import { Cart, Revenue, Customer, TotalShops, Pizza } from "../Config/images";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
-import Container from "../Container";
 
 function Dashboard() {
   // @ts-ignore
@@ -23,7 +22,7 @@ function Dashboard() {
     }
   };
   return (
-    <Container>
+    <div>
       {/* {dashboardData && ( */}
       <div
         className="flex justify-between  mt-8 w-full flex-wrap text-lg"
@@ -239,7 +238,7 @@ function Dashboard() {
       {/* Pagination */}
 
       {/* Pagination */}
-    </Container>
+    </div>
   );
 }
 

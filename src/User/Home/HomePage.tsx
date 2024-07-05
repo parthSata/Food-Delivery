@@ -1,8 +1,7 @@
-import Container from "../../User/Components/Container"
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../Config/images"
 import AboutUs from "./AboutUs"
 import BestSeller from "./BestSeller"
-import LatestNews from "./LatestNews"
+// import LatestNews from "./LatestNews"
 import ProductGallary from "./ProductGallary"
 import Team from "./Team"
 import Testimonials from "./Testimonials"
@@ -12,7 +11,7 @@ import TodaySpecial from "./TodaySpecial"
 function HomePage() {
 
     return (
-        <Container>
+        <div>
             <div className='h-full w-full mb-20 '>
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">
@@ -90,14 +89,11 @@ function HomePage() {
                             <Testimonials />
                         </div>
 
-                        <div className="">
-                            <LatestNews />
-                        </div>
 
                     </div>
                 </div>
             </div>
-        </Container>
+        </div>
     )
 }
 

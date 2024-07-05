@@ -6,7 +6,7 @@ import { useAuth } from '../../Components/AuthContext';
 
 const routes = {
   customer: [
-    { path: "/customer/", label: "Homepage" },
+    { path: "/customer/", label: "Home" },
     { path: "/customer/category", label: "Category" },
     { path: "/customer/about", label: "About" },
     { path: "/customer/dishes", label: "Dishes" },

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Coupon } from "./CouponAdd";
-import Container from "../Container";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../Loader";
 
 function CouponView() {
   const { couponId } = useParams();
+  console.log("🚀 ~ CouponView ~ couponId:", couponId)
   const navigate = useNavigate();
   const [couponDetail, setCouponDetail] = useState<Coupon>({
     id: "",
@@ -24,7 +24,7 @@ function CouponView() {
   }, [couponId]);
 
   const handleUpdateCoupons = (id: string) => {
-    navigate(`/couponAdd/${id}`);
+    navigate(`/seller/couponAdd/${id}`);
   };
 
   const handleDeleteCoupons = async (id: string) => {
@@ -33,7 +33,7 @@ function CouponView() {
     try {
       const couponRef = ref(db, `coupons/${id}`);
       await remove(couponRef);
-      navigate(`/coupons`);
+      navigate(`/seller/coupons`);
     } catch (error) {
       console.error("Error deleting coupon:", error);
     }
@@ -59,7 +59,6 @@ function CouponView() {
 
   return (
     <div>
-      <Container>
         <div
           className="flex justify-center mt-28 items-center"
           style={{ fontFamily: "Montserrat Alternates" }}
@@ -108,7 +107,6 @@ function CouponView() {
             </Loader>
           </div>
         </div>
-      </Container >
     </div >
   );
 }

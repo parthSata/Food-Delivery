@@ -15,7 +15,7 @@ const routes = {
     { path: "/admin/team", label: "Our Team" },
   ],
   seller: [
-    { path: "/seller/", label: "CategoryPage" },
+    { path: "/seller/", label: "Category" },
     { path: "/seller/dashboard", label: "Dashboard" },
     { path: "/seller/businessDetail", label: "BusinessDetail" },
     { path: "/seller/orders", label: "Orders" },

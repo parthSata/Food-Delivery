@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute";
-import ProtectedLayout from "../Dashboard/ProtectedLayout";
 import {
   CategoryPage,
   Dashboard,
@@ -12,11 +10,12 @@ import {
   TeamAdd,
   OurTeam,
 } from "../Config/index";
+import Container from "../Container";
 
 const AdminNavigation = () => {
   return (
-    <Routes>
-      <Route path="/" element={<ProtectedRoute roles={['admin']} element={<ProtectedLayout />} />}>
+    <Container>
+      <Routes>
         <Route path="categoryPage" element={<CategoryPage />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="products" element={<Products />} />
@@ -26,8 +25,8 @@ const AdminNavigation = () => {
         <Route path="addrestaurants" element={<AddRestaurants />} />
         <Route path="team" element={<OurTeam />} />
         <Route path="teamAdd/:updateId" element={<TeamAdd onClose={() => { }} isOpen={true} />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </Container>
   );
 };
 

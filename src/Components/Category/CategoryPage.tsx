@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import AddCategory from "./AddCategory";
 import { search, Pizza } from "../Config/images";
 import { useNavigate } from "react-router-dom";
-import Container from "../Container";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "../Loader";
@@ -104,7 +103,7 @@ function Home(): JSX.Element {
   };
 
   const handleViewCategories = (id: string) => {
-    navigate(`/category/${id}`);
+    navigate(`/seller/category/${id}`);
   };
 
   const handleNextPage = () => {
@@ -123,7 +122,7 @@ function Home(): JSX.Element {
   const closeAddCategoryDialog = () => setShowAddCategoryDialog(false);
 
   return (
-    <Container>
+    <div>
       {/* Body Part Started */}
       <div
         className="flex justify-between items-center mt-10 flex-wrap gap-2"
@@ -252,98 +251,96 @@ function Home(): JSX.Element {
       {/* table End */}
       {/* Pagination */}
 
-      {
-        totalPages > 1 && (
-          <div className="flex justify-end">
-            <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
-              <button
-                className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
-                onClick={() => handlePreviousPage()}
-                disabled={currentPage === 1}
-              >
-                <i
-                  className="fa-solid fa-angle-left"
-                  style={{ color: "#8f9194" }}
-                ></i>
-              </button>
-              <ul className="flex items-end justify-around w-[80px] top-[]">
-                {[...Array(totalPages)].map((_, index) => (
-                  <li key={index} className="page flex flex-grow">
-                    <a
-                      href="#"
-                      onClick={() => handlePageChange(index + 1)}
-                      className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
-                        }`}
-                    >
-                      {index + 1}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-              <button
-                className="ml-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
-                onClick={() => handleNextPage()}
-                disabled={currentPage === totalPages}
-              >
-                <i
-                  className="fa-solid fa-angle-right"
-                  style={{ color: "#8f9194" }}
-                ></i>
-              </button>
-            </div>
+      {totalPages > 1 && (
+        <div className="flex justify-end">
+          <div className="flex flex-row items-center justify-center mt-8 w-[308px] h-[38px] rounded-md">
+            <button
+              className="mr-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
+              onClick={() => handlePreviousPage()}
+              disabled={currentPage === 1}
+            >
+              <i
+                className="fa-solid fa-angle-left"
+                style={{ color: "#8f9194" }}
+              ></i>
+            </button>
+            <ul className="flex items-end justify-around w-[80px] top-[]">
+              {[...Array(totalPages)].map((_, index) => (
+                <li key={index} className="page flex flex-grow">
+                  <a
+                    href="#"
+                    onClick={() => handlePageChange(index + 1)}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                      }`}
+                  >
+                    {index + 1}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <button
+              className="ml-4 rounded-sm px-3 py-1 hover:bg-gray-200 focus:outline-none"
+              onClick={() => handleNextPage()}
+              disabled={currentPage === totalPages}
+            >
+              <i
+                className="fa-solid fa-angle-right"
+                style={{ color: "#8f9194" }}
+              ></i>
+            </button>
           </div>
-        )
+        </div>
+      )
       }
 
       {/* Pagination */}
       {/* Body Ended Started */}
-      {
-        showAddCategoryDialog && (
-          <div className="fixed rounded-[10px] z-10 inset-0 overflow-x-hidden bg-red">
-            <div className="flex items-center justify-center h-full ">
-              <div
-                className="fixed inset-0 transition-opacity "
-                aria-hidden="true"
-              >
-                <div className="absolute inset-0 bg-[#161A1D] opacity-75"></div>
-              </div>
+      {showAddCategoryDialog && (
+        <div className="fixed rounded-[10px] z-10 inset-0 overflow-x-hidden bg-red">
+          <div className="flex items-center justify-center h-full ">
+            <div
+              className="fixed inset-0 transition-opacity "
+              aria-hidden="true"
+            >
+              <div className="absolute inset-0 bg-[#161A1D] opacity-75"></div>
+            </div>
 
-              <div className="bg-white rounded-lg shadow-xl transform transition-all p-6 relative m-8">
-                <button
-                  type="button"
-                  className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute top-[-10px] right-[-10px]
+            <div className="bg-white rounded-lg shadow-xl transform transition-all p-6 relative m-8">
+              <button
+                type="button"
+                className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute top-[-10px] right-[-10px]
                    mt-0`}
-                  onClick={closeAddCategoryDialog}
+                onClick={closeAddCategoryDialog}
+              >
+                <span className="sr-only ">Close</span>
+                <svg
+                  className="h-[26px] w-[26px] p-[4px]"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
                 >
-                  <span className="sr-only ">Close</span>
-                  <svg
-                    className="h-[26px] w-[26px] p-[4px]"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
 
-                <AddCategory
-                  id={updateCategoryId}
-                  onAddCategory={handleAddOrUpdateCategory}
-                  onClose={closeAddCategoryDialog}
-                />
-              </div>
+              <AddCategory
+                id={updateCategoryId}
+                onAddCategory={handleAddOrUpdateCategory}
+                onClose={closeAddCategoryDialog}
+              />
             </div>
           </div>
-        )
+        </div>
+      )
       }
-    </Container >
+    </div >
   );
 }
 

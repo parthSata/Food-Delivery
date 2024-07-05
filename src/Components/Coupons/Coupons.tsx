@@ -16,11 +16,11 @@ function Coupons() {
   const [isLoading, setisLoading] = useState(false)
 
   const handleUpdateCoupons = (id: any) => {
-    navigate(`/couponAdd/${id}`);
+    navigate(`/seller/couponAdd/${id}`);
   };
 
   const handleCouponView = (id: string) => {
-    navigate(`/couponView/${id}`, { state: { couponId: id } });
+    navigate(`/seller/couponView/${id}`, { state: { couponId: id } });
   };
   const handleDeleteCoupons = async (id: string) => {
     setisLoading(true)
@@ -33,7 +33,7 @@ function Coupons() {
       console.error("Error deleting Coupons:", error);
     }
     setisLoading(false)
-    navigate(`/coupons`);
+    navigate(`/seller/coupons`);
   };
 
   useEffect(() => {
