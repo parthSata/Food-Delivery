@@ -1,3 +1,5 @@
-import HomePage from "../Home/HomePage";
+import HomePage from "../Pages/Home/HomePage";
+import Container from "../../User/Components/Container";
+import Category from "../../User/Pages/Category/Category";
 
-export { HomePage };
+export { HomePage, Category, Container };

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../Config/images"
+import { AllFood, HomeImg, Left, Pizza, Right, texture } from "../../Config/images"
 import AboutUs from "./AboutUs"
 import BestSeller from "./BestSeller"
 // import LatestNews from "./LatestNews"
@@ -7,6 +7,7 @@ import ProductGallary from "./ProductGallary"
 import Team from "./Team"
 import Testimonials from "./Testimonials"
 import TodaySpecial from "./TodaySpecial"
+import UserHeader from "./UserHeader"
 
 
 function HomePage() {
@@ -18,6 +19,7 @@ function HomePage() {
 
     return (
         <div>
+            <UserHeader />
             <div className='h-full w-full mb-20 '>
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">

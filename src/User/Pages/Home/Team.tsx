@@ -1,4 +1,4 @@
-import EmployeImg from '../../assets/OurTeam/Ellipse 7 (2).png'
+import { EmplyoeImg } from "../../Config/images"
 
 function Team() {
     return (
@@ -14,7 +14,7 @@ function Team() {
                         <div className="w-full flex justify-center ">
                             <div className="absolute -top-10 ">
                                 <img
-                                    src={EmployeImg}
+                                    src={EmplyoeImg}
                                     alt="No Image Found"
                                     className=" h-40 w-40"
                                 />
@@ -41,7 +41,7 @@ function Team() {
                         <div className="w-full flex justify-center ">
                             <div className="absolute -top-10 ">
                                 <img
-                                    src={EmployeImg}
+                                    src={EmplyoeImg}
                                     alt="No Image Found"
                                     className=" h-40 w-40"
                                 />
@@ -68,7 +68,7 @@ function Team() {
                         <div className="w-full flex justify-center ">
                             <div className="absolute -top-10 ">
                                 <img
-                                    src={EmployeImg}
+                                    src={EmplyoeImg}
                                     alt="No Image Found"
                                     className=" h-40 w-40"
                                 />
@@ -91,12 +91,12 @@ function Team() {
                     </div>
 
                 </div>
-                    <div className="mb-4 flex relative -top-24  space-x-2 justify-center rtl:space-x-reverse">
-                        <button type="button" className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                        <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                        <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                        <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                    </div>
+                <div className="mb-4 flex relative -top-24  space-x-2 justify-center rtl:space-x-reverse">
+                    <button type="button" className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+                    <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+                    <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+                    <button type="button" className="w-3 h-3 border-2 border-[#94CD00]  rounded-full" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+                </div>
             </div>
         </div>
     )

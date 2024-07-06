@@ -2,7 +2,6 @@ import { DummyImg } from "../Config/images";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import Container from "../Container";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../Loader";
@@ -63,7 +62,6 @@ function Coupons() {
   const closeDialog = () => setIsDialogOpen(false);
   return (
     <div>
-      <Container >
         <div className="relative mt-4 bg-black opacity-90 w-full">
           <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
           <div className=" flex justify-start pl-16 ">
@@ -155,7 +153,6 @@ function Coupons() {
         {isDialogOpen && (
           <CouponAdd isOpen={isDialogOpen} onClose={closeDialog} />
         )}
-      </Container>
     </div>
   );
 }

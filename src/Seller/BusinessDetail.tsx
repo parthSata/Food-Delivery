@@ -6,7 +6,10 @@ import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+// import { loadStripe } from '@stripe/stripe-js';
 
+
+// const stripePromise = loadStripe('pk_test_51PVmy0GkQKWIkWzyiewG5kaejC93EnGmocXAxU9S7TFQmepAwO78FJXorkiorirMwhHsg22nyJ7wivwK3gCzDgjz00axihnECg');
 
 interface BusinessDetails {
     id: string;
@@ -150,7 +153,35 @@ function BusinessDetails() {
                 gstNo: "",
                 email: "",
                 images: []
-            })
+            });
+
+            // const stripe = await stripePromise;
+            // if (!stripe) {
+            //     throw new Error("Stripe not initialized");
+            // }
+
+            // const response = await fetch('http://localhost:5173/seller/businessDetail/create-checkout-session', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify({
+            //         businessId: businessDetails.id
+            //     }),
+            // });
+
+            // if (!response.ok) {
+            //     throw new Error(`Server error: ${response.status}`);
+            // }
+
+            // const session = await response.json();
+
+            // if (!session.id) {
+            //     throw new Error("Invalid session response");
+            // }
+
+            // await stripe.redirectToCheckout({ sessionId: session.id });
+
         } catch (error) {
             toast.error("Failed to save business details.");
             console.error("Error saving business details:", error);
@@ -160,14 +191,14 @@ function BusinessDetails() {
 
     return (
         <div>
-            <div className="flex flex-row   justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
+            <div className="flex flex-row   justify-center  items-center gap-20 h-full w-full flex-wrap md:flex-nowrap xl:flex-wrap">
                 {/* Form */}
 
                 <form
                     style={{ fontFamily: "Montserrat Alternates" }}
                     onSubmit={handleSubmit}
                 >
-                    <div className="border-black flex flex-col justify-center items-center">
+                    <div className="border-black flex flex-col  justify-center items-center">
                         <div className="flex flex-col justify-center items-center ">
                             <p
                                 className="text-[30px] font-semibold"
@@ -383,7 +414,7 @@ function BusinessDetails() {
 
 
                 {/* Image */}
-                <div className="flex justify-center ">
+                <div className="flex justify-center order-2 ">
                     <img
                         src={ImageOfRestaurant}
                         className="h-[500px] w-[500px] "

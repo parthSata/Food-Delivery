@@ -20,8 +20,16 @@ import Dummy from "../../assets/HomePage/Dummy.png";
 import DummyImg from "../../assets/HomePage/DummyImg.png";
 import StraightQuotes from "../../assets/HomePage/StraightQuotes.png";
 import StraightQuotes2 from "../../assets/HomePage/StraightQuotes2.png";
+import EmplyoeImg from "../../assets/OurTeam/Ellipse 7 (2).png";
+import FlashBurger from "../../assets/UserSide/Category/FlashBurger.png";
+import BurgerImg from "../../assets/UserSide/Category/BurgerImg.png";
+import Cart from "../../assets/UserSide/Category/Cart.png";
 
 export {
+  FlashBurger,
+  Cart,
+  BurgerImg,
+  EmplyoeImg,
   Dummy,
   DummyImg,
   StraightQuotes,

@@ -1,4 +1,4 @@
-import { Burgger } from "../Config/images"
+import { Burgger } from "../../Config/images"
 
 
 function BestSeller() {

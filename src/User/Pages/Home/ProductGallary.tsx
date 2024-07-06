@@ -1,5 +1,5 @@
-import { GallaryFood } from '../Config/images'
-import UserGallaryHeader from '../Home/UserGallaryHeader'
+import { GallaryFood } from '../../Config/images'
+import UserGallaryHeader from './UserGallaryHeader'
 
 function ProductGallary() {
     return (

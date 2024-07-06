@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import Sidebar from '../../Components/Dashboard/Sidebar';
+import Sidebar from '../../../Components/Dashboard/Sidebar';
 import { Link, useLocation } from 'react-router-dom';
-import { Logo, menu } from '../../Components/Config/images';
-import { useAuth } from '../../Components/AuthContext';
+import { Logo, menu } from '../../../Components/Config/images';
+import { useAuth } from '../../../Components/AuthContext';
 
 const routes = {
   customer: [
@@ -58,7 +58,7 @@ function UserHeader() {
           </Link>
         </div>
         <div className={`md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"}`} style={{ fontFamily: "Bai Jamjuree" }}>
-          <ul className="flex items-center font-semibold text-[16px] gap-8 px-5">
+          <ul className="flex items-center font-semibold w-full text-[16px] gap-8">
             {routeLinks}
           </ul>
         </div>

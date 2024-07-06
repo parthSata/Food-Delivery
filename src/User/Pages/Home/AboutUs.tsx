@@ -1,4 +1,4 @@
-import { PlayArrow, Shafe } from "../Config/images"
+import { PlayArrow, Shafe } from "../../Config/images"
 
 function AboutUs() {
     return (

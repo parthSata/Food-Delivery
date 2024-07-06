@@ -1,11 +1,12 @@
 import React from "react";
-import UserHeader from "../Home/UserHeader";
+import PageComponent from "./PageComponent";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
-            <UserHeader />
-            <div className="min-w-fit max-w-[1280px] w-full mx-auto px-6">{children}</div>
+            <PageComponent>
+                <div className="min-w-fit max-w-[1280px] w-full mx-auto px-6">{children}</div>
+            </PageComponent>
         </div>
     );
 };

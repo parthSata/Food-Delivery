@@ -1,4 +1,4 @@
-import { Manchurian } from "../Config/images"
+import { Manchurian } from "../../Config/images"
 
 function TodaySpecial() {
     return (

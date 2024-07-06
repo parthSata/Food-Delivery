@@ -1,27 +1,22 @@
 import { useRef, useEffect } from "react";
-import { Orders, Logo } from "../Config/images";
+import { Orders, Logo } from "../../../Components/Config/images";
 import { Link } from "react-router-dom";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../../Components/AuthContext";
 
 
 const routes = {
-    admin: [
-        { path: "/admin/categoryPage", label: "Category", image: Orders },
-        { path: "/admin/dashboard", label: "Dashboard", image: Orders },
-        { path: "/admin/products", label: "Products", image: Orders },
-        { path: "/admin/productsAdd", label: "ProductsAdd", image: Orders },
-        { path: "/admin/addRestaurants", label: "AddRestaurants", image: Orders },
-        { path: "/admin/restaurants", label: "Restaurants", image: Orders },
-        { path: "/admin/team", label: "Our Team", image: Orders },
+    customer: [
+        { path: "/customer/", label: "Home", image: Orders },
+        { path: "/customer/category", label: "Category", image: Orders },
+        { path: "/customer/about", label: "About", image: Orders },
+        { path: "/customer/dishes", label: "Dishes", image: Orders },
+        { path: "/customer/gallery", label: "Gallery", image: Orders },
+        { path: "/customer/team", label: "Team", image: Orders },
+        { path: "/customer/testimonials", label: "Testimonials", image: Orders },
+        { path: "/customer/news", label: "News", image: Orders },
+        { path: "/customer/contactUs", label: "Contact Us", image: Orders },
+        { path: "/customer/restaurantNearBy", label: "Restaurant Nearby", image: Orders },
     ],
-    seller: [
-        { path: "/seller/", label: "Category", image: Orders },
-        { path: "/seller/dashboard", label: "Dashboard", image: Orders },
-        { path: "/seller/businessDetail", label: "BusinessDetail", image: Orders },
-        { path: "/seller/orders", label: "Orders", image: Orders },
-        { path: "/seller/products", label: "Products", image: Orders },
-        { path: "/seller/coupons", label: "Coupons", image: Orders },
-    ]
 };
 
 function Sidebar() {
@@ -53,12 +48,11 @@ function Sidebar() {
 
     const getRoutes = () => {
         if (!user) return [];
-        if (user.role === 'admin') return routes.admin;
-        if (user.role === 'seller') return routes.seller;
+        if (user.role === 'customer') return routes.customer;
         return [];
     };
 
-    const routeLinks = getRoutes().map((route) => (
+    const routeLinks = getRoutes().map((route: any) => (
         <li
             key={route.path}
             className={`hover:text-red-600 flex justify-center items-center text-[18px] hover:underline-offset-8 w-full} `}

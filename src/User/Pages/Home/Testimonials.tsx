@@ -1,4 +1,4 @@
-import { Dummy, DummyImg, StraightQuotes, StraightQuotes2, TestimonialBg, Vector } from "../Config/images"
+import { Dummy, DummyImg, StraightQuotes, StraightQuotes2, TestimonialBg, Vector } from "../../Config/images"
 
 function Testimonials() {
     return (

@@ -4,6 +4,7 @@ import { auth, db } from '../Firebase/firebase';
 import { getIdToken, onIdTokenChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { child, get, ref } from 'firebase/database';
+import Loader from './Loader';
 
 interface User {
   uid: string;
@@ -22,7 +23,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [isLoading, setIsLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
@@ -46,7 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         localStorage.removeItem('accessToken');
         setUser(null);
       }
-      setLoading(false)
+      setIsLoading(false)
     });
 
     return () => unsubscribe();
@@ -69,13 +70,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>; // Add a loading indicator
-  }
 
   return (
     <AuthContext.Provider value={{ user, login, logout, refreshToken }}>
-      {children}
+      <Loader isLoading={isLoading}>
+        {children}
+      </Loader>
     </AuthContext.Provider>
   );
 };
