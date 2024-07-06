@@ -12,7 +12,6 @@ function AllProducts() {
   const [productUpdateId, setProductUpdateId] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setisLoading] = useState(false)
-  
 
   const handleAddProduct = (id: any) => {
     navigate(`/seller/productsAdd/${id}`);
