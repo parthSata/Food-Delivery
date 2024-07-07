@@ -6,34 +6,33 @@ function Category() {
     const navigate = useNavigate()
 
     const handleAddProduct = () => {
-        navigate("/customer/addToCart")
+        navigate("/customer/checkOutPage")
+    }
+
+    const handleProductView = () => {
+
     }
 
     return (
         <div className="">
             {/* Product Heading */}
             <div
-                className="relative mt-4 flex-row bg-black opacity-90 "
+                className="relative mt-4 w-full flex-row bg-black opacity-90 "
                 style={{ fontFamily: "Bai Jamjuree" }}
             >
-                <div className=" absolute flex justify-start flex-col pl-16 w-full h-full" style={{ background: ("269.88deg, #83B018 0.09%, #C2C965 99.89%") }}>
+                <div className=" flex justify-start flex-col pl-16 w-full  h-full" style={{ background: ("269.88deg, #83B018 0.09%, #C2C965 99.89%") }}>
                     <span className="absolute bottom-28 text-white text-2xl">Get 30% Off</span>
-                    <span
-                        className="absolute bottom-20 text-white text-2xl"
-                        style={{ fontFamily: "Bai Jamjuree" }}
-                    >
-                        Best Veg  Burger
-                    </span>
+                    <span className="absolute bottom-20 text-white text-2xl">Best Veg  Burger</span>
                 </div>
-                <div className="">
-                    <img src={BurgerImg} alt="" className=" h-[205px] w-full  " />
+                <div className="w-full">
+                    <img src={BurgerImg} alt="" className="h-[205px] w-full  " />
                 </div>
             </div>
             {/* Products */}
             {/* <Loader isLoading={isLoading}> */}
             <div className="">
                 <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
-                    <div className="sm:w-1/5 w-full mb-10 ">
+                    <div className="sm:w-1/5 w-full mb-10" onClick={handleProductView}>
                         <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                             {/* @ts-ignore */}
                             <img src={FlashBurger} alt="" className="h-20" />

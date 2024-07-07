@@ -6,10 +6,12 @@ import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+// import stripeKey from '../Config'
+// console.log("🚀 ~ stripeKey:", stripeKey)
+// // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';
+// const stripePromise = loadStripe(`${stripeKey}`);
 
-
-// const stripePromise = loadStripe('pk_test_51PVmy0GkQKWIkWzyiewG5kaejC93EnGmocXAxU9S7TFQmepAwO78FJXorkiorirMwhHsg22nyJ7wivwK3gCzDgjz00axihnECg');
 
 interface BusinessDetails {
     id: string;
@@ -42,11 +44,6 @@ function BusinessDetails() {
     });
     const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([]);
 
-
-
-    // const buyProductFromStripe = () => {
-
-    // }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -155,19 +152,12 @@ function BusinessDetails() {
                 images: []
             });
 
-            // const stripe = await stripePromise;
-            // if (!stripe) {
-            //     throw new Error("Stripe not initialized");
-            // }
-
-            // const response = await fetch('http://localhost:5173/seller/businessDetail/create-checkout-session', {
+            // const response = await fetch('http://localhost:5173/create-checkout-session', {
             //     method: 'POST',
             //     headers: {
             //         'Content-Type': 'application/json',
             //     },
-            //     body: JSON.stringify({
-            //         businessId: businessDetails.id
-            //     }),
+            //     body: JSON.stringify({}),
             // });
 
             // if (!response.ok) {
@@ -175,15 +165,21 @@ function BusinessDetails() {
             // }
 
             // const session = await response.json();
+            // const stripe = await stripePromise;
 
-            // if (!session.id) {
-            //     throw new Error("Invalid session response");
+            // if (!stripe) {
+            //     throw new Error("Stripe not initialized");
             // }
 
             // await stripe.redirectToCheckout({ sessionId: session.id });
 
         } catch (error) {
             toast.error("Failed to save business details.");
+            if (error instanceof TypeError) {
+                toast.error("Failed to fetch. Is the server running?");
+            } else {
+                toast.error("Failed to save business details.");
+            }
             console.error("Error saving business details:", error);
         }
     };

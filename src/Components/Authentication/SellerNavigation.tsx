@@ -12,6 +12,7 @@ import {
   CategoryPage,
 } from "../Config/index";
 import Container from "../Container";
+import CheckoutForm from "../../Seller/CheckOutPage";
 
 const SellerNavigation = () => {
   return (
@@ -27,6 +28,7 @@ const SellerNavigation = () => {
         <Route path="coupons" element={<Coupons />} />
         <Route path="couponAdd" element={<CouponAdd onClose={() => { }} isOpen={true} />} />
         <Route path="couponview/:couponId" element={<CouponView />} />
+        <Route path="create-checkout-session" element={<CheckoutForm />} />
       </Routes>
     </Container>
   );

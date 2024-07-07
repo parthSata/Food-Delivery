@@ -7,7 +7,6 @@ import ProductGallary from "./ProductGallary"
 import Team from "./Team"
 import Testimonials from "./Testimonials"
 import TodaySpecial from "./TodaySpecial"
-import UserHeader from "./UserHeader"
 
 
 function HomePage() {
@@ -19,7 +18,6 @@ function HomePage() {
 
     return (
         <div>
-            <UserHeader />
             <div className='h-full w-full mb-20 '>
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">

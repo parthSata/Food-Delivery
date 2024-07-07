@@ -7,17 +7,17 @@ import PageSidebar from './PageSidebar';
 
 const routes = {
     customer: [
-      { path: "/customer/", label: "Home" },
-      { path: "/customer/category", label: "Category" },
-      { path: "/customer/about", label: "About" },
-      { path: "/customer/dishes", label: "Dishes" },
-      { path: "/customer/gallery", label: "Gallery" },
-      { path: "/customer/team", label: "Team" },
-      { path: "/customer/testimonials", label: "Testimonials" },
-      { path: "/customer/news", label: "News" },
-      { path: "/customer/contactUs", label: "Contact Us" },
+        { path: "/customer/", label: "Home" },
+        { path: "/customer/category", label: "Category" },
+        { path: "/customer/about", label: "About" },
+        { path: "/customer/dishes", label: "Dishes" },
+        { path: "/customer/gallery", label: "Gallery" },
+        { path: "/customer/team", label: "Team" },
+        { path: "/customer/testimonials", label: "Testimonials" },
+        { path: "/customer/news", label: "News" },
+        { path: "/customer/contactUs", label: "Contact Us" },
     ],
-  };
+};
 
 function PageHeader() {
     const [showSideMenu] = useState<boolean>(false);
