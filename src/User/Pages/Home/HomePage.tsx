@@ -5,8 +5,9 @@ import BestSeller from "./BestSeller"
 // import LatestNews from "./LatestNews"
 import ProductGallary from "./ProductGallary"
 import Team from "./Team"
-import Testimonials from "./Testimonials"
 import TodaySpecial from "./TodaySpecial"
+import Strings from "../../../Components/Config/Strings"
+import Button from "../../../Components/ReusableComponent.tsx/Button"
 
 
 function HomePage() {
@@ -15,6 +16,7 @@ function HomePage() {
     const handleSubmit = () => {
         navigate('/login')
     }
+  
 
     return (
         <div>
@@ -24,10 +26,12 @@ function HomePage() {
                         <img src={HomeImg} alt="" className="h-[400px] w-full" />
                         <div className="absolute  font-semibold w-full   flex-col justify-center top-28" style={{ fontFamily: "Bai Jamjuree" }}>
                             <div className="flex flex-col gap-2">
-                                <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>Welcome to our food shop</span>
-                                <span className="text-white text-5xl    font-bold">we have best delicious food</span>
-                                <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>It is a long established fact that a reader will be distracted</p>
-                                <button className="w-[120px] text-white rounded-full self-center bg-[#94CD00] h-[50px]" onClick={handleSubmit}>Login Now</button>
+                                <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>{Strings.home.welcome}</span>
+                                <span className="text-white text-5xl    font-bold">{Strings.home.slogan}</span>
+                                <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>{Strings.home.description}</p>
+                                <Button className="w-[120px] text-white cursor-pointer rounded-full self-center bg-[#94CD00] h-[50px]" onClick={handleSubmit}>
+                                    {Strings.login.loginButton}
+                                </Button>
                             </div>
                         </div>
                         <div className="relative bg-[#DF201F] h-[210px] flex justify-center items-center " style={{ fontFamily: "Bai Jamjuree" }}>
@@ -36,7 +40,7 @@ function HomePage() {
                                 <img src={AllFood} alt="" className="h-[240px] w-full " />
                                 <div className="flex justify-between items-center text-white text-2xl font-semibold">
                                     <img src={Left} className="h-12 w-12 " />
-                                    <span className="">Best Categoty</span>
+                                    <span className="">{Strings.home.bestCategory}</span>
                                     <img src={Right} className="h-12 w-12" />
                                 </div>
                             </div>
@@ -45,23 +49,23 @@ function HomePage() {
                             <div className="flex  flex-row flex-wrap justify-center gap-8">
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
+                                    <span className="">{Strings.dashboard.pizza}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
+                                    <span className="">{Strings.dashboard.pizza}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
+                                    <span className="">{Strings.dashboard.pizza}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
+                                    <span className="">{Strings.dashboard.pizza}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">Pizza</span>
+                                    <span className="">{Strings.dashboard.pizza}</span>
                                 </div>
                             </div>
                         </div>
@@ -89,10 +93,6 @@ function HomePage() {
 
                         <div className="">
                             <Team />
-                        </div>
-
-                        <div className="">
-                            <Testimonials />
                         </div>
 
 

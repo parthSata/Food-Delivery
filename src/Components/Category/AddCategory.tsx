@@ -6,6 +6,8 @@ import { CategoriesData } from "./CategoryPage";
 import { db } from '../../Firebase/firebase';
 import { set, ref, onValue, update } from 'firebase/database';
 import { Loaders } from "../Config/images";
+import Strings from "../Config/Strings";
+import Input from "../ReusableComponent.tsx/Input";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
@@ -215,7 +217,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
             className="font-semibold"
             style={{ fontFamily: "Montserrat Alternates" }}
           >
-            Category Image
+            {Strings.addCategory.labelImage}
           </span>
 
           <div className="">
@@ -223,7 +225,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
               {imagePreview ? (
                 <img src={imagePreview} alt="Selected" className="w-full h-64 object-cover rounded-lg" />
               ) : (
-                <input
+                <Input
                   type="file"
                   accept="image/*"
                   className="border-2 text-[#A2A3A5] mt-2 p-2 text-xl focus:outline-none rounded-lg w-full"
@@ -246,10 +248,10 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
               <div className="flex flex-wrap mb-6">
                 <div className="w-full px-3 mb-6">
                   <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Category Name
+                    {Strings.addCategory.labelName}
                   </label>
-                  <input
-                    className={` appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
+                  <Input
+                    className={` appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
                     type="text"
                     placeholder="Pizza"
                     name="categoryName"
@@ -267,7 +269,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                 </div>
                 <div className="w-full md:w-1/1 px-3 mb-6">
                   <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Discription
+                    {Strings.addCategory.labelDescription}
                   </label>
                   <textarea
                     className="appearance-none block w-full  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white resize-none"
@@ -289,9 +291,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                 </div>
                 <div className="w-full md:w-1/2 px-3 mb-6">
                   <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Number of Categories
+                    {Strings.addCategory.labelNumberOfCategory}
                   </label>
-                  <input
+                  <Input
                     className={` appearance-none  block w-full h-[60px]  text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928] bg-white`}
                     id="grid-last-name"
                     type="number"
@@ -307,7 +309,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
 
                 <div className="w-full md:w-1/2 px-3 mb-6">
                   <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                    Status
+                    {Strings.addCategory.labelStatus}
                   </label>
                   <select
                     name="status"
@@ -339,7 +341,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
           }}
           onClick={handleSubmit}
         >
-          Save Category
+          {Strings.addCategory.labelSaveButton}
         </button>
         <ToastContainer
           position="top-right"
@@ -356,7 +358,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
           }}
           onClick={handleUpdate}
         >
-          Update Category
+          {Strings.addCategory.labelUpdateButton}
         </button>
       </div>
       {/* DialogBox For Add Category */}

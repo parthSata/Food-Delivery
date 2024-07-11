@@ -2,6 +2,8 @@ import Burger from '../../assets/Orders/Burger.png'
 import Pizza from '../../assets/Orders/Pizza.png'
 import Accepted from '../../assets/Orders/OrderAccepted.png'
 import Cancel from '../../assets/Orders/OrderCancel.png'
+import Strings from '../Config/Strings'
+import Input from '../ReusableComponent.tsx/Input'
 // import { useState } from 'react'
 
 function Orders() {
@@ -41,7 +43,7 @@ function Orders() {
                 <div className="flex flex-col flex-wrap">
                     <div className="">
                         <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
-                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>Today , 25th March 2022</span>
+                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.orders.today}</span>
                             <span className="">
                                 {/* Search Input */}
 
@@ -52,7 +54,7 @@ function Orders() {
                                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                             </svg>
                                         </div>
-                                        <input type="search"
+                                        <Input type="search"
                                             className="block w-full p-4 ps-10 text-sm  text-gray-500 border border-[1px solid #E7E7E9] rounded-lg "
                                             style={{ fontFamily: "Montserrat Alternates" }}
                                             placeholder="Search"
@@ -68,10 +70,10 @@ function Orders() {
                                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}>
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>Order# ORD00003</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>03:25 PM</p>
+                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.orders.orderNumber}</span>
+                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>{Strings.orders.orderTime}</p>
                                             <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Accepted} alt="" className="h-5" />Accepted Order
+                                                <img src={Accepted} alt="" className="h-5" />{Strings.orders.acceptedOrder}
                                             </span>
                                         </div>
                                     </div>

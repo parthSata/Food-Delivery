@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "MontserratAlternates";
+  src: url("./assets/Fonts/MontserratAlternates-Regular.ttf");
+}
+@font-face {
+  font-family: "BaiJamjuree";
+  src: url("./assets/Fonts/BaiJamjuree-Regular.ttf");
+}

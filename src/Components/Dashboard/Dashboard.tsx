@@ -1,6 +1,7 @@
 import { Cart, Revenue, Customer, TotalShops, Pizza } from "../Config/images";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
+import Strings from "../Config/Strings";
 
 function Dashboard() {
   // @ts-ignore
@@ -30,8 +31,8 @@ function Dashboard() {
       >
         <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
-            <span className="self-start">{}</span>
-            <span className="">Recent Order</span>
+            <span className="self-start">{ }</span>
+            <span className="">{Strings.dashboard.recentOrder}</span>
           </div>
           <span className="">
             <img src={Cart} className="h-[50px] w-[50px] " />
@@ -40,7 +41,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col ">
             <span className="self-start">923</span>
-            <span className="">Revenue</span>
+            <span className="">{Strings.dashboard.revenue}</span>
           </div>
           <span className="">
             <img src={Revenue} className="h-[50px] w-[50px]" />
@@ -49,7 +50,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
             <span className="self-start">923</span>
-            <span className="">New Customer</span>
+            <span className="">{Strings.dashboard.newCustomer}</span>
           </div>
           <span className="">
             <img src={Customer} className="h-[50px] w-[50px]" />
@@ -58,7 +59,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
             <span className="self-start">923</span>
-            <span className="">Total Shops</span>
+            <span className="">{Strings.dashboard.totalShops}</span>
           </div>
           <span className="">
             <img src={TotalShops} className="h-[50px] w-[50px]" />
@@ -85,13 +86,13 @@ function Dashboard() {
                     <thead className="text-lg font-semibold bg-gray-50 ">
                       <tr className="flex justify-between text-black ">
                         <th scope="col" className="px-6 py-3  cursor-pointer">
-                          Recent Orders
+                          {Strings.dashboard.recentOrders}
                         </th>
                         <th
                           scope="col"
                           className="px-6 py-3  cursor-pointer text-[#DF201F] "
                         >
-                          View All
+                          {Strings.dashboard.viewAll}
                         </th>
                       </tr>
                     </thead>
@@ -102,7 +103,7 @@ function Dashboard() {
                           <span className=" text-[#A2A3A5] ">03:25 PM</span>
                         </td>
                         <td className=" cursor-pointer  text-[#50E06B] ">
-                          Accepted Order
+                          {Strings.dashboard.acceptedOrder}
                         </td>
                         <td className="p-6 flex relative mr-10 cursor-pointer">
                           <img
@@ -132,8 +133,8 @@ function Dashboard() {
               style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}
             >
               <div className="flex flex-col m-4">
-                <span className="self-start">Revenue</span>
-                <span className="self-start">44620 Rs</span>
+                <span className="self-start">{Strings.dashboard.revenue}</span>
+                <span className="self-start">{Strings.dashboard.revenueAmount}</span>
               </div>
               <div className="ml-10 mb-10 " style={{ width: 550 }}>
                 {/* <LineChart /> */}
@@ -142,8 +143,8 @@ function Dashboard() {
           </div>
           <div className="mt-24 h-full w-full">
             <div className="flex justify-between font-semibold text-xl">
-              <span className="text-[#161A1D] ">Recently Placed Orders</span>
-              <span className="text-[#DF201F]">View All</span>
+              <span className="text-[#161A1D] ">{Strings.dashboard.recentlyPlacedOrders}</span>
+              <span className="text-[#DF201F]">{Strings.dashboard.viewAll}</span>
             </div>
             <div className="">
               <div
@@ -165,31 +166,31 @@ function Dashboard() {
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          Order
+                          {Strings.dashboard.order}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          Customer Name
+                          {Strings.dashboard.customerName}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          Status
+                          {Strings.dashboard.status}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          Time
+                          {Strings.dashboard.time}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          Discount Price
+                          {Strings.dashboard.discountPrice}
                         </th>
                       </tr>
                     </thead>
@@ -209,20 +210,20 @@ function Dashboard() {
                             alt=""
                           />
                           {/* {item.ProductName} */}
-                          <span className="mr-10">Pizza</span>
+                          <span className="mr-10">{Strings.dashboard.pizza}</span>
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* {item.id} */}
-                          Parth Sata
+                          {Strings.dashboard.parthSata}
                         </td>
                         <td className="p-4 border-[2px] text-[#E9CB3F] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* {item.Stock} */}Pending
+                          {/* {item.Stock} */}{Strings.dashboard.pending}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* {item.Status} */}10:05
+                          {/* {item.Status} */}{Strings.dashboard.orderTime}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* ₹{item.Price} */}₹200
+                          {/* ₹{item.Price} */}{Strings.dashboard.price}
                         </td>
                       </tr>
                       {/* ))} */}

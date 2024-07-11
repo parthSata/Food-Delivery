@@ -4,10 +4,11 @@ import { Coupon } from "./CouponAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 function CouponView() {
   const { couponId } = useParams();
-  console.log("🚀 ~ CouponView ~ couponId:", couponId)
   const navigate = useNavigate();
   const [couponDetail, setCouponDetail] = useState<Coupon>({
     id: "",
@@ -67,15 +68,15 @@ function CouponView() {
           <div className="flex flex-col gap-1 p-8 font-semibold bg-[#FFF3E5] rounded-[15px] h-auto w-[816px]  ">
             <Loader isLoading={isLoading}>
               <div className="flex flex-row  pl-4 gap-8 text-lg">
-                <span className="font-bold text-[#A2A3A5]">Offer Code </span>
+                <span className="font-bold text-[#A2A3A5]">{Strings.couponAdd.offerCode} </span>
                 <span className="text-[#161A1D] ">{couponDetail.offerCode}</span>
               </div>
               <div className="flex flex-row  pl-4 gap-[85px] text-lg">
-                <span className="font-bold text-[hsl(220,2%,64%)]">Offer </span>
+                <span className="font-bold text-[hsl(220,2%,64%)]">{Strings.couponAdd.OfferLable}</span>
                 <span className="text-[#DF201F]">{couponDetail.discount}%</span>
               </div>
               <div className="flex flex-row  pl-4 gap-8 text-lg">
-                <span className="font-bold text-[#A2A3A5]">Description </span>
+                <span className="font-bold text-[#A2A3A5]">{Strings.couponAdd.description} </span>
                 <span className="text-[#938D8E] text-justify">
                   {couponDetail.discription}
                 </span>
@@ -85,23 +86,23 @@ function CouponView() {
                   className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl "
                   onClick={() => handleDeleteCoupons(couponDetail.id)}
                 >
-                  <button className="">
+                  <Button className="">
                     <i
                       className="fa-solid fa-trash fa-lg"
                       style={{ color: "#d4d9de" }}
                     ></i>
-                  </button>
+                  </Button>
                 </div>
                 <div
                   className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl"
                   onClick={() => handleUpdateCoupons(couponDetail.id)}
                 >
-                  <button className="">
+                  <Button className="">
                     <i
                       className="fa-solid fa-pen fa-lg"
                       style={{ color: "#d4d9de" }}
                     ></i>
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Loader>

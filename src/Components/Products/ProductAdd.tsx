@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { db } from '../../Firebase/firebase';
 import { set, ref, onValue, update } from 'firebase/database';
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Input from "../ReusableComponent.tsx/Input";
 
 export interface Product {
   id: string;
@@ -21,12 +23,9 @@ export interface Product {
 }
 
 const ProductAdd: React.FC = () => {
-  const { updateId } = useParams();
-  console.log("🚀 ~ updateId:", updateId)
-  console.log("Product Add Render")
+
   const location = useLocation();
-  const { CategoryId } = location.state || [];
-  console.log("🚀 ~ CategoryId:", CategoryId)
+  const { CategoryId, updateId } = location.state || [];
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const [errors, setErrors] = useState<Partial<Product>>({});
@@ -239,7 +238,7 @@ const ProductAdd: React.FC = () => {
 
       const data = await response.json();
       if (data.result === "ok") {
-        console.log(`Image ${publicId} deleted successfully from Cloudinary`);
+        toast.success(`Image ${publicId} deleted successfully from Cloudinary`);
       } else {
         console.warn(`Failed to delete image ${publicId} from Cloudinary`);
       }
@@ -262,8 +261,8 @@ const ProductAdd: React.FC = () => {
         <Loader isLoading={isLoading}>
           <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
             {/* Upload Product Image */}
-            <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
-              <div className="flex  flex-wrap">
+            <div className="flex flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
+              <div className="flex flex-wrap">
                 <div
                   className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold"
                   style={{ fontFamily: "Bai Jamjuree" }}
@@ -322,14 +321,14 @@ const ProductAdd: React.FC = () => {
                                   style={{ color: "#e8eaed" }}
                                 ></i>
                               </span>
-                              <input
+                              <Input
                                 type="file"
-                                onChange={(e) => handleImageUpload(e, index)}
+                                onChange={(e:any) => handleImageUpload(e, index)}
                                 style={{ display: "none" }}
                               />
                             </label>
                           </div>
-                          <p>Upload New</p>
+                          <p>{Strings.productAdd.uploadNow}</p>
                         </>
                       )}
                     </div>
@@ -353,10 +352,10 @@ const ProductAdd: React.FC = () => {
                         className="h-[250px]  object-cover"
                       />
                     ) : (
-                      <p>No image uploaded</p>
+                      <p>{Strings.productAdd.noImageUploaded}</p>
                     )}
                     <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                      Supported files PNG, JPEG, SVG, WEBP
+                      {Strings.productAdd.supportedFiles}
                     </p>
                   </div>
                 </div>
@@ -373,12 +372,12 @@ const ProductAdd: React.FC = () => {
                   <div className="flex flex-wrap  mb-6 w-full">
                     <div className="w-full px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Name
+                        {Strings.productAdd.nameLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
                         type="text"
-                        placeholder="Name"
+                        placeholder={Strings.productAdd.nameLabel}
                         name="name"
                         value={product.name}
                         onChange={handleChange}
@@ -386,19 +385,17 @@ const ProductAdd: React.FC = () => {
                       {errors.name && (
                         <span
                           className={`text-red-600 text-sm ${product.name ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.name}
                         </span>
                       )}
-                      console.log("🚀 ~ CategoryId:", CategoryId)
-                      console.log("🚀 ~ CategoryId:", CategoryId)
                     </div>
                     <div className="w-full  md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Price
+                        {Strings.productAdd.priceLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                         type="number"
                         placeholder="0"
@@ -409,7 +406,7 @@ const ProductAdd: React.FC = () => {
                       {errors.price && (
                         <span
                           className={`text-red-600 text-sm ${product.price ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.price}
                         </span>
@@ -417,9 +414,9 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Discount Price
+                        {Strings.productAdd.discountPriceLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                         type="number"
                         placeholder="0"
@@ -430,17 +427,17 @@ const ProductAdd: React.FC = () => {
                       {errors.discountPrice && (
                         <span
                           className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.discountPrice}
                         </span>
                       )}
                     </div>
-                    <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Weight
+                        {Strings.productAdd.weightLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                         type="number"
                         placeholder="0"
@@ -451,17 +448,17 @@ const ProductAdd: React.FC = () => {
                       {errors.weight && (
                         <span
                           className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.weight}
                         </span>
                       )}
                     </div>
-                    <div className="w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Unit
+                        {Strings.productAdd.unitLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                         type="text"
                         placeholder="0"
@@ -472,17 +469,17 @@ const ProductAdd: React.FC = () => {
                       {errors.unit && (
                         <span
                           className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.unit}
                         </span>
                       )}
                     </div>
-                    <div className="w-full   px-3 mb-6">
+                    <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Packaging Charges
+                        {Strings.productAdd.packagingChargesLabel}
                       </label>
-                      <input
+                      <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                         type="number"
                         placeholder="0"
@@ -493,7 +490,7 @@ const ProductAdd: React.FC = () => {
                       {errors.packagingCharges && (
                         <span
                           className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.packagingCharges}
                         </span>
@@ -501,53 +498,52 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        Description
+                        {Strings.productAdd.descriptionLabel}
                       </label>
                       <textarea
-                        className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none"
-                        placeholder="Type Here..."
-                        rows={5}
+                        className="resize-none appearance-none block w-full h-[120px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
+                        placeholder="Description"
                         name="description"
                         value={product.description}
                         onChange={handleChange}
-                      />
+                      ></textarea>
                       {errors.description && (
                         <span
                           className={`text-red-600 text-sm ${product.description ? "" : "hidden"
-                            }}`}
+                            }`}
                         >
                           {errors.description}
                         </span>
                       )}
                     </div>
-                  </div>
-                  <div className="flex w-full">
-                    <button
-                      className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
-                      style={{
-                        boxShadow: "2px 2px 20px 2px #DF201F66",
-                        fontFamily: "Bai Jamjuree",
-                      }}
-                      onClick={handleSubmit}
-                    >
-                      Add Product
-                    </button>
-                    <button
-                      className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
-                      style={{
-                        boxShadow: "2px 2px 20px 2px #DF201F66",
-                        fontFamily: "Bai Jamjuree",
-                      }}
-                      onClick={handleUpdate}
-                    >
-                      Update Product
-                    </button>
-                    <ToastContainer
-                      position="top-right"
-                      autoClose={1000}
-                      pauseOnFocusLoss={false}
-                      limit={1}
-                    />
+                    <div className="flex w-full">
+                      <button
+                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                        style={{
+                          boxShadow: "2px 2px 20px 2px #DF201F66",
+                          fontFamily: "Bai Jamjuree",
+                        }}
+                        onClick={handleSubmit}
+                      >
+                        Add Product
+                      </button>
+                      <button
+                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                        style={{
+                          boxShadow: "2px 2px 20px 2px #DF201F66",
+                          fontFamily: "Bai Jamjuree",
+                        }}
+                        onClick={handleUpdate}
+                      >
+                        Update Product
+                      </button>
+                      <ToastContainer
+                        position="top-right"
+                        autoClose={1000}
+                        pauseOnFocusLoss={false}
+                        limit={1}
+                      />
+                    </div>
                   </div>
                 </form>
               </div>

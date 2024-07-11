@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Pizza from "../assets/HomePage/Pizza.png";
+import { toast } from "react-toastify";
 
 
 interface Product {
@@ -52,7 +53,7 @@ function Table() {
       // setShowAddProductDialog(true);
       setUpdateProductId(id);
     } else {
-      console.log("Product not found for update!");
+      toast.error("Product not found for update!");
     }
   };
 

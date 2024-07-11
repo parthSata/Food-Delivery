@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { db } from '../../Firebase/firebase';
 import { set, ref } from 'firebase/database';
 import Loader from "../Loader";
+import Input from "../ReusableComponent.tsx/Input";
 
 export interface Gallary {
   id: string;
@@ -190,7 +191,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                           className="w-full h-64 object-cover rounded-lg"
                         />
                       ) : (
-                        <input
+                        <Input
                           type="file"
                           accept="image/*"
                           className="border-2 text-[#A2A3A5] mt-2 p-2 text-xl focus:outline-none rounded-lg w-full"
@@ -210,7 +211,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                         <label className="flex justify-self-start  uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                           Title
                         </label>
-                        <input
+                        <Input
                           className={` appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] ro unded py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219]    focus:outline-[#99c928] rounded-md bg-white`}
                           type="text"
                           placeholder="Title"

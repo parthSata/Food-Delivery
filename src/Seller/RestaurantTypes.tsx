@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ToastContainer } from "react-toastify"
 import ConfirmDialog from "./ConfirmDialog";
+import Strings from "../Components/Config/Strings";
+import Input from "../Components/ReusableComponent.tsx/Input";
 
 function RestaurantTypes() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -12,31 +14,30 @@ function RestaurantTypes() {
     return (
         <div className="h-full w-full">
             <div className="flex m-8">
-                <span className="self-start text-3xl" style={{ fontFamily: "Bai Jamjuree" }}>Restaurant Type And Timings</span>
+                <span className="self-start text-3xl" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.restaurantTypes.pageTitle}</span>
             </div>
             <div className="flex flex-wrap">
                 <div className="font-semibold flex  flex-col  gap-10 m-8">
                     <div className="flex justify-center flex-wrap flex-col gap-10 ">
                         <div className="flex flex-col gap-8" style={{ fontFamily: "Montserrat Alternates" }}>
                             <div className="flex flex-col">
-                                <span className="self-start text-[#161A1D]">Establishment Type</span>
-                                <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">Select most relevant category for your restaurant type</p>
+                                <span className="self-start text-[#161A1D]">{Strings.restaurantTypes.establishmentType}</span>
+                                <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">{Strings.restaurantTypes.establishmentDescription}</p>
                             </div>
-
                             <div className="flex flex-col gap-8 ">
                                 <div className="flex flex-col ">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="radio" name="restaurantType" className="accent-[#DF201F]" id="" />
-                                        <span className="text-[#161A1D]">Both, delivery and dine-in available</span>
+                                        <Input type="radio" name="restaurantType" className="accent-[#DF201F]" id="" />
+                                        <span className="text-[#161A1D]">{Strings.restaurantTypes.bothDeliveryDineIn}</span>
                                     </div>
-                                    <p className="text-[#B9BABB]  font-medium text-sm text-justify text-wrap px-5">Select this option when you have a place for customers to dine-in and also want to online for your restaurant</p>
+                                    <p className="text-[#B9BABB]  font-medium text-sm text-justify text-wrap px-5">{Strings.restaurantTypes.bothDeliveryDineInDescription}</p>
                                 </div>
                                 <div className="flex flex-col ">
                                     <div className="flex flex-row gap-2">
-                                        <input type="radio" name="restaurantType" className="accent-[#DF201F]" id="" />
-                                        <span className="text-[#161A1D] ">Delivery Only</span>
+                                        <Input type="radio" name="restaurantType" className="accent-[#DF201F]" id="" />
+                                        <span className="text-[#161A1D] ">{Strings.restaurantTypes.deliveryOnly}</span>
                                     </div>
-                                    <p className="self-start text-[#B9BABB] font-medium text-sm text-justify px-5">Select when you don't have a facility for customers to dine-in (like delivery Kitchens)</p>
+                                    <p className="self-start text-[#B9BABB] font-medium text-sm text-justify px-5">{Strings.restaurantTypes.deliveryOnlyDescription}</p>
                                 </div>
                             </div>
                         </div>
@@ -44,73 +45,69 @@ function RestaurantTypes() {
 
                             <div className="flex flex-col gap-5">
                                 <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
-                                    <span className=" self-start font">Select options which are best for you outlet</span>
+                                    <span className=" self-start font">{Strings.restaurantTypes.selectOptions}</span>
                                 </div>
                                 <div className="flex gap-10 flex-wrap px-6" style={{ fontFamily: "Bai Jamjuree" }}>
                                     <div className="flex flex-col gap-3">
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div>
+
+                                    </div>
+                                    <div className="flex flex-col gap-3">
+                                        <div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div><div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div><div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div><div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div><div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-3">
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                         <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col gap-3">
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
-                                        </div>
-                                        <div className="flex flex-row gap-2 items-center">
-                                            <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                            <span className="">Bakery</span>
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
+                                        </div><div className="flex flex-row gap-2 items-center">
+                                            <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                            <span className="">{Strings.restaurantTypes.bakery}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -121,51 +118,51 @@ function RestaurantTypes() {
                 <div className="flex flex-col gap-10 ">
                     <div className="flex flex-col gap-8" style={{ fontFamily: "Montserrat Alternates" }}>
                         <div className="flex flex-col font-semibold px-5">
-                            <span className="self-start text-[#161A1D]">Types of Cuisines</span>
-                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">Select most relevant category for your restaurant type</p>
+                            <span className="self-start text-[#161A1D]">{Strings.restaurantTypes.typesOf}</span>
+                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">{Strings.restaurantTypes.establishmentType}</p>
                         </div>
                         <div className="">
                             <div className="flex gap-10 flex-wrap px-6" style={{ fontFamily: "Bai Jamjuree" }}>
                                 <div className="flex flex-col gap-3 text-lg">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
-                                    </div>
-                                </div>
-                                <div className="flex flex-col gap-3 text-lg">
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
-                                    </div>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
-                                    </div>
-                                    <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-3 text-lg">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
-                                        <span className="">Bakery</span>
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col gap-3 text-lg">
+                                    <div className="flex flex-row gap-2 items-center">
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
+                                    </div>
+                                    <div className="flex flex-row gap-2 items-center">
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
+                                    </div>
+                                    <div className="flex flex-row gap-2 items-center">
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <span className="">{Strings.restaurantTypes.bakery}</span>
                                     </div>
                                 </div>
                             </div>
@@ -173,59 +170,59 @@ function RestaurantTypes() {
                     </div>
                     <div className="flex flex-col gap-4 " style={{ fontFamily: "Montserrat Alternates" }}>
                         <div className="flex flex-col font-semibold px-5">
-                            <span className="self-start text-[#161A1D] text-xl">Restaurant operational Hours</span>
-                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">Restaurant operational Hours</p>
+                            <span className="self-start text-[#161A1D] text-xl">{Strings.restaurantTypes.restaurantOperationalHours}</span>
+                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">{Strings.restaurantTypes.restaurantOperationalHours}</p>
                         </div>
                         <div className="flex gap-10 px-5 text-[#B9BABB] items-center flex-wrap">
                             <div className="flex  flex-col ">
-                                <span className="self-start text-lg">Open At</span>
-                                <input type="time" name="" className="border-2 p-4 rounded h-10 w-32 border-[#A2A3A5]" id="" />
+                                <span className="self-start text-lg">{Strings.restaurantTypes.openAt}</span>
+                                <Input type="time" name="" className="border-2 p-4 rounded h-10 w-32 border-[#A2A3A5]" id="" />
                             </div>
                             <span className="self-center">To</span>
                             <div className="flex  flex-col ">
-                                <span className="self-start text-lg">Closes At</span>
-                                <input type="time" name="" className="border-2 p-4 rounded h-10 w-32 border-[#A2A3A5]" id="" />
+                                <span className="self-start text-lg">{Strings.restaurantTypes.closesAt}</span>
+                                <Input type="time" name="" className="border-2 p-4 rounded h-10 w-32 border-[#A2A3A5]" id="" />
                             </div>
                         </div>
                     </div>
                     <div className="flex flex-col gap-8" style={{ fontFamily: "Montserrat Alternates" }}>
                         <div className="flex flex-col font-semibold px-5">
-                            <span className="self-start text-[#161A1D]">Mark open days</span>
-                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">Don’t forget to uncheck your off days</p>
+                            <span className="self-start text-[#161A1D]">{Strings.restaurantTypes.markOpenDays}</span>
+                            <p className="self-start text-[#B9BABB] font-medium text-sm text-justify ">{Strings.restaurantTypes.uncheckOffDays}</p>
                         </div>
                         <div className="flex flex-col gap-8">
                             <div className="flex gap-10 flex-wrap px-6" style={{ fontFamily: "Bai Jamjuree" }}>
                                 <div className="flex flex-col gap-3 text-lg">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Monday</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Tuesday</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Wednesday</span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-3 text-lg">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Thursday</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Friday</span>
                                     </div>
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Saturday</span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-3 text-lg">
                                     <div className="flex flex-row gap-2 items-center">
-                                        <input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
+                                        <Input type="checkbox" className="accent-[#DF201F] h-4 w-4" name="Bakery" id="" />
                                         <span className="">Sunday</span>
                                     </div>
                                 </div>
@@ -237,7 +234,7 @@ function RestaurantTypes() {
                                     className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5s`}
                                     onClick={openDialog}
                                 >
-                                    Submit
+                                    {Strings.restaurantTypes.submit}
                                 </button>
                                 <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
                             </div>

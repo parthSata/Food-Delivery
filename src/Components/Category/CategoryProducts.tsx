@@ -5,7 +5,8 @@ import { Product } from "../Products/ProductAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../Loader";
-// import { Loaders } from '../Config/images'
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 
 
@@ -22,7 +23,7 @@ function Category() {
   });
   // const [Loader, setLoader] = useState(false)
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function Category() {
   }, [CategoryId]);
 
   const fetchCategoryData = (id: string) => {
-    setisLoading(true)
+    setIsLoading(true)
     const categoryRef = ref(db, `categories/${id}`);
     onValue(categoryRef, (snapshot) => {
       const data = snapshot.val();
@@ -41,7 +42,7 @@ function Category() {
     }, {
       onlyOnce: true
     });
-    setisLoading(false)
+    setIsLoading(false)
   };
 
   const fetchProducts = (categoryId: string) => {
@@ -72,7 +73,7 @@ function Category() {
   };
 
   const handleUpdateProduct = (id: string) => {
-    navigate(`/seller/productsAdd/${id}`, { state: { CategoryId } });
+    navigate(`/seller/productsAdd/${id}`, { state: { CategoryId, updateId: id } });
   };
 
   const handleDeleteProduct = (id: string) => {
@@ -93,6 +94,7 @@ function Category() {
 
   return (
     <>
+
       <div className="">
         {/* Product Heading */}
 
@@ -116,6 +118,7 @@ function Category() {
           <Loader isLoading={isLoading}>
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
               {products.map((item) => (
+
                 <div
                   className="sm:w-1/5 mb-10  w-full cursor-pointer"
                   onClick={() => handleProductView(item.id)}
@@ -143,12 +146,12 @@ function Category() {
                         e.stopPropagation(), handleDeleteProduct(item.id)
                       )}
                     >
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-trash fa-lg"
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                     <div
                       className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl"
@@ -156,12 +159,12 @@ function Category() {
                         e.stopPropagation(), handleUpdateProduct(item.id)
                       )}
                     >
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-pen fa-lg"
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -174,7 +177,7 @@ function Category() {
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                      <button
+                      <Button
                         className="flex self-center"
                         onClick={() => handleAddProduct(CategoryId)}
                       >
@@ -182,9 +185,9 @@ function Category() {
                           className="fa-duotone fa-plus fa-2xl "
                           style={{ color: "#e8eaed" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
-                    <p className="">Add New</p>
+                    <p className="">{Strings.category.addNewButton}</p>
                   </div>
                 </div>
               </div>

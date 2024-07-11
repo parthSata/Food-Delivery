@@ -6,8 +6,10 @@ import { ref as dbRef, set } from 'firebase/database';
 import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import Strings from "../Components/Config/Strings";
+import Button from "../Components/ReusableComponent.tsx/Button";
+import Input from "../Components/ReusableComponent.tsx/Input";
 // import stripeKey from '../Config'
-// console.log("🚀 ~ stripeKey:", stripeKey)
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';
 // const stripePromise = loadStripe(`${stripeKey}`);
@@ -117,15 +119,15 @@ function BusinessDetails() {
         setErrors({});
 
         try {
-            let imageUrls: string[] = [];
-            let documentUrls: string[] = [];
+            const imageUrls: string[] = [];
+            const documentUrls: string[] = [];
 
             if (imageFile) {
                 const imageUrl = await uploadFileToFirebase(imageFile, 'business_image');
                 imageUrls.push(imageUrl);
             }
 
-            for (let doc of uploadedDocuments) {
+            for (const doc of uploadedDocuments) {
                 const docUrl = await uploadFileToFirebase(doc, "business_documents");
                 documentUrls.push(docUrl);
             }
@@ -200,10 +202,10 @@ function BusinessDetails() {
                                 className="text-[30px] font-semibold"
                                 style={{ fontFamily: "Bai Jamjuree" }}
                             >
-                                Business Details{" "}
+                                {Strings.businessDetail.title}{" "}
                             </p>
 
-                            <div className=" mx-auto relative bg-white  border-gray-300 border-none rounded-full " style={{
+                            <div className=" mx-auto relative bg-white mt-10     border-gray-300 border-none rounded-full " style={{
                                 boxShadow: " 0px 0px 10px 0px #00000026"
                             }}>
                                 <div className="p-4 h-36 w-36 flex flex-col items-center justify-center text-center cursor-pointer">
@@ -219,19 +221,19 @@ function BusinessDetails() {
                                                         d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                                                         data-original="#000000" />
                                                 </svg>
-                                                <span className="text-xs">Upload Image</span>
+                                                <span className="text-xs">{Strings.businessDetail.uploadImage}</span>
 
-                                                <input type="file" id="chooseFile" className="h-full w-full hidden rounded-full" onChange={handleImageUpload} />
+                                                <Input type="file" id="chooseFile" className="h-full w-full hidden rounded-full" onChange={handleImageUpload} />
                                             </label>
                                         )}
                                 </div>
 
                                 <div className="absolute border-none rounded-full top-16 left-28 border-black">
-                                    <button className="h-10 flex justify-center items-center w-10 rounded-full bg-white" style={{
+                                    <Button className="h-10 flex justify-center items-center w-10 rounded-full bg-white" style={{
                                         boxShadow: "0px 4px 14px 0px #00000024"
                                     }}>
                                         <img src={CloudUpload} alt="" className="full" />
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
 
@@ -241,7 +243,7 @@ function BusinessDetails() {
                                     {/* Name */}
 
                                     <div className="flex items-center border-b">
-                                        <input
+                                        <Input
                                             type="text"
                                             placeholder="Business Name"
                                             name="businessName"
@@ -265,7 +267,7 @@ function BusinessDetails() {
                                     )}
 
                                     <div className="flex items-center border-b">
-                                        <input
+                                        <Input
                                             type="text"
                                             placeholder="Owner Name"
                                             className="ml-2 p-6 text-[14px] focus:outline-none placeholder:text-[#161A1D] text-[#161A1D] h-[50px] w-[320px]  hover:border-0 font-semibold"
@@ -313,7 +315,7 @@ function BusinessDetails() {
                                     )}
 
                                     <div className="flex items-center border-b">
-                                        <input
+                                        <Input
                                             type="text"
                                             placeholder="GST No"
                                             className="ml-2 p-6 text-[14px] focus:outline-none placeholder:text-[#161A1D] text-[#161A1D] h-[50px] w-[320px]  hover:border-0 font-semibold"
@@ -337,7 +339,7 @@ function BusinessDetails() {
                                     )}
 
                                     <div className="flex items-center">
-                                        <input
+                                        <Input
                                             type="email"
                                             placeholder="Email"
                                             className="ml-2 p-6 text-[14px] focus:outline-none placeholder:text-[#161A1D] text-[#161A1D]  h-[50px] w-[320px] border-b font-semibold"
@@ -365,10 +367,10 @@ function BusinessDetails() {
                                         <div className="">
                                             <label htmlFor="uploadDocument" className="bg-[#FFF3E5] flex h-10 rounded-md w-40 gap-2 text-sm font-semibold justify-center items-center cursor-pointer">
                                                 <img src={uploadDocument} alt="" className="h-4 w-4" style={{ fontFamily: "Bai Jamjuree" }} />
-                                                Upload
+                                                {Strings.businessDetail.uploadLabel}
                                             </label>
-                                            <input type="file" id="uploadDocument" className="hidden" onChange={handleDocumentUpload} />
-                                            {/* <button className="bg-[#FFF3E5] flex h-10 rounded-md w-40 gap-2 text-sm font-semibold justify-center items-center"><img src={uploadDocument} alt="" className="h-4 w-4" style={{ fontFamily: "Bai Jamjuree" }} /> Upload </button> */}
+                                            <Input type="file" id="uploadDocument" className="hidden" onChange={handleDocumentUpload} />
+                                            {/* <Button className="bg-[#FFF3E5] flex h-10 rounded-md w-40 gap-2 text-sm font-semibold justify-center items-center"><img src={uploadDocument} alt="" className="h-4 w-4" style={{ fontFamily: "Bai Jamjuree" }} /> Upload </Button> */}
                                         </div>
                                         <div className="flex gap-2">
                                             <div className="flex-col gap-2">
@@ -387,17 +389,16 @@ function BusinessDetails() {
 
 
 
-                            <button
-                                type="submit"
+                            <Button
                                 style={{
                                     fontFamily: "Bai Jamjuree",
                                     boxShadow: "2px 2px 25px 2px #94CD0099 ",
                                 }}
-                                className={`bg-[#94CD00]  h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer `}
+                                className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer `}
                                 onClick={handleSubmit}
                             >
-                                SAVE & CONTINUE
-                            </button>
+                                {Strings.businessDetail.saveAndContinueButton}
+                            </Button>
                             <ToastContainer
                                 position="top-right"
                                 autoClose={1000}

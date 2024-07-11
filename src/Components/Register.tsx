@@ -8,6 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { db } from '../Firebase/firebase';
 import { ref, set } from 'firebase/database';
+import Strings from "./Config/Strings";
+import Input from "./ReusableComponent.tsx/Input";
 
 function Register() {
   const navigate = useNavigate();
@@ -126,13 +128,13 @@ function Register() {
             <div className="flex flex-col justify-center items-center ">
               <p className="text-[30px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Register </p>
               <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>
-                Create Seller Account!
+                {Strings.register.createSeller}
               </p>
               <div className="flex mt-5  ">
                 <div className="flex items-center justify-center flex-col gap-6">
                   <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
                     <div className="flex flex-row gap-3 items-center">
-                      <input
+                      <Input
                         type="radio"
                         value="customer"
                         checked={role === "customer"}
@@ -144,11 +146,11 @@ function Register() {
                         <div className={`flex justify-center items-center rounded-full ${role === "customer" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
                           <img src={Person} alt="" className="h-5" />
                         </div>
-                        Customer
+                        {Strings.login.customerRole}
                       </label>
                     </div>
                     <div className="flex flex-row gap-3 items-center">
-                      <input
+                      <Input
                         type="radio"
                         value="seller"
                         checked={role === "seller"}
@@ -160,13 +162,13 @@ function Register() {
                         <div className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
                           <img src={Store} alt="" className="h-5" />
                         </div>
-                        Seller
+                        {Strings.login.sellerRole}
                       </label>
                     </div>
                   </div>
 
                   <div className="flex items-center border-b">
-                    <input
+                    <Input
                       type="text"
                       value={name}
                       placeholder="Name"
@@ -194,7 +196,7 @@ function Register() {
                         <option className="h-8 w-8" value="+598">+598</option>
                       </select>
                     </div>
-                    <input
+                    <Input
                       type="number"
                       placeholder="Mobile Number"
                       className="ml-2 p-6 text-[14px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold"
@@ -207,7 +209,7 @@ function Register() {
                   {errors.mobileNumber && <p className="text-red-600 text-xs ">{errors.mobileNumber}</p>}
 
                   <div className="flex items-center">
-                    <input
+                    <Input
                       type="email"
                       placeholder="Email Id"
                       className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] border-b hover:border-0 font-semibold"
@@ -223,7 +225,7 @@ function Register() {
 
               <div className="mt-5 md:shrink flex flex-col gap-2">
                 <div className="flex justify-start gap-6">
-                  <label className="font-semibold">Passcode:</label>
+                  <label className="font-semibold">{Strings.register.passCode}</label>
                 </div>
                 <div className="flex">
                   <OtpInput
@@ -232,7 +234,7 @@ function Register() {
                     numInputs={6}
                     inputType="password"
                     renderInput={(props, index) => (
-                      <input
+                      <Input
                         {...props}
                         key={index}
                         accept="*"
@@ -246,7 +248,7 @@ function Register() {
 
                 <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start gap-6">
-                    <label className="font-semibold">Confirm Passcode:</label>
+                    <label className="font-semibold">{Strings.register.confirmPasscode}</label>
                   </div>
                   <div className="flex">
                     <OtpInput
@@ -255,7 +257,7 @@ function Register() {
                       numInputs={6}
                       inputType="password"
                       renderInput={(props, index) => (
-                        <input
+                        <Input
                           {...props}
                           key={index}
                           className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
@@ -280,18 +282,18 @@ function Register() {
                 </select>
 
                 <div className="flex flex-row mt-4 justify-start gap-2 items-center">
-                  <input type="checkbox" className="bg-red-600 h-[30px] w-[20px]" />
-                  <p className="text-[#161A1D] font-semibold text-lg">Agree Terms & Conditions</p>
+                  <Input type="checkbox" className="bg-red-600 h-[30px] w-[20px]" />
+                  <p className="text-[#161A1D] font-semibold text-lg">{Strings.register.agreeTerms}</p>
                 </div>
               </div>
 
               <button
                 type="submit"
                 style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}
-                className={`bg-[#94CD00] h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
+                className={`bg-[#94CD00] h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
                 disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
               >
-                Register
+                {Strings.register.registerButton}
               </button>
               <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
             </div>

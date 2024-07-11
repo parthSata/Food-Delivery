@@ -9,6 +9,8 @@ import { ref, get, child } from 'firebase/database';
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
+import Strings from "./Config/Strings";
+import Input from "./ReusableComponent.tsx/Input";
 
 
 function AdminLogin() {
@@ -35,12 +37,11 @@ function AdminLogin() {
                 size: 'invisible',
                 // @ts-ignoreF
                 callback: (response: any) => {
-                    console.log("reCAPTCHA solved");
                     // @ts-ignore
                     handleLogin()
                 },
                 'expired-callback': () => {
-                    console.log("reCAPTCHA expired");
+                    toast.warning("reCAPTCHA expired");
                 }
             });
         }
@@ -79,19 +80,15 @@ function AdminLogin() {
                     if (userData.passcode === passcode) {
                         toast.success("Login successful!");
                         const firebaseUser = auth.currentUser;
-                        console.log("🚀 ~ handleLogin ~ auth:", auth)
-                        console.log("🚀 ~ handleLogin ~ firebaseUser:", firebaseUser)
                         if (firebaseUser) {
                             const token = await firebaseUser.getIdToken(true);
                             const idTokenResult = await firebaseUser.getIdTokenResult();
                             const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
-                            console.log("🚀 ~ handleLogin ~ role:", role)
 
                             const user = {
                                 uid: firebaseUser.uid,
                                 role: role,
                             };
-                            console.log("🚀 ~ handleLogin ~ user:", user)
 
                             localStorage.setItem('accessToken', token);
                             login(user);
@@ -158,13 +155,13 @@ function AdminLogin() {
                                 className="text-[30px] font-semibold"
                                 style={{ fontFamily: "Bai Jamjuree" }}
                             >
-                                Admin  Login
+                                {Strings.login.adminLogin}
                             </p>
                             <p
                                 className="text-[#A2A3A5] mt-0  text-[16px] font-semibold"
                                 style={{ fontFamily: "Bai Jamjuree" }}
                             >
-                                Welcome Back!
+                                {Strings.login.welcomeMessage}
                             </p>
 
                             {/* Country dropdown */}
@@ -195,7 +192,7 @@ function AdminLogin() {
                                     </select>
                                 </div>
                                 <div className="flex items-center justify-center w-full">
-                                    <input
+                                    <Input
                                         type="number"
                                         placeholder="Mobile Number"
                                         className="ml-2 p-6 text-[14px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 font-semibold"
@@ -210,7 +207,7 @@ function AdminLogin() {
 
                             <div className="mt-5 md:shrink flex flex-col gap-2">
                                 <div className="flex justify-start  gap-6">
-                                    <label className="font-semibold">Passcode:</label>
+                                    <label className="font-semibold">{Strings.register.passCode}</label>
                                 </div>
                                 <div className="flex ">
                                     <OtpInput
@@ -219,7 +216,7 @@ function AdminLogin() {
                                         numInputs={6}
                                         inputType="password"
                                         renderInput={(props, index) => (
-                                            <input
+                                            <Input
                                                 {...props}
                                                 key={index}
                                                 className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
@@ -243,7 +240,7 @@ function AdminLogin() {
                                     }`}
                                 disabled={!isValid}
                             >
-                                LOGIN
+                                {Strings.login.loginButton}
                             </button>
                             <ToastContainer
                                 position="top-right"

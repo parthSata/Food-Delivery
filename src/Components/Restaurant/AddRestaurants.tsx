@@ -6,6 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { db } from '../../Firebase/firebase';
 import { set, ref, onValue, update } from 'firebase/database';
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Input from "../ReusableComponent.tsx/Input";
 
 export interface Restaurant {
   id: string;
@@ -284,14 +286,15 @@ function AddRestaurants() {
                                 style={{ color: "#e8eaed" }}
                               ></i>
                             </span>
-                            <input
+                            <Input
                               type="file"
-                              onChange={(e) => handleImageUpload(e, index)}
+                              onChange={(e: any) => handleImageUpload(e, index)}
                               style={{ display: "none" }}
+                              className=""
                             />
                           </label>
                         </div>
-                        <p>Upload New</p>
+                        <p>{Strings.addRestaurant.uploadNewImage}</p>
                       </>
                     )}
                   </div>
@@ -315,10 +318,10 @@ function AddRestaurants() {
                       className="h-[250px] w-full object-cover"
                     />
                   ) : (
-                    <p>No image uploaded</p>
+                    <p>{Strings.addRestaurant.noImageUploaded}</p>
                   )}
                   <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    Supported files PNG, JPEG, SVG, WEBP
+                    {Strings.addRestaurant.supportedFiles}
                   </p>
                 </div>
               </div>
@@ -335,9 +338,9 @@ function AddRestaurants() {
                 <div className="flex flex-wrap  mb-6 w-full">
                   <div className="w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Restaurant Name
+                      {Strings.addRestaurant.restaurantNameLabel}
                     </label>
-                    <input
+                    <Input
                       className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
                       type="text"
                       placeholder="Restaurant Name"
@@ -356,9 +359,9 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full  md:w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Address
+                      {Strings.addRestaurant.addressLabel}
                     </label>
-                    <input
+                    <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
                       type="text"
                       placeholder="Address"
@@ -377,9 +380,9 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Latitude
+                      {Strings.addRestaurant.latitudeLabel}
                     </label>
-                    <input
+                    <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       type="number"
                       placeholder="Latitude"
@@ -398,9 +401,9 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Longitude
+                      {Strings.addRestaurant.longitudeLabel}
                     </label>
-                    <input
+                    <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       type="number"
                       placeholder="Longitude"
@@ -419,14 +422,13 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Mobile Number
+                      {Strings.addRestaurant.mobileNumberLabel}
                     </label>
-                    <input
+                    <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       type="number"
                       placeholder="Mobile Number"
                       name="mobilenumber"
-                      maxLength={10}
                       value={restaurant?.mobilenumber}
                       onChange={handleChange}
                     />
@@ -441,20 +443,12 @@ function AddRestaurants() {
                   </div>
                   <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6 flex flex-col gap-2">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Ratings
+                      {Strings.addRestaurant.ratingsLabel}
                     </label>
-                    {/* <input
-                                        className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
-                                        type="number"
-                                        placeholder="Ratings"
-                                        name="ratings"
-                                        value={restaurant?.ratings}
-                                        onChange={handleChange}
-                                    /> */}
                     <div className="flex items-center justify-start">
                       {[1, 2, 3, 4, 5].map((rating) => (
                         <React.Fragment key={rating}>
-                          <input
+                          <Input
                             type="radio"
                             name="ratings"
                             value={rating}
@@ -491,7 +485,7 @@ function AddRestaurants() {
 
                   <div className="w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      Description
+                      {Strings.addRestaurant.descriptionLabel}
                     </label>
                     <textarea
                       className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none"
@@ -520,7 +514,7 @@ function AddRestaurants() {
                     }}
                     onClick={handleSubmit}
                   >
-                    Add Restaurant
+                    {Strings.addRestaurant.addButton}
                   </button>
                   <button
                     className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
@@ -530,7 +524,7 @@ function AddRestaurants() {
                     }}
                     onClick={handleUpdate}
                   >
-                    Update Restaurant
+                    {Strings.addRestaurant.updateButton}
                   </button>
                   <ToastContainer
                     position="top-right"

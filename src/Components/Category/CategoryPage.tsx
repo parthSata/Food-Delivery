@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Input from "../ReusableComponent.tsx/Input";
 
 export interface CategoriesData {
   id: string;
@@ -84,7 +86,6 @@ function Home(): JSX.Element {
 
   const handleDelete = async (id: string) => {
     setisLoading(true)
-    console.log("🚀 ~ handleDelete ~ id:", id)
     try {
       const categoryRef = ref(db, `categories/${id}`);
       await remove(categoryRef);
@@ -125,21 +126,20 @@ function Home(): JSX.Element {
     <div>
       {/* Body Part Started */}
       <div
-        className="flex justify-between items-center mt-10 flex-wrap gap-2"
-        style={{ fontFamily: "Bai Jamjuree" }}
+        className="flex justify-between items-center font-BaiJamjuree font-semibold  mt-10 flex-wrap gap-2"
       >
         <div className="">
-          <span className="font-semibold  text-[#161A1D]">Category List</span>
+          <span className="font-semibold  text-[#161A1D]">{Strings.category.categoryList}</span>
         </div>
         <div className="flex ">
           <div className="flex justify-evenly flex-wrap gap-4">
             <div className="relative">
-              <input
+              <Input
                 type="text"
                 placeholder="Search.."
                 disabled
                 className="border-gray-400 border-[1px] p-4 text-[#A2A3A5] focus:border-none pr-12 hover:border-[1px solid #E7E7E9] h-10 rounded-full"
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={(e: any) => setSearchInput(e.target.value)}
               />
               <img
                 src={search}
@@ -154,7 +154,7 @@ function Home(): JSX.Element {
                 style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
                 onClick={openAddCategoryDialog}
               >
-                Add New Category +
+                {Strings.category.addNewCategoryButton}
               </button>
             </div>
           </div>
@@ -167,32 +167,28 @@ function Home(): JSX.Element {
         <div className="flex flex-col relative ">
           <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
             <table
-              className="w-full text-md text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
-              style={{
-                fontFamily: "Bai Jamjuree",
-                boxShadow: "2px 2px 30px 2px #FFF3E5",
-                minWidth: "100%",
-              }}
+              className="w-full text-md min-w-full shadow-[2px 2px 30px 2px #FFF3E5] text-left font-BaiJamjuree font-semibold  rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
+
             >
               <thead className="rounded-full bg-[#DF201F] ">
                 <tr className="text-[#FFFFFF] font-semibold ">
                   <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Category Name
+                    {Strings.category.headerCategory}
                   </th>
                   <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Category Id
+                    {Strings.category.headerCategoryId}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Description
+                    {Strings.category.headerDescription}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Number of Products
+                    {Strings.category.headerNumberOfProducts}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Status
+                    {Strings.category.headerStatus}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    Actions
+                    {Strings.category.headerAction}
                   </th>
                 </tr>
               </thead>

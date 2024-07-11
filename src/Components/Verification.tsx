@@ -9,6 +9,8 @@ import Loader from "./Loader";
 import { useAuth } from "./AuthContext";
 import { child, get, ref } from "firebase/database";
 import { auth, db } from "../Firebase/firebase";
+import Strings from "./Config/Strings";
+import Input from "./ReusableComponent.tsx/Input";
 
 
 function Verification() {
@@ -74,7 +76,7 @@ function Verification() {
                 Verification
               </p>
               <p className="font-semibold text-[#A2A3A5] text-[22px] md:text-[22px] lg:text-[25px]" style={{ fontFamily: "Bai Jamjuree" }}>
-                Enter the OTP sent to{" "}
+                {Strings.verification.otpMessage}{" "}
                 <span className="underline font-semibold">
                   {" "}
                   {callingCode} {mobileNumber}
@@ -88,7 +90,7 @@ function Verification() {
                 onChange={setOtp}
                 numInputs={6}
                 renderInput={(props, index) => (
-                  <input
+                  <Input
                     {...props}
                     key={index}
                     className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
@@ -104,7 +106,7 @@ function Verification() {
               </p>
               <span className="flex flex-row">
                 <p className="font-semibold text-[18px] md:text-[20px]" style={{ fontFamily: "Montserrat Alternates" }}>
-                  Resend Otp
+                  {Strings.verification.resendOtp}
                 </p>
                 <img src={Resend} alt="" className="h-[34px] ml-2 w-[34px] md:h-[34px] md:w-[34px]" />
               </span>
@@ -112,10 +114,10 @@ function Verification() {
             <button
               type="submit"
               style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
-              className="bg-red-500 h-[60px] md:h-[60px] w-[260px] md:w-[260px] rounded-[60px] text-white text-[22px] md:text-[22px] mt-5"
+              className="bg-red-500 h-[60px] uppercase md:h-[60px] w-[260px] md:w-[260px] rounded-[60px] text-white text-[22px] md:text-[22px] mt-5"
               onClick={handleSubmit}
             >
-              VERIFICATION
+              {Strings.verification.verificationButton}
             </button>
           </div>
 

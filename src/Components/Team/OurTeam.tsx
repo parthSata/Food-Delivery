@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
 import Container from "../Container";
 import firebaseDatabaseURL from "../Config/apiUrl";
+import { toast } from "react-toastify";
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 function OurTeam() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -23,7 +26,7 @@ function OurTeam() {
       });
       if (response.ok) {
         setMember((prevMembers) => prevMembers.filter((member) => member.id !== id));
-        console.log('Member deleted successfully');
+        toast.success('Member deleted successfully');
       } else {
         console.error('Failed to delete Member:', response.statusText);
       }
@@ -98,23 +101,23 @@ function OurTeam() {
                       className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl "
                       onClick={() => handleDeleteMember(item.id)}
                     >
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-trash fa-lg"
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                     <div
                       className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl"
                       onClick={() => handleUpdateMember(item.id)}
                     >
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-pen fa-lg"
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -127,7 +130,7 @@ function OurTeam() {
               >
                 <div className="border-dotted rounded-[15px] border-4 h-[180px] flex-col gap-2 text-md w-[200px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                   <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                    <button
+                    <Button
                       className="flex self-center"
                       onClick={openDialog}
                     >
@@ -135,9 +138,9 @@ function OurTeam() {
                         className="fa-duotone fa-plus fa-2xl "
                         style={{ color: "#e8eaed" }}
                       ></i>
-                    </button>
+                    </Button>
                   </div>
-                  <p className="">Add New</p>
+                  <p className="">{Strings.category.addNewButton}</p>
                 </div>
               </div>
             </div>

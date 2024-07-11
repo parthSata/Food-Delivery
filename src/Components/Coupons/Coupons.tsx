@@ -5,6 +5,8 @@ import CouponAdd, { Coupon } from "./CouponAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -69,7 +71,7 @@ function Coupons() {
               className="absolute bottom-20 text-white text-2xl"
               style={{ fontFamily: "Bai Jamjuree" }}
             >
-              Coupons
+              {Strings.couponAdd.couponTitle}
             </span>
           </div>
         </div>
@@ -106,23 +108,23 @@ function Coupons() {
                     className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl "
                     onClick={() => handleDeleteCoupons(item.id)}
                   >
-                    <button className="">
+                    <Button className="">
                       <i
                         className="fa-solid fa-trash fa-lg"
                         style={{ color: "#d4d9de" }}
                       ></i>
-                    </button>
+                    </Button>
                   </div>
                   <div
                     className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl"
                     onClick={() => handleUpdateCoupons(item.id)}
                   >
-                    <button className="">
+                    <Button className="">
                       <i
                         className="fa-solid fa-pen fa-lg"
                         style={{ color: "#d4d9de" }}
                       ></i>
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -135,15 +137,15 @@ function Coupons() {
               >
                 <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                   <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                    <button className="flex self-center">
+                    <Button className="flex self-center">
                       <i
                         className="fa-duotone fa-plus fa-2xl "
                         style={{ color: "#e8eaed" }}
                         onClick={openDialog}
                       ></i>
-                    </button>
+                    </Button>
                   </div>
-                  <p className="">Add New</p>
+                  <p className="">{Strings.category.addNewButton}</p>
                 </div>
               </div>
             </div>

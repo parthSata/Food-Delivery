@@ -8,6 +8,8 @@ import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
 import Container from "../Container";
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 function Restaurant() {
   const navigate = useNavigate();
@@ -77,21 +79,21 @@ function Restaurant() {
   return (
     <div>
       <Container >
-      <Loader isLoading={isLoading}>
+        <Loader isLoading={isLoading}>
 
-        <div className="relative mt-4 bg-black opacity-90 w-full">
-          <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
-          <div className=" flex justify-start pl-16 ">
-            <span
-              className="absolute bottom-20 text-white text-2xl"
-              style={{ fontFamily: "Bai Jamjuree" }}
-            >
-              Restaurants
-            </span>
+          <div className="relative mt-4 bg-black opacity-90 w-full">
+            <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
+            <div className=" flex justify-start pl-16 ">
+              <span
+                className="absolute bottom-20 text-white text-2xl"
+                style={{ fontFamily: "Bai Jamjuree" }}
+              >
+                {Strings.restaurant.pageTitle}
+              </span>
+            </div>
           </div>
-        </div>
 
-        {/* Restaurants */}
+          {/* Restaurants */}
           <div className="">
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
               {restarants.map((item) => (
@@ -114,19 +116,19 @@ function Restaurant() {
                         <img src={Star} alt="" className="h-6" />
                         <span className="text-lg">{item.ratings}</span>
                       </div>
-                      <button className="border border-[#DF201F] rounded-lg text-[#DF201F] p-1.5">
+                      <Button className="border border-[#DF201F] rounded-lg text-[#DF201F] p-1.5">
                         <i
                           className="fa-solid fa-location-dot  fa-lg"
                           style={{ color: "#DF201F" }}
                         ></i>{" "}
-                        Direction
-                      </button>
+                        {Strings.restaurant.directionsButton}
+                      </Button>
                     </span>
                     <span
                       className="text-justify text-[#38393b] "
                       style={{ fontFamily: "Montserrat Alternates" }}
                     >
-                      Address:
+                      {Strings.restaurant.address}
                     </span>
                     <span
                       className="text-justify text-[#A2A3A5] "
@@ -140,21 +142,21 @@ function Restaurant() {
                       className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl"
                       onClick={() => handleDeleteRestaurant(item.id)}
                     >
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-trash fa-lg"
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                     <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
-                      <button className="">
+                      <Button className="">
                         <i
                           className="fa-solid fa-pen fa-lg"
                           onClick={() => handleUpdateRestaurant(item.id)}
                           style={{ color: "#d4d9de" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -167,7 +169,7 @@ function Restaurant() {
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[280px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                      <button
+                      <Button
                         className="flex self-center"
                         onClick={() => handleAddRestaurant(restarantList.id)}
                       >
@@ -175,9 +177,9 @@ function Restaurant() {
                           className="fa-duotone fa-plus fa-2xl "
                           style={{ color: "#e8eaed" }}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
-                    <p className="">Add New</p>
+                    <p className="">{Strings.category.addNewButton}</p>
                   </div>
                 </div>
               </div>

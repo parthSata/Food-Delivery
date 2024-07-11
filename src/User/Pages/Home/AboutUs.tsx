@@ -1,3 +1,5 @@
+import Strings from "../../../Components/Config/Strings"
+import Button from "../../../Components/ReusableComponent.tsx/Button"
 import { PlayArrow, Shafe } from "../../Config/images"
 
 function AboutUs() {
@@ -7,20 +9,19 @@ function AboutUs() {
                 {/* About Us */}
                 <div className="m-14 flex flex-col flex-wrap gap-10">
                     <div className="flex flex-col font-semibold gap-1">
-                        <span className="self-start text-[#161A1D] text-3xl" style={{ fontFamily: "Bai Jamjuree" }}>About Us</span>
-                        <span className="self-start text-[#DF201F] text-2xl " style={{ fontFamily: "fall in love" }}>We are here since 6 year</span>
+                        <span className="self-start text-[#161A1D] text-3xl" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.AboutUs.title}</span>
+                        <span className="self-start text-[#DF201F] text-2xl " style={{ fontFamily: "fall in love" }}>{Strings.AboutUs.subtitle}</span>
                     </div>
 
                     <div className=" font-semibold text-[17px] text-balance">
                         <p className="text-[#A2A3A5] ">
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed
-                        </p>
+                        {Strings.AboutUs.description}                        </p>
                     </div>
                     <div className="flex flex-row gap-4">
-                        <button className="w-[180px] text-white rounded-full self-center uppercase bg-[#94CD00] h-[50px]" style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}>Read More</button>
-                        <button className="bg-[#DF201F] rounded-[60px]" style={{ boxShadow: "2px 2px 25px 2px #DF201F6E" }}>
+                        <Button className="w-[180px] text-white rounded-full self-center uppercase bg-[#94CD00] h-[50px]" style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}>{Strings.AboutUs.readMore}</Button>
+                        <Button className="bg-[#DF201F] rounded-[60px]" style={{ boxShadow: "2px 2px 25px 2px #DF201F6E" }}>
                             <img src={PlayArrow} alt="" className="" />
-                        </button>
+                        </Button>
                     </div>
                 </div>
 

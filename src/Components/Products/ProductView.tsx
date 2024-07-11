@@ -4,6 +4,8 @@ import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
 import firebaseDatabaseURL from "../Config/apiUrl";
 import Loader from "../Loader";
+import { toast } from "react-toastify";
+import Strings from "../Config/Strings";
 
 // import Footer from '../Footer';
 
@@ -46,7 +48,7 @@ const ProductView: React.FC = () => {
             setPreviewImage(data.images[0]);
           }
         } else {
-          console.log("No such document!");
+          toast.warn("No such document!");
         }
       } else {
         console.error("Error fetching product: ", response.statusText);
@@ -121,10 +123,10 @@ const ProductView: React.FC = () => {
                       className="h-[240px] w-auto object-cover"
                     />
                   ) : (
-                    <p>No image uploaded</p>
+                    <p>{Strings.productAdd.noImageUploaded}</p>
                   )}
                   <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    Supported files PNG, JPEG, SVG, WEBP
+                    {Strings.productAdd.supportedFiles}
                   </p>
                 </div>
               </div>
@@ -202,14 +204,14 @@ const ProductView: React.FC = () => {
                 onClick={handleEditOrder}
                 style={{ boxShadow: "2px 2px 20px 2px #94CD0099" }}
               >
-                Edit
+                {Strings.productView.editButton}
               </button>
               <button
                 className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] "
                 onClick={handleDeleteOrder}
                 style={{ boxShadow: "2px 2px 20px 2px #DF201F80" }}
               >
-                Delete
+                {Strings.productView.deleteButton}
               </button>
             </div>
           </div>

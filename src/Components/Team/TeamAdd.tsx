@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import firebaseDatabaseURL from "../Config/apiUrl";
+import Strings from "../Config/Strings";
+import Input from "../ReusableComponent.tsx/Input";
 
 export interface Team {
   id: string;
@@ -240,7 +242,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
                 className="w-32 h-32  rounded-lg"
               />
             ) : (
-              <input
+              <Input
                 type="file"
                 accept="image/*"
                 className="border-2 text-[#A2A3A5] mt-2 p-2 text-xl focus:outline-none rounded-lg w-full"
@@ -257,8 +259,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Name</label>
-            <input
+            <label className="self-start">{Strings.productAdd.nameLabel}</label>
+            <Input
               type="text"
               placeholder="Name"
               name="name"
@@ -276,8 +278,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">Position</label>
-            <input
+            <label className="self-start">{Strings.ourTeam.positionLabel}</label>
+            <Input
               type="text"
               placeholder="Position"
               name="position"
@@ -301,7 +303,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
               onClick={handleUpdateMember}
             >
-              Update
+              {Strings.ourTeam.updateButton}
             </button>
           ) : (
             <button
@@ -310,7 +312,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
               onClick={handleAddMember}
             >
-              Save
+              {Strings.couponAdd.saveButton}
             </button>
           )}
           <ToastContainer

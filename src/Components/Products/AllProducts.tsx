@@ -5,6 +5,7 @@ import { Product } from "./ProductAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, remove, get } from 'firebase/database';
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
 
 function AllProducts() {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ function AllProducts() {
             className="absolute bottom-20 text-white text-2xl"
             style={{ fontFamily: "Bai Jamjuree" }}
           >
-            All Products
+            {Strings.allProduct.productHeading}
           </span>
         </div>
       </div>
@@ -160,7 +161,7 @@ function AllProducts() {
                       ></i>
                     </button>
                   </div>
-                  <p className="">Add New</p>
+                  <p className="">{Strings.category.addNewButton}</p>
                 </div>
               </div>
             </div>

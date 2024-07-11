@@ -6,7 +6,7 @@ import Dashboard from "../Dashboard/Dashboard";
 import Orders from "../Orders/Orders";
 import Products from "../Products/Products";
 import ProductAdd from "../Products/ProductAdd";
-import Category from "../Category/Products";
+import Category from "../Category/CategoryProducts";
 import ProductView from "../Products/ProductView";
 import Coupons from "../Coupons/Coupons";
 import CouponAdd from '../Coupons/CouponAdd'
@@ -18,10 +18,12 @@ import OurTeam from "../Team/OurTeam";
 import TeamAdd from "../Team/TeamAdd";
 import AdminLogin from '../AdminLogin'
 import BusinessDetails from "../../Seller/BusinessDetail";
+import CategoryProducts from "../../Components/Category/CategoryProducts";
 
 
 export {
     Login,
+    CategoryProducts,
     BusinessDetails,
     AdminLogin,
     CategoryPage,

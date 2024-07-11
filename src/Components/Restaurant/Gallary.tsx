@@ -8,6 +8,8 @@ import { ref, get } from 'firebase/database';
 import { db } from '../../Firebase/firebase';
 import Container from "../Container";
 import Loader from "../Loader";
+import Strings from "../Config/Strings";
+import Button from "../ReusableComponent.tsx/Button";
 
 const Gallary: React.FC<GallaryInterface> = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -60,9 +62,9 @@ const Gallary: React.FC<GallaryInterface> = () => {
                     />
                   </div>
                   <div className="absolute   inset-0 bg-black bg-opacity-50 flex justify-center items-center rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <button className="bg-[#DF201F] rounded-full h-14 w-14 ">
+                    <Button className="bg-[#DF201F] rounded-full h-14 w-14 ">
                       <img src={Link} className="p-2 size-14" />
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ))}
@@ -73,15 +75,15 @@ const Gallary: React.FC<GallaryInterface> = () => {
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[240px] flex-col gap-2 text-md w-[240px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                      <button className="flex self-center">
+                      <Button className="flex self-center">
                         <i
                           className="fa-duotone fa-plus fa-2xl "
                           style={{ color: "#e8eaed" }}
                           onClick={openDialog}
                         ></i>
-                      </button>
+                      </Button>
                     </div>
-                    <p className="">Add New</p>
+                    <p className="">{Strings.category.addNewButton}</p>
                   </div>
                 </div>
               </div>
