@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, remove, get } from 'firebase/database';
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 
 function AllProducts() {

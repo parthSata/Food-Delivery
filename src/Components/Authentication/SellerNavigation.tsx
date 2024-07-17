@@ -12,7 +12,7 @@ import {
   CategoryPage,
   CategoryProducts,
 } from "../Config/index";
-import Container from "../Container";
+import Container from "../ReusableComponent/Container";
 
 const SellerNavigation = () => {
   return (

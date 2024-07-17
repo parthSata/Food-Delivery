@@ -1,5 +1,5 @@
 import Strings from "../../../Components/Config/Strings"
-import Button from "../../../Components/ReusableComponent.tsx/Button"
+import Button from "../../../Components/ReusableComponent/Button"
 import { Manchurian } from "../../Config/images"
 
 function TodaySpecial() {

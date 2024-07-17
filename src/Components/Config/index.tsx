@@ -18,7 +18,7 @@ import OurTeam from "../Team/OurTeam";
 import TeamAdd from "../Team/TeamAdd";
 import AdminLogin from '../AdminLogin'
 import BusinessDetails from "../../Seller/BusinessDetail";
-import CategoryProducts from "../../Components/Category/CategoryProducts";
+import CategoryProducts from "../Category/CategoryProducts";
 
 
 export {

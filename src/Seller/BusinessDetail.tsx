@@ -7,8 +7,8 @@ import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Strings from "../Components/Config/Strings";
-import Button from "../Components/ReusableComponent.tsx/Button";
-import Input from "../Components/ReusableComponent.tsx/Input";
+import Button from "../Components/ReusableComponent/Button";
+import Input from "../Components/ReusableComponent/Input";
 // import stripeKey from '../Config'
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';

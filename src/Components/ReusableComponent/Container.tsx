@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardHeader from "./Dashboard/Menu";
+import DashboardHeader from "../Dashboard/Menu";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
   return (

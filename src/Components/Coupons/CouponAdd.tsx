@@ -5,9 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from '../../Firebase/firebase'; // Ensure this points to your Firebase initialization
 import { ref, set, onValue } from 'firebase/database';
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Input from "../ReusableComponent.tsx/Input";
+import Input from "../ReusableComponent/Input";
 
 export interface Coupon {
   id: string;

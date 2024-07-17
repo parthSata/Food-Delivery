@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { db } from '../Firebase/firebase';
 import { ref, set } from 'firebase/database';
 import Strings from "./Config/Strings";
-import Input from "./ReusableComponent.tsx/Input";
+import Input from "./ReusableComponent/Input";
 
 function Register() {
   const navigate = useNavigate();
@@ -134,7 +134,7 @@ function Register() {
                 <div className="flex items-center justify-center flex-col gap-6">
                   <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
                     <div className="flex flex-row gap-3 items-center">
-                      <Input
+                      <input
                         type="radio"
                         value="customer"
                         checked={role === "customer"}
@@ -150,7 +150,7 @@ function Register() {
                       </label>
                     </div>
                     <div className="flex flex-row gap-3 items-center">
-                      <Input
+                      <input
                         type="radio"
                         value="seller"
                         checked={role === "seller"}
@@ -234,7 +234,7 @@ function Register() {
                     numInputs={6}
                     inputType="password"
                     renderInput={(props, index) => (
-                      <Input
+                      <input
                         {...props}
                         key={index}
                         accept="*"
@@ -257,7 +257,7 @@ function Register() {
                       numInputs={6}
                       inputType="password"
                       renderInput={(props, index) => (
-                        <Input
+                        <input
                           {...props}
                           key={index}
                           className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
@@ -289,8 +289,8 @@ function Register() {
 
               <button
                 type="submit"
-                style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}
-                className={`bg-[#94CD00] h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
+                style={{ fontFamily: "Bai Jamjuree" }}
+                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
                 disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
               >
                 {Strings.register.registerButton}

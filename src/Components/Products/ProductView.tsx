@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
 import firebaseDatabaseURL from "../Config/apiUrl";
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
 

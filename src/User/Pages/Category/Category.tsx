@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 // import Loader from "../../../Components/Loader"
 import { BurgerImg, FlashBurger } from "../../Config/images"
 import Strings from "../../../Components/Config/Strings"
-import Button from "../../../Components/ReusableComponent.tsx/Button"
+import Button from "../../../Components/ReusableComponent/Button"
 
 function Category() {
     const navigate = useNavigate()

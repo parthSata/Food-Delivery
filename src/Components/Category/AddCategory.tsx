@@ -7,7 +7,7 @@ import { db } from '../../Firebase/firebase';
 import { set, ref, onValue, update } from 'firebase/database';
 import { Loaders } from "../Config/images";
 import Strings from "../Config/Strings";
-import Input from "../ReusableComponent.tsx/Input";
+import Input from "../ReusableComponent/Input";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
@@ -334,9 +334,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
       </div>
       <div className="flex justify-center">
         <button
-          className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
+          className="rounded-[60px] shadow-registerBtn ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
           style={{
-            boxShadow: "2px 2px 25px 2px #94CD0099",
             fontFamily: "Bai Jamjuree",
           }}
           onClick={handleSubmit}
@@ -351,9 +350,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
         />
         <button
           type="submit"
-          className={`rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] `}
+          className={`rounded-[60px] ml-5 text-[#FFFFFF] shadow-registerBtn bg-[#94CD00] h-[40px] w-[140px] `}
           style={{
-            boxShadow: "2px 2px 25px 2px #94CD0099",
             fontFamily: "Bai Jamjuree",
           }}
           onClick={handleUpdate}

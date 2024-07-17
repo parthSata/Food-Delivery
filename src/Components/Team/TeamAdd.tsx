@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import firebaseDatabaseURL from "../Config/apiUrl";
 import Strings from "../Config/Strings";
-import Input from "../ReusableComponent.tsx/Input";
+import Input from "../ReusableComponent/Input";
 
 export interface Team {
   id: string;

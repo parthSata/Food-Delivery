@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Button from "../ReusableComponent.tsx/Button";
+import Button from "../ReusableComponent/Button";
 
 function Coupons() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

@@ -3,7 +3,7 @@ import Pizza from '../../assets/Orders/Pizza.png'
 import Accepted from '../../assets/Orders/OrderAccepted.png'
 import Cancel from '../../assets/Orders/OrderCancel.png'
 import Strings from '../Config/Strings'
-import Input from '../ReusableComponent.tsx/Input'
+import Input from '../ReusableComponent/Input'
 // import { useState } from 'react'
 
 function Orders() {

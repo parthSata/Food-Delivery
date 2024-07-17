@@ -2,11 +2,11 @@ import EmployeImg from "../../assets/OurTeam/Ellipse 7.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
-import Container from "../Container";
+import Container from "../ReusableComponent/Container";
 import firebaseDatabaseURL from "../Config/apiUrl";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
-import Button from "../ReusableComponent.tsx/Button";
+import Button from "../ReusableComponent/Button";
 
 function OurTeam() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

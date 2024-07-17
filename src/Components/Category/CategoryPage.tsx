@@ -4,9 +4,9 @@ import { search, Pizza } from "../Config/images";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Input from "../ReusableComponent.tsx/Input";
+import Input from "../ReusableComponent/Input";
 
 export interface CategoriesData {
   id: string;
@@ -150,8 +150,7 @@ function Home(): JSX.Element {
             <div className="">
               <button
                 type="button"
-                className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
-                style={{ boxShadow: "2px 2px 25px 2px #94CD0066" }}
+                className="rounded-[60px] ml-5 shadow-addCategory text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
                 onClick={openAddCategoryDialog}
               >
                 {Strings.category.addNewCategoryButton}
@@ -256,8 +255,8 @@ function Home(): JSX.Element {
               disabled={currentPage === 1}
             >
               <i
-                className="fa-solid fa-angle-left"
-                style={{ color: "#8f9194" }}
+                className="fa-solid fa-angle-left text-fontGray"
+                // style={{ color: "#8f9194" }}
               ></i>
             </button>
             <ul className="flex items-end justify-around w-[80px] top-[]">

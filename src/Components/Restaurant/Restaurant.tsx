@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
-import Container from "../Container";
-import Loader from "../Loader";
+import Container from "../ReusableComponent/Container";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Button from "../ReusableComponent.tsx/Button";
+import Button from "../ReusableComponent/Button";
 
 function Restaurant() {
   const navigate = useNavigate();

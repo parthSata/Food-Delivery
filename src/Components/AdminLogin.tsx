@@ -10,7 +10,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
 import Strings from "./Config/Strings";
-import Input from "./ReusableComponent.tsx/Input";
+import Input from "./ReusableComponent/Input";
+import Button from "./ReusableComponent/Button";
 
 
 function AdminLogin() {
@@ -216,10 +217,11 @@ function AdminLogin() {
                                         numInputs={6}
                                         inputType="password"
                                         renderInput={(props, index) => (
-                                            <Input
+                                            <input
                                                 {...props}
+                                                type="password"
                                                 key={index}
-                                                className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
+                                                className="rounded-md border-2 mr-2 p-[16px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
                                                 style={{
                                                     width: 50,
                                                     fontFamily: "Montserrat Alternates",
@@ -230,18 +232,16 @@ function AdminLogin() {
                                 </div>
 
                             </div>
-                            <button
-                                type="submit"
+                            <Button
                                 style={{
                                     fontFamily: "Bai Jamjuree",
-                                    boxShadow: " 2px 2px 25px 2px #DF201F80",
                                 }}
-                                className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
+                                className={`bg-red-600 h-[50px] w-[247px] shadow-adminbtn rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
                                     }`}
                                 disabled={!isValid}
                             >
                                 {Strings.login.loginButton}
-                            </button>
+                            </Button>
                             <ToastContainer
                                 position="top-right"
                                 autoClose={1000}

@@ -10,7 +10,7 @@ import {
   TeamAdd,
   OurTeam,
 } from "../Config/index";
-import Container from "../Container";
+import Container from "../ReusableComponent/Container";
 
 const AdminNavigation = () => {
   return (

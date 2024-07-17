@@ -4,8 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { db } from '../../Firebase/firebase';
 import { set, ref } from 'firebase/database';
-import Loader from "../Loader";
-import Input from "../ReusableComponent.tsx/Input";
+import Loader from "../ReusableComponent/Loader";
+import Input from "../ReusableComponent/Input";
 
 export interface Gallary {
   id: string;

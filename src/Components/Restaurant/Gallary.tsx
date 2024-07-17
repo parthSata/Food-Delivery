@@ -6,10 +6,10 @@ import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
 import { ref, get } from 'firebase/database';
 import { db } from '../../Firebase/firebase';
-import Container from "../Container";
-import Loader from "../Loader";
+import Container from "../ReusableComponent/Container";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Button from "../ReusableComponent.tsx/Button";
+import Button from "../ReusableComponent/Button";
 
 const Gallary: React.FC<GallaryInterface> = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);

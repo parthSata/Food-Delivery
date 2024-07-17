@@ -2,8 +2,8 @@ import { useState } from "react";
 import { FlashBurger } from "../User/Config/images"
 import { Delete, Edit, RightArrow } from "./images";
 import Strings from "../Components/Config/Strings";
-import Button from "../Components/ReusableComponent.tsx/Button";
-import Input from "../Components/ReusableComponent.tsx/Input";
+import Button from "../Components/ReusableComponent/Button";
+import Input from "../Components/ReusableComponent/Input";
 
 
 
@@ -50,9 +50,9 @@ function CheckoutPage() {
                                     <span className="">{Strings.orders.hamburger}</span>
                                     <span className="flex gap-2 items-center text-[#DF201F]">{Strings.checkOut.discountPrice}<span className="line-through text-xs">{Strings.checkOut.price}</span></span>
                                     <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
-                                        <div className="cursor-pointer"><i className="fa-solid fa-minus p-2 "></i></div>
-                                        <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">01</div>
-                                        <div className="cursor-pointer"><i className="fa-solid fa-plus  p-2 " ></i></div>
+                                        <div className="cursor-pointer" onClick={decrementQuantity}><i className="fa-solid fa-minus p-2 "></i></div>
+                                        <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">{quantity}</div>
+                                        <div className="cursor-pointer" onClick={incrementQuantity}><i className="fa-solid fa-plus  p-2 " ></i></div>
                                     </div>
                                 </div>
                             </div>

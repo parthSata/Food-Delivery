@@ -4,9 +4,9 @@ import { CategoriesData } from "./CategoryPage";
 import { Product } from "../Products/ProductAdd";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
-import Loader from "../Loader";
+import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import Button from "../ReusableComponent.tsx/Button";
+import Button from "../ReusableComponent/Button";
 
 
 

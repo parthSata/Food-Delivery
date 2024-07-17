@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ToastContainer } from "react-toastify"
 import ConfirmDialog from "./ConfirmDialog";
 import Strings from "../Components/Config/Strings";
-import Input from "../Components/ReusableComponent.tsx/Input";
+import Input from "../Components/ReusableComponent/Input";
 
 function RestaurantTypes() {
     const [isDialogOpen, setIsDialogOpen] = useState(false);

@@ -4,7 +4,7 @@ import { auth, db } from '../Firebase/firebase';
 import { getIdToken, onIdTokenChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { child, get, ref } from 'firebase/database';
-import Loader from './Loader';
+import Loader from './ReusableComponent/Loader';
 
 interface User {
   uid: string;

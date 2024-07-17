@@ -7,7 +7,7 @@ import ProductGallary from "./ProductGallary"
 import Team from "./Team"
 import TodaySpecial from "./TodaySpecial"
 import Strings from "../../../Components/Config/Strings"
-import Button from "../../../Components/ReusableComponent.tsx/Button"
+import Button from "../../../Components/ReusableComponent/Button"
 
 
 function HomePage() {
