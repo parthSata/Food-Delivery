@@ -126,8 +126,12 @@ function Register() {
         <form style={{ fontFamily: "Montserrat Alternates" }} onSubmit={handleSubmit}>
           <div className="border-black flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center ">
-              <p className="text-[30px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Register </p>
-              <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>
+              <p className="text-[30px] font-semibold " style={{
+                fontFamily: "Bai Jamjuree",
+              }} >Register </p>
+              <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold " style={{
+                fontFamily: "Bai Jamjuree",
+              }} >
                 {Strings.register.createSeller}
               </p>
               <div className="flex mt-5  ">
@@ -172,8 +176,7 @@ function Register() {
                       type="text"
                       value={name}
                       placeholder="Name"
-                      className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold"
-                      style={{ fontFamily: "Montserrat Alternates" }}
+                      className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold " style={{ fontFamily: "Montserrat Alternates" }}
                       onChange={handleNameChange}
                     />
                     <img src={Person} className="h-[24px] ml-2 w-[24px]" alt="" />
@@ -185,8 +188,9 @@ function Register() {
                       <img src={renderFlag(callingCode)} className="h-8 w-8" />
                       <select
                         onChange={handleCallingCodeChange}
-                        className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white " style={{
+                          fontFamily: "Bai Jamjuree",
+                        }}
                         value={callingCode}
                       >
                         <option className="h-8 w-8" value="+91">+91</option>
@@ -199,8 +203,7 @@ function Register() {
                     <Input
                       type="number"
                       placeholder="Mobile Number"
-                      className="ml-2 p-6 text-[14px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold"
-                      style={{ fontFamily: "Montserrat Alternates" }}
+                      className="ml-2 p-6 text-[14px]  focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
                       onChange={handleChange}
                       value={mobileNumber}
                     />
@@ -213,8 +216,7 @@ function Register() {
                       type="email"
                       placeholder="Email Id"
                       className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] border-b hover:border-0 font-semibold"
-                      style={{ fontFamily: "Montserrat Alternates" }}
-                      value={email}
+                      style={{ fontFamily: "Montserrat Alternates" }} value={email}
                       onChange={handleEmailChange}
                     />
                     <img src={Email} className="h-[24px] ml-2 w-[24px]" alt="" />
@@ -227,7 +229,7 @@ function Register() {
                 <div className="flex justify-start gap-6">
                   <label className="font-semibold">{Strings.register.passCode}</label>
                 </div>
-                <div className="flex">
+                <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
                   <OtpInput
                     value={passcode}
                     onChange={setPasscode}
@@ -238,8 +240,8 @@ function Register() {
                         {...props}
                         key={index}
                         accept="*"
-                        className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
-                        style={{ width: 50, fontFamily: "Montserrat Alternates" }}
+                        className="rounded-md  font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
+                        style={{ width: 50 }}
                       />
                     )}
                   />
@@ -250,7 +252,7 @@ function Register() {
                   <div className="flex justify-start gap-6">
                     <label className="font-semibold">{Strings.register.confirmPasscode}</label>
                   </div>
-                  <div className="flex">
+                  <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
                     <OtpInput
                       value={confirmPasscode}
                       onChange={setConfirmPasscode}
@@ -261,7 +263,7 @@ function Register() {
                           {...props}
                           key={index}
                           className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
-                          style={{ width: 50, fontFamily: "Montserrat Alternates" }}
+                          style={{ width: 50 }}
                         />
                       )}
                     />
@@ -271,8 +273,9 @@ function Register() {
 
                 <select
                   className="rounded-lg px-1 py-1 cursor-pointer outline-none mt-2 border-b-4 bg-white"
-                  style={{ fontFamily: "Bai Jamjuree" }}
-                  value={selectedState}
+                  value={selectedState} style={{
+                    fontFamily: "Bai Jamjuree",
+                  }}
                   onChange={handleStateSelect}
                 >
                   <option className="h-8 w-8" value="Gujrat">Gujrat</option>
@@ -289,9 +292,10 @@ function Register() {
 
               <button
                 type="submit"
-                style={{ fontFamily: "Bai Jamjuree" }}
                 className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
-                disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }} disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
               >
                 {Strings.register.registerButton}
               </button>

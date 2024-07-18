@@ -299,8 +299,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
           {updateId ? (
             <button
               type="submit"
-              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-              style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleUpdateMember}
             >
               {Strings.ourTeam.updateButton}
@@ -308,8 +307,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
           ) : (
             <button
               type="submit"
-              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-              style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+              className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleAddMember}
             >
               {Strings.couponAdd.saveButton}

@@ -256,7 +256,6 @@ function Home(): JSX.Element {
             >
               <i
                 className="fa-solid fa-angle-left text-fontGray"
-                // style={{ color: "#8f9194" }}
               ></i>
             </button>
             <ul className="flex items-end justify-around w-[80px] top-[]">
@@ -279,8 +278,7 @@ function Home(): JSX.Element {
               disabled={currentPage === totalPages}
             >
               <i
-                className="fa-solid fa-angle-right"
-                style={{ color: "#8f9194" }}
+                className="fa-solid fa-angle-right text-fontGray"
               ></i>
             </button>
           </div>

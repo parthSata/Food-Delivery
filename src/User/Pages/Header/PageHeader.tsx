@@ -52,7 +52,7 @@ function PageHeader() {
         <div>
             <div className="h-full w-full mt-4 flex flex-wrap px-">
                 <PageSidebar />
-                <nav className="flex w-full flex-wrap justify-between px-4" style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}>
+                <nav className="flex w-full flex-wrap justify-between px-4 shadow-dashboard" >
                     <div className="flex items-center flex-row">
                         <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="Logo" />
                         <Link to="/">

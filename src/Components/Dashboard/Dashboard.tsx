@@ -69,13 +69,12 @@ function Dashboard() {
       {/* )} */}
       <div className="flex gap-6 ">
         <div
-          className="mt-4 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full flex-wrap"
-          style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}
+          className="mt-4 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full flex-wrap shadow-dashboard"
+          
         >
           <div className="flex justify-around gap-6 flex-wrap lg:flex-nowrap ">
             <div
-              className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full border-2"
-              style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}
+              className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full border-2 shadow-dashboard"
             >
               <div className="flex justify-around">
                 <div className="relative  w-full">
@@ -129,8 +128,7 @@ function Dashboard() {
               </div>
             </div>
             <div
-              className="flex flex-wrap  mt-8 border-2  rounded-[15px] h-[370px] w-full"
-              style={{ boxShadow: " 2px 2px 30px 2px #FFF3E5" }}
+              className="flex flex-wrap  mt-8 border-2  rounded-[15px] h-[370px] w-full shadow-dashboard"
             >
               <div className="flex flex-col m-4">
                 <span className="self-start">{Strings.dashboard.revenue}</span>

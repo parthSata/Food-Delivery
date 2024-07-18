@@ -164,7 +164,7 @@ const Login: React.FC = () => {
                   <img src={renderFlag(callingCode)} className="h-8 w-8" />
                   <select
                     onChange={handleCallingCodeChange}
-                    className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white"
+                    className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white" 
                     style={{ fontFamily: "Bai Jamjuree" }}
                     value={callingCode}
                   >
@@ -256,8 +256,8 @@ const Login: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
-                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
+                  style={{ fontFamily: "Bai Jamjuree" }}
+                  className={`bg-red-600 h-[50px] shadow-adminbtn w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
                   disabled={!isValid || !recaptchaToken}
                 >
                   LOGIN

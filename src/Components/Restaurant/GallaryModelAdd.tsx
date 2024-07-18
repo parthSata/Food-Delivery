@@ -234,9 +234,8 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               </div>
               <div className="flex justify-center">
                 <button
-                  className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
+                  className="rounded-[60px] ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] shadow-registerBtn"
                   style={{
-                    boxShadow: "2px 2px 25px 2px #94CD0099",
                     fontFamily: "Bai Jamjuree",
                   }}
                   onClick={handleSubmit}

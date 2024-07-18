@@ -88,8 +88,7 @@ function CouponView() {
                 >
                   <Button className="">
                     <i
-                      className="fa-solid fa-trash fa-lg"
-                      style={{ color: "#d4d9de" }}
+                      className="fa-solid fa-trash fa-lg text-productBtn"
                     ></i>
                   </Button>
                 </div>
@@ -99,8 +98,7 @@ function CouponView() {
                 >
                   <Button className="">
                     <i
-                      className="fa-solid fa-pen fa-lg"
-                      style={{ color: "#d4d9de" }}
+                      className="fa-solid fa-pen fa-lg text-productBtn"
                     ></i>
                   </Button>
                 </div>

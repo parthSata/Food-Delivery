@@ -62,11 +62,9 @@ function Table() {
       <div className="flex flex-col relative ">
         <div className="relative overflow-x-auto  max-w-[100%]">
           <table
-            className="mt-4 w-full text-md text-left rtl:text-right rounded-[10px] overflow-hidden  text-gray-500"
+            className="mt-4 w-full text-md text-left rtl:text-right rounded-[10px] overflow-hidden  text-gray-500 shadow-dashboard"
             style={{
               fontFamily: "Bai Jamjuree",
-              boxShadow: "2px 2px 30px 2px #FFF3E5",
-              minWidth: "100%",
             }}
           >
             <thead className="rounded-full   bg-[#DF201F]  ">

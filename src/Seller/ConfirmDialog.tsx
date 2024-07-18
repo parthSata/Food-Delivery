@@ -29,8 +29,8 @@ const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 <div className="flex justify-center">
                     <button
                         type="submit"
-                        style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}
-                        className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5s`}
+                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className={`bg-[#94CD00] uppercase shadow-registerBtn h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5s`}
                         onClick={onClose}
                     >
                         {Strings.checkOut.continueButton}

@@ -229,9 +229,7 @@ function BusinessDetails() {
                                 </div>
 
                                 <div className="absolute border-none rounded-full top-16 left-28 border-black">
-                                    <Button className="h-10 flex justify-center items-center w-10 rounded-full bg-white" style={{
-                                        boxShadow: "0px 4px 14px 0px #00000024"
-                                    }}>
+                                    <Button className="h-10 flex justify-center items-center w-10 rounded-full bg-white shadow-cloud" >
                                         <img src={CloudUpload} alt="" className="full" />
                                     </Button>
                                 </div>
@@ -392,9 +390,8 @@ function BusinessDetails() {
                             <Button
                                 style={{
                                     fontFamily: "Bai Jamjuree",
-                                    boxShadow: "2px 2px 25px 2px #94CD0099 ",
                                 }}
-                                className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer `}
+                                className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer shadow-registerBtn`}
                                 onClick={handleSubmit}
                             >
                                 {Strings.businessDetail.saveAndContinueButton}

@@ -99,8 +99,9 @@ function Category() {
         {/* Product Heading */}
 
         <div
-          className="bg-[#fcbc65]  h-52 w-full  sm:w-full "
-          style={{ fontFamily: "Bai Jamjuree" }}
+          className="bg-[#fcbc65]  h-52 w-full  sm:w-full" style={{
+            fontFamily: "Bai Jamjuree",
+          }}
         >
           <div className="flex justify-between  items-center w-full">
             <span className="text-3xl pl-28 text-white">
@@ -126,12 +127,13 @@ function Category() {
                 >
                   <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                     <img src={item.images?.[0]} alt="" className="h-20" />
-                    <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
+                    <p className="" style={{
+                      fontFamily: "Bai Jamjuree",
+                    }}>
                       {item.name}{" "}
                     </p>
                     <p
-                      className="flex gap-2 items-center text-[#DF201F]"
-                      style={{ fontFamily: "Montserrat Alternates" }}
+                      className="flex gap-2 items-center text-[#DF201F]" style={{ fontFamily: "Montserrat Alternates" }}
                     >
                       ₹{item.price}
                       <span className="text-xs line-through">
@@ -148,8 +150,7 @@ function Category() {
                     >
                       <Button className="">
                         <i
-                          className="fa-solid fa-trash fa-lg"
-                          style={{ color: "#d4d9de" }}
+                          className="fa-solid fa-trash fa-lg text-productBtn"
                         ></i>
                       </Button>
                     </div>
@@ -161,8 +162,7 @@ function Category() {
                     >
                       <Button className="">
                         <i
-                          className="fa-solid fa-pen fa-lg"
-                          style={{ color: "#d4d9de" }}
+                          className="fa-solid fa-pen fa-lg text-productBtn"
                         ></i>
                       </Button>
                     </div>
@@ -172,8 +172,7 @@ function Category() {
 
               <div className=" sm:w-1/5  mb-10 w-full">
                 <div
-                  className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px]  "
-                  style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}
+                  className="flex justify-center w-full shadow-addNew font-semibold flex-col text-md items-center  h-[200px]  "
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
@@ -182,8 +181,7 @@ function Category() {
                         onClick={() => handleAddProduct(CategoryId)}
                       >
                         <i
-                          className="fa-duotone fa-plus fa-2xl "
-                          style={{ color: "#e8eaed" }}
+                          className="fa-duotone fa-plus fa-2xl text-addNew"
                         ></i>
                       </Button>
                     </div>

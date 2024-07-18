@@ -16,7 +16,7 @@ function HomePage() {
     const handleSubmit = () => {
         navigate('/login')
     }
-  
+
 
     return (
         <div>
@@ -24,7 +24,9 @@ function HomePage() {
                 <div className="">
                     <div className="relative  bg-opacity-85 mt-0">
                         <img src={HomeImg} alt="" className="h-[400px] w-full" />
-                        <div className="absolute  font-semibold w-full   flex-col justify-center top-28" style={{ fontFamily: "Bai Jamjuree" }}>
+                        <div className="absolute  font-semibold w-full   flex-col justify-center top-28" style={{
+                            fontFamily: "Bai Jamjuree",
+                        }}>
                             <div className="flex flex-col gap-2">
                                 <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>{Strings.home.welcome}</span>
                                 <span className="text-white text-5xl    font-bold">{Strings.home.slogan}</span>

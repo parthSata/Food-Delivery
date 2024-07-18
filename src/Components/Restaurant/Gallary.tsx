@@ -70,15 +70,13 @@ const Gallary: React.FC<GallaryInterface> = () => {
               ))}
               <div className=" sm:w-1/4 p-4 h-[290px] w-full ">
                 <div
-                  className="flex justify-center bg-[#FFFFFF] rounded-[15px] w-full font-semibold flex-col text-md items-center  h-[260px] "
-                  style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}
+                  className="flex justify-center bg-[#FFFFFF] rounded-[15px] w-full font-semibold flex-col text-md items-center  h-[260px] shadow-addNew"
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[240px] flex-col gap-2 text-md w-[240px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                       <Button className="flex self-center">
                         <i
-                          className="fa-duotone fa-plus fa-2xl "
-                          style={{ color: "#e8eaed" }}
+                          className="fa-duotone fa-plus fa-2xl text-addNew"
                           onClick={openDialog}
                         ></i>
                       </Button>

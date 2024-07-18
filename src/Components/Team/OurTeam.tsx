@@ -93,8 +93,7 @@ function OurTeam() {
                     </div>
                   </div>
                   <div
-                    className="h-[70%] w-full border-2 rounded-t-lg "
-                    style={{ boxShadow: "1.49px 1.49px 22.33px 1.49px #FFF3E5" }}
+                    className="h-[70%] w-full border-2 rounded-t-lg shadow-div"
                   ></div>
                   <div className="absolute  flex justify-center w-full gap-2  bottom-[98px]">
                     <div
@@ -103,8 +102,7 @@ function OurTeam() {
                     >
                       <Button className="">
                         <i
-                          className="fa-solid fa-trash fa-lg"
-                          style={{ color: "#d4d9de" }}
+                          className="fa-solid fa-trash fa-lg text-productBtn"
                         ></i>
                       </Button>
                     </div>
@@ -114,8 +112,7 @@ function OurTeam() {
                     >
                       <Button className="">
                         <i
-                          className="fa-solid fa-pen fa-lg"
-                          style={{ color: "#d4d9de" }}
+                          className="fa-solid fa-pen fa-lg text-productBtn"
                         ></i>
                       </Button>
                     </div>
@@ -125,8 +122,7 @@ function OurTeam() {
             ))}
             <div className=" sm:w-1/5 w-full mb-10 mt-8 h-[350px]">
               <div
-                className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full "
-                style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}
+                className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full shadow-addNew"
               >
                 <div className="border-dotted rounded-[15px] border-4 h-[180px] flex-col gap-2 text-md w-[200px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                   <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
@@ -135,8 +131,7 @@ function OurTeam() {
                       onClick={openDialog}
                     >
                       <i
-                        className="fa-duotone fa-plus fa-2xl "
-                        style={{ color: "#e8eaed" }}
+                        className="fa-duotone fa-plus fa-2xl text-addNew"
                       ></i>
                     </Button>
                   </div>

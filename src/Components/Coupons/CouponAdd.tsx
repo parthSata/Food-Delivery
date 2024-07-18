@@ -271,8 +271,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
             {updateId ? (
               <button
                 type="submit"
-                className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-                style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                className="w-full text-xl bg-[#DF201F] h-full shadow-couponAdd text-white py-2 rounded-[60px] "
                 onClick={handleUpdateCoupon}
               >
                 {Strings.couponAdd.updateButton}
@@ -280,8 +279,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
             ) : (
               <button
                 type="submit"
-                className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] "
-                style={{ boxShadow: "2px 2px 20px 2px #DF201F66" }}
+                className="w-full text-xl bg-[#DF201F] h-full text-white shadow-couponAdd py-2 rounded-[60px] "
                 onClick={handleAddCoupon}
               >
                 {Strings.couponAdd.saveButton}

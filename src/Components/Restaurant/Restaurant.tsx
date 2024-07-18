@@ -97,11 +97,10 @@ function Restaurant() {
           <div className="">
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
               {restarants.map((item) => (
-                <div className="sm:w-1/4 mb-10 font-semibold"
+                <div className="sm:w-1/4 mb-10 font-semibold shadow-3xl"
                   key={item.id}
                   style={{
                     fontFamily: "Bai Jamjuree",
-                    boxShadow: "2px 2px 40px 2px #FFF3E5",
                   }}
                 >
                   <img
@@ -118,8 +117,7 @@ function Restaurant() {
                       </div>
                       <Button className="border border-[#DF201F] rounded-lg text-[#DF201F] p-1.5">
                         <i
-                          className="fa-solid fa-location-dot  fa-lg"
-                          style={{ color: "#DF201F" }}
+                          className="fa-solid fa-location-dot  fa-lg text-direction"
                         ></i>{" "}
                         {Strings.restaurant.directionsButton}
                       </Button>
@@ -144,17 +142,15 @@ function Restaurant() {
                     >
                       <Button className="">
                         <i
-                          className="fa-solid fa-trash fa-lg"
-                          style={{ color: "#d4d9de" }}
+                          className="fa-solid fa-trash fa-lg text-productBtn"
                         ></i>
                       </Button>
                     </div>
                     <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
                       <Button className="">
                         <i
-                          className="fa-solid fa-pen fa-lg"
+                          className="fa-solid fa-pen fa-lg text-productBtn"
                           onClick={() => handleUpdateRestaurant(item.id)}
-                          style={{ color: "#d4d9de" }}
                         ></i>
                       </Button>
                     </div>
@@ -164,8 +160,7 @@ function Restaurant() {
 
               <div className=" sm:w-1/4  mb-10 w-full">
                 <div
-                  className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] "
-                  style={{ boxShadow: " 2px 2px 20px 2px #FFE9D066" }}
+                  className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] shadow-addNew"
                 >
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[280px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
@@ -174,8 +169,7 @@ function Restaurant() {
                         onClick={() => handleAddRestaurant(restarantList.id)}
                       >
                         <i
-                          className="fa-duotone fa-plus fa-2xl "
-                          style={{ color: "#e8eaed" }}
+                          className="fa-duotone fa-plus fa-2xl text-addNew"
                         ></i>
                       </Button>
                     </div>

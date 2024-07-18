@@ -57,7 +57,7 @@ function CheckoutPage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full " style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}>
+                        <div className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full shadow-dashboard" >
                             <div className=" flex flex-row  w-[300px] h-[126px] ">
                                 <div className="flex justify-center items-center w-full">
                                     <img src={FlashBurger} alt="" className=" w-28 " />

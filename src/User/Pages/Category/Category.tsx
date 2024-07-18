@@ -22,7 +22,7 @@ function Category() {
                 className="relative mt-4 w-full flex-row bg-black opacity-90 "
                 style={{ fontFamily: "Bai Jamjuree" }}
             >
-                <div className=" flex justify-start flex-col pl-16 w-full  h-full" style={{ background: ("269.88deg, #83B018 0.09%, #C2C965 99.89%") }}>
+                <div className=" flex justify-start flex-col pl-16 w-full  h-full" >
                     <span className="absolute bottom-28 text-white text-2xl">{Strings.category.getOff}</span>
                     <span className="absolute bottom-20 text-white text-2xl">{Strings.category.bestBurger}</span>
                 </div>
@@ -47,13 +47,10 @@ function Category() {
                             </p>
                         </div>
                         <div className="relative flex justify-center w-full gap-2  -top-6">
-                            <div className="hover:bg-[#DF201F] bg-white  h-12 w-12 flex justify-center rounded-3xl " style={{
-                                boxShadow: "2px 2px 15px 2px #FFE5E5"
-                            }}>
+                            <div className="hover:bg-[#DF201F] bg-white  h-12 w-12 flex justify-center rounded-3xl shadow-Size">
                                 <Button className="" onClick={(handleAddProduct)}>
                                     <i
-                                        className="fa-solid fa-plus fa-lg hover:text-white"
-                                        style={{ color: "#111213" }}
+                                        className="fa-solid fa-plus fa-lg hover:text-white text-addProd"
                                     ></i>
                                 </Button>
                             </div>

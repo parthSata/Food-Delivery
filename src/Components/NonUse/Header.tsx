@@ -20,8 +20,7 @@ function Header(): JSX.Element {
     <div className="h-full w-full">
       <SideMenu />
       <nav
-        className="bg-[#FFFFFF] flex-1  flex justify-between "
-        style={{ boxShadow: "  2px 2px 30px 2px #FFF3E5" }}
+        className="bg-[#FFFFFF] flex-1  flex justify-between shadow-dashboard"
       >
         <div className="flex items-center">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />

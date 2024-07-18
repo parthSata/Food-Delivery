@@ -214,8 +214,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
           className={`flex flex-col items-center relative mt-[2px] sm:mt-[60px] md:mt-[10px] lg:mt-[10px] `}
         >
           <span
-            className="font-semibold"
-            style={{ fontFamily: "Montserrat Alternates" }}
+            className="font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
           >
             {Strings.addCategory.labelImage}
           </span>
@@ -237,8 +236,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
         </div>
         <div className="w-full max-w-lg">
           <form
-            className="w-full flex flex-row font-semibold "
-            style={{ fontFamily: "Montserrat Alternates" }}
+            className="w-full flex flex-row font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
           >
             {isLoading ? (
               <div className="flex justify-center items-center mt-20">
@@ -334,11 +332,11 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
       </div>
       <div className="flex justify-center">
         <button
-          className="rounded-[60px] shadow-registerBtn ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px]"
+          className="rounded-[60px] shadow-registerBtn ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] "
+          onClick={handleSubmit}
           style={{
             fontFamily: "Bai Jamjuree",
           }}
-          onClick={handleSubmit}
         >
           {Strings.addCategory.labelSaveButton}
         </button>
@@ -351,10 +349,10 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
         <button
           type="submit"
           className={`rounded-[60px] ml-5 text-[#FFFFFF] shadow-registerBtn bg-[#94CD00] h-[40px] w-[140px] `}
+          onClick={handleUpdate}
           style={{
             fontFamily: "Bai Jamjuree",
           }}
-          onClick={handleUpdate}
         >
           {Strings.addCategory.labelUpdateButton}
         </button>

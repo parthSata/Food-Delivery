@@ -5,7 +5,7 @@ import { PlayArrow, Shafe } from "../../Config/images"
 function AboutUs() {
     return (
         <div>
-            <div className="flex h-full  border-2 w-full" style={{ boxShadow: "5px 5px 40px 5px #FFEFDDCC" }}>
+            <div className="flex h-full  border-2 w-full shadow-About" >
                 {/* About Us */}
                 <div className="m-14 flex flex-col flex-wrap gap-10">
                     <div className="flex flex-col font-semibold gap-1">
@@ -19,7 +19,7 @@ function AboutUs() {
                     </div>
                     <div className="flex flex-row gap-4">
                         <Button className="w-[180px] text-white rounded-full self-center uppercase bg-[#94CD00] h-[50px]" style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}>{Strings.AboutUs.readMore}</Button>
-                        <Button className="bg-[#DF201F] rounded-[60px]" style={{ boxShadow: "2px 2px 25px 2px #DF201F6E" }}>
+                        <Button className="bg-[#DF201F] rounded-[60px] shadow-Play" >
                             <img src={PlayArrow} alt="" className="" />
                         </Button>
                     </div>

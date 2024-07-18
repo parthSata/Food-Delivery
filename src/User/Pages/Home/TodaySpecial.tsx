@@ -7,14 +7,14 @@ function TodaySpecial() {
         <div className="h-full w-full ">
             <div className="text-2xl flex justify-between flex-wrap font-semibold m-2">
                 <span className=" rounded-[0px, 60px, 60px, 0px] p-4  mb-4"><span className="border-b-4 pb-3 rounded-r  border-[#DF201F]">To</span>day Special</span>
-                <Button className="w-[180px] text-white rounded-full font-bold text-lg self-center uppercase bg-[#94CD00]  h-[50px]" style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #94CD0099" }}>{Strings.todaySpecial.viewAll}</Button>
+                <Button className="w-[180px] text-white shadow-registerBtn rounded-full font-bold text-lg self-center uppercase bg-[#94CD00]  h-[50px]" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.todaySpecial.viewAll}</Button>
             </div>
 
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
-                <div className="sm:w-1/5 w-full mb-10 font-semibold"
+                <div className="sm:w-1/5 w-full mb-10 font-semibold shadow-dashboard"
                     style={{
                         fontFamily: "Bai Jamjuree",
-                        boxShadow: "2px 2px 40px 2px #FFF3E5",
+
                     }}
                 >
                     <img
@@ -51,10 +51,9 @@ function TodaySpecial() {
                         </p>
                     </div>
                 </div>
-                <div className="sm:w-1/5 w-full mb-10 font-semibold"
+                <div className="sm:w-1/5 w-full mb-10 font-semibold shadow-dashboard"
                     style={{
                         fontFamily: "Bai Jamjuree",
-                        boxShadow: "2px 2px 40px 2px #FFF3E5",
                     }}
                 >
                     <img
@@ -71,10 +70,9 @@ function TodaySpecial() {
                         </p>
                     </div>
                 </div>
-                <div className="sm:w-1/5 w-full mb-10 font-semibold"
+                <div className="sm:w-1/5 w-full mb-10 font-semibold shadow-dashboard"
                     style={{
                         fontFamily: "Bai Jamjuree",
-                        boxShadow: "2px 2px 40px 2px #FFF3E5",
                     }}
                 >
                     <img

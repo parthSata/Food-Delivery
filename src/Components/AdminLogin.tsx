@@ -153,15 +153,14 @@ function AdminLogin() {
                         <div className="flex flex-col justify-center items-center ">
                             <img className="h-[80px] w-[80px]" src={Logo} alt="" />
                             <p
-                                className="text-[30px] font-semibold"
+                                className="text-[30px] font-semibold "
                                 style={{ fontFamily: "Bai Jamjuree" }}
                             >
                                 {Strings.login.adminLogin}
                             </p>
                             <p
-                                className="text-[#A2A3A5] mt-0  text-[16px] font-semibold"
-                                style={{ fontFamily: "Bai Jamjuree" }}
-                            >
+                                className="text-[#A2A3A5] mt-0  text-[16px] font-semibold "
+                                style={{ fontFamily: "Bai Jamjuree" }}                            >
                                 {Strings.login.welcomeMessage}
                             </p>
 
@@ -171,8 +170,7 @@ function AdminLogin() {
                                     <img src={renderFlag(callingCode)} className="h-8 w-8" />
                                     <select
                                         onChange={handleCallingCodeChange}
-                                        className="rounded-lg px-1 py-1  cursor-pointer outline-none bg-white w-full"
-                                        style={{ fontFamily: "Bai Jamjuree" }}
+                                        className="rounded-lg px-1 py-1  cursor-pointer outline-none bg-white w-full" style={{ fontFamily: "Bai Jamjuree" }}
                                         value={callingCode}
                                     >
                                         <option className="h-8 w-8" value="+91">
@@ -196,8 +194,8 @@ function AdminLogin() {
                                     <Input
                                         type="number"
                                         placeholder="Mobile Number"
-                                        className="ml-2 p-6 text-[14px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 font-semibold"
-                                        style={{ fontFamily: "Montserrat Alternates" }}
+                                        className="ml-2 p-6 text-[14px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
+
                                         value={mobileNumber}
                                         onChange={handleChange}
                                     />
@@ -223,8 +221,7 @@ function AdminLogin() {
                                                 key={index}
                                                 className="rounded-md border-2 mr-2 p-[16px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
                                                 style={{
-                                                    width: 50,
-                                                    fontFamily: "Montserrat Alternates",
+                                                    width: 50, fontFamily: "Montserrat Alternates",
                                                 }}
                                             />
                                         )}
@@ -236,7 +233,7 @@ function AdminLogin() {
                                 style={{
                                     fontFamily: "Bai Jamjuree",
                                 }}
-                                className={`bg-red-600 h-[50px] w-[247px] shadow-adminbtn rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
+                                className={`bg-red-600  h-[50px] w-[247px] shadow-adminbtn rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
                                     }`}
                                 disabled={!isValid}
                             >

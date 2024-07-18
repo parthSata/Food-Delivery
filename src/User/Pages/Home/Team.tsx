@@ -29,8 +29,7 @@ function Team() {
                                 </div>
                             </div>
                             <div
-                                className="h-[60%] w-full border-2 rounded-t-2xl "
-                                style={{ boxShadow: "1.49px 1.49px 22.33px 1.49px #FFF3E5" }}
+                                className="h-[60%] w-full border-2 rounded-t-2xl shadow-div"
                             ></div>
 
                         </div>
@@ -56,8 +55,7 @@ function Team() {
                                 </div>
                             </div>
                             <div
-                                className="h-[60%] w-full border-2 rounded-t-2xl "
-                                style={{ boxShadow: "1.49px 1.49px 22.33px 1.49px #FFF3E5" }}
+                                className="h-[60%] w-full border-2 rounded-t-2xl shadow-div"
                             ></div>
 
                         </div>
@@ -83,8 +81,7 @@ function Team() {
                                 </div>
                             </div>
                             <div
-                                className="h-[60%] w-full border-2 rounded-t-2xl "
-                                style={{ boxShadow: "1.49px 1.49px 22.33px 1.49px #FFF3E5" }}
+                                className="h-[60%] w-full border-2 rounded-t-2xl shadow-div"
                             ></div>
 
                         </div>

@@ -112,8 +112,7 @@ const ProductView: React.FC = () => {
               style={{ fontFamily: "Bai Jamjuree" }}
             >
               <div
-                className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px]"
-                style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}
+                className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew"
               >
                 <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                   {previewImage ? (
@@ -156,8 +155,7 @@ const ProductView: React.FC = () => {
                     <li key={size} className="page flex flex-grow text-xl">
                       <a
                         href="#"
-                        className={`h-[42px] w-[40px] border-none rounded-sm p-1 focus:text-white focus:border-black-8 focus:bg-[#DF201F]`}
-                        style={{ boxShadow: "2px 2px 15px 2px #FFE5E5" }}
+                        className={`h-[42px] w-[40px] border-none rounded-sm shadow-Size p-1 focus:text-white focus:border-black-8 focus:bg-[#DF201F]`}
                       >
                         {size}
                       </a>
@@ -168,8 +166,7 @@ const ProductView: React.FC = () => {
               <div className="flex items-start gap-2 flex-col">
                 <span className="">Quantity</span>
                 <div
-                  className="flex  gap-1"
-                  style={{ boxShadow: " 2px 2px 15px 2px #FFE5E5" }}
+                  className="flex  gap-1 shadow-Size"
                 >
                   <button
                     className=" w-[40px] h-[42px]  border-r   border-gray"
@@ -200,16 +197,14 @@ const ProductView: React.FC = () => {
 
             <div className="flex gap-6 justify-around">
               <button
-                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#94CD00] "
+                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#94CD00] shadow-registerBtn"
                 onClick={handleEditOrder}
-                style={{ boxShadow: "2px 2px 20px 2px #94CD0099" }}
               >
                 {Strings.productView.editButton}
               </button>
               <button
-                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] "
+                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] shadow-adminbtn"
                 onClick={handleDeleteOrder}
-                style={{ boxShadow: "2px 2px 20px 2px #DF201F80" }}
               >
                 {Strings.productView.deleteButton}
               </button>

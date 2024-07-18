@@ -317,14 +317,14 @@ const ProductAdd: React.FC = () => {
                             <label className="flex">
                               <span className="flex self-center cursor-pointer">
                                 <i
-                                  className="fa-solid fa-plus fa-2xl"
-                                  style={{ color: "#e8eaed" }}
+                                  className="fa-solid fa-plus fa-2xl text-addNew"
                                 ></i>
                               </span>
                               <input
                                 type="file"
                                 onChange={(e: any) => handleImageUpload(e, index)}
                                 style={{ display: "none" }}
+
                               />
                             </label>
                           </div>
@@ -341,8 +341,7 @@ const ProductAdd: React.FC = () => {
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
                 <div
-                  className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px]"
-                  style={{ boxShadow: "2px 2px 20px 2px #FFE9D066" }}
+                  className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew"
                 >
                   <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                     {previewImage ? (
@@ -518,9 +517,8 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="flex w-full">
                       <button
-                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
                         style={{
-                          boxShadow: "2px 2px 20px 2px #DF201F66",
                           fontFamily: "Bai Jamjuree",
                         }}
                         onClick={handleSubmit}
@@ -528,9 +526,8 @@ const ProductAdd: React.FC = () => {
                         Add Product
                       </button>
                       <button
-                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full"
+                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
                         style={{
-                          boxShadow: "2px 2px 20px 2px #DF201F66",
                           fontFamily: "Bai Jamjuree",
                         }}
                         onClick={handleUpdate}

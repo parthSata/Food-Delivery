@@ -8,7 +8,7 @@ function Testimonials() {
                 <img src={TestimonialBg} alt="" className="" />
                 <span className="absolute self-center text-xl font-semibold text-white" style={{ fontFamily: "Bai Jamjuree" }}>Testi<span className="border-b-4 pb-3 rounded border-[#DF201F]">mo</span>nials</span>
                 <div className="absolute flex justify-center items-center top-72 flex-w gap-6">
-                    <div className="bg-[#DF201F] top-[300px]  p-6 font-semibold text-white flex flex-col gap-4 h-full w-[440px] rounded-[20px]" style={{ fontFamily: "Montserrat Alternates", boxShadow: "2px 2px 50px 2px #0000001A" }}>
+                    <div className="bg-[#DF201F] top-[300px]  p-6 font-semibold shadow-testimonials text-white flex flex-col gap-4 h-full w-[440px] rounded-[20px]" style={{ fontFamily: "Montserrat Alternates"}}>
                         <img src={StraightQuotes} alt="" className="absolute -top-5  left-5 h-14 w-12" />
                         <p className="text-sm mt-4 text-justify">It is a long established fact that a reader will be istracted by the readable content of a page when looking at its layout The point of using</p>
                         <div className=" flex justify-start items-center gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
@@ -17,7 +17,7 @@ function Testimonials() {
                         </div>
 
                     </div>
-                    <div className="bg-[#fff]  top-[300px]  p-6 font-semibold  flex flex-col gap-4 h-full w-[440px] rounded-[20px]" style={{ fontFamily: "Montserrat Alternates", boxShadow: "2px 2px 50px 2px #0000001A" }}>
+                    <div className="bg-[#fff]  top-[300px] shadow-testimonials p-6 font-semibold  flex flex-col gap-4 h-full w-[440px] rounded-[20px]" style={{ fontFamily: "Montserrat Alternates" }}>
                         <img src={StraightQuotes2} alt="" className="absolute  -top-5  left-[55%] h-14 w-14" />
                         <p className="text-sm text-justify mt-4 text-[#A2A3A5]">It is a long established fact that a reader will be istracted by the readable content of a page when looking at its layout The point of using</p>
                         <div className=" flex justify-start items-center gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
