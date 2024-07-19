@@ -320,11 +320,10 @@ const ProductAdd: React.FC = () => {
                                   className="fa-solid fa-plus fa-2xl text-addNew"
                                 ></i>
                               </span>
-                              <input
+                              <Input
                                 type="file"
                                 onChange={(e: any) => handleImageUpload(e, index)}
                                 style={{ display: "none" }}
-
                               />
                             </label>
                           </div>

@@ -8,9 +8,12 @@ import Team from "./Team"
 import TodaySpecial from "./TodaySpecial"
 import Strings from "../../../Components/Config/Strings"
 import Button from "../../../Components/ReusableComponent/Button"
+// import { useTranslation } from 'react-i18next';
+
 
 
 function HomePage() {
+    // const { t } = useTranslation();
     const navigate = useNavigate()
 
     const handleSubmit = () => {

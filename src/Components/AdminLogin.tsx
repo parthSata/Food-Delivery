@@ -222,6 +222,7 @@ function AdminLogin() {
                                                 className="rounded-md border-2 mr-2 p-[16px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
                                                 style={{
                                                     width: 50, fontFamily: "Montserrat Alternates",
+
                                                 }}
                                             />
                                         )}

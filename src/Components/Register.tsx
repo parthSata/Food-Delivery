@@ -138,12 +138,13 @@ function Register() {
                 <div className="flex items-center justify-center flex-col gap-6">
                   <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
                     <div className="flex flex-row gap-3 items-center">
-                      <input
+                      <Input
                         type="radio"
                         value="customer"
                         checked={role === "customer"}
                         onChange={handleRoleChange}
                         className="hidden"
+                        name="role"
                         id="customer-role"
                       />
                       <label htmlFor="customer-role" className="flex items-center gap-3 cursor-pointer">
@@ -154,12 +155,13 @@ function Register() {
                       </label>
                     </div>
                     <div className="flex flex-row gap-3 items-center">
-                      <input
+                      <Input
                         type="radio"
                         value="seller"
                         checked={role === "seller"}
                         onChange={handleRoleChange}
                         className="hidden"
+                        name="role"
                         id="seller-role"
                       />
                       <label htmlFor="seller-role" className="flex items-center gap-3 cursor-pointer">

@@ -10,6 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
+import Input from "./ReusableComponent/Input";
 // import Loader from "./Loader";
 
 
@@ -164,7 +165,7 @@ const Login: React.FC = () => {
                   <img src={renderFlag(callingCode)} className="h-8 w-8" />
                   <select
                     onChange={handleCallingCodeChange}
-                    className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white" 
+                    className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white"
                     style={{ fontFamily: "Bai Jamjuree" }}
                     value={callingCode}
                   >
@@ -214,12 +215,13 @@ const Login: React.FC = () => {
                   <div className="flex items-center justify-center flex-col gap-6">
                     <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
                       <div className="flex flex-row gap-3 items-center">
-                        <input
+                        <Input
                           type="radio"
                           value="customer"
                           checked={role === "customer"}
                           onChange={handleRoleChange}
                           className="hidden"
+                          name="role"
                           id="customer-role"
                         />
                         <label htmlFor="customer-role" className="flex items-center gap-3 cursor-pointer">
@@ -230,7 +232,7 @@ const Login: React.FC = () => {
                         </label>
                       </div>
                       <div className="flex flex-row gap-3 items-center">
-                        <input
+                        <Input
                           type="radio"
                           value="seller"
                           checked={role === "seller"}
