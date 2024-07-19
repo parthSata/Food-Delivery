@@ -8,12 +8,12 @@ import Team from "./Team"
 import TodaySpecial from "./TodaySpecial"
 import Strings from "../../../Components/Config/Strings"
 import Button from "../../../Components/ReusableComponent/Button"
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 
 
 function HomePage() {
-    // const { t } = useTranslation();
+    const { t } = useTranslation();
     const navigate = useNavigate()
 
     const handleSubmit = () => {
@@ -31,11 +31,11 @@ function HomePage() {
                             fontFamily: "Bai Jamjuree",
                         }}>
                             <div className="flex flex-col gap-2">
-                                <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>{Strings.home.welcome}</span>
-                                <span className="text-white text-5xl    font-bold">{Strings.home.slogan}</span>
-                                <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>{Strings.home.description}</p>
+                                <span className="text-[red] text-xl font-normal" style={{ fontFamily: "Fall in love" }}>{t(Strings.home.welcome)}</span>
+                                <span className="text-white text-5xl    font-bold">{t(Strings.home.slogan)}</span>
+                                <p className="text-[#FFFFFF] text-sm font-semibold" style={{ fontFamily: "Montserrat Alternates" }}>{t(Strings.home.description)}</p>
                                 <Button className="w-[120px] text-white cursor-pointer rounded-full self-center bg-[#94CD00] h-[50px]" onClick={handleSubmit}>
-                                    {Strings.login.loginButton}
+                                    {t(Strings.login.loginButton)}
                                 </Button>
                             </div>
                         </div>
@@ -45,7 +45,7 @@ function HomePage() {
                                 <img src={AllFood} alt="" className="h-[240px] w-full " />
                                 <div className="flex justify-between items-center text-white text-2xl font-semibold">
                                     <img src={Left} className="h-12 w-12 " />
-                                    <span className="">{Strings.home.bestCategory}</span>
+                                    <span className="">{t(Strings.home.bestCategory)}</span>
                                     <img src={Right} className="h-12 w-12" />
                                 </div>
                             </div>
@@ -54,23 +54,23 @@ function HomePage() {
                             <div className="flex  flex-row flex-wrap justify-center gap-8">
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">{Strings.dashboard.pizza}</span>
+                                    <span className="">{t(Strings.dashboard.pizza)}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">{Strings.dashboard.pizza}</span>
+                                    <span className="">{t(Strings.dashboard.pizza)}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">{Strings.dashboard.pizza}</span>
+                                    <span className="">{t(Strings.dashboard.pizza)}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">{Strings.dashboard.pizza}</span>
+                                    <span className="">{t(Strings.dashboard.pizza)}</span>
                                 </div>
                                 <div className="flex flex-col justify-center">
                                     <img src={Pizza} alt="" className="self-center h-[100px] w-[100px] " />
-                                    <span className="">{Strings.dashboard.pizza}</span>
+                                    <span className="">{t(Strings.dashboard.pizza)}</span>
                                 </div>
                             </div>
                         </div>

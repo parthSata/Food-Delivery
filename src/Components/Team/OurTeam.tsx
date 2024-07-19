@@ -7,8 +7,10 @@ import firebaseDatabaseURL from "../Config/apiUrl";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
+import { useTranslation } from "react-i18next";
 
 function OurTeam() {
+  const { t } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore
@@ -135,7 +137,7 @@ function OurTeam() {
                       ></i>
                     </Button>
                   </div>
-                  <p className="">{Strings.category.addNewButton}</p>
+                  <p className="">{t(Strings.category.addNewButton)}</p>
                 </div>
               </div>
             </div>

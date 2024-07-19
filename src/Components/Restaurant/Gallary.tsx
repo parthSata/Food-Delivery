@@ -10,8 +10,10 @@ import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
+import { useTranslation } from "react-i18next";
 
 const Gallary: React.FC<GallaryInterface> = () => {
+  const { t } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
   const [isLoading, setisLoading] = useState(false)
@@ -81,7 +83,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
                         ></i>
                       </Button>
                     </div>
-                    <p className="">{Strings.category.addNewButton}</p>
+                    <p className="">{t(Strings.category.addNewButton)}</p>
                   </div>
                 </div>
               </div>

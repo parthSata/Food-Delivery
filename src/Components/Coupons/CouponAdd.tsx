@@ -8,6 +8,7 @@ import { ref, set, onValue } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 
 export interface Coupon {
   id: string;
@@ -24,6 +25,7 @@ interface AddProps {
 }
 
 const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});
@@ -174,7 +176,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
           </button>
           <form className="space-y-4 ">
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{Strings.couponAdd.offerCode}</label>
+              <label className="self-start">{t(Strings.couponAdd.offerCode)}</label>
               <Input
                 type="text"
                 placeholder="Offer Code Here.."
@@ -193,7 +195,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{Strings.couponAdd.discount}</label>
+              <label className="self-start">{t(Strings.couponAdd.discount)}</label>
               <Input
                 type="number"
                 placeholder="Discount Here.."
@@ -212,7 +214,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{Strings.couponAdd.offerPrice}</label>
+              <label className="self-start">{t(Strings.couponAdd.offerPrice)}</label>
               <Input
                 type="number"
                 placeholder="Offer Price Here.."
@@ -231,7 +233,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{Strings.couponAdd.expiryDate}</label>
+              <label className="self-start">{t(Strings.couponAdd.expiryDate)}</label>
               <Input
                 type="date"
                 placeholder="Date Here.."
@@ -250,7 +252,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{Strings.couponAdd.description}</label>
+              <label className="self-start">{t(Strings.couponAdd.description)}</label>
               <textarea
                 placeholder="Type Here.."
                 name="discription"
@@ -274,7 +276,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 className="w-full text-xl bg-[#DF201F] h-full shadow-couponAdd text-white py-2 rounded-[60px] "
                 onClick={handleUpdateCoupon}
               >
-                {Strings.couponAdd.updateButton}
+                {t(Strings.couponAdd.updateButton)}
               </button>
             ) : (
               <button
@@ -282,7 +284,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 className="w-full text-xl bg-[#DF201F] h-full text-white shadow-couponAdd py-2 rounded-[60px] "
                 onClick={handleAddCoupon}
               >
-                {Strings.couponAdd.saveButton}
+                {t(Strings.couponAdd.saveButton)}
               </button>
 
             )}

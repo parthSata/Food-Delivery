@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import firebaseDatabaseURL from "../Config/apiUrl";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 
 export interface Team {
   id: string;
@@ -20,6 +21,7 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
+  const { t } = useTranslation();
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();
@@ -259,7 +261,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">{Strings.productAdd.nameLabel}</label>
+            <label className="self-start">{t(Strings.productAdd.nameLabel)}</label>
             <Input
               type="text"
               placeholder="Name"
@@ -278,7 +280,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">{Strings.ourTeam.positionLabel}</label>
+            <label className="self-start">{t(Strings.ourTeam.positionLabel)}</label>
             <Input
               type="text"
               placeholder="Position"
@@ -302,7 +304,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleUpdateMember}
             >
-              {Strings.ourTeam.updateButton}
+              {t(Strings.ourTeam.updateButton)}
             </button>
           ) : (
             <button
@@ -310,7 +312,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleAddMember}
             >
-              {Strings.couponAdd.saveButton}
+              {t(Strings.couponAdd.saveButton)}
             </button>
           )}
           <ToastContainer

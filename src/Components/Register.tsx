@@ -10,8 +10,10 @@ import { db } from '../Firebase/firebase';
 import { ref, set } from 'firebase/database';
 import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 
 function Register() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [callingCode, setCallingCode] = useState<string>("+91");
@@ -132,7 +134,7 @@ function Register() {
               <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold " style={{
                 fontFamily: "Bai Jamjuree",
               }} >
-                {Strings.register.createSeller}
+                {t(Strings.register.createSeller)}
               </p>
               <div className="flex mt-5  ">
                 <div className="flex items-center justify-center flex-col gap-6">
@@ -151,7 +153,7 @@ function Register() {
                         <div className={`flex justify-center items-center rounded-full ${role === "customer" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
                           <img src={Person} alt="" className="h-5" />
                         </div>
-                        {Strings.login.customerRole}
+                        {t(Strings.login.customerRole)}
                       </label>
                     </div>
                     <div className="flex flex-row gap-3 items-center">
@@ -168,7 +170,7 @@ function Register() {
                         <div className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
                           <img src={Store} alt="" className="h-5" />
                         </div>
-                        {Strings.login.sellerRole}
+                        {t(Strings.login.sellerRole)}
                       </label>
                     </div>
                   </div>
@@ -229,7 +231,7 @@ function Register() {
 
               <div className="mt-5 md:shrink flex flex-col gap-2">
                 <div className="flex justify-start gap-6">
-                  <label className="font-semibold">{Strings.register.passCode}</label>
+                  <label className="font-semibold">{t(Strings.register.passCode)}</label>
                 </div>
                 <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
                   <OtpInput
@@ -252,7 +254,7 @@ function Register() {
 
                 <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start gap-6">
-                    <label className="font-semibold">{Strings.register.confirmPasscode}</label>
+                    <label className="font-semibold">{t(Strings.register.confirmPasscode)}</label>
                   </div>
                   <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
                     <OtpInput
@@ -288,7 +290,7 @@ function Register() {
 
                 <div className="flex flex-row mt-4 justify-start gap-2 items-center">
                   <Input type="checkbox" className="bg-red-600 h-[30px] w-[20px]" />
-                  <p className="text-[#161A1D] font-semibold text-lg">{Strings.register.agreeTerms}</p>
+                  <p className="text-[#161A1D] font-semibold text-lg">{t(Strings.register.agreeTerms)}</p>
                 </div>
               </div>
 
@@ -299,7 +301,7 @@ function Register() {
                   fontFamily: "Bai Jamjuree",
                 }} disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
               >
-                {Strings.register.registerButton}
+                {t(Strings.register.registerButton)}
               </button>
               <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
             </div>

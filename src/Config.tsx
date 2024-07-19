@@ -13,7 +13,8 @@ const config = {
     firebaseStorageBucket: String(import.meta.env.VITE_FIREBASE_STORAGE_BUCKET),
     firebaseMessagingSenderId: String(import.meta.env.VITE_FIREBASE_MESSAGEING_SENDER_ID),
     firebaseAppId: String(import.meta.env.VITE_FIREBASE_APP_ID),
-    firebaseMeasurementId: String(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID)
+    firebaseMeasurementId: String(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID),
+    reCaptchkey: String(import.meta.env.VITE_RECAPTCHKEY)
 };
 
 export default config;

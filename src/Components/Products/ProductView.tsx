@@ -6,10 +6,12 @@ import firebaseDatabaseURL from "../Config/apiUrl";
 import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
+import { useTranslation } from "react-i18next";
 
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
+  const { t } = useTranslation();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [productImages, setProductImages] = useState<string[]>([]);
   const { productId } = useParams<{ productId?: string }>();
@@ -122,10 +124,10 @@ const ProductView: React.FC = () => {
                       className="h-[240px] w-auto object-cover"
                     />
                   ) : (
-                    <p>{Strings.productAdd.noImageUploaded}</p>
+                    <p>{t(Strings.productAdd.noImageUploaded)}</p>
                   )}
                   <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    {Strings.productAdd.supportedFiles}
+                    {t(Strings.productAdd.supportedFiles)}
                   </p>
                 </div>
               </div>
@@ -200,13 +202,13 @@ const ProductView: React.FC = () => {
                 className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#94CD00] shadow-registerBtn"
                 onClick={handleEditOrder}
               >
-                {Strings.productView.editButton}
+                {t(Strings.productView.editButton)}
               </button>
               <button
                 className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] shadow-adminbtn"
                 onClick={handleDeleteOrder}
               >
-                {Strings.productView.deleteButton}
+                {t(Strings.productView.deleteButton)}
               </button>
             </div>
           </div>

@@ -10,8 +10,10 @@ import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
+import { useTranslation } from "react-i18next";
 
 function Restaurant() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [restarants, setRestarants] = useState<RestaurantInterface[]>([]);
   const [restarantList, setRestarantList] = useState<RestaurantInterface>({
@@ -88,7 +90,7 @@ function Restaurant() {
                 className="absolute bottom-20 text-white text-2xl"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                {Strings.restaurant.pageTitle}
+                {t(Strings.restaurant.pageTitle)}
               </span>
             </div>
           </div>
@@ -119,14 +121,14 @@ function Restaurant() {
                         <i
                           className="fa-solid fa-location-dot  fa-lg text-direction"
                         ></i>{" "}
-                        {Strings.restaurant.directionsButton}
+                        {t(Strings.restaurant.directionsButton)}
                       </Button>
                     </span>
                     <span
                       className="text-justify text-[#38393b] "
                       style={{ fontFamily: "Montserrat Alternates" }}
                     >
-                      {Strings.restaurant.address}
+                      {t(Strings.restaurant.address)}
                     </span>
                     <span
                       className="text-justify text-[#A2A3A5] "
@@ -173,7 +175,7 @@ function Restaurant() {
                         ></i>
                       </Button>
                     </div>
-                    <p className="">{Strings.category.addNewButton}</p>
+                    <p className="">{t(Strings.category.addNewButton)}</p>
                   </div>
                 </div>
               </div>

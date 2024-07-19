@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Strings from "../Components/Config/Strings";
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 // import stripeKey from '../Config'
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';
@@ -28,6 +29,7 @@ interface BusinessDetails {
 
 
 function BusinessDetails() {
+    const { t } = useTranslation()
     // const presetKey = "ml_default";
     // const cloudName = "dwxhjomtn";
     const [imageFile, setImageFile] = useState<File | null>(null);
@@ -202,7 +204,7 @@ function BusinessDetails() {
                                 className="text-[30px] font-semibold"
                                 style={{ fontFamily: "Bai Jamjuree" }}
                             >
-                                {Strings.businessDetail.title}{" "}
+                                {t(Strings.businessDetail.title)}{" "}
                             </p>
 
                             <div className=" mx-auto relative bg-white mt-10     border-gray-300 border-none rounded-full " style={{
@@ -221,7 +223,7 @@ function BusinessDetails() {
                                                         d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                                                         data-original="#000000" />
                                                 </svg>
-                                                <span className="text-xs">{Strings.businessDetail.uploadImage}</span>
+                                                <span className="text-xs">{t(Strings.businessDetail.uploadImage)}</span>
 
                                                 <Input type="file" id="chooseFile" className="h-full w-full hidden rounded-full" onChange={handleImageUpload} />
                                             </label>
@@ -365,7 +367,7 @@ function BusinessDetails() {
                                         <div className="">
                                             <label htmlFor="uploadDocument" className="bg-[#FFF3E5] flex h-10 rounded-md w-40 gap-2 text-sm font-semibold justify-center items-center cursor-pointer">
                                                 <img src={uploadDocument} alt="" className="h-4 w-4" style={{ fontFamily: "Bai Jamjuree" }} />
-                                                {Strings.businessDetail.uploadLabel}
+                                                {t(Strings.businessDetail.uploadLabel)}
                                             </label>
                                             <Input type="file" id="uploadDocument" className="hidden" onChange={handleDocumentUpload} />
                                             {/* <Button className="bg-[#FFF3E5] flex h-10 rounded-md w-40 gap-2 text-sm font-semibold justify-center items-center"><img src={uploadDocument} alt="" className="h-4 w-4" style={{ fontFamily: "Bai Jamjuree" }} /> Upload </Button> */}
@@ -394,7 +396,7 @@ function BusinessDetails() {
                                 className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer shadow-registerBtn`}
                                 onClick={handleSubmit}
                             >
-                                {Strings.businessDetail.saveAndContinueButton}
+                                {t(Strings.businessDetail.saveAndContinueButton)}
                             </Button>
                             <ToastContainer
                                 position="top-right"

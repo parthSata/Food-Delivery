@@ -6,16 +6,12 @@ const resources = {
   en: {
     translation: en,
   },
-  // Add other languages here
 };
 
 i18n.use(initReactI18next).init({
   resources,
   lng: "en",
-  fallbackLng: "en",
-  interpolation: {
-    escapeValue: false,
-  },
+ 
 });
 
 export default i18n;

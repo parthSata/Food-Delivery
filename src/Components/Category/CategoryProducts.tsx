@@ -7,10 +7,13 @@ import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
+import { useTranslation } from "react-i18next";
 
 
 
 function Category() {
+  const { t } = useTranslation();
+
   const { CategoryId } = useParams<{ CategoryId?: any }>();
   const navigate = useNavigate();
   const [categoryData, setCategoryData] = useState<CategoriesData>({
@@ -185,7 +188,7 @@ function Category() {
                         ></i>
                       </Button>
                     </div>
-                    <p className="">{Strings.category.addNewButton}</p>
+                    <p className="">{t(Strings.category.addNewButton)}</p>
                   </div>
                 </div>
               </div>

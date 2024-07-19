@@ -4,12 +4,15 @@ import { Delete, Edit, RightArrow } from "./images";
 import Strings from "../Components/Config/Strings";
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 
 
 
 
 
 function CheckoutPage() {
+    const { t } = useTranslation();
+
     const [quantity, setQuantity] = useState(0)
     const incrementQuantity = () => {
         setQuantity((prevQuantity) => prevQuantity + 1);
@@ -31,8 +34,8 @@ function CheckoutPage() {
                                     <img src={FlashBurger} alt="" className=" w-28 " />
                                 </div>
                                 <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                                    <span className="">{Strings.orders.hamburger}</span>
-                                    <span className="flex gap-2 items-center text-[#DF201F]">{Strings.checkOut.discountPrice}<span className="line-through text-xs">{Strings.checkOut.price}</span></span>
+                                    <span className="">{t(Strings.orders.hamburger)}</span>
+                                    <span className="flex gap-2 items-center text-[#DF201F]">{t(Strings.checkOut.discountPrice)}<span className="line-through text-xs">{t(Strings.checkOut.price)}</span></span>
                                     <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
                                         <div className="cursor-pointer"><i className="fa-solid fa-minus p-2 "></i></div>
                                         <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">01</div>
@@ -47,8 +50,8 @@ function CheckoutPage() {
                                     <img src={FlashBurger} alt="" className=" w-28 " />
                                 </div>
                                 <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                                    <span className="">{Strings.orders.hamburger}</span>
-                                    <span className="flex gap-2 items-center text-[#DF201F]">{Strings.checkOut.discountPrice}<span className="line-through text-xs">{Strings.checkOut.price}</span></span>
+                                    <span className="">{t(Strings.orders.hamburger)}</span>
+                                    <span className="flex gap-2 items-center text-[#DF201F]">{t(Strings.checkOut.discountPrice)}<span className="line-through text-xs">{t(Strings.checkOut.price)}</span></span>
                                     <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
                                         <div className="cursor-pointer" onClick={decrementQuantity}><i className="fa-solid fa-minus p-2 "></i></div>
                                         <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">{quantity}</div>
@@ -63,8 +66,8 @@ function CheckoutPage() {
                                     <img src={FlashBurger} alt="" className=" w-28 " />
                                 </div>
                                 <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                                    <span className="">{Strings.orders.hamburger}</span>
-                                    <span className="flex gap-2 items-center text-[#DF201F]">{Strings.checkOut.discountPrice}<span className="line-through text-xs">{Strings.checkOut.price}</span></span>
+                                    <span className="">{t(Strings.orders.hamburger)}</span>
+                                    <span className="flex gap-2 items-center text-[#DF201F]">{t(Strings.checkOut.discountPrice)}<span className="line-through text-xs">{t(Strings.checkOut.price)}</span></span>
                                     <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
                                         <div className="cursor-pointer"><i className="fa-solid fa-minus p-2 "></i></div>
                                         <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">01</div>
@@ -81,7 +84,7 @@ function CheckoutPage() {
                         {/* input */}
                         <div className="">
                             <label className="flex self-start pl-4 text-lg tracking-wide text-gray-700  font-bold mb-2">
-                                {Strings.checkOut.couponOnCode}
+                                {t(Strings.checkOut.couponOnCode)}
                             </label>
                             <div className="w-full relative flex-row font-semibold  flex justify-center items-center px-3 mb-6" style={{ fontFamily: "Montserrat Alternates" }}>
                                 <Input
@@ -99,31 +102,31 @@ function CheckoutPage() {
 
                         <div className="flex flex-col px-5 gap-4">
                             <div className="border-b-2 flex justify-between items-center pb-4  border-dashed border-[#C4C4C4]">
-                                <span className="text-lg">{Strings.checkOut.totalBill}</span>
-                                <span className="">{Strings.checkOut.price}</span>
+                                <span className="text-lg">{t(Strings.checkOut.totalBill)}</span>
+                                <span className="">{t(Strings.checkOut.price)}</span>
                             </div>
                             <div className="border-b flex justify-between items-center pb-4  border-[#C4C4C4]">
-                                <span className="text-[#A2A3A5] text-lg">{Strings.checkOut.deliveryCharge}</span>
+                                <span className="text-[#A2A3A5] text-lg">{t(Strings.checkOut.deliveryCharge)}</span>
                                 <span className="text-[#A2A3A5] text-lg">₹0.00</span>
                             </div>
                             <div className="border-b flex justify-between items-center pb-4  border-[#C4C4C4]">
-                                <span className="text-[#A2A3A5] text-lg">{Strings.checkOut.packagingCharge}</span>
+                                <span className="text-[#A2A3A5] text-lg">{t(Strings.checkOut.packagingCharge)}</span>
                                 <span className="text-[#A2A3A5] text-lg">₹9</span>
                             </div>
                             <div className="border-b flex justify-between items-center pb-4  border-[#C4C4C4]">
-                                <span className="text-[#A2A3A5] text-lg">{Strings.checkOut.taxAmount}</span>
+                                <span className="text-[#A2A3A5] text-lg">{t(Strings.checkOut.taxAmount)}</span>
                                 <span className="text-[#A2A3A5] text-lg">₹15</span>
                             </div>
                             <div className="border-b flex justify-between items-center pb-4  border-[#C4C4C4]">
-                                <span className="text-[#A2A3A5] text-lg">{Strings.checkOut.totalDiscount}</span>
+                                <span className="text-[#A2A3A5] text-lg">{t(Strings.checkOut.totalDiscount)}</span>
                                 <span className="text-[#A2A3A5] text-lg">₹0.00</span>
                             </div>
                             <div className="border-b-2 flex justify-between items-center pb-4 border-dashed border-[#C4C4C4]">
-                                <span className="text-[#A2A3A5] text-lg">{Strings.checkOut.couponDiscount}</span>
+                                <span className="text-[#A2A3A5] text-lg">{t(Strings.checkOut.couponDiscount)}</span>
                                 <span className="text-[#A2A3A5] text-lg">₹0.00</span>
                             </div>
                             <div className=" flex justify-between items-center ">
-                                <span className=" text-lg">{Strings.checkOut.grandTotal}</span>
+                                <span className=" text-lg">{t(Strings.checkOut.grandTotal)}</span>
                                 <span className=" text-lg text-[#DF201F]">₹324</span>
                             </div>
                         </div>
@@ -139,7 +142,7 @@ function CheckoutPage() {
                 {/* Add New Address */}
                 <div className="h-full w-full -order-1">
                     <div className="flex flex-col gap-4 p-10" style={{ fontFamily: "Bai Jamjuree" }}>
-                        <label className="pl-3 self-start">{Strings.checkOut.addNewAddress}</label>
+                        <label className="pl-3 self-start">{t(Strings.checkOut.addNewAddress)}</label>
                         <div className="flex flex-row justify-around">
                             <div className="w-full md:w-1/2 px-3 ">
                                 <select
@@ -173,7 +176,7 @@ function CheckoutPage() {
                                 name="mobilenumber"
                             />
                         </div>
-                        <p className=" underline text-[#DF201F] text-sm">{Strings.checkOut.saveNewAddress}</p>
+                        <p className=" underline text-[#DF201F] text-sm">{t(Strings.checkOut.saveNewAddress)}</p>
                     </div>
                 </div>
 
@@ -183,9 +186,9 @@ function CheckoutPage() {
                 {/* View Address */}
                 <div className="h-full w-full order-2">
                     <div className="flex font-semibold flex-col gap-6 p-10" style={{ fontFamily: "Bai Jamjuree" }}>
-                        <label className="pl-3 self-start">{Strings.checkOut.orderItemDetails}</label>
+                        <label className="pl-3 self-start">{t(Strings.checkOut.orderItemDetails)}</label>
                         <div className="flex gap-2 bg-[#FFF3E5] rounded-[10px] border-[#FFE3C1] border-2 p-6 h-full ">
-                            <Input type="radio" radioGroup="address" className="accent-[#DF201F] h-6 w-6" />
+                            <Input type="radio" className="accent-[#DF201F] h-6 w-6" />
                             <div className="">
                                 <p className="text-justify text-[#161A1D] ">near Hocky building, raj royal,House no 13, lakadganj
                                     nagpur Maharashtra 441001
@@ -197,7 +200,7 @@ function CheckoutPage() {
                             <img src={Delete} alt="" className="cursor-pointer" />
                         </div>
                         <div className="flex gap-2 bg-[#FFF3E5] rounded-[10px] border-[#FFE3C1] border-2 p-6 h-full ">
-                            <Input type="radio" radioGroup="address" className="accent-[#DF201F] h-6 w-6" />
+                            <Input type="radio" className="accent-[#DF201F] h-6 w-6" />
                             <div className="">
                                 <p className="text-justify text-[#161A1D] ">near Hocky building, raj royal,House no 13, lakadganj
                                     nagpur Maharashtra 441001
@@ -210,7 +213,7 @@ function CheckoutPage() {
                         </div>
 
                         <div className="w-full h-full">
-                            <Button className="uppercase text-white text-xl bg-[#94CD00] w-full rounded-[60px] h-[60px]" style={{ boxShadow: "2px 2px 25px 2px #94CD0099" }}>{Strings.checkOut.continueButton}</Button>
+                            <Button className="uppercase text-white text-xl bg-[#94CD00] w-full rounded-[60px] h-[60px]" style={{ boxShadow: "2px 2px 25px 2px #94CD0099" }}>{t(Strings.checkOut.continueButton)}</Button>
                         </div>
                     </div>
                 </div>

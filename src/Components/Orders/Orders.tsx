@@ -4,9 +4,11 @@ import Accepted from '../../assets/Orders/OrderAccepted.png'
 import Cancel from '../../assets/Orders/OrderCancel.png'
 import Strings from '../Config/Strings'
 import Input from '../ReusableComponent/Input'
+import { useTranslation } from 'react-i18next'
 // import { useState } from 'react'
 
 function Orders() {
+    const { t } = useTranslation();
     // const [currentPage, setCurrentPage] = useState<number>(1);
     // const itemsPerPage = 5;
     // const [searchInput, setSearchInput] = useState("");
@@ -43,7 +45,7 @@ function Orders() {
                 <div className="flex flex-col flex-wrap">
                     <div className="">
                         <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
-                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.orders.today}</span>
+                            <span className="text-[#161A1D] mb-2" style={{ fontFamily: "Bai Jamjuree" }}>{t(Strings.orders.today)}</span>
                             <span className="">
                                 {/* Search Input */}
 
@@ -70,10 +72,10 @@ function Orders() {
                                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
                                     <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                                         <div className="flex flex-col  gap-1">
-                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>{Strings.orders.orderNumber}</span>
-                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>{Strings.orders.orderTime}</p>
+                                            <span className="" style={{ fontFamily: "Bai Jamjuree" }}>{t(Strings.orders.orderNumber)}</span>
+                                            <p className="text-[#A2A3A5] text-xs " style={{ fontFamily: "Montserrat Alternates" }}>{t(Strings.orders.orderTime)}</p>
                                             <span className="flex justify-center items-center text-[#50E06B] gap-2" style={{ fontFamily: "Bai Jamjuree" }}>
-                                                <img src={Accepted} alt="" className="h-5" />{Strings.orders.acceptedOrder}
+                                                <img src={Accepted} alt="" className="h-5" />{t(Strings.orders.acceptedOrder)}
                                             </span>
                                         </div>
                                     </div>

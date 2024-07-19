@@ -6,8 +6,10 @@ import { db } from '../../Firebase/firebase';
 import { ref, remove, get } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
+import { useTranslation } from "react-i18next";
 
 function AllProducts() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");
@@ -84,7 +86,7 @@ function AllProducts() {
             className="absolute bottom-20 text-white text-2xl"
             style={{ fontFamily: "Bai Jamjuree" }}
           >
-            {Strings.allProduct.productHeading}
+            {t(Strings.allProduct.productHeading)}
           </span>
         </div>
       </div>
@@ -157,7 +159,7 @@ function AllProducts() {
                       ></i>
                     </button>
                   </div>
-                  <p className="">{Strings.category.addNewButton}</p>
+                  <p className="">{t(Strings.category.addNewButton)}</p>
                 </div>
               </div>
             </div>

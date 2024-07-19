@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 
 import PORT from "../Config";
-console.log("🚀 ~ PORT:", PORT)
 
 dotenv.config();
 

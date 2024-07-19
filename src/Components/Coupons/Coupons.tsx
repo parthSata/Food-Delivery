@@ -7,8 +7,10 @@ import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
+import { useTranslation } from "react-i18next";
 
 function Coupons() {
+  const { t } = useTranslation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore
@@ -72,7 +74,7 @@ function Coupons() {
               fontFamily: "Bai Jamjuree",
             }}
           >
-            {Strings.couponAdd.couponTitle}
+            {t(Strings.couponAdd.couponTitle)}
           </span>
         </div>
       </div>
@@ -142,7 +144,7 @@ function Coupons() {
                     ></i>
                   </Button>
                 </div>
-                <p className="">{Strings.category.addNewButton}</p>
+                <p className="">{t(Strings.category.addNewButton)}</p>
               </div>
             </div>
           </div>

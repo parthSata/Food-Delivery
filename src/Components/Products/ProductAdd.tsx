@@ -8,6 +8,7 @@ import { set, ref, onValue, update } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
+import { useTranslation } from "react-i18next";
 
 export interface Product {
   id: string;
@@ -23,7 +24,7 @@ export interface Product {
 }
 
 const ProductAdd: React.FC = () => {
-
+  const { t } = useTranslation();
   const location = useLocation();
   const { CategoryId, updateId } = location.state || [];
   const presetKey = "ml_default";
@@ -327,7 +328,7 @@ const ProductAdd: React.FC = () => {
                               />
                             </label>
                           </div>
-                          <p>{Strings.productAdd.uploadNow}</p>
+                          <p>{t(Strings.productAdd.uploadNow)}</p>
                         </>
                       )}
                     </div>
@@ -350,10 +351,10 @@ const ProductAdd: React.FC = () => {
                         className="h-[250px]  object-cover"
                       />
                     ) : (
-                      <p>{Strings.productAdd.noImageUploaded}</p>
+                      <p>{t(Strings.productAdd.noImageUploaded)}</p>
                     )}
                     <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                      {Strings.productAdd.supportedFiles}
+                      {t(Strings.productAdd.supportedFiles)}
                     </p>
                   </div>
                 </div>
@@ -370,12 +371,12 @@ const ProductAdd: React.FC = () => {
                   <div className="flex flex-wrap  mb-6 w-full">
                     <div className="w-full px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.nameLabel}
+                        {t(Strings.productAdd.nameLabel)}
                       </label>
                       <Input
                         className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
                         type="text"
-                        placeholder={Strings.productAdd.nameLabel}
+                        placeholder={t(Strings.productAdd.nameLabel)}
                         name="name"
                         value={product.name}
                         onChange={handleChange}
@@ -391,7 +392,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full  md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.priceLabel}
+                        {t(Strings.productAdd.priceLabel)}
                       </label>
                       <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -412,7 +413,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.discountPriceLabel}
+                        {t(Strings.productAdd.discountPriceLabel)}
                       </label>
                       <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -433,7 +434,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.weightLabel}
+                        {t(Strings.productAdd.weightLabel)}
                       </label>
                       <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -454,7 +455,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.unitLabel}
+                        {t(Strings.productAdd.unitLabel)}
                       </label>
                       <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -475,7 +476,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.packagingChargesLabel}
+                        {t(Strings.productAdd.packagingChargesLabel)}
                       </label>
                       <Input
                         className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -496,7 +497,7 @@ const ProductAdd: React.FC = () => {
                     </div>
                     <div className="w-full px-3 mb-6">
                       <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                        {Strings.productAdd.descriptionLabel}
+                        {t(Strings.productAdd.descriptionLabel)}
                       </label>
                       <textarea
                         className="resize-none appearance-none block w-full h-[120px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"

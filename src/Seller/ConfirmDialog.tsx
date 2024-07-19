@@ -1,6 +1,7 @@
 import { ToastContainer } from 'react-toastify'
 import { Conformation } from './images'
 import Strings from '../Components/Config/Strings';
+import { useTranslation } from 'react-i18next';
 
 interface AddProps {
     onClose: () => void;
@@ -9,6 +10,7 @@ interface AddProps {
 
 const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
     if (!isOpen) return null;
+    const { t } = useTranslation();
 
 
 
@@ -33,7 +35,7 @@ const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
                         className={`bg-[#94CD00] uppercase shadow-registerBtn h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5s`}
                         onClick={onClose}
                     >
-                        {Strings.checkOut.continueButton}
+                        {t(Strings.checkOut.continueButton)}
                     </button>
                     <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
                 </div>

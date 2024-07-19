@@ -34,10 +34,4 @@ export const LanguageContextProvider = ({ children }: LanguageContextProviderPro
     );
 };
 
-export const useLanguageContext = () => {
-    const context = useContext(LanguageContext);
-    if (!context) {
-        throw new Error("useLanguageContext must be used within a LanguageContextProvider");
-    }
-    return context;
-};
+export const useLanguageContext = () => useContext(LanguageContext);
