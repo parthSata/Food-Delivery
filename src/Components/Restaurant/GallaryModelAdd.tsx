@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import { db } from '../../Firebase/firebase';
-import { set, ref } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { set, ref } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Input from "../ReusableComponent/Input";
 
@@ -29,13 +29,13 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   if (!isOpen) return null;
   const uploadImageToCloudinary = async (
     file: File
   ): Promise<string | null> => {
-    setisLoading(true)
+    setisLoading(true);
     try {
       const data = new FormData();
       data.append("file", file);
@@ -56,9 +56,8 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     } catch (error) {
       return null;
     } finally {
-      setisLoading(true)
+      setisLoading(true);
     }
-
   };
 
   const isFieldEmpty = (value: string | number) => {
@@ -66,7 +65,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
     const newErrors: Partial<Gallary> = {};
@@ -103,7 +102,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
       toast.error("Failed to save gallery item.");
       console.error("Error saving gallery item:", error);
     }
-    setisLoading(false)
+    setisLoading(false);
     setGallary({
       id: "",
       images: [],
@@ -221,8 +220,9 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                         />
                         {errors.title && (
                           <span
-                            className={`text-red-600 text-sm ${gallary.title ? "" : "hidden"
-                              }}`}
+                            className={`text-red-600 text-sm ${
+                              gallary.title ? "" : "hidden"
+                            }}`}
                           >
                             {errors.title}
                           </span>
@@ -253,7 +253,7 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
           </Loader>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 

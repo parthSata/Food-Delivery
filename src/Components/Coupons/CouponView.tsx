@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Coupon } from "./CouponAdd";
-import { db } from '../../Firebase/firebase';
-import { ref, onValue, remove } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
@@ -20,7 +20,7 @@ function CouponView() {
     expiryDate: "",
     discription: "",
   });
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     fetchCouponData();
@@ -31,7 +31,7 @@ function CouponView() {
   };
 
   const handleDeleteCoupons = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
 
     try {
       const couponRef = ref(db, `coupons/${id}`);
@@ -40,24 +40,27 @@ function CouponView() {
     } catch (error) {
       console.error("Error deleting coupon:", error);
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   const fetchCouponData = () => {
-    setisLoading(true)
+    setisLoading(true);
     const couponRef = ref(db, `coupons/${couponId}`);
-    onValue(couponRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setCouponDetail({ id: couponId, ...data });
-      } else {
-        console.error("No data available");
+    onValue(
+      couponRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCouponDetail({ id: couponId, ...data });
+        } else {
+          console.error("No data available");
+        }
+      },
+      (error) => {
+        console.error("Error fetching coupon data:", error);
       }
-    }, (error) => {
-      console.error("Error fetching coupon data:", error);
-    });
-    setisLoading(false)
+    );
+    setisLoading(false);
   };
 
   return (
@@ -66,19 +69,24 @@ function CouponView() {
         className="flex justify-center mt-28 items-center"
         style={{ fontFamily: "Montserrat Alternates" }}
       >
-
         <div className="flex flex-col gap-1 p-8 font-semibold bg-[#FFF3E5] rounded-[15px] h-auto w-[816px]  ">
           <Loader isLoading={isLoading}>
             <div className="flex flex-row  pl-4 gap-8 text-lg">
-              <span className="font-bold text-[#A2A3A5]">{t(Strings.couponAdd.offerCode)} </span>
+              <span className="font-bold text-[#A2A3A5]">
+                {t(Strings.couponAdd.offerCode)}{" "}
+              </span>
               <span className="text-[#161A1D] ">{couponDetail.offerCode}</span>
             </div>
             <div className="flex flex-row  pl-4 gap-[85px] text-lg">
-              <span className="font-bold text-[hsl(220,2%,64%)]">{t(Strings.couponAdd.OfferLable)}</span>
+              <span className="font-bold text-[hsl(220,2%,64%)]">
+                {t(Strings.couponAdd.OfferLable)}
+              </span>
               <span className="text-[#DF201F]">{couponDetail.discount}%</span>
             </div>
             <div className="flex flex-row  pl-4 gap-8 text-lg">
-              <span className="font-bold text-[#A2A3A5]">{t(Strings.couponAdd.description)} </span>
+              <span className="font-bold text-[#A2A3A5]">
+                {t(Strings.couponAdd.description)}{" "}
+              </span>
               <span className="text-[#938D8E] text-justify">
                 {couponDetail.discription}
               </span>
@@ -89,9 +97,7 @@ function CouponView() {
                 onClick={() => handleDeleteCoupons(couponDetail.id)}
               >
                 <Button className="">
-                  <i
-                    className="fa-solid fa-trash fa-lg text-productBtn"
-                  ></i>
+                  <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                 </Button>
               </div>
               <div
@@ -99,16 +105,14 @@ function CouponView() {
                 onClick={() => handleUpdateCoupons(couponDetail.id)}
               >
                 <Button className="">
-                  <i
-                    className="fa-solid fa-pen fa-lg text-productBtn"
-                  ></i>
+                  <i className="fa-solid fa-pen fa-lg text-productBtn"></i>
                 </Button>
               </div>
             </div>
           </Loader>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

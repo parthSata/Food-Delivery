@@ -1,14 +1,20 @@
 // AuthContext.tsx
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { auth, db } from '../Firebase/firebase';
-import { getIdToken, onIdTokenChanged } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
-import { child, get, ref } from 'firebase/database';
-import Loader from './ReusableComponent/Loader';
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
+import { auth, db } from "@/config/Firebase/firebase";
+import { getIdToken, onIdTokenChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { child, get, ref } from "firebase/database";
+import Loader from "./ReusableComponent/Loader";
 
 interface User {
   uid: string;
-  role: 'admin' | 'seller' | 'customer';
+  role: "admin" | "seller" | "customer";
 }
 
 interface AuthContextType {
@@ -27,27 +33,27 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
-
       if (firebaseUser) {
         const token = await getIdToken(firebaseUser, true); // force refresh token
-        localStorage.setItem('accessToken', token);
-        const userDataRef = ref(db, 'users');
-        const mobileNumber: any = firebaseUser.phoneNumber
-        const mobileArray = mobileNumber.split('');
+        localStorage.setItem("accessToken", token);
+        const userDataRef = ref(db, "users");
+        const mobileNumber: any = firebaseUser.phoneNumber;
+        const mobileArray = mobileNumber.split("");
         mobileArray.splice(0, 3); // Remove the first 3 characters
-        const mobileWithoutCallingCode = mobileArray.join('');
-        const snapshot = await get(child(userDataRef, `${mobileWithoutCallingCode}`));
+        const mobileWithoutCallingCode = mobileArray.join("");
+        const snapshot = await get(
+          child(userDataRef, `${mobileWithoutCallingCode}`)
+        );
 
         if (snapshot.exists()) {
-          const userData = snapshot.val()
-          setUser(userData)
+          const userData = snapshot.val();
+          setUser(userData);
         }
-
       } else {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem("accessToken");
         setUser(null);
       }
-      setIsLoading(false)
+      setIsLoading(false);
     });
 
     return () => unsubscribe();
@@ -59,23 +65,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('accessToken');
-    navigate('/login');
+    localStorage.removeItem("accessToken");
+    navigate("/login");
   };
 
   const refreshToken = async () => {
     if (auth.currentUser) {
       const token = await getIdToken(auth.currentUser, true);
-      localStorage.setItem('accessToken', token);
+      localStorage.setItem("accessToken", token);
     }
   };
 
-
   return (
     <AuthContext.Provider value={{ user, login, logout, refreshToken }}>
-      <Loader isLoading={isLoading}>
-        {children}
-      </Loader>
+      <Loader isLoading={isLoading}>{children}</Loader>
     </AuthContext.Provider>
   );
 };
@@ -83,7 +86,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 export const useAuth = (): AuthContextType => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

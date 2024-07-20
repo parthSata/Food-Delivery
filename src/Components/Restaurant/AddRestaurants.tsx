@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { db } from '../../Firebase/firebase';
-import { set, ref, onValue, update } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { set, ref, onValue, update } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
@@ -44,11 +44,12 @@ function AddRestaurants() {
     latitude: "",
     longitude: "",
   });
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
-
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
-    setisLoading(true)
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<string | null> => {
+    setisLoading(true);
     try {
       const data = new FormData();
       data.append("file", file);
@@ -70,12 +71,15 @@ function AddRestaurants() {
       console.error("Error uploading image:", error);
       return null;
     } finally {
-      setisLoading(false)
+      setisLoading(false);
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    setisLoading(true)
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setisLoading(true);
 
     if (!e.target.files) return;
     const file = e.target.files[0];
@@ -94,11 +98,12 @@ function AddRestaurants() {
         e.target.disabled = true;
       }
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setRestaurant((prevState) => ({
       ...prevState,
@@ -132,7 +137,7 @@ function AddRestaurants() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
     e.preventDefault();
 
     const newErrors = validateFields();
@@ -168,12 +173,11 @@ function AddRestaurants() {
       console.error("Error adding restaurant:", error);
       toast.error("Error adding restaurant");
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
     e.preventDefault();
 
     const newErrors = validateFields();
@@ -195,8 +199,7 @@ function AddRestaurants() {
       console.error("Error updating restaurant:", error);
       toast.error("Error updating restaurant");
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   useEffect(() => {
@@ -206,7 +209,7 @@ function AddRestaurants() {
   }, [updateId]);
 
   const fetchRestaurantData = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
 
     const restaurantRef = ref(db, `restaurants/${id}`);
     onValue(restaurantRef, (snapshot) => {
@@ -219,8 +222,7 @@ function AddRestaurants() {
         }
       }
     });
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   return (
@@ -237,10 +239,11 @@ function AddRestaurants() {
                 {[0].map((index) => (
                   <div
                     key={index}
-                    className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${restaurantImages[index]
-                      ? "border-[#DF201F]"
-                      : "border-[#161A1D]"
-                      }`}
+                    className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${
+                      restaurantImages[index]
+                        ? "border-[#DF201F]"
+                        : "border-[#161A1D]"
+                    }`}
                   >
                     {restaurantImages[index] ? (
                       <div
@@ -283,9 +286,7 @@ function AddRestaurants() {
                         <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
                           <label className="flex">
                             <span className="flex self-center cursor-pointer">
-                              <i
-                                className="fa-solid fa-plus fa-2xl text-addNew"
-                              ></i>
+                              <i className="fa-solid fa-plus fa-2xl text-addNew"></i>
                             </span>
                             <Input
                               type="file"
@@ -307,9 +308,7 @@ function AddRestaurants() {
               className="flex items-center w-full order-1"
               style={{ fontFamily: "Bai Jamjuree" }}
             >
-              <div
-                className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew"
-              >
+              <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew">
                 <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                   {previewImage ? (
                     <img
@@ -350,8 +349,9 @@ function AddRestaurants() {
                     />
                     {errors.restaurantName && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.restaurantName ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.restaurantName ? "" : "hidden"
+                        }}`}
                       >
                         {errors.restaurantName}
                       </span>
@@ -371,8 +371,9 @@ function AddRestaurants() {
                     />
                     {errors.address && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.address ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.address ? "" : "hidden"
+                        }}`}
                       >
                         {errors.address}
                       </span>
@@ -392,8 +393,9 @@ function AddRestaurants() {
                     />
                     {errors.latitude && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.latitude ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.latitude ? "" : "hidden"
+                        }}`}
                       >
                         {errors.latitude}
                       </span>
@@ -413,8 +415,9 @@ function AddRestaurants() {
                     />
                     {errors.longitude && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.longitude ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.longitude ? "" : "hidden"
+                        }}`}
                       >
                         {errors.longitude}
                       </span>
@@ -434,8 +437,9 @@ function AddRestaurants() {
                     />
                     {errors.mobilenumber && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.mobilenumber ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.mobilenumber ? "" : "hidden"
+                        }}`}
                       >
                         {errors.mobilenumber}
                       </span>
@@ -459,10 +463,11 @@ function AddRestaurants() {
                           />
                           <label htmlFor={`star${rating}`}>
                             <svg
-                              className={`h-8 w-8 cursor-pointer ${Number(restaurant?.ratings) >= rating
-                                ? "text-yellow-400"
-                                : "text-gray-400"
-                                }`}
+                              className={`h-8 w-8 cursor-pointer ${
+                                Number(restaurant?.ratings) >= rating
+                                  ? "text-yellow-400"
+                                  : "text-gray-400"
+                              }`}
                               fill="currentColor"
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
@@ -475,8 +480,9 @@ function AddRestaurants() {
                     </div>
                     {errors.ratings && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.ratings ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.ratings ? "" : "hidden"
+                        }}`}
                       >
                         {errors.ratings}
                       </span>
@@ -497,8 +503,9 @@ function AddRestaurants() {
                     />
                     {errors.description && (
                       <span
-                        className={`text-red-600 text-sm ${restaurant?.description ? "" : "hidden"
-                          }}`}
+                        className={`text-red-600 text-sm ${
+                          restaurant?.description ? "" : "hidden"
+                        }}`}
                       >
                         {errors.description}
                       </span>

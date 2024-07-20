@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { db } from '../../Firebase/firebase';
-import { set, ref, onValue, update } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { set, ref, onValue, update } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
@@ -42,7 +42,7 @@ const ProductAdd: React.FC = () => {
     images: [],
     categoryId: "",
   });
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState<File | null>(null);
@@ -50,16 +50,19 @@ const ProductAdd: React.FC = () => {
   const [productImages, setProductImages] = useState<string[]>([]);
 
   const handleUpdate = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
     e.preventDefault();
     const newErrors: Partial<Product> = {};
     if (isFieldEmpty(product.name)) newErrors.name = "Product Name is required";
     if (isFieldEmpty(product.price)) newErrors.price = "Price is required";
-    if (isFieldEmpty(product.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+    if (isFieldEmpty(product.discountPrice))
+      newErrors.discountPrice = "Discount Price is required";
     if (isFieldEmpty(product.weight)) newErrors.weight = "Weight is required";
     if (isFieldEmpty(product.unit)) newErrors.unit = "Unit is required";
-    if (isFieldEmpty(product.packagingCharges)) newErrors.packagingCharges = "Packaging Charges is required";
-    if (isFieldEmpty(product.description)) newErrors.description = "Description is required";
+    if (isFieldEmpty(product.packagingCharges))
+      newErrors.packagingCharges = "Packaging Charges is required";
+    if (isFieldEmpty(product.description))
+      newErrors.description = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -81,8 +84,7 @@ const ProductAdd: React.FC = () => {
     } catch (error) {
       toast.error("Error updating product.");
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   useEffect(() => {
@@ -92,25 +94,29 @@ const ProductAdd: React.FC = () => {
   }, [updateId]);
 
   const fetchProductData = () => {
-    setisLoading(true)
+    setisLoading(true);
     const productRef = ref(db, `products/${updateId}`);
-    onValue(productRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setProductImages(data.images || []);
-        if (data.images && data.images.length > 0) {
-          setPreviewImage(data.images[0]);
+    onValue(
+      productRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setProductImages(data.images || []);
+          if (data.images && data.images.length > 0) {
+            setPreviewImage(data.images[0]);
+          }
+          setProduct(data);
         }
-        setProduct(data);
+      },
+      {
+        onlyOnce: true,
       }
-    }, {
-      onlyOnce: true
-    });
-    setisLoading(false)
+    );
+    setisLoading(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
 
@@ -118,11 +124,14 @@ const ProductAdd: React.FC = () => {
 
     if (isFieldEmpty(product.name)) newErrors.name = "Product Name is required";
     if (isFieldEmpty(product.price)) newErrors.price = "Price is required";
-    if (isFieldEmpty(product.discountPrice)) newErrors.discountPrice = "Discount Price is required";
+    if (isFieldEmpty(product.discountPrice))
+      newErrors.discountPrice = "Discount Price is required";
     if (isFieldEmpty(product.weight)) newErrors.weight = "Weight is required";
     if (isFieldEmpty(product.unit)) newErrors.unit = "Unit is required";
-    if (isFieldEmpty(product.packagingCharges)) newErrors.packagingCharges = "Packaging Charges is required";
-    if (isFieldEmpty(product.description)) newErrors.description = "Description is required";
+    if (isFieldEmpty(product.packagingCharges))
+      newErrors.packagingCharges = "Packaging Charges is required";
+    if (isFieldEmpty(product.description))
+      newErrors.description = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -139,11 +148,13 @@ const ProductAdd: React.FC = () => {
     try {
       await set(ref(db, `products/${newProduct.id}`), newProduct);
       toast.success("Product Added");
-      CategoryId ? navigate(`/seller/category/${CategoryId}`) : navigate('/products');
+      CategoryId
+        ? navigate(`/seller/category/${CategoryId}`)
+        : navigate("/products");
     } catch (error) {
       toast.error("Error adding product.");
     }
-    setisLoading(false)
+    setisLoading(false);
     resetform();
   };
 
@@ -162,8 +173,10 @@ const ProductAdd: React.FC = () => {
     });
   };
 
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
-    setisLoading(true)
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<string | null> => {
+    setisLoading(true);
     try {
       const data = new FormData();
       data.append("file", file);
@@ -171,23 +184,28 @@ const ProductAdd: React.FC = () => {
       data.append("cloud_name", cloudName);
       data.append("folder", "Products");
 
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: "POST",
-        body: data,
-      });
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
 
       const imgData = await response.json();
       return imgData.url;
     } catch (error) {
       return null;
     } finally {
-      setisLoading(false)
+      setisLoading(false);
     }
-
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    setisLoading(true)
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setisLoading(true);
 
     if (!e.target.files) return;
     const file = e.target.files[0];
@@ -210,11 +228,12 @@ const ProductAdd: React.FC = () => {
         e.target.disabled = true;
       }
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     const updatedProducts: any = { ...product };
     updatedProducts[name] = value;
@@ -229,13 +248,16 @@ const ProductAdd: React.FC = () => {
   const deleteImageFromCloudinary = async (imageUrl: string) => {
     try {
       const publicId = extractPublicIdFromUrl(imageUrl);
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ public_id: publicId }),
-      });
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ public_id: publicId }),
+        }
+      );
 
       const data = await response.json();
       if (data.result === "ok") {
@@ -255,7 +277,6 @@ const ProductAdd: React.FC = () => {
     return publicId;
   };
 
-
   return (
     <>
       <div className="">
@@ -271,10 +292,11 @@ const ProductAdd: React.FC = () => {
                   {[0, 1, 2, 3].map((index) => (
                     <div
                       key={index}
-                      className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
-                        ? "border-[#DF201F]"
-                        : "border-[#161A1D]"
-                        }`}
+                      className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${
+                        productImages[index]
+                          ? "border-[#DF201F]"
+                          : "border-[#161A1D]"
+                      }`}
                     >
                       {productImages[index] ? (
                         <div
@@ -317,13 +339,13 @@ const ProductAdd: React.FC = () => {
                           <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
                             <label className="flex">
                               <span className="flex self-center cursor-pointer">
-                                <i
-                                  className="fa-solid fa-plus fa-2xl text-addNew"
-                                ></i>
+                                <i className="fa-solid fa-plus fa-2xl text-addNew"></i>
                               </span>
                               <Input
                                 type="file"
-                                onChange={(e: any) => handleImageUpload(e, index)}
+                                onChange={(e: any) =>
+                                  handleImageUpload(e, index)
+                                }
                                 style={{ display: "none" }}
                               />
                             </label>
@@ -340,9 +362,7 @@ const ProductAdd: React.FC = () => {
                 className="flex items-center w-full order-1"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                <div
-                  className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew"
-                >
+                <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew">
                   <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                     {previewImage ? (
                       <img
@@ -383,8 +403,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.name && (
                         <span
-                          className={`text-red-600 text-sm ${product.name ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.name ? "" : "hidden"
+                          }`}
                         >
                           {errors.name}
                         </span>
@@ -404,8 +425,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.price && (
                         <span
-                          className={`text-red-600 text-sm ${product.price ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.price ? "" : "hidden"
+                          }`}
                         >
                           {errors.price}
                         </span>
@@ -425,8 +447,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.discountPrice && (
                         <span
-                          className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.discountPrice ? "" : "hidden"
+                          }`}
                         >
                           {errors.discountPrice}
                         </span>
@@ -446,8 +469,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.weight && (
                         <span
-                          className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.weight ? "" : "hidden"
+                          }`}
                         >
                           {errors.weight}
                         </span>
@@ -467,8 +491,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.unit && (
                         <span
-                          className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.unit ? "" : "hidden"
+                          }`}
                         >
                           {errors.unit}
                         </span>
@@ -488,8 +513,9 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.packagingCharges && (
                         <span
-                          className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.packagingCharges ? "" : "hidden"
+                          }`}
                         >
                           {errors.packagingCharges}
                         </span>
@@ -508,8 +534,9 @@ const ProductAdd: React.FC = () => {
                       ></textarea>
                       {errors.description && (
                         <span
-                          className={`text-red-600 text-sm ${product.description ? "" : "hidden"
-                            }`}
+                          className={`text-red-600 text-sm ${
+                            product.description ? "" : "hidden"
+                          }`}
                         >
                           {errors.description}
                         </span>

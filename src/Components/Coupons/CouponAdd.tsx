@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { db } from '../../Firebase/firebase'; // Ensure this points to your Firebase initialization
-import { ref, set, onValue } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { ref, set, onValue } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
@@ -37,7 +37,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     expiryDate: "",
     discription: "",
   });
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   if (!isOpen) return null;
 
@@ -45,9 +45,11 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     return value === "" || value === null || value === undefined;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setCoupon(prevCoupon => ({
+    setCoupon((prevCoupon) => ({
       ...prevCoupon,
       [name]: value,
     }));
@@ -60,32 +62,41 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   }, [updateId]);
 
   const fetchCouponData = () => {
-    setisLoading(true)
+    setisLoading(true);
     const couponRef = ref(db, `coupons/${updateId}`);
-    onValue(couponRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setCoupon(data);
-      } else {
-        console.error("No data available");
+    onValue(
+      couponRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCoupon(data);
+        } else {
+          console.error("No data available");
+        }
+      },
+      (error) => {
+        console.error("Error fetching coupon data:", error);
       }
-    }, (error) => {
-      console.error("Error fetching coupon data:", error);
-    });
-    setisLoading(false)
+    );
+    setisLoading(false);
   };
 
   const handleUpdateCoupon = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
-    if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
-    if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount is required";
-    if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
-    if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
-    if (isFieldEmpty(coupon.discription)) newErrors.discription = "Description is required";
+    if (isFieldEmpty(coupon.offerCode))
+      newErrors.offerCode = "Offer Code is required";
+    if (isFieldEmpty(coupon.discount))
+      newErrors.discount = "Discount is required";
+    if (isFieldEmpty(coupon.offerPrice))
+      newErrors.offerPrice = "Offer Price is required";
+    if (isFieldEmpty(coupon.expiryDate))
+      newErrors.expiryDate = "Expiry Date is required";
+    if (isFieldEmpty(coupon.discription))
+      newErrors.discription = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -103,20 +114,25 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     } catch (error) {
       toast.error("Error updating Coupon.");
     }
-    setisLoading(false)
+    setisLoading(false);
   };
 
   const handleAddCoupon = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
 
     const newErrors: Partial<Coupon> = {};
-    if (isFieldEmpty(coupon.offerCode)) newErrors.offerCode = "Offer Code is required";
-    if (isFieldEmpty(coupon.discount)) newErrors.discount = "Discount is required";
-    if (isFieldEmpty(coupon.offerPrice)) newErrors.offerPrice = "Offer Price is required";
-    if (isFieldEmpty(coupon.expiryDate)) newErrors.expiryDate = "Expiry Date is required";
-    if (isFieldEmpty(coupon.discription)) newErrors.discription = "Description is required";
+    if (isFieldEmpty(coupon.offerCode))
+      newErrors.offerCode = "Offer Code is required";
+    if (isFieldEmpty(coupon.discount))
+      newErrors.discount = "Discount is required";
+    if (isFieldEmpty(coupon.offerPrice))
+      newErrors.offerPrice = "Offer Price is required";
+    if (isFieldEmpty(coupon.expiryDate))
+      newErrors.expiryDate = "Expiry Date is required";
+    if (isFieldEmpty(coupon.discription))
+      newErrors.discription = "Description is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -146,9 +162,8 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
       discription: "",
     });
     onClose();
-    setisLoading(false)
+    setisLoading(false);
   };
-
 
   return (
     <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
@@ -176,7 +191,9 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
           </button>
           <form className="space-y-4 ">
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{t(Strings.couponAdd.offerCode)}</label>
+              <label className="self-start">
+                {t(Strings.couponAdd.offerCode)}
+              </label>
               <Input
                 type="text"
                 placeholder="Offer Code Here.."
@@ -187,15 +204,18 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               />
               {errors.offerCode && (
                 <span
-                  className={`text-red-600 text-sm ${coupon?.offerCode ? "" : "hidden"
-                    }}`}
+                  className={`text-red-600 text-sm ${
+                    coupon?.offerCode ? "" : "hidden"
+                  }}`}
                 >
                   {errors.offerCode}
                 </span>
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{t(Strings.couponAdd.discount)}</label>
+              <label className="self-start">
+                {t(Strings.couponAdd.discount)}
+              </label>
               <Input
                 type="number"
                 placeholder="Discount Here.."
@@ -206,15 +226,18 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               />
               {errors.discount && (
                 <span
-                  className={`text-red-600 text-sm ${coupon?.discount ? "" : "hidden"
-                    }}`}
+                  className={`text-red-600 text-sm ${
+                    coupon?.discount ? "" : "hidden"
+                  }}`}
                 >
                   {errors.discount}
                 </span>
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{t(Strings.couponAdd.offerPrice)}</label>
+              <label className="self-start">
+                {t(Strings.couponAdd.offerPrice)}
+              </label>
               <Input
                 type="number"
                 placeholder="Offer Price Here.."
@@ -225,15 +248,18 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               />
               {errors.offerPrice && (
                 <span
-                  className={`text-red-600 text-sm ${coupon?.offerPrice ? "" : "hidden"
-                    }}`}
+                  className={`text-red-600 text-sm ${
+                    coupon?.offerPrice ? "" : "hidden"
+                  }}`}
                 >
                   {errors.offerPrice}
                 </span>
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{t(Strings.couponAdd.expiryDate)}</label>
+              <label className="self-start">
+                {t(Strings.couponAdd.expiryDate)}
+              </label>
               <Input
                 type="date"
                 placeholder="Date Here.."
@@ -244,15 +270,18 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               />
               {errors.expiryDate && (
                 <span
-                  className={`text-red-600 text-sm ${coupon?.expiryDate ? "" : "hidden"
-                    }}`}
+                  className={`text-red-600 text-sm ${
+                    coupon?.expiryDate ? "" : "hidden"
+                  }}`}
                 >
                   {errors.expiryDate}
                 </span>
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">{t(Strings.couponAdd.description)}</label>
+              <label className="self-start">
+                {t(Strings.couponAdd.description)}
+              </label>
               <textarea
                 placeholder="Type Here.."
                 name="discription"
@@ -263,8 +292,9 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               />
               {errors.discription && (
                 <span
-                  className={`text-red-600 text-sm ${coupon?.discription ? "" : "hidden"
-                    }}`}
+                  className={`text-red-600 text-sm ${
+                    coupon?.discription ? "" : "hidden"
+                  }}`}
                 >
                   {errors.discription}
                 </span>
@@ -286,7 +316,6 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               >
                 {t(Strings.couponAdd.saveButton)}
               </button>
-
             )}
             <ToastContainer
               position="top-right"
