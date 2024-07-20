@@ -10,10 +10,11 @@ import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 const Gallary: React.FC<GallaryInterface> = () => {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
   const [isLoading, setisLoading] = useState(false)

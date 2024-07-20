@@ -7,12 +7,13 @@ import { ref, onValue, remove } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 
 
 function Category() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
 
   const { CategoryId } = useParams<{ CategoryId?: any }>();
   const navigate = useNavigate();

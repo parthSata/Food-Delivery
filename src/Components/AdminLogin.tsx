@@ -12,14 +12,15 @@ import { useAuth } from "./AuthContext";
 import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
 import Button from "./ReusableComponent/Button";
-import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import config from "../Config";
 import Loader from "./ReusableComponent/Loader";
+import { useLanguageContext } from "./LanguageContext";
 
 
 function AdminLogin() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
     const navigate = useNavigate();
     const { login } = useAuth();
     const [mobileNumber, setMobileNumber] = useState<string>("");

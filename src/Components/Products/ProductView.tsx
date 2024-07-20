@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
-import firebaseDatabaseURL from "../Config/apiUrl";
 import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
+import config from "../../Config";
 
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [productImages, setProductImages] = useState<string[]>([]);
   const { productId } = useParams<{ productId?: string }>();
@@ -40,7 +41,7 @@ const ProductView: React.FC = () => {
   const fetchProductData = async (id: string) => {
     setisLoading(true)
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/products/${id}.json`);
+      const response = await fetch(`${config.firebaseDatabaseUrl}/products/${id}.json`);
       if (response.ok) {
         const data = await response.json();
         if (data) {

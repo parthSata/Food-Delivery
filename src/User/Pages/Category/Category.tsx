@@ -5,7 +5,8 @@ import Button from "../../../Components/ReusableComponent/Button";
 import { useTranslation } from 'react-i18next';
 
 function Category() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
     const navigate = useNavigate();
 
     const handleAddProduct = () => {

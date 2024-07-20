@@ -7,7 +7,7 @@ import { db } from "../../Firebase/firebase"; // Adjust the import based on your
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 export interface CategoriesData {
   id: string;
@@ -19,7 +19,7 @@ export interface CategoriesData {
 }
 
 function Home(): JSX.Element {
-  const { t } = useTranslation();
+  const { t } = useLanguageContext();
 
   const [showAddCategoryDialog, setShowAddCategoryDialog] =
     useState<boolean>(false);

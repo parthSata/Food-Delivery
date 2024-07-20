@@ -4,14 +4,15 @@ import { Delete, Edit, RightArrow } from "./images";
 import Strings from "../Components/Config/Strings";
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 
 
 
 
 function CheckoutPage() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
 
     const [quantity, setQuantity] = useState(0)
     const incrementQuantity = () => {

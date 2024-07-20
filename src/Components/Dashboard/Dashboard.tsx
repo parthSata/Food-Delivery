@@ -2,10 +2,11 @@ import { Cart, Revenue, Customer, TotalShops, Pizza } from "../Config/images";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
 import Strings from "../Config/Strings";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 function Dashboard() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   // @ts-ignore
   const [dashboardData, setDashboardData] = useState(null);
 

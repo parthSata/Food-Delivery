@@ -3,7 +3,8 @@ import UserGallaryHeader from './UserGallaryHeader';
 import { useTranslation } from 'react-i18next';
 
 function ProductGallary() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
 
     return (
         <div>

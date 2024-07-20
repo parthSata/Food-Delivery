@@ -8,7 +8,7 @@ import { set, ref, onValue, update } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 export interface Restaurant {
   id: string;
@@ -23,7 +23,8 @@ export interface Restaurant {
 }
 
 function AddRestaurants() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   // @ts-ignore
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);

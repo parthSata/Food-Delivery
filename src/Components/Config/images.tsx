@@ -41,9 +41,12 @@ import UPI from '../../assets/Payment/UPI.png'
 import SBILogo from '../../assets/Payment/sbi-logo-744E8B0C10-seeklogo 1.png'
 
 
-
+import Resend from "../assets/Login/Resend.png";
+import image from "../assets/Login/img.png";
 
 
 export {
+    Resend,
+    image,
     Logo, Shop, BankAccount, PaymentImage, UPI, SBILogo, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
 }

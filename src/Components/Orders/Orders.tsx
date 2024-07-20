@@ -4,11 +4,12 @@ import Accepted from '../../assets/Orders/OrderAccepted.png'
 import Cancel from '../../assets/Orders/OrderCancel.png'
 import Strings from '../Config/Strings'
 import Input from '../ReusableComponent/Input'
-import { useTranslation } from 'react-i18next'
+import { useLanguageContext } from '../LanguageContext'
 // import { useState } from 'react'
 
 function Orders() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
     // const [currentPage, setCurrentPage] = useState<number>(1);
     // const itemsPerPage = 5;
     // const [searchInput, setSearchInput] = useState("");

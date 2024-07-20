@@ -10,10 +10,11 @@ import { db } from '../Firebase/firebase';
 import { ref, set } from 'firebase/database';
 import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "./LanguageContext";
 
 function Register() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [callingCode, setCallingCode] = useState<string>("+91");

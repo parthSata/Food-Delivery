@@ -10,10 +10,11 @@ import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 function Restaurant() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const navigate = useNavigate();
   const [restarants, setRestarants] = useState<RestaurantInterface[]>([]);
   const [restarantList, setRestarantList] = useState<RestaurantInterface>({

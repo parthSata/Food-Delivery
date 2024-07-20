@@ -4,7 +4,8 @@ import { Manchurian } from "../../Config/images";
 import { useTranslation } from 'react-i18next';
 
 function TodaySpecial() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
 
     return (
         <div className="h-full w-full">

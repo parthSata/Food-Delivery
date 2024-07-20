@@ -6,10 +6,11 @@ import { db } from '../../Firebase/firebase';
 import { ref, remove, get } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 function AllProducts() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const navigate = useNavigate();
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");

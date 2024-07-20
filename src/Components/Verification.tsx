@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
-import Logo from "../assets/Login/Logo1.png";
-import Resend from "../assets/Login/Resend.png";
-import image from "../assets/Login/img.png";
+import { Logo, Resend, image } from "./Config/images";
 import { toast } from "react-toastify";
 import Loader from "./ReusableComponent/Loader";
 import { useAuth } from "./AuthContext";

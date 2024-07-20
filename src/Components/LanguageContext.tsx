@@ -1,6 +1,6 @@
 import { createContext, useContext, ReactNode } from "react";
-import { useTranslation } from "react-i18next";
 import { TFunction } from "i18next";
+import { useTranslation } from "react-i18next";
 
 // Define the type for the context value
 interface LanguageContextType {
@@ -34,4 +34,10 @@ export const LanguageContextProvider = ({ children }: LanguageContextProviderPro
     );
 };
 
-export const useLanguageContext = () => useContext(LanguageContext);
+export const useLanguageContext = (): LanguageContextType => {
+    const context = useContext(LanguageContext);
+    if (!context) {
+        throw new Error("useLanguageContext must be used within a LanguageContextProvider");
+    }
+    return context;
+};

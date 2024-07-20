@@ -10,7 +10,8 @@ interface AddProps {
 
 const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
     if (!isOpen) return null;
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
 
 
 

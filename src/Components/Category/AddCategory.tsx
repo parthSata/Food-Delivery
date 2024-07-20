@@ -8,7 +8,7 @@ import { set, ref, onValue, update } from 'firebase/database';
 import { Loaders } from "../Config/images";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
-  const { t } = useTranslation();
+  const { t } = useLanguageContext();
 
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";

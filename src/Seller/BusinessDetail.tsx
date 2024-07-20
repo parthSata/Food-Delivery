@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Strings from "../Components/Config/Strings";
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 // import stripeKey from '../Config'
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';

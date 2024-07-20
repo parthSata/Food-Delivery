@@ -4,7 +4,8 @@ import { Burgger } from "../../Config/images";
 import { useTranslation } from 'react-i18next';
 
 function BestSeller() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
 
     return (
         <div>

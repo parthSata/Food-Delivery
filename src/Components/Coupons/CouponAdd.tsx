@@ -8,7 +8,7 @@ import { ref, set, onValue } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 export interface Coupon {
   id: string;
@@ -25,7 +25,8 @@ interface AddProps {
 }
 
 const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});

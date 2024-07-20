@@ -13,7 +13,8 @@ import { useTranslation } from 'react-i18next';
 
 
 function HomePage() {
-    const { t } = useTranslation();
+      const { t } = useLanguageContext();
+
     const navigate = useNavigate()
 
     const handleSubmit = () => {

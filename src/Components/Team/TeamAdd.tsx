@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import firebaseDatabaseURL from "../Config/apiUrl";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
+import config from "../../Config";
 
 export interface Team {
   id: string;
@@ -21,7 +21,8 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
-  const { t } = useTranslation();
+  const { t } = useLanguageContext();
+
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
   const fetchMemberData = async () => {
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/team/${updateId}.json`);
+      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${updateId}.json`);
       if (response.ok) {
         const data = await response.json();
         setMembers(data);
@@ -99,7 +100,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/team/${updateId}.json`, {
+      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${updateId}.json`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -145,7 +146,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/team.json`, {
+      const response = await fetch(`${config.firebaseDatabaseUrl}/team.json`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

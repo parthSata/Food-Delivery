@@ -8,7 +8,7 @@ import { set, ref, onValue, update } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
 
 export interface Product {
   id: string;
@@ -24,7 +24,8 @@ export interface Product {
 }
 
 const ProductAdd: React.FC = () => {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const location = useLocation();
   const { CategoryId, updateId } = location.state || [];
   const presetKey = "ml_default";

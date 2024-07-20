@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
 import Container from "../ReusableComponent/Container";
-import firebaseDatabaseURL from "../Config/apiUrl";
 import { toast } from "react-toastify";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
-import { useTranslation } from "react-i18next";
+import { useLanguageContext } from "../LanguageContext";
+import config from "../../Config";
 
 function OurTeam() {
-  const { t } = useTranslation();
+    const { t } = useLanguageContext();
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore
@@ -23,7 +24,7 @@ function OurTeam() {
 
   const handleDeleteMember = async (id: string) => {
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/team/${id}.json`, {
+      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${id}.json`, {
         method: 'DELETE',
       });
       if (response.ok) {
@@ -44,7 +45,7 @@ function OurTeam() {
 
   const fetchMembers = async () => {
     try {
-      const response = await fetch(`${firebaseDatabaseURL}/team.json`);
+      const response = await fetch(`${config.firebaseDatabaseUrl}/team.json`);
       if (response.ok) {
         const data = await response.json();
         if (data) {
