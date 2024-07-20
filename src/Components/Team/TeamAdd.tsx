@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import Strings from "../Config/Strings";
+
 import Input from "../ReusableComponent/Input";
 import { useLanguageContext } from "../LanguageContext";
-import config from "../../Config";
+import config from "../../config/Config";
 
 export interface Team {
   id: string;
@@ -60,7 +60,9 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
 
   const fetchMemberData = async () => {
     try {
-      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${updateId}.json`);
+      const response = await fetch(
+        `${config.firebaseDatabaseUrl}/team/${updateId}.json`
+      );
       if (response.ok) {
         const data = await response.json();
         setMembers(data);
@@ -87,7 +89,8 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     }
     setErrors({});
 
-    let imageUrl = members.images && members.images.length > 0 ? members.images[0] : "";
+    let imageUrl =
+      members.images && members.images.length > 0 ? members.images[0] : "";
 
     if (imageFile) {
       imageUrl = await uploadImageToCloudinary(imageFile);
@@ -99,13 +102,16 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
     };
 
     try {
-      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${updateId}.json`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedMember),
-      });
+      const response = await fetch(
+        `${config.firebaseDatabaseUrl}/team/${updateId}.json`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedMember),
+        }
+      );
 
       if (response.ok) {
         toast.success("Member successfully updated");
@@ -253,15 +259,16 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             )}
             {errors.images && (
               <span
-                className={`text-red-600 text-sm ${members.images ? "" : "hidden"
-                  }}`}
+                className={`text-red-600 text-sm ${
+                  members.images ? "" : "hidden"
+                }}`}
               >
                 {errors.images}
               </span>
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">{t(Strings.productAdd.nameLabel)}</label>
+            <label className="self-start">{t("productAdd.nameLabel")}</label>
             <Input
               type="text"
               placeholder="Name"
@@ -272,15 +279,16 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.name && (
               <span
-                className={`text-red-600 text-sm ${members.name ? "" : "hidden"
-                  }}`}
+                className={`text-red-600 text-sm ${
+                  members.name ? "" : "hidden"
+                }}`}
               >
                 {errors.name}
               </span>
             )}
           </div>
           <div className="flex flex-col  font-semibold gap-1">
-            <label className="self-start">{t(Strings.ourTeam.positionLabel)}</label>
+            <label className="self-start">{t("ourTeam.positionLabel")}</label>
             <Input
               type="text"
               placeholder="Position"
@@ -291,8 +299,9 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
             />
             {errors.position && (
               <span
-                className={`text-red-600 text-sm ${members.position ? "" : "hidden"
-                  }}`}
+                className={`text-red-600 text-sm ${
+                  members.position ? "" : "hidden"
+                }}`}
               >
                 {errors.position}
               </span>
@@ -304,7 +313,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleUpdateMember}
             >
-              {t(Strings.ourTeam.updateButton)}
+              {t("ourTeam.updateButton")}
             </button>
           ) : (
             <button
@@ -312,7 +321,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
               className="w-full text-xl bg-[#DF201F] h-full text-white py-2 rounded-[60px] shadow-couponAdd"
               onClick={handleAddMember}
             >
-              {t(Strings.couponAdd.saveButton)}
+              {t("couponAdd.saveButton")}
             </button>
           )}
           <ToastContainer

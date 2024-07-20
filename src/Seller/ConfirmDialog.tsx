@@ -1,6 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { Conformation } from "@/assets";
-import Strings from "../Components/Config/Strings";
+
 import { useLanguageContext } from "../Components/LanguageContext";
 
 interface AddProps {
@@ -37,7 +37,7 @@ const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
             className={`bg-[#94CD00] uppercase shadow-registerBtn h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5s`}
             onClick={onClose}
           >
-            {t(Strings.checkOut.continueButton)}
+            {t("checkOut.continueButton")}
           </button>
           <ToastContainer
             position="top-right"

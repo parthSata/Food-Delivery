@@ -4,7 +4,6 @@ import { Coupon } from "./CouponAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -73,19 +72,19 @@ function CouponView() {
           <Loader isLoading={isLoading}>
             <div className="flex flex-row  pl-4 gap-8 text-lg">
               <span className="font-bold text-[#A2A3A5]">
-                {t(Strings.couponAdd.offerCode)}{" "}
+                {t("couponAdd.offerCode")}{" "}
               </span>
               <span className="text-[#161A1D] ">{couponDetail.offerCode}</span>
             </div>
             <div className="flex flex-row  pl-4 gap-[85px] text-lg">
               <span className="font-bold text-[hsl(220,2%,64%)]">
-                {t(Strings.couponAdd.OfferLable)}
+                {t("couponAdd.OfferLable")}
               </span>
               <span className="text-[#DF201F]">{couponDetail.discount}%</span>
             </div>
             <div className="flex flex-row  pl-4 gap-8 text-lg">
               <span className="font-bold text-[#A2A3A5]">
-                {t(Strings.couponAdd.description)}{" "}
+                {t("couponAdd.description")}{" "}
               </span>
               <span className="text-[#938D8E] text-justify">
                 {couponDetail.discription}

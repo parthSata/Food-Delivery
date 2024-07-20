@@ -1,4 +1,3 @@
-import Strings from "../../../Components/Config/Strings";
 import Button from "../../../Components/ReusableComponent/Button";
 import { Burgger } from "@/assets";
 import { useLanguageContext } from "../../../Components/LanguageContext";
@@ -23,7 +22,7 @@ function BestSeller() {
               boxShadow: "2px 2px 25px 2px #94CD0099",
             }}
           >
-            {t(Strings.bestSeller.viewAll)}
+            {t("bestSeller.viewAll")}
           </Button>
         </div>
         <div className="mt-6 w-full flex gap-4 flex-wrap">
@@ -32,15 +31,15 @@ function BestSeller() {
               <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFF3E5] h-[200px] w-full rounded-[20px]">
                 <img src={Burgger} alt="burger" className="h-20" />
                 <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
-                  {t(Strings.bestSeller.name)}
+                  {t("bestSeller.name")}
                 </p>
                 <p
                   className="flex gap-2 items-center text-[#DF201F]"
                   style={{ fontFamily: "Montserrat Alternates" }}
                 >
-                  {t(Strings.bestSeller.price)}
+                  {t("bestSeller.price")}
                   <span className="text-xs line-through">
-                    {t(Strings.bestSeller.originalPrice)}
+                    {t("bestSeller.originalPrice")}
                   </span>
                 </p>
               </div>

@@ -5,7 +5,6 @@ import CouponAdd, { Coupon } from "./CouponAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -81,7 +80,7 @@ function Coupons() {
               fontFamily: "Bai Jamjuree",
             }}
           >
-            {t(Strings.couponAdd.couponTitle)}
+            {t("couponAdd.couponTitle")}
           </span>
         </div>
       </div>
@@ -146,7 +145,7 @@ function Coupons() {
                     ></i>
                   </Button>
                 </div>
-                <p className="">{t(Strings.category.addNewButton)}</p>
+                <p className="">{t("category.addNewButton")}</p>
               </div>
             </div>
           </div>

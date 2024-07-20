@@ -1,6 +1,5 @@
 import { Burger, Accepted, Cancel, Pizza } from "@/assets";
 
-import Strings from "../Config/Strings";
 import { useLanguageContext } from "../LanguageContext";
 import Input from "../ReusableComponent/Input";
 // import { useState } from 'react'
@@ -47,7 +46,7 @@ function Orders() {
                 className="text-[#161A1D] mb-2"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                {t(Strings.orders.today)}
+                {t("orders.today")}
               </span>
               <span className="">
                 {/* Search Input */}
@@ -89,20 +88,20 @@ function Orders() {
                   <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
-                        {t(Strings.orders.orderNumber)}
+                        {t("orders.orderNumber")}
                       </span>
                       <p
                         className="text-[#A2A3A5] text-xs "
                         style={{ fontFamily: "Montserrat Alternates" }}
                       >
-                        {t(Strings.orders.orderTime)}
+                        {t("orders.orderTime")}
                       </p>
                       <span
                         className="flex justify-center items-center text-[#50E06B] gap-2"
                         style={{ fontFamily: "Bai Jamjuree" }}
                       >
                         <img src={Accepted} alt="" className="h-5" />
-                        {t(Strings.orders.acceptedOrder)}
+                        {t("orders.acceptedOrder")}
                       </span>
                     </div>
                   </div>

@@ -3,10 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
 import Container from "../ReusableComponent/Container";
 import { toast } from "react-toastify";
-import Strings from "../Config/Strings";
+
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
-import config from "../../Config";
+import config from "../../config/Config";
 import { EmplyoeImg } from "@/assets";
 
 function OurTeam() {
@@ -127,7 +127,7 @@ function OurTeam() {
                       <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                     </Button>
                   </div>
-                  <p className="">{t(Strings.category.addNewButton)}</p>
+                  <p className="">{t("category.addNewButton")}</p>
                 </div>
               </div>
             </div>

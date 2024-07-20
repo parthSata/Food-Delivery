@@ -1,7 +1,6 @@
 import { Cart, Revenue, Customer, TotalShops, Pizza } from "@/assets";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
-import Strings from "../Config/Strings";
 import { useLanguageContext } from "../LanguageContext";
 
 function Dashboard() {
@@ -34,7 +33,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
             <span className="self-start">{}</span>
-            <span className="">{t(Strings.dashboard.recentOrder)}</span>
+            <span className="">{t("dashboard.recentOrder")}</span>
           </div>
           <span className="">
             <img src={Cart} className="h-[50px] w-[50px] " />
@@ -43,7 +42,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col ">
             <span className="self-start">923</span>
-            <span className="">{t(Strings.dashboard.revenue)}</span>
+            <span className="">{t("dashboard.revenue")}</span>
           </div>
           <span className="">
             <img src={Revenue} className="h-[50px] w-[50px]" />
@@ -52,7 +51,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
             <span className="self-start">923</span>
-            <span className="">{t(Strings.dashboard.newCustomer)}</span>
+            <span className="">{t("dashboard.newCustomer")}</span>
           </div>
           <span className="">
             <img src={Customer} className="h-[50px] w-[50px]" />
@@ -61,7 +60,7 @@ function Dashboard() {
         <div className="h-[90px] sm:w-[280px] mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
             <span className="self-start">923</span>
-            <span className="">{t(Strings.dashboard.totalShops)}</span>
+            <span className="">{t("dashboard.totalShops")}</span>
           </div>
           <span className="">
             <img src={TotalShops} className="h-[50px] w-[50px]" />
@@ -82,13 +81,13 @@ function Dashboard() {
                     <thead className="text-lg font-semibold bg-gray-50 ">
                       <tr className="flex justify-between text-black ">
                         <th scope="col" className="px-6 py-3  cursor-pointer">
-                          {t(Strings.dashboard.recentOrders)}
+                          {t("dashboard.recentOrders")}
                         </th>
                         <th
                           scope="col"
                           className="px-6 py-3  cursor-pointer text-[#DF201F] "
                         >
-                          {t(Strings.dashboard.viewAll)}
+                          {t("dashboard.viewAll")}
                         </th>
                       </tr>
                     </thead>
@@ -99,7 +98,7 @@ function Dashboard() {
                           <span className=" text-[#A2A3A5] ">03:25 PM</span>
                         </td>
                         <td className=" cursor-pointer  text-[#50E06B] ">
-                          {t(Strings.dashboard.acceptedOrder)}
+                          {t("dashboard.acceptedOrder")}
                         </td>
                         <td className="p-6 flex relative mr-10 cursor-pointer">
                           <img
@@ -126,11 +125,9 @@ function Dashboard() {
             </div>
             <div className="flex flex-wrap  mt-8 border-2  rounded-[15px] h-[370px] w-full shadow-dashboard">
               <div className="flex flex-col m-4">
+                <span className="self-start">{t("dashboard.revenue")}</span>
                 <span className="self-start">
-                  {t(Strings.dashboard.revenue)}
-                </span>
-                <span className="self-start">
-                  {t(Strings.dashboard.revenueAmount)}
+                  {t("dashboard.revenueAmount")}
                 </span>
               </div>
               <div className="ml-10 mb-10 " style={{ width: 550 }}>
@@ -141,11 +138,9 @@ function Dashboard() {
           <div className="mt-24 h-full w-full">
             <div className="flex justify-between font-semibold text-xl">
               <span className="text-[#161A1D] ">
-                {t(Strings.dashboard.recentlyPlacedOrders)}
+                {t("dashboard.recentlyPlacedOrders")}
               </span>
-              <span className="text-[#DF201F]">
-                {t(Strings.dashboard.viewAll)}
-              </span>
+              <span className="text-[#DF201F]">{t("dashboard.viewAll")}</span>
             </div>
             <div className="">
               <div
@@ -167,31 +162,31 @@ function Dashboard() {
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          {t(Strings.dashboard.order)}
+                          {t("dashboard.order")}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          {t(Strings.dashboard.customerName)}
+                          {t("dashboard.customerName")}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          {t(Strings.dashboard.status)}
+                          {t("dashboard.status")}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          {t(Strings.dashboard.time)}
+                          {t("dashboard.time")}
                         </th>
                         <th
                           scope="col"
                           className="border-r-1  py-2 px-4  border-r-[#FFFFFF]  h-[60px]  rounded-[8px, 8px, 0px, 0px] opacity-100"
                         >
-                          {t(Strings.dashboard.discountPrice)}
+                          {t("dashboard.discountPrice")}
                         </th>
                       </tr>
                     </thead>
@@ -211,25 +206,23 @@ function Dashboard() {
                             alt=""
                           />
                           {/* {item.ProductName} */}
-                          <span className="mr-10">
-                            {t(Strings.dashboard.pizza)}
-                          </span>
+                          <span className="mr-10">{t("dashboard.pizza")}</span>
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* {item.id} */}
-                          {t(Strings.dashboard.parthSata)}
+                          {t("dashboard.parthSata")}
                         </td>
                         <td className="p-4 border-[2px] text-[#E9CB3F] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* {item.Stock} */}
-                          {t(Strings.dashboard.pending)}
+                          {t("dashboard.pending")}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* {item.Status} */}
-                          {t(Strings.dashboard.orderTime)}
+                          {t("dashboard.orderTime")}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* ₹{item.Price} */}
-                          {t(Strings.dashboard.price)}
+                          {t("dashboard.price")}
                         </td>
                       </tr>
                       {/* ))} */}

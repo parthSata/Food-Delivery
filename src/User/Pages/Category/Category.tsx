@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { BurgerImg, FlashBurger } from "@/assets";
-import Strings from "../../../Components/Config/Strings";
+
 import Button from "../../../Components/ReusableComponent/Button";
 import { useLanguageContext } from "../../../Components/LanguageContext";
 
@@ -25,10 +25,10 @@ function Category() {
       >
         <div className="flex justify-start flex-col pl-16 w-full h-full">
           <span className="absolute bottom-28 text-white text-2xl">
-            {t(Strings.category.getOff)}
+            {t("category.getOff")}
           </span>
           <span className="absolute bottom-20 text-white text-2xl">
-            {t(Strings.category.bestBurger)}
+            {t("category.bestBurger")}
           </span>
         </div>
         <div className="w-full">
@@ -44,15 +44,15 @@ function Category() {
               {/* @ts-ignore */}
               <img src={FlashBurger} alt="" className="h-20" />
               <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
-                {t(Strings.orders.hamburger)}
+                {t("orders.hamburger")}
               </p>
               <p
                 className="flex gap-2 items-center text-[#DF201F]"
                 style={{ fontFamily: "Montserrat Alternates" }}
               >
-                {t(Strings.checkOut.discountPrice)}
+                {t("checkOut.discountPrice")}
                 <span className="text-xs line-through">
-                  {t(Strings.checkOut.price)}
+                  {t("checkOut.price")}
                 </span>
               </p>
             </div>

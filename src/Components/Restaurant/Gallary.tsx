@@ -4,7 +4,7 @@ import { ref, get } from "firebase/database";
 import { db } from "@/config/Firebase/firebase";
 import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
+
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 import { BurgerGallary, Link } from "@/assets";
@@ -83,7 +83,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
                         ></i>
                       </Button>
                     </div>
-                    <p className="">{t(Strings.category.addNewButton)}</p>
+                    <p className="">{t("category.addNewButton")}</p>
                   </div>
                 </div>
               </div>

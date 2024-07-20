@@ -6,7 +6,7 @@ import BestSeller from "./BestSeller";
 import ProductGallary from "./ProductGallary";
 import Team from "./Team";
 import TodaySpecial from "./TodaySpecial";
-import Strings from "../../../Components/Config/Strings";
+
 import Button from "../../../Components/ReusableComponent/Button";
 import { useLanguageContext } from "../../../Components/LanguageContext";
 
@@ -35,22 +35,22 @@ function HomePage() {
                   className="text-[red] text-xl font-normal"
                   style={{ fontFamily: "Fall in love" }}
                 >
-                  {t(Strings.home.welcome)}
+                  {t("home.welcome")}
                 </span>
                 <span className="text-white text-5xl    font-bold">
-                  {t(Strings.home.slogan)}
+                  {t("home.slogan")}
                 </span>
                 <p
                   className="text-[#FFFFFF] text-sm font-semibold"
                   style={{ fontFamily: "Montserrat Alternates" }}
                 >
-                  {t(Strings.home.description)}
+                  {t("home.description")}
                 </p>
                 <Button
                   className="w-[120px] text-white cursor-pointer rounded-full self-center bg-[#94CD00] h-[50px]"
                   onClick={handleSubmit}
                 >
-                  {t(Strings.login.loginButton)}
+                  {t("login.loginButton")}
                 </Button>
               </div>
             </div>
@@ -63,7 +63,7 @@ function HomePage() {
                 <img src={AllFood} alt="" className="h-[240px] w-full " />
                 <div className="flex justify-between items-center text-white text-2xl font-semibold">
                   <img src={Left} className="h-12 w-12 " />
-                  <span className="">{t(Strings.home.bestCategory)}</span>
+                  <span className="">{t("home.bestCategory")}</span>
                   <img src={Right} className="h-12 w-12" />
                 </div>
               </div>
@@ -76,7 +76,7 @@ function HomePage() {
                     alt=""
                     className="self-center h-[100px] w-[100px] "
                   />
-                  <span className="">{t(Strings.dashboard.pizza)}</span>
+                  <span className="">{t("dashboard.pizza")}</span>
                 </div>
                 <div className="flex flex-col justify-center">
                   <img
@@ -84,7 +84,7 @@ function HomePage() {
                     alt=""
                     className="self-center h-[100px] w-[100px] "
                   />
-                  <span className="">{t(Strings.dashboard.pizza)}</span>
+                  <span className="">{t("dashboard.pizza")}</span>
                 </div>
                 <div className="flex flex-col justify-center">
                   <img
@@ -92,7 +92,7 @@ function HomePage() {
                     alt=""
                     className="self-center h-[100px] w-[100px] "
                   />
-                  <span className="">{t(Strings.dashboard.pizza)}</span>
+                  <span className="">{t("dashboard.pizza")}</span>
                 </div>
                 <div className="flex flex-col justify-center">
                   <img
@@ -100,7 +100,7 @@ function HomePage() {
                     alt=""
                     className="self-center h-[100px] w-[100px] "
                   />
-                  <span className="">{t(Strings.dashboard.pizza)}</span>
+                  <span className="">{t("dashboard.pizza")}</span>
                 </div>
                 <div className="flex flex-col justify-center">
                   <img
@@ -108,7 +108,7 @@ function HomePage() {
                     alt=""
                     className="self-center h-[100px] w-[100px] "
                   />
-                  <span className="">{t(Strings.dashboard.pizza)}</span>
+                  <span className="">{t("dashboard.pizza")}</span>
                 </div>
               </div>
             </div>

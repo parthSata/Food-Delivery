@@ -20,7 +20,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
-import config from "../Config";
+import config from "../config/Config";
 // import Loader from "./Loader";
 
 const Login: React.FC = () => {

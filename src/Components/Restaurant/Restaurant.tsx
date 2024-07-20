@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
+
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 import { Noodles, Star, DummyImg } from "@/assets";
@@ -89,7 +89,7 @@ function Restaurant() {
                 className="absolute bottom-20 text-white text-2xl"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                {t(Strings.restaurant.pageTitle)}
+                {t("restaurant.pageTitle")}
               </span>
             </div>
           </div>
@@ -119,14 +119,14 @@ function Restaurant() {
                       </div>
                       <Button className="border border-[#DF201F] rounded-lg text-[#DF201F] p-1.5">
                         <i className="fa-solid fa-location-dot  fa-lg text-direction"></i>{" "}
-                        {t(Strings.restaurant.directionsButton)}
+                        {t("restaurant.directionsButton")}
                       </Button>
                     </span>
                     <span
                       className="text-justify text-[#38393b] "
                       style={{ fontFamily: "Montserrat Alternates" }}
                     >
-                      {t(Strings.restaurant.address)}
+                      {t("restaurant.address")}
                     </span>
                     <span
                       className="text-justify text-[#A2A3A5] "
@@ -167,7 +167,7 @@ function Restaurant() {
                         <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                       </Button>
                     </div>
-                    <p className="">{t(Strings.category.addNewButton)}</p>
+                    <p className="">{t("category.addNewButton")}</p>
                   </div>
                 </div>
               </div>

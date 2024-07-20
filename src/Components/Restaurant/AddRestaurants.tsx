@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
+
 import Input from "../ReusableComponent/Input";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -296,7 +296,7 @@ function AddRestaurants() {
                             />
                           </label>
                         </div>
-                        <p>{t(Strings.addRestaurant.uploadNewImage)}</p>
+                        <p>{t("addRestaurant.uploadNewImage")}</p>
                       </>
                     )}
                   </div>
@@ -317,10 +317,10 @@ function AddRestaurants() {
                       className="h-[250px] w-full object-cover"
                     />
                   ) : (
-                    <p>{t(Strings.addRestaurant.noImageUploaded)}</p>
+                    <p>{t("addRestaurant.noImageUploaded")}</p>
                   )}
                   <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    {t(Strings.addRestaurant.supportedFiles)}
+                    {t("addRestaurant.supportedFiles")}
                   </p>
                 </div>
               </div>
@@ -337,7 +337,7 @@ function AddRestaurants() {
                 <div className="flex flex-wrap  mb-6 w-full">
                   <div className="w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.restaurantNameLabel)}
+                      {t("addRestaurant.restaurantNameLabel")}
                     </label>
                     <Input
                       className="appearance-none w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8]  py-3 px-4 leading-tight hover:outline-none hover:border-[#9ad219] focus:outline-[#99c928] rounded-md bg-white"
@@ -359,7 +359,7 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full  md:w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.addressLabel)}
+                      {t("addRestaurant.addressLabel")}
                     </label>
                     <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white"
@@ -381,7 +381,7 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.latitudeLabel)}
+                      {t("addRestaurant.latitudeLabel")}
                     </label>
                     <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -403,7 +403,7 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-1/2 px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.longitudeLabel)}
+                      {t("addRestaurant.longitudeLabel")}
                     </label>
                     <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -425,7 +425,7 @@ function AddRestaurants() {
                   </div>
                   <div className="w-full md:w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.mobileNumberLabel)}
+                      {t("addRestaurant.mobileNumberLabel")}
                     </label>
                     <Input
                       className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
@@ -447,7 +447,7 @@ function AddRestaurants() {
                   </div>
                   <div className=" w-1/2 sm:w-1/2 md:w-1/2 px-3 mb-6 flex flex-col gap-2">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.ratingsLabel)}
+                      {t("addRestaurant.ratingsLabel")}
                     </label>
                     <div className="flex items-center justify-start">
                       {[1, 2, 3, 4, 5].map((rating) => (
@@ -491,7 +491,7 @@ function AddRestaurants() {
 
                   <div className="w-full px-3 mb-6">
                     <label className="flex justify-self-start uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-                      {t(Strings.addRestaurant.descriptionLabel)}
+                      {t("addRestaurant.descriptionLabel")}
                     </label>
                     <textarea
                       className="appearance-none block w-full text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219] focus:outline-[#99c928] bg-white resize-none"
@@ -520,7 +520,7 @@ function AddRestaurants() {
                     }}
                     onClick={handleSubmit}
                   >
-                    {t(Strings.addRestaurant.addButton)}
+                    {t("addRestaurant.addButton")}
                   </button>
                   <button
                     className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
@@ -529,7 +529,7 @@ function AddRestaurants() {
                     }}
                     onClick={handleUpdate}
                   >
-                    {t(Strings.addRestaurant.updateButton)}
+                    {t("addRestaurant.updateButton")}
                   </button>
                   <ToastContainer
                     position="top-right"

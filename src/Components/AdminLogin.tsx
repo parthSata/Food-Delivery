@@ -9,11 +9,10 @@ import { ref, get, child } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
-import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
 import Button from "./ReusableComponent/Button";
 import ReCAPTCHA from "react-google-recaptcha";
-import config from "../Config";
+import config from "../config/Config";
 import Loader from "@/Components/ReusableComponent/Loader";
 import { useLanguageContext } from "./LanguageContext";
 
@@ -175,13 +174,13 @@ function AdminLogin() {
                   className="text-[30px] font-semibold "
                   style={{ fontFamily: "Bai Jamjuree" }}
                 >
-                  {t(Strings.login.adminLogin)}
+                  {t("login.adminLogin")}
                 </p>
                 <p
                   className="text-[#A2A3A5] mt-0  text-[16px] font-semibold "
                   style={{ fontFamily: "Bai Jamjuree" }}
                 >
-                  {t(Strings.login.welcomeMessage)}
+                  {t("login.welcomeMessage")}
                 </p>
 
                 {/* Country dropdown */}
@@ -232,7 +231,7 @@ function AdminLogin() {
                 <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start  gap-6">
                     <label className="font-semibold">
-                      {t(Strings.register.passCode)}
+                      {t("register.passCode")}
                     </label>
                   </div>
                   <div className="flex ">
@@ -269,7 +268,7 @@ function AdminLogin() {
                   }`}
                   disabled={!isValid || !recaptchaToken}
                 >
-                  {t(Strings.login.loginButton)}
+                  {t("login.loginButton")}
                 </Button>
                 <ToastContainer
                   position="top-right"

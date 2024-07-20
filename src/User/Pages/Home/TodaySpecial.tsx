@@ -1,4 +1,3 @@
-import Strings from "../../../Components/Config/Strings";
 import { useLanguageContext } from "../../../Components/LanguageContext";
 import Button from "../../../Components/ReusableComponent/Button";
 import { Manchurian } from "@/assets";
@@ -19,7 +18,7 @@ function TodaySpecial() {
           className="w-[180px] text-white shadow-registerBtn rounded-full font-bold text-lg self-center uppercase bg-[#94CD00] h-[50px]"
           style={{ fontFamily: "Bai Jamjuree" }}
         >
-          {t(Strings.todaySpecial.viewAll)}
+          {t("todaySpecial.viewAll")}
         </Button>
       </div>
 
@@ -36,14 +35,14 @@ function TodaySpecial() {
               className="h-[190px] w-full max-w-[340px] rounded-2xl"
             />
             <div className="flex flex-col gap-1 p-3">
-              <span className="self-start">{t(Strings.todaySpecial.name)}</span>
+              <span className="self-start">{t("todaySpecial.name")}</span>
               <p
                 className="flex gap-2 items-center text-[#DF201F]"
                 style={{ fontFamily: "Montserrat Alternates" }}
               >
-                {t(Strings.bestSeller.price)}
+                {t("bestSeller.price")}
                 <span className="text-xs line-through">
-                  {t(Strings.bestSeller.originalPrice)}
+                  {t("bestSeller.originalPrice")}
                 </span>
               </p>
             </div>

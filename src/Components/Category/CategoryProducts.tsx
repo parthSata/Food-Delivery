@@ -5,7 +5,6 @@ import { Product } from "../Products/ProductAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -190,7 +189,7 @@ function Category() {
                         <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                       </Button>
                     </div>
-                    <p className="">{t(Strings.category.addNewButton)}</p>
+                    <p className="">{t("category.addNewButton")}</p>
                   </div>
                 </div>
               </div>

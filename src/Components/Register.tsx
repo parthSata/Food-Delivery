@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
-import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
 import { useLanguageContext } from "./LanguageContext";
 
@@ -162,7 +161,7 @@ function Register() {
                   fontFamily: "Bai Jamjuree",
                 }}
               >
-                {t(Strings.register.createSeller)}
+                {t("register.createSeller")}
               </p>
               <div className="flex mt-5  ">
                 <div className="flex items-center justify-center flex-col gap-6">
@@ -190,7 +189,7 @@ function Register() {
                         >
                           <img src={Person} alt="" className="h-5" />
                         </div>
-                        {t(Strings.login.customerRole)}
+                        {t("login.customerRole")}
                       </label>
                     </div>
                     <div className="flex flex-row gap-3 items-center">
@@ -214,7 +213,7 @@ function Register() {
                         >
                           <img src={Store} alt="" className="h-5" />
                         </div>
-                        {t(Strings.login.sellerRole)}
+                        {t("login.sellerRole")}
                       </label>
                     </div>
                   </div>
@@ -310,7 +309,7 @@ function Register() {
               <div className="mt-5 md:shrink flex flex-col gap-2">
                 <div className="flex justify-start gap-6">
                   <label className="font-semibold">
-                    {t(Strings.register.passCode)}
+                    {t("register.passCode")}
                   </label>
                 </div>
                 <div
@@ -340,7 +339,7 @@ function Register() {
                 <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start gap-6">
                     <label className="font-semibold">
-                      {t(Strings.register.confirmPasscode)}
+                      {t("register.confirmPasscode")}
                     </label>
                   </div>
                   <div
@@ -397,7 +396,7 @@ function Register() {
                     className="bg-red-600 h-[30px] w-[20px]"
                   />
                   <p className="text-[#161A1D] font-semibold text-lg">
-                    {t(Strings.register.agreeTerms)}
+                    {t("register.agreeTerms")}
                   </p>
                 </div>
               </div>
@@ -420,7 +419,7 @@ function Register() {
                   passcode !== confirmPasscode
                 }
               >
-                {t(Strings.register.registerButton)}
+                {t("register.registerButton")}
               </button>
               <ToastContainer
                 position="top-right"

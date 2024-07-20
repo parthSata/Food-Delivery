@@ -20,7 +20,7 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Strings from "../Components/Config/Strings";
+
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
 import { useLanguageContext } from "../Components/LanguageContext";
@@ -221,7 +221,7 @@ function BusinessDetails() {
                 className="text-[30px] font-semibold"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                {t(Strings.businessDetail.title)}{" "}
+                {t("businessDetail.title")}{" "}
               </p>
 
               <div
@@ -257,7 +257,7 @@ function BusinessDetails() {
                         />
                       </svg>
                       <span className="text-xs">
-                        {t(Strings.businessDetail.uploadImage)}
+                        {t("businessDetail.uploadImage")}
                       </span>
 
                       <Input
@@ -421,7 +421,7 @@ function BusinessDetails() {
                           className="h-4 w-4"
                           style={{ fontFamily: "Bai Jamjuree" }}
                         />
-                        {t(Strings.businessDetail.uploadLabel)}
+                        {t("businessDetail.uploadLabel")}
                       </label>
                       <Input
                         type="file"
@@ -455,7 +455,7 @@ function BusinessDetails() {
                 className={`bg-[#94CD00] uppercase h-[50px] w-[247px] rounded-3xl text-white text-lg  mt-5 cursor-pointer shadow-registerBtn`}
                 onClick={handleSubmit}
               >
-                {t(Strings.businessDetail.saveAndContinueButton)}
+                {t("businessDetail.saveAndContinueButton")}
               </Button>
               <ToastContainer
                 position="top-right"

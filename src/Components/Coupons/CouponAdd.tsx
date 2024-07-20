@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { ref, set, onValue } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -191,9 +190,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
           </button>
           <form className="space-y-4 ">
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">
-                {t(Strings.couponAdd.offerCode)}
-              </label>
+              <label className="self-start">{t("couponAdd.offerCode")}</label>
               <Input
                 type="text"
                 placeholder="Offer Code Here.."
@@ -213,9 +210,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">
-                {t(Strings.couponAdd.discount)}
-              </label>
+              <label className="self-start">{t("couponAdd.discount")}</label>
               <Input
                 type="number"
                 placeholder="Discount Here.."
@@ -235,9 +230,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">
-                {t(Strings.couponAdd.offerPrice)}
-              </label>
+              <label className="self-start">{t("couponAdd.offerPrice")}</label>
               <Input
                 type="number"
                 placeholder="Offer Price Here.."
@@ -257,9 +250,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">
-                {t(Strings.couponAdd.expiryDate)}
-              </label>
+              <label className="self-start">{t("couponAdd.expiryDate")}</label>
               <Input
                 type="date"
                 placeholder="Date Here.."
@@ -279,9 +270,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
               )}
             </div>
             <div className="flex flex-col  font-semibold gap-1">
-              <label className="self-start">
-                {t(Strings.couponAdd.description)}
-              </label>
+              <label className="self-start">{t("couponAdd.description")}</label>
               <textarea
                 placeholder="Type Here.."
                 name="discription"
@@ -306,7 +295,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 className="w-full text-xl bg-[#DF201F] h-full shadow-couponAdd text-white py-2 rounded-[60px] "
                 onClick={handleUpdateCoupon}
               >
-                {t(Strings.couponAdd.updateButton)}
+                {t("couponAdd.updateButton")}
               </button>
             ) : (
               <button
@@ -314,7 +303,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                 className="w-full text-xl bg-[#DF201F] h-full text-white shadow-couponAdd py-2 rounded-[60px] "
                 onClick={handleAddCoupon}
               >
-                {t(Strings.couponAdd.saveButton)}
+                {t("couponAdd.saveButton")}
               </button>
             )}
             <ToastContainer

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "@/config/Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "../ReusableComponent/Loader";
-import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
 import { useLanguageContext } from "../LanguageContext";
 
@@ -128,7 +127,7 @@ function Home(): JSX.Element {
       <div className="flex justify-between items-center font-BaiJamjuree font-semibold  mt-10 flex-wrap gap-2">
         <div className="">
           <span className="font-semibold  text-[#161A1D]">
-            {t(Strings.category.categoryList)}
+            {t("category.categoryList")}
           </span>
         </div>
         <div className="flex ">
@@ -153,7 +152,7 @@ function Home(): JSX.Element {
                 className="rounded-[60px] ml-5 shadow-addCategory text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[200px]"
                 onClick={openAddCategoryDialog}
               >
-                {t(Strings.category.addNewCategoryButton)}
+                {t("category.addNewCategoryButton")}
               </button>
             </div>
           </div>
@@ -169,22 +168,22 @@ function Home(): JSX.Element {
               <thead className="rounded-full bg-[#DF201F] ">
                 <tr className="text-[#FFFFFF] font-semibold ">
                   <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerCategory)}
+                    {t("category.headerCategory")}
                   </th>
                   <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerCategoryId)}
+                    {t("category.headerCategoryId")}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerDescription)}
+                    {t("category.headerDescription")}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerNumberOfProducts)}
+                    {t("category.headerNumberOfProducts")}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerStatus)}
+                    {t("category.headerStatus")}
                   </th>
                   <th className="border-r-1 py-2 px-4 border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
-                    {t(Strings.category.headerAction)}
+                    {t("category.headerAction")}
                   </th>
                 </tr>
               </thead>

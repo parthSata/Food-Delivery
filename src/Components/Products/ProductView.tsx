@@ -4,9 +4,9 @@ import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
 import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
-import Strings from "../Config/Strings";
+
 import { useLanguageContext } from "../LanguageContext";
-import config from "../../Config";
+import config from "../../config/Config";
 
 // import Footer from '../Footer';
 
@@ -28,8 +28,7 @@ const ProductView: React.FC = () => {
     images: [],
     categoryId: "",
   });
-  const [isLoading, setisLoading] = useState(false)
-
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     if (productId) {
@@ -38,9 +37,11 @@ const ProductView: React.FC = () => {
   }, [productId]);
 
   const fetchProductData = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
     try {
-      const response = await fetch(`${config.firebaseDatabaseUrl}/products/${id}.json`);
+      const response = await fetch(
+        `${config.firebaseDatabaseUrl}/products/${id}.json`
+      );
       if (response.ok) {
         const data = await response.json();
         if (data) {
@@ -58,8 +59,7 @@ const ProductView: React.FC = () => {
     } catch (error) {
       console.error("Error fetching product:", error);
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   const incrementQuantity = () => {
@@ -70,9 +70,9 @@ const ProductView: React.FC = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  const handleEditOrder = () => { };
+  const handleEditOrder = () => {};
 
-  const handleDeleteOrder = () => { };
+  const handleDeleteOrder = () => {};
   return (
     <div className="">
       <Loader isLoading={isLoading}>
@@ -87,10 +87,11 @@ const ProductView: React.FC = () => {
                 {[0, 1, 2, 3].map((index) => (
                   <div
                     key={index}
-                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index]
-                      ? "border-[3px] border-[#DF201F]"
-                      : " outline-none border-[#161A1D]"
-                      }`}
+                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${
+                      productImages[index]
+                        ? "border-[3px] border-[#DF201F]"
+                        : " outline-none border-[#161A1D]"
+                    }`}
                   >
                     {productImages[index] && (
                       <div
@@ -113,9 +114,7 @@ const ProductView: React.FC = () => {
               className="flex items-start w-full  order-1"
               style={{ fontFamily: "Bai Jamjuree" }}
             >
-              <div
-                className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew"
-              >
+              <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew">
                 <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                   {previewImage ? (
                     <img
@@ -124,10 +123,10 @@ const ProductView: React.FC = () => {
                       className="h-[240px] w-auto object-cover"
                     />
                   ) : (
-                    <p>{t(Strings.productAdd.noImageUploaded)}</p>
+                    <p>{t("productAdd.noImageUploaded")}</p>
                   )}
                   <p className="text-[#A4A1A1] text-[16px] font-semibold">
-                    {t(Strings.productAdd.supportedFiles)}
+                    {t("productAdd.supportedFiles")}
                   </p>
                 </div>
               </div>
@@ -167,9 +166,7 @@ const ProductView: React.FC = () => {
               </div>
               <div className="flex items-start gap-2 flex-col">
                 <span className="">Quantity</span>
-                <div
-                  className="flex  gap-1 shadow-Size"
-                >
+                <div className="flex  gap-1 shadow-Size">
                   <button
                     className=" w-[40px] h-[42px]  border-r   border-gray"
                     onClick={decrementQuantity}
@@ -202,13 +199,13 @@ const ProductView: React.FC = () => {
                 className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#94CD00] shadow-registerBtn"
                 onClick={handleEditOrder}
               >
-                {t(Strings.productView.editButton)}
+                {t("productView.editButton")}
               </button>
               <button
                 className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] shadow-adminbtn"
                 onClick={handleDeleteOrder}
               >
-                {t(Strings.productView.deleteButton)}
+                {t("productView.deleteButton")}
               </button>
             </div>
           </div>
