@@ -1,6 +1,7 @@
+import React from "react";
 import { useLanguageContext } from "./LanguageContext";
 
-const LanguageSelect = () => {
+const LanguageSelect: React.FC = () => {
     const { languages, onClickLanguageChange } = useLanguageContext();
 
     return (
@@ -15,7 +16,7 @@ const LanguageSelect = () => {
             onChange={onClickLanguageChange}
         >
             {Object.keys(languages).map((lng) => (
-                <option key={languages[lng as keyof typeof languages].nativeName} value={lng}>
+                <option key={lng} value={lng}>
                     {languages[lng as keyof typeof languages].nativeName}
                 </option>
             ))}

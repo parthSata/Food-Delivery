@@ -7,8 +7,8 @@ const CustomerNavigation = () => {
     <Container>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/category" element={<Category />} />
-        <Route path="checkOutPage" element={<CheckoutPage />} /> */}
+        <Route path="/category" element={<Category />} />
+        <Route path="checkOutPage" element={<CheckoutPage />} />
       </Routes>
     </Container>
   );

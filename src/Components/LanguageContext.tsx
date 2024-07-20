@@ -2,13 +2,11 @@ import { createContext, useContext, ReactNode } from "react";
 import { i18n, TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
 
-type Language = 'en';
-
 interface LanguageContextType {
-    t: TFunction;
-    onClickLanguageChange: (language: Language) => void;
-    i18n: i18n;
-    languages: { [key in Language]: { nativeName: string } };
+    t: TFunction<"translation", undefined>;
+    i18n: any;
+    onClickLanguageChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    languages: { en: { nativeName: string } };
 }
 
 export const LanguageContext = createContext<LanguageContextType>({
@@ -29,9 +27,11 @@ export const LanguageContextProvider = ({ children }: LanguageContextProviderPro
     };
     const { t, i18n } = useTranslation();
 
-    const onClickLanguageChange = (language: Language) => {
-        i18n.changeLanguage(language);
+    const onClickLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const language = e.target.value;
+        i18n.changeLanguage(language); // Change the language
     };
+
 
     const value = { t, i18n, onClickLanguageChange, languages }
 

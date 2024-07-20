@@ -18,7 +18,7 @@ const SellerNavigation = () => {
   return (
     <Container>
       <Routes>
-        {/* <Route path="/" element={<CategoryPage />} />
+        <Route path="/" element={<CategoryPage />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="businessDetail" element={<BusinessDetails />} />
         <Route path="category/:CategoryId" element={<CategoryProducts />} />
@@ -34,7 +34,7 @@ const SellerNavigation = () => {
           throw new Error("Function not implemented.");
         }} isOpen={true} />} />
         <Route path="couponview" element={<CouponView />} />
-        <Route path="couponview/:couponId" element={<CouponView />} /> */}
+        <Route path="couponview/:couponId" element={<CouponView />} />
       </Routes>
     </Container>
   );
