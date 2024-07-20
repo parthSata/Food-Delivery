@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoriesData } from "./CategoryPage";
 import { Product } from "../Products/ProductAdd";
-import { db } from '../../Firebase/firebase';
-import { ref, onValue, remove } from 'firebase/database';
+import { db } from "@/config/Firebase/firebase";
+import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
-
-
 
 function Category() {
   const { t } = useLanguageContext();
@@ -26,8 +24,7 @@ function Category() {
   });
   // const [Loader, setLoader] = useState(false)
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (CategoryId) {
@@ -37,38 +34,46 @@ function Category() {
   }, [CategoryId]);
 
   const fetchCategoryData = (id: string) => {
-    setIsLoading(true)
+    setIsLoading(true);
     const categoryRef = ref(db, `categories/${id}`);
-    onValue(categoryRef, (snapshot) => {
-      const data = snapshot.val();
-      setCategoryData({ id, ...data });
-    }, {
-      onlyOnce: true
-    });
-    setIsLoading(false)
+    onValue(
+      categoryRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setCategoryData({ id, ...data });
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+    setIsLoading(false);
   };
 
   const fetchProducts = (categoryId: string) => {
-    const productsRef = ref(db, 'products');
-    onValue(productsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (!data) {
-        console.error("Data is null or undefined");
-        return;
+    const productsRef = ref(db, "products");
+    onValue(
+      productsRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (!data) {
+          console.error("Data is null or undefined");
+          return;
+        }
+
+        const productsData = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+
+        const filteredProductsData = productsData.filter(
+          (product) => product.categoryId === categoryId
+        );
+        setProducts(filteredProductsData);
+      },
+      {
+        onlyOnce: true,
       }
-
-      const productsData = Object.keys(data).map((key) => ({
-        id: key,
-        ...data[key],
-      }));
-
-      const filteredProductsData = productsData.filter(
-        (product) => product.categoryId === categoryId
-      );
-      setProducts(filteredProductsData);
-    }, {
-      onlyOnce: true
-    });
+    );
   };
 
   const handleAddProduct = (id: string) => {
@@ -76,7 +81,9 @@ function Category() {
   };
 
   const handleUpdateProduct = (id: string) => {
-    navigate(`/seller/productsAdd/${id}`, { state: { CategoryId, updateId: id } });
+    navigate(`/seller/productsAdd/${id}`, {
+      state: { CategoryId, updateId: id },
+    });
   };
 
   const handleDeleteProduct = (id: string) => {
@@ -97,12 +104,12 @@ function Category() {
 
   return (
     <>
-
       <div className="">
         {/* Product Heading */}
 
         <div
-          className="bg-[#fcbc65]  h-52 w-full  sm:w-full" style={{
+          className="bg-[#fcbc65]  h-52 w-full  sm:w-full"
+          style={{
             fontFamily: "Bai Jamjuree",
           }}
         >
@@ -122,7 +129,6 @@ function Category() {
           <Loader isLoading={isLoading}>
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
               {products.map((item) => (
-
                 <div
                   className="sm:w-1/5 mb-10  w-full cursor-pointer"
                   onClick={() => handleProductView(item.id)}
@@ -130,13 +136,17 @@ function Category() {
                 >
                   <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
                     <img src={item.images?.[0]} alt="" className="h-20" />
-                    <p className="" style={{
-                      fontFamily: "Bai Jamjuree",
-                    }}>
+                    <p
+                      className=""
+                      style={{
+                        fontFamily: "Bai Jamjuree",
+                      }}
+                    >
                       {item.name}{" "}
                     </p>
                     <p
-                      className="flex gap-2 items-center text-[#DF201F]" style={{ fontFamily: "Montserrat Alternates" }}
+                      className="flex gap-2 items-center text-[#DF201F]"
+                      style={{ fontFamily: "Montserrat Alternates" }}
                     >
                       ₹{item.price}
                       <span className="text-xs line-through">
@@ -152,9 +162,7 @@ function Category() {
                       )}
                     >
                       <Button className="">
-                        <i
-                          className="fa-solid fa-trash fa-lg text-productBtn"
-                        ></i>
+                        <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                       </Button>
                     </div>
                     <div
@@ -164,9 +172,7 @@ function Category() {
                       )}
                     >
                       <Button className="">
-                        <i
-                          className="fa-solid fa-pen fa-lg text-productBtn"
-                        ></i>
+                        <i className="fa-solid fa-pen fa-lg text-productBtn"></i>
                       </Button>
                     </div>
                   </div>
@@ -174,18 +180,14 @@ function Category() {
               ))}
 
               <div className=" sm:w-1/5  mb-10 w-full">
-                <div
-                  className="flex justify-center w-full shadow-addNew font-semibold flex-col text-md items-center  h-[200px]  "
-                >
+                <div className="flex justify-center w-full shadow-addNew font-semibold flex-col text-md items-center  h-[200px]  ">
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                       <Button
                         className="flex self-center"
                         onClick={() => handleAddProduct(CategoryId)}
                       >
-                        <i
-                          className="fa-duotone fa-plus fa-2xl text-addNew"
-                        ></i>
+                        <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                       </Button>
                     </div>
                     <p className="">{t(Strings.category.addNewButton)}</p>
