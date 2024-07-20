@@ -3,7 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import { CategoriesData } from "./CategoryPage";
-import { db } from "../../Firebase/firebase";
+import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
 import { Loaders } from "@/assets";
 import Strings from "../Config/Strings";

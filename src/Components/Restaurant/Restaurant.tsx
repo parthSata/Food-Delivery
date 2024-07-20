@@ -1,14 +1,14 @@
 import { Restaurant as RestaurantInterface } from "./AddRestaurants";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { db } from "../../Firebase/firebase";
+import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
-import { Container } from "../Config/index";
 import { Noodles, Star, DummyImg } from "@/assets";
+import { Container } from "@/Components";
 
 function Restaurant() {
   const { t } = useLanguageContext();

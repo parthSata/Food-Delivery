@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage, CheckoutPage } from '../Config/index'
-import { Category, Container } from "../../User/Config/Index";
+import { HomePage, CheckoutPage, Category } from "@/navigation";
+import { Container } from "@/Components";
 
 const CustomerNavigation = () => {
   return (

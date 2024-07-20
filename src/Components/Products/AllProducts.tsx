@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
-import { db } from "../../Firebase/firebase";
+import { db } from "@/config/Firebase/firebase";
 import { ref, remove, get } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";

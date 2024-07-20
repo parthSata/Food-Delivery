@@ -11,8 +11,8 @@ import {
   CouponView,
   CategoryPage,
   CategoryProducts,
-  Container
-} from "../Config/index";
+} from "@/navigation";
+import { Container } from "@/Components";
 
 const SellerNavigation = () => {
   return (
@@ -29,10 +29,21 @@ const SellerNavigation = () => {
         <Route path="productsAdd/:updateId" element={<ProductAdd />} />
         <Route path="productsAdd" element={<ProductAdd />} />
         <Route path="coupons" element={<Coupons />} />
-        <Route path="couponAdd" element={<CouponAdd onClose={() => { }} isOpen={true} />} />
-        <Route path="/couponAdd/:updateId" element={<CouponAdd onClose={function (): void {
-          throw new Error("Function not implemented.");
-        }} isOpen={true} />} />
+        <Route
+          path="couponAdd"
+          element={<CouponAdd onClose={() => {}} isOpen={true} />}
+        />
+        <Route
+          path="/couponAdd/:updateId"
+          element={
+            <CouponAdd
+              onClose={function (): void {
+                throw new Error("Function not implemented.");
+              }}
+              isOpen={true}
+            />
+          }
+        />
         <Route path="couponview" element={<CouponView />} />
         <Route path="couponview/:couponId" element={<CouponView />} />
       </Routes>

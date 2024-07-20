@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "./ReusableComponent/Loader";
 import { useAuth } from "./AuthContext";
 import { child, get, ref } from "firebase/database";
-import { auth, db } from "../Firebase/firebase";
+import { auth, db } from "@/config/Firebase/firebase";
 
 function Verification() {
   const location = useLocation();

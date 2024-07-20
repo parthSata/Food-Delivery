@@ -3,7 +3,7 @@ import AddCategory from "./AddCategory";
 import { search, Pizza } from "@/assets";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
-import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
+import { db } from "@/config/Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";

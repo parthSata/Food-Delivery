@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Notification, Profile, Logo } from "../Config/images";
+import { Notification, Profile, Logo } from "@/assets";
 import { Link, useLocation } from "react-router-dom";
 import SideMenu from "./SideMenu";
 
@@ -19,41 +19,52 @@ function Header(): JSX.Element {
   return (
     <div className="h-full w-full">
       <SideMenu />
-      <nav
-        className="bg-[#FFFFFF] flex-1  flex justify-between shadow-dashboard"
-      >
+      <nav className="bg-[#FFFFFF] flex-1  flex justify-between shadow-dashboard">
         <div className="flex items-center">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
           <span className="text-[24px] font-bold">Food Delivery</span>
         </div>
         <div
-          className={`  md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"
-            }`}
+          className={`  md:flex item-center text-[14px] ${
+            showSideMenu ? "" : "hidden"
+          }`}
           style={{ fontFamily: "Bai Jamjuree" }}
           id="navbar-default"
         >
           <ul className={`flex items-center  font-semibold text-[16px] gap-8`}>
             <li
-              className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
-                } `}
+              className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${
+                pathname === "/dashboard"
+                  ? "text-red-500  border-b-2 border-[#DF201F]"
+                  : ""
+              } `}
             >
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/menus" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
-                } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${
+                pathname === "/menus"
+                  ? "text-red-500  border-b-2 border-[#DF201F]"
+                  : ""
+              } `}
             >
               <Link to="/#">Menus</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/orders" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
-                } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${
+                pathname === "/orders"
+                  ? "text-red-500  border-b-2 border-[#DF201F]"
+                  : ""
+              } `}
             >
               <Link to="/#">Orders</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurant-list" ? "text-red-500  border-b-2 border-[#DF201F]" : ""
-                } `}
+              className={` hover:text-red-500 hover:underline-offset-8 ${
+                pathname === "/restaurant-list"
+                  ? "text-red-500  border-b-2 border-[#DF201F]"
+                  : ""
+              } `}
             >
               <Link to="/#">Restaurant List</Link>
             </li>

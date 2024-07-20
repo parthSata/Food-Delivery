@@ -2,14 +2,18 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./Components/AuthContext";
 import {
-  HomePage, Login, AdminLogin, Register, Verification, AdminNavigation,
+  HomePage,
+  Login,
+  AdminLogin,
+  Register,
+  Verification,
+  AdminNavigation,
   SellerNavigation,
   CustomerNavigation,
   NotAuthorized,
   ProtectedRoute,
   RestaurantTypes,
-} from './Components/Config/index'
-
+} from "./navigation/index";
 
 function App() {
   return (

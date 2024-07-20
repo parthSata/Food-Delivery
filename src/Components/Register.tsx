@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "../Firebase/firebase";
+import { db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
 import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";

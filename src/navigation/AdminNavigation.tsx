@@ -9,8 +9,8 @@ import {
   AddRestaurants,
   TeamAdd,
   OurTeam,
-  Container
-} from "../Config/index";
+} from "@/navigation";
+import { Container } from "@/Components";
 
 const AdminNavigation = () => {
   return (
@@ -24,7 +24,10 @@ const AdminNavigation = () => {
         <Route path="restaurants" element={<Restaurant />} />
         <Route path="addrestaurants" element={<AddRestaurants />} />
         <Route path="team" element={<OurTeam />} />
-        <Route path="teamAdd/:updateId" element={<TeamAdd onClose={() => { }} isOpen={true} />} />
+        <Route
+          path="teamAdd/:updateId"
+          element={<TeamAdd onClose={() => {}} isOpen={true} />}
+        />
       </Routes>
     </Container>
   );

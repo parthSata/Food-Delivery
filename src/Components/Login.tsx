@@ -14,7 +14,7 @@ import {
 } from "@/assets";
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
-import { auth, db } from "../Firebase/firebase";
+import { auth, db } from "@/config/Firebase/firebase";
 import { ref, get, child } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";

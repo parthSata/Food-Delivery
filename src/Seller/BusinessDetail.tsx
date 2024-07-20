@@ -11,7 +11,7 @@ import {
   Attach,
 } from "@/assets";
 import { ToastContainer, toast } from "react-toastify";
-import { db, storage } from "../Firebase/firebase"; // Import storage from firebase
+import { db, storage } from "@/config/Firebase/firebase"; // Import storage from firebase
 import { ref as dbRef, set } from "firebase/database";
 import {
   ref as storageRef,

@@ -2,7 +2,7 @@ import { DummyImg } from "@/assets";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import { db } from "../../Firebase/firebase";
+import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
