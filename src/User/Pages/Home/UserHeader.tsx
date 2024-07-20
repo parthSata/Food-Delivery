@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../../../Components/Dashboard/Sidebar";
 import { Link, useLocation } from "react-router-dom";
 import { Logo, menu } from "@/assets";
-import { useAuth } from "../../../Components/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 
 const routes = {
   customer: [

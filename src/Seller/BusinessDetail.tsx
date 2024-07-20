@@ -23,7 +23,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
-import { useLanguageContext } from "../Components/LanguageContext";
+import { useLanguageContext } from "../context/LanguageContext";
 // import stripeKey from '../Config'
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';

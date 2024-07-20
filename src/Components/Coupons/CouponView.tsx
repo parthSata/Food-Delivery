@@ -5,7 +5,7 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Button from "../ReusableComponent/Button";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 function CouponView() {
   const { t } = useLanguageContext();

@@ -8,13 +8,13 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, get, child } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 import Input from "./ReusableComponent/Input";
 import Button from "./ReusableComponent/Button";
 import ReCAPTCHA from "react-google-recaptcha";
 import config from "../config/Config";
 import Loader from "@/Components/ReusableComponent/Loader";
-import { useLanguageContext } from "./LanguageContext";
+import { useLanguageContext } from "../context/LanguageContext";
 
 function AdminLogin() {
   const { t } = useLanguageContext();

@@ -1,4 +1,4 @@
-import { useLanguageContext } from "../../../Components/LanguageContext";
+import { useLanguageContext } from "../../../context/LanguageContext";
 import Button from "../../../Components/ReusableComponent/Button";
 import { PlayArrow, Shafe } from "@/assets";
 

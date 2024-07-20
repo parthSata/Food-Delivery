@@ -1,7 +1,7 @@
 import { Cart, Revenue, Customer, TotalShops, Pizza } from "@/assets";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 function Dashboard() {
   const { t } = useLanguageContext();

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
-import Container from "../ReusableComponent/Container";
+import Container from "@/Components/Container";
 import { toast } from "react-toastify";
 
 import Button from "../ReusableComponent/Button";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import config from "../../config/Config";
 import { EmplyoeImg } from "@/assets";
 

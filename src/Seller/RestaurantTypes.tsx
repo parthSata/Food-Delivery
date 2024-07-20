@@ -3,7 +3,7 @@ import { ToastContainer } from "react-toastify";
 import ConfirmDialog from "./ConfirmDialog";
 
 import Input from "../Components/ReusableComponent/Input";
-import { useLanguageContext } from "../Components/LanguageContext";
+import { useLanguageContext } from "../context/LanguageContext";
 
 function RestaurantTypes() {
   const { t } = useLanguageContext();

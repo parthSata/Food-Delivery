@@ -7,7 +7,7 @@ import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
 import { Loaders } from "@/assets";
 import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;

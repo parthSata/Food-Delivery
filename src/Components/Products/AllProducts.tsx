@@ -5,7 +5,7 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, remove, get } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import { DummyImg } from "@/assets";
 
 function AllProducts() {

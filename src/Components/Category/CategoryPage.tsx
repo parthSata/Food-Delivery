@@ -6,7 +6,7 @@ import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "@/config/Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "../ReusableComponent/Loader";
 import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 export interface CategoriesData {
   id: string;

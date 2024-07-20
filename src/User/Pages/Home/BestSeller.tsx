@@ -1,6 +1,6 @@
 import Button from "../../../Components/ReusableComponent/Button";
 import { Burgger } from "@/assets";
-import { useLanguageContext } from "../../../Components/LanguageContext";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 function BestSeller() {
   const { t } = useLanguageContext();

@@ -1,6 +1,6 @@
 import { Burger, Accepted, Cancel, Pizza } from "@/assets";
 
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import Input from "../ReusableComponent/Input";
 // import { useState } from 'react'
 

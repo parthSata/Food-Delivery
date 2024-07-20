@@ -7,7 +7,7 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, set, onValue } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 export interface Coupon {
   id: string;

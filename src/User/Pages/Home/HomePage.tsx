@@ -8,7 +8,7 @@ import Team from "./Team";
 import TodaySpecial from "./TodaySpecial";
 
 import Button from "../../../Components/ReusableComponent/Button";
-import { useLanguageContext } from "../../../Components/LanguageContext";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 function HomePage() {
   const { t } = useLanguageContext();

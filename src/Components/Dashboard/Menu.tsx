@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Notification, Profile, Logo, menu } from "@/assets";
 import Sidebar from "./Sidebar";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const routes = {
   admin: [

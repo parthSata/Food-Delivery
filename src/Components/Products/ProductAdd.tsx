@@ -8,7 +8,7 @@ import { set, ref, onValue, update } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 
 import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 export interface Product {
   id: string;

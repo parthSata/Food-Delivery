@@ -18,7 +18,7 @@ import { auth, db } from "@/config/Firebase/firebase";
 import { ref, get, child } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 import ReCAPTCHA from "react-google-recaptcha";
 import config from "../config/Config";
 // import Loader from "./Loader";

@@ -5,7 +5,7 @@ import { FlashBurger, Delete, Edit, RightArrow } from "@/assets";
 
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
-import { useLanguageContext } from "../Components/LanguageContext";
+import { useLanguageContext } from "../context/LanguageContext";
 
 function CheckoutPage() {
   const { t } = useLanguageContext();

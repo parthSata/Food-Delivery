@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
 
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import config from "../../config/Config";
 
 // import Footer from '../Footer';

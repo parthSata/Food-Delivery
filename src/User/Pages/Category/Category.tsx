@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { BurgerImg, FlashBurger } from "@/assets";
 
 import Button from "../../../Components/ReusableComponent/Button";
-import { useLanguageContext } from "../../../Components/LanguageContext";
+import { useLanguageContext } from "../../../context/LanguageContext";
 
 function Category() {
   const { t } = useLanguageContext();

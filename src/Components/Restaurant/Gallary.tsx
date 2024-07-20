@@ -2,13 +2,13 @@ import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
 import { ref, get } from "firebase/database";
 import { db } from "@/config/Firebase/firebase";
-import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 
 import Button from "../ReusableComponent/Button";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import { BurgerGallary, Link } from "@/assets";
 import { GallaryHeader, GallaryModelAdd } from "../../navigation/index";
+import Container from "@/Components/Container";
 
 const Gallary: React.FC<GallaryInterface> = () => {
   const { t } = useLanguageContext();

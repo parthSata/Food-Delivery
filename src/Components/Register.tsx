@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from "uuid";
 import { db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
 import Input from "./ReusableComponent/Input";
-import { useLanguageContext } from "./LanguageContext";
+import { useLanguageContext } from "../context/LanguageContext";
 
 function Register() {
   const { t } = useLanguageContext();

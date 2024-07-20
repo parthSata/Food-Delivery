@@ -4,7 +4,7 @@ import OtpInput from "react-otp-input";
 import { Logo, Resend, image } from "@/assets";
 import { toast } from "react-toastify";
 import Loader from "./ReusableComponent/Loader";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { child, get, ref } from "firebase/database";
 import { auth, db } from "@/config/Firebase/firebase";
 
