@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Notification, Profile, Logo, menu } from "../Config/images";
+import { Notification, Profile, Logo, menu } from "@/assets";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../AuthContext";
 
@@ -21,7 +21,7 @@ const routes = {
     { path: "/seller/orders", label: "Orders" },
     { path: "/seller/products", label: "Products" },
     { path: "/seller/coupons", label: "Coupons" },
-  ]
+  ],
 };
 
 const DashboardHeader = () => {
@@ -40,16 +40,19 @@ const DashboardHeader = () => {
 
   const getRoutes = () => {
     if (!user) return [];
-    if (user.role === 'admin') return routes.admin;
-    if (user.role === 'seller') return routes.seller;
+    if (user.role === "admin") return routes.admin;
+    if (user.role === "seller") return routes.seller;
     return [];
   };
 
   const routeLinks = getRoutes().map((route) => (
     <li
       key={route.path}
-      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === route.path ? "text-red-500 border-b-2 border-[#DF201F]" : ""
-        } `}
+      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${
+        pathname === route.path
+          ? "text-red-500 border-b-2 border-[#DF201F]"
+          : ""
+      } `}
     >
       <Link to={route.path}>{route.label}</Link>
     </li>
@@ -58,9 +61,7 @@ const DashboardHeader = () => {
   return (
     <div className="h-full w-full mt-4">
       <Sidebar />
-      <nav
-        className="flex flex-wrap justify-between px-4 shadow-dashboard"
-      >
+      <nav className="flex flex-wrap justify-between px-4 shadow-dashboard">
         <div className="flex items-center flex-row">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
           <Link to="/">
@@ -70,8 +71,9 @@ const DashboardHeader = () => {
           </Link>
         </div>
         <div
-          className={`md:flex items-center text-[14px] ${showSideMenu ? "" : "hidden"
-            }`}
+          className={`md:flex items-center text-[14px] ${
+            showSideMenu ? "" : "hidden"
+          }`}
           style={{ fontFamily: "Bai Jamjuree" }}
         >
           <ul className={`flex items-center font-semibold text-[16px] gap-8`}>
@@ -79,7 +81,11 @@ const DashboardHeader = () => {
           </ul>
         </div>
         <div className="flex items-center">
-          <img src={Profile} alt="Profile" className="h-[40px] w-[40px] border-r" />
+          <img
+            src={Profile}
+            alt="Profile"
+            className="h-[40px] w-[40px] border-r"
+          />
           <div className="relative items-center justify-center ml-6 hidden md:flex">
             <img
               src={Notification}

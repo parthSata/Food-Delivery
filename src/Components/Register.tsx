@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-import { Person, Shop, Store, Email, Phone, flag, uk, us, united, uruguay } from "./Config/images";
+import {
+  Person,
+  Shop,
+  Store,
+  Email,
+  Phone,
+  flag,
+  uk,
+  us,
+  united,
+  uruguay,
+} from "@/assets";
 import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-import { db } from '../Firebase/firebase';
-import { ref, set } from 'firebase/database';
+import { db } from "../Firebase/firebase";
+import { ref, set } from "firebase/database";
 import Strings from "./Config/Strings";
 import Input from "./ReusableComponent/Input";
 import { useLanguageContext } from "./LanguageContext";
@@ -66,12 +77,18 @@ function Register() {
     if (!mobileNumber) newErrors.mobileNumber = "Mobile number is required.";
     if (!email) newErrors.email = "Email is required.";
     if (!passcode) newErrors.passcode = "Passcode is required.";
-    if (!confirmPasscode) newErrors.confirmPasscode = "Confirm passcode is required.";
-    if (passcode !== confirmPasscode) newErrors.confirmPasscode = "Passcode and Confirm Passcode must match.";
+    if (!confirmPasscode)
+      newErrors.confirmPasscode = "Confirm passcode is required.";
+    if (passcode !== confirmPasscode)
+      newErrors.confirmPasscode = "Passcode and Confirm Passcode must match.";
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0 && isValidMobileNumber && isValidEmail) {
+    if (
+      Object.keys(newErrors).length === 0 &&
+      isValidMobileNumber &&
+      isValidEmail
+    ) {
       const userData = {
         name,
         mobileNumber,
@@ -85,7 +102,7 @@ function Register() {
       try {
         // @ts-ignore
         const dbRef = ref(db);
-        await set(ref(db, 'users/' + mobileNumber), userData);
+        await set(ref(db, "users/" + mobileNumber), userData);
         toast.success("Registration successful!");
         navigate("/login");
       } catch (error) {
@@ -125,15 +142,26 @@ function Register() {
   return (
     <div>
       <div className="flex flex-row px-10 justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
-        <form style={{ fontFamily: "Montserrat Alternates" }} onSubmit={handleSubmit}>
+        <form
+          style={{ fontFamily: "Montserrat Alternates" }}
+          onSubmit={handleSubmit}
+        >
           <div className="border-black flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center ">
-              <p className="text-[30px] font-semibold " style={{
-                fontFamily: "Bai Jamjuree",
-              }} >Register </p>
-              <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold " style={{
-                fontFamily: "Bai Jamjuree",
-              }} >
+              <p
+                className="text-[30px] font-semibold "
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }}
+              >
+                Register{" "}
+              </p>
+              <p
+                className="text-[#A2A3A5] mt-0 text-[16px] font-semibold "
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }}
+              >
                 {t(Strings.register.createSeller)}
               </p>
               <div className="flex mt-5  ">
@@ -149,8 +177,17 @@ function Register() {
                         name="role"
                         id="customer-role"
                       />
-                      <label htmlFor="customer-role" className="flex items-center gap-3 cursor-pointer">
-                        <div className={`flex justify-center items-center rounded-full ${role === "customer" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                      <label
+                        htmlFor="customer-role"
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <div
+                          className={`flex justify-center items-center rounded-full ${
+                            role === "customer"
+                              ? "bg-[#E23635]"
+                              : "bg-[#A2A3A5]"
+                          } h-10 w-10`}
+                        >
                           <img src={Person} alt="" className="h-5" />
                         </div>
                         {t(Strings.login.customerRole)}
@@ -166,8 +203,15 @@ function Register() {
                         name="role"
                         id="seller-role"
                       />
-                      <label htmlFor="seller-role" className="flex items-center gap-3 cursor-pointer">
-                        <div className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                      <label
+                        htmlFor="seller-role"
+                        className="flex items-center gap-3 cursor-pointer"
+                      >
+                        <div
+                          className={`flex justify-center items-center rounded-full ${
+                            role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"
+                          } h-10 w-10`}
+                        >
                           <img src={Store} alt="" className="h-5" />
                         </div>
                         {t(Strings.login.sellerRole)}
@@ -180,60 +224,99 @@ function Register() {
                       type="text"
                       value={name}
                       placeholder="Name"
-                      className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold " style={{ fontFamily: "Montserrat Alternates" }}
+                      className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold "
+                      style={{ fontFamily: "Montserrat Alternates" }}
                       onChange={handleNameChange}
                     />
-                    <img src={Person} className="h-[24px] ml-2 w-[24px]" alt="" />
+                    <img
+                      src={Person}
+                      className="h-[24px] ml-2 w-[24px]"
+                      alt=""
+                    />
                   </div>
-                  {errors.name && <p className="text-red-600 text-xs">{errors.name}</p>}
+                  {errors.name && (
+                    <p className="text-red-600 text-xs">{errors.name}</p>
+                  )}
 
                   <div className="flex items-center border-b w-[350px]">
                     <div className="flex">
                       <img src={renderFlag(callingCode)} className="h-8 w-8" />
                       <select
                         onChange={handleCallingCodeChange}
-                        className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white " style={{
+                        className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white "
+                        style={{
                           fontFamily: "Bai Jamjuree",
                         }}
                         value={callingCode}
                       >
-                        <option className="h-8 w-8" value="+91">+91</option>
-                        <option className="h-8 w-8" value="+1">+1</option>
-                        <option className="h-8 w-8" value="+971">+971</option>
-                        <option className="h-8 w-8" value="+44">+44</option>
-                        <option className="h-8 w-8" value="+598">+598</option>
+                        <option className="h-8 w-8" value="+91">
+                          +91
+                        </option>
+                        <option className="h-8 w-8" value="+1">
+                          +1
+                        </option>
+                        <option className="h-8 w-8" value="+971">
+                          +971
+                        </option>
+                        <option className="h-8 w-8" value="+44">
+                          +44
+                        </option>
+                        <option className="h-8 w-8" value="+598">
+                          +598
+                        </option>
                       </select>
                     </div>
                     <Input
                       type="number"
                       placeholder="Mobile Number"
-                      className="ml-2 p-6 text-[14px]  focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
+                      className="ml-2 p-6 text-[14px]  focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold"
+                      style={{ fontFamily: "Montserrat Alternates" }}
                       onChange={handleChange}
                       value={mobileNumber}
                     />
-                    <img src={Phone} className="h-[24px] ml-2 w-[24px]" alt="" />
+                    <img
+                      src={Phone}
+                      className="h-[24px] ml-2 w-[24px]"
+                      alt=""
+                    />
                   </div>
-                  {errors.mobileNumber && <p className="text-red-600 text-xs ">{errors.mobileNumber}</p>}
+                  {errors.mobileNumber && (
+                    <p className="text-red-600 text-xs ">
+                      {errors.mobileNumber}
+                    </p>
+                  )}
 
                   <div className="flex items-center">
                     <Input
                       type="email"
                       placeholder="Email Id"
                       className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] border-b hover:border-0 font-semibold"
-                      style={{ fontFamily: "Montserrat Alternates" }} value={email}
+                      style={{ fontFamily: "Montserrat Alternates" }}
+                      value={email}
                       onChange={handleEmailChange}
                     />
-                    <img src={Email} className="h-[24px] ml-2 w-[24px]" alt="" />
+                    <img
+                      src={Email}
+                      className="h-[24px] ml-2 w-[24px]"
+                      alt=""
+                    />
                   </div>
-                  {errors.email && <p className="text-red-600 text-xs">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="text-red-600 text-xs">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div className="mt-5 md:shrink flex flex-col gap-2">
                 <div className="flex justify-start gap-6">
-                  <label className="font-semibold">{t(Strings.register.passCode)}</label>
+                  <label className="font-semibold">
+                    {t(Strings.register.passCode)}
+                  </label>
                 </div>
-                <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
+                <div
+                  className="flex"
+                  style={{ fontFamily: "Montserrat Alternates" }}
+                >
                   <OtpInput
                     value={passcode}
                     onChange={setPasscode}
@@ -250,13 +333,20 @@ function Register() {
                     )}
                   />
                 </div>
-                {errors.passcode && <p className="text-red-600 text-xs">{errors.passcode}</p>}
+                {errors.passcode && (
+                  <p className="text-red-600 text-xs">{errors.passcode}</p>
+                )}
 
                 <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start gap-6">
-                    <label className="font-semibold">{t(Strings.register.confirmPasscode)}</label>
+                    <label className="font-semibold">
+                      {t(Strings.register.confirmPasscode)}
+                    </label>
                   </div>
-                  <div className="flex" style={{ fontFamily: "Montserrat Alternates" }}>
+                  <div
+                    className="flex"
+                    style={{ fontFamily: "Montserrat Alternates" }}
+                  >
                     <OtpInput
                       value={confirmPasscode}
                       onChange={setConfirmPasscode}
@@ -273,37 +363,71 @@ function Register() {
                     />
                   </div>
                 </div>
-                {errors.confirmPasscode && <p className="text-red-600 text-xs">{errors.confirmPasscode}</p>}
+                {errors.confirmPasscode && (
+                  <p className="text-red-600 text-xs">
+                    {errors.confirmPasscode}
+                  </p>
+                )}
 
                 <select
                   className="rounded-lg px-1 py-1 cursor-pointer outline-none mt-2 border-b-4 bg-white"
-                  value={selectedState} style={{
+                  value={selectedState}
+                  style={{
                     fontFamily: "Bai Jamjuree",
                   }}
                   onChange={handleStateSelect}
                 >
-                  <option className="h-8 w-8" value="Gujrat">Gujrat</option>
-                  <option className="h-8 w-8" value="Maharashtra">Maharashtra</option>
-                  <option className="h-8 w-8" value="Himachal">Himachal</option>
-                  <option className="h-8 w-8" value="Jharkhand">Jharkhand</option>
+                  <option className="h-8 w-8" value="Gujrat">
+                    Gujrat
+                  </option>
+                  <option className="h-8 w-8" value="Maharashtra">
+                    Maharashtra
+                  </option>
+                  <option className="h-8 w-8" value="Himachal">
+                    Himachal
+                  </option>
+                  <option className="h-8 w-8" value="Jharkhand">
+                    Jharkhand
+                  </option>
                 </select>
 
                 <div className="flex flex-row mt-4 justify-start gap-2 items-center">
-                  <Input type="checkbox" className="bg-red-600 h-[30px] w-[20px]" />
-                  <p className="text-[#161A1D] font-semibold text-lg">{t(Strings.register.agreeTerms)}</p>
+                  <Input
+                    type="checkbox"
+                    className="bg-red-600 h-[30px] w-[20px]"
+                  />
+                  <p className="text-[#161A1D] font-semibold text-lg">
+                    {t(Strings.register.agreeTerms)}
+                  </p>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber && isValidEmail && passcode === confirmPasscode ? "" : "cursor-not-allowed opacity-50"}`}
+                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
+                  isValidMobileNumber &&
+                  isValidEmail &&
+                  passcode === confirmPasscode
+                    ? ""
+                    : "cursor-not-allowed opacity-50"
+                }`}
                 style={{
                   fontFamily: "Bai Jamjuree",
-                }} disabled={!isValidMobileNumber || !isValidEmail || passcode !== confirmPasscode}
+                }}
+                disabled={
+                  !isValidMobileNumber ||
+                  !isValidEmail ||
+                  passcode !== confirmPasscode
+                }
               >
                 {t(Strings.register.registerButton)}
               </button>
-              <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
+              <ToastContainer
+                position="top-right"
+                autoClose={1000}
+                pauseOnFocusLoss={false}
+                limit={1}
+              />
             </div>
           </div>
         </form>

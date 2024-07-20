@@ -1,12 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
-import { db } from '../../Firebase/firebase';
-import { ref, remove, get } from 'firebase/database';
+import { db } from "../../Firebase/firebase";
+import { ref, remove, get } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import { useLanguageContext } from "../LanguageContext";
-import { DummyImg } from '../Config/images'
+import { DummyImg } from "@/assets";
 
 function AllProducts() {
   const { t } = useLanguageContext();
@@ -14,7 +14,7 @@ function AllProducts() {
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   const handleAddProduct = (id: any) => {
     navigate(`/seller/productsAdd/${id}`);
@@ -25,14 +25,14 @@ function AllProducts() {
   }, []);
 
   const fetchProducts = async () => {
-    setisLoading(true)
+    setisLoading(true);
     try {
-      const productsRef = ref(db, 'products');
+      const productsRef = ref(db, "products");
       const snapshot = await get(productsRef);
 
       if (snapshot.exists()) {
         const productsData = snapshot.val();
-        const productsArray = Object.keys(productsData).map(key => ({
+        const productsArray = Object.keys(productsData).map((key) => ({
           id: key,
           ...productsData[key],
         }));
@@ -43,7 +43,7 @@ function AllProducts() {
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-    setisLoading(false)
+    setisLoading(false);
   };
 
   const handleUpdateProduct = (id: any) => {
@@ -52,7 +52,7 @@ function AllProducts() {
   };
 
   const handleDeleteProduct = async (id: any) => {
-    setisLoading(true)
+    setisLoading(true);
     try {
       // Delete product from Firebase Realtime Database
       const productRef = ref(db, `products/${id}`);
@@ -66,7 +66,7 @@ function AllProducts() {
     } catch (error) {
       console.error("Error deleting product:", error);
     }
-    setisLoading(false)
+    setisLoading(false);
   };
 
   const handleProductView = (id: string) => {
@@ -124,9 +124,7 @@ function AllProducts() {
                         e.stopPropagation(), handleDeleteProduct(item.id)
                       )}
                     >
-                      <i
-                        className="fa-solid fa-trash fa-lg text-productBtn"
-                      ></i>
+                      <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                     </button>
                   </div>
                   <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
@@ -136,27 +134,21 @@ function AllProducts() {
                         e.stopPropagation(), handleUpdateProduct(item.id)
                       )}
                     >
-                      <i
-                        className="fa-solid fa-pen fa-lg text-productBtn"
-                      ></i>
+                      <i className="fa-solid fa-pen fa-lg text-productBtn"></i>
                     </button>
                   </div>
                 </div>
               </div>
             ))}
             <div className=" sm:w-1/5 w-full mb-10 ">
-              <div
-                className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full shadow-addNew"
-              >
+              <div className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full shadow-addNew">
                 <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                   <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                     <button
                       className="flex self-center"
                       onClick={handleAddProduct}
                     >
-                      <i
-                        className="fa-duotone fa-plus fa-2xl text-addNew"
-                      ></i>
+                      <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                     </button>
                   </div>
                   <p className="">{t(Strings.category.addNewButton)}</p>

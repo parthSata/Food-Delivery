@@ -1,9 +1,9 @@
-import { DummyImg } from "../Config/images";
+import { DummyImg } from "@/assets";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./CouponAdd";
-import { db } from '../../Firebase/firebase';
-import { ref, onValue, remove } from 'firebase/database';
+import { db } from "../../Firebase/firebase";
+import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
@@ -16,7 +16,7 @@ function Coupons() {
   // @ts-ignore
   const { updateId } = useParams();
   const [coupons, setCoupons] = useState<Coupon[]>([]);
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   const handleUpdateCoupons = (id: any) => {
     navigate(`/seller/couponAdd/${id}`);
@@ -26,7 +26,7 @@ function Coupons() {
     navigate(`/seller/couponView/${id}`, { state: { couponId: id } });
   };
   const handleDeleteCoupons = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
 
     try {
       const couponRef = ref(db, `coupons/${id}`);
@@ -35,7 +35,7 @@ function Coupons() {
     } catch (error) {
       console.error("Error deleting Coupons:", error);
     }
-    setisLoading(false)
+    setisLoading(false);
     navigate(`/seller/coupons`);
   };
 
@@ -44,22 +44,28 @@ function Coupons() {
   }, []);
 
   const fetchCoupons = () => {
-    setisLoading(true)
+    setisLoading(true);
 
-    const couponsRef = ref(db, 'coupons');
-    onValue(couponsRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const couponsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-        setCoupons(couponsArray);
-      } else {
-        setCoupons([]);
+    const couponsRef = ref(db, "coupons");
+    onValue(
+      couponsRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const couponsArray = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
+          setCoupons(couponsArray);
+        } else {
+          setCoupons([]);
+        }
+      },
+      (error) => {
+        console.error("Error fetching Coupons:", error);
       }
-    }, (error) => {
-      console.error("Error fetching Coupons:", error);
-    });
-    setisLoading(false)
-
+    );
+    setisLoading(false);
   };
 
   const openDialog = () => setIsDialogOpen(true);
@@ -70,7 +76,8 @@ function Coupons() {
         <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
         <div className=" flex justify-start pl-16 ">
           <span
-            className="absolute bottom-20 text-white text-2xl " style={{
+            className="absolute bottom-20 text-white text-2xl "
+            style={{
               fontFamily: "Bai Jamjuree",
             }}
           >
@@ -85,7 +92,8 @@ function Coupons() {
         <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
           {coupons.map((item) => (
             <div
-              className="sm:w-1/5  mb-10 flex-col  w-full cursor-pointer" style={{ fontFamily: "Montserrat Alternates" }}
+              className="sm:w-1/5  mb-10 flex-col  w-full cursor-pointer"
+              style={{ fontFamily: "Montserrat Alternates" }}
               onClick={() => handleCouponView(item.id)}
               key={item.id}
             >
@@ -111,9 +119,7 @@ function Coupons() {
                   onClick={() => handleDeleteCoupons(item.id)}
                 >
                   <Button className="">
-                    <i
-                      className="fa-solid fa-trash fa-lg text-productBtn"
-                    ></i>
+                    <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                   </Button>
                 </div>
                 <div
@@ -121,9 +127,7 @@ function Coupons() {
                   onClick={() => handleUpdateCoupons(item.id)}
                 >
                   <Button className="">
-                    <i
-                      className="fa-solid fa-pen fa-lg text-productBtn"
-                    ></i>
+                    <i className="fa-solid fa-pen fa-lg text-productBtn"></i>
                   </Button>
                 </div>
               </div>
@@ -131,9 +135,7 @@ function Coupons() {
           ))}
 
           <div className=" sm:w-1/5  mb-10 w-full">
-            <div
-              className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] shadow-addNew"
-            >
+            <div className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] shadow-addNew">
               <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[220px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                 <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                   <Button className="flex self-center">

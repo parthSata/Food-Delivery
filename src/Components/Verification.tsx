@@ -1,28 +1,27 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
-import { Logo, Resend, image } from "./Config/images";
+import { Logo, Resend, image } from "@/assets";
 import { toast } from "react-toastify";
 import Loader from "./ReusableComponent/Loader";
 import { useAuth } from "./AuthContext";
 import { child, get, ref } from "firebase/database";
 import { auth, db } from "../Firebase/firebase";
 
-
 function Verification() {
   const location = useLocation();
   const { login } = useAuth();
-  const { mobileNumber, callingCode } = location.state as { mobileNumber: string, callingCode: string };
+  const { mobileNumber, callingCode } = location.state as {
+    mobileNumber: string;
+    callingCode: string;
+  };
   const [otp, setOtp] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-
-
-
   const handleSubmit = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       const result = await window.confirmationResult.confirm(otp);
@@ -30,36 +29,44 @@ function Verification() {
       toast.success("User is verified");
 
       if (user) {
-        const userDataRef = ref(db, 'users');
+        const userDataRef = ref(db, "users");
         const snapshot = await get(child(userDataRef, `${mobileNumber}`));
 
         if (snapshot.exists()) {
-          const userData = snapshot.val()
+          const userData = snapshot.val();
 
           const firebaseUser = auth.currentUser;
           if (firebaseUser) {
             // @ts-ignore
             const token = await firebaseUser.getIdToken(true);
             const idTokenResult = await firebaseUser.getIdTokenResult();
-            const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
+            const role = (idTokenResult.claims.role ||
+              userData.role ||
+              "customer") as "admin" | "seller" | "customer";
 
             const user = {
               uid: firebaseUser.uid,
-              role: role
-            }
+              role: role,
+            };
 
-            login(user)
-            navigate(role === 'admin' ? '/admin' : role === 'seller' ? '/seller' : '/customer', { state: { mobileNumber, callingCode } });
+            login(user);
+            navigate(
+              role === "admin"
+                ? "/admin"
+                : role === "seller"
+                ? "/seller"
+                : "/customer",
+              { state: { mobileNumber, callingCode } }
+            );
           }
         }
       }
     } catch (error) {
       console.error("Error during OTP verification", error);
       setError("Invalid OTP!!");
-      setIsLoading(false)
+      setIsLoading(false);
     }
   };
-
 
   return (
     <>
@@ -68,14 +75,20 @@ function Verification() {
           <div className="flex justify-center items-center flex-col ">
             <img src={Logo} className="h-[106px] w-[96px]" alt="" />
             <div className="">
-              <p className="font-semibold text-[35px] md:text-[35px] lg:text-[32px]" style={{
-                fontFamily: "Bai Jamjuree",
-              }} >
+              <p
+                className="font-semibold text-[35px] md:text-[35px] lg:text-[32px]"
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }}
+              >
                 Verification
               </p>
-              <p className="font-semibold text-[#A2A3A5] text-[22px] md:text-[22px] lg:text-[25px]" style={{
-                fontFamily: "Bai Jamjuree",
-              }} >
+              <p
+                className="font-semibold text-[#A2A3A5] text-[22px] md:text-[22px] lg:text-[25px]"
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }}
+              >
                 Enter the OTP sent to{" "}
                 <span className="underline font-semibold">
                   {" "}
@@ -101,21 +114,32 @@ function Verification() {
             </div>
             {error && <p className="text-red-500">{error}</p>}
             <div className="">
-              <p className="text-[#DF201F] text-[22px] md:text-[22px] mt-2 font-semibold " style={{
-                fontFamily: "Bai Jamjuree",
-              }} >
+              <p
+                className="text-[#DF201F] text-[22px] md:text-[22px] mt-2 font-semibold "
+                style={{
+                  fontFamily: "Bai Jamjuree",
+                }}
+              >
                 Sec 08
               </p>
               <span className="flex flex-row">
-                <p className="font-semibold text-[18px] md:text-[20px]" style={{ fontFamily: "Montserrat Alternates" }} >
+                <p
+                  className="font-semibold text-[18px] md:text-[20px]"
+                  style={{ fontFamily: "Montserrat Alternates" }}
+                >
                   Resend Otp
                 </p>
-                <img src={Resend} alt="" className="h-[34px] ml-2 w-[34px] md:h-[34px] md:w-[34px]" />
+                <img
+                  src={Resend}
+                  alt=""
+                  className="h-[34px] ml-2 w-[34px] md:h-[34px] md:w-[34px]"
+                />
               </span>
             </div>
             <button
               type="submit"
-              className="bg-red-500 h-[60px] shadow-adminbtn md:h-[60px] w-[260px] md:w-[260px] rounded-[60px] text-white text-[22px] md:text-[22px] mt-5" style={{
+              className="bg-red-500 h-[60px] shadow-adminbtn md:h-[60px] w-[260px] md:w-[260px] rounded-[60px] text-white text-[22px] md:text-[22px] mt-5"
+              style={{
                 fontFamily: "Bai Jamjuree",
               }}
               onClick={handleSubmit}
@@ -125,7 +149,11 @@ function Verification() {
           </div>
 
           <div className="">
-            <img src={image} alt="" className="h-[413px] w-[454px] md:h-[413px] ml-10 md:w-[454px]" />
+            <img
+              src={image}
+              alt=""
+              className="h-[413px] w-[454px] md:h-[413px] ml-10 md:w-[454px]"
+            />
           </div>
         </div>
       </Loader>

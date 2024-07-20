@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import AddCategory from "./AddCategory";
-import { search, Pizza } from "../Config/images";
+import { search, Pizza } from "@/assets";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "../../Firebase/firebase"; // Adjust the import based on your firebase setup
@@ -39,15 +39,14 @@ function Home(): JSX.Element {
     indexOfFirstItem,
     indexOfLastItem
   );
-  const [isLoading, setisLoading] = useState(false)
-
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
   const fetchCategories = () => {
-    setisLoading(true)
+    setisLoading(true);
     const categoriesRef = ref(db, "categories");
     onValue(categoriesRef, (snapshot) => {
       const data = snapshot.val();
@@ -57,14 +56,13 @@ function Home(): JSX.Element {
           ...data[key],
         }));
         setCategories(categoriesData);
-        setisLoading(false)
+        setisLoading(false);
       }
     });
-
   };
 
   const handleAddOrUpdateCategory = async (newCategory: CategoriesData) => {
-    setisLoading(true)
+    setisLoading(true);
     try {
       if (newCategory.id) {
         // Update category
@@ -79,7 +77,7 @@ function Home(): JSX.Element {
       setShowAddCategoryDialog(false);
     } catch (error) {
       console.error("Error adding/updating category:", error);
-      setisLoading(false)
+      setisLoading(false);
     }
   };
 
@@ -88,7 +86,7 @@ function Home(): JSX.Element {
   };
 
   const handleDelete = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
     try {
       const categoryRef = ref(db, `categories/${id}`);
       await remove(categoryRef);
@@ -96,8 +94,7 @@ function Home(): JSX.Element {
     } catch (error) {
       console.error("Error deleting category:", error);
     } finally {
-      setisLoading(false)
-
+      setisLoading(false);
     }
   };
 
@@ -128,11 +125,11 @@ function Home(): JSX.Element {
   return (
     <div>
       {/* Body Part Started */}
-      <div
-        className="flex justify-between items-center font-BaiJamjuree font-semibold  mt-10 flex-wrap gap-2"
-      >
+      <div className="flex justify-between items-center font-BaiJamjuree font-semibold  mt-10 flex-wrap gap-2">
         <div className="">
-          <span className="font-semibold  text-[#161A1D]">{t(Strings.category.categoryList)}</span>
+          <span className="font-semibold  text-[#161A1D]">
+            {t(Strings.category.categoryList)}
+          </span>
         </div>
         <div className="flex ">
           <div className="flex justify-evenly flex-wrap gap-4">
@@ -168,10 +165,7 @@ function Home(): JSX.Element {
       <Loader isLoading={isLoading}>
         <div className="flex flex-col relative ">
           <div className="mt-4 flex rounded-[10px] absolute overflow-hidden w-full overflow-x-auto max-w-[100%] sm:overflow-x-scroll md:overflow-x-auto lg:overflow-x-auto">
-            <table
-              className="w-full text-md min-w-full shadow-[2px 2px 30px 2px #FFF3E5] text-left font-BaiJamjuree font-semibold  rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll"
-
-            >
+            <table className="w-full text-md min-w-full shadow-[2px 2px 30px 2px #FFF3E5] text-left font-BaiJamjuree font-semibold  rtl:text-right text-gray-500 dark:text-gray-400 table-auto overflow-x-scroll">
               <thead className="rounded-full bg-[#DF201F] ">
                 <tr className="text-[#FFFFFF] font-semibold ">
                   <th className="border-r-1 py-2 px-4  border-r-[#FFFFFF] h-[60px] rounded-[8px, 8px, 0px, 0px] opacity-100">
@@ -224,17 +218,17 @@ function Home(): JSX.Element {
                       <i
                         className="fa-solid fa-trash fa-xl cursor-pointer "
                         onClick={() => handleDelete(item.id)}
-                      // Delete Category
+                        // Delete Category
                       ></i>
                       <i
                         className="fa-solid fa-pen fa-xl cursor-pointer "
                         onClick={() => handleUpdate(item.id)}
-                      // Update Category
+                        // Update Category
                       ></i>{" "}
                       <i
                         className="fa-solid fa-eye fa-xl cursor-pointer"
                         onClick={() => handleViewCategories(item.id)}
-                      // View  Category Categories
+                        // View  Category Categories
                       ></i>
                     </td>
                   </tr>
@@ -257,9 +251,7 @@ function Home(): JSX.Element {
               onClick={() => handlePreviousPage()}
               disabled={currentPage === 1}
             >
-              <i
-                className="fa-solid fa-angle-left text-fontGray"
-              ></i>
+              <i className="fa-solid fa-angle-left text-fontGray"></i>
             </button>
             <ul className="flex items-end justify-around w-[80px] top-[]">
               {[...Array(totalPages)].map((_, index) => (
@@ -267,8 +259,9 @@ function Home(): JSX.Element {
                   <a
                     href="#"
                     onClick={() => handlePageChange(index + 1)}
-                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
-                      }`}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
+                      currentPage === index + 1 ? "font-bold" : ""
+                    }`}
                   >
                     {index + 1}
                   </a>
@@ -280,14 +273,11 @@ function Home(): JSX.Element {
               onClick={() => handleNextPage()}
               disabled={currentPage === totalPages}
             >
-              <i
-                className="fa-solid fa-angle-right text-fontGray"
-              ></i>
+              <i className="fa-solid fa-angle-right text-fontGray"></i>
             </button>
           </div>
         </div>
-      )
-      }
+      )}
 
       {/* Pagination */}
       {/* Body Ended Started */}
@@ -334,9 +324,8 @@ function Home(): JSX.Element {
             </div>
           </div>
         </div>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
 

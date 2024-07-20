@@ -1,4 +1,3 @@
-import EmployeImg from "../../assets/OurTeam/Ellipse 7.png";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./TeamAdd";
@@ -8,6 +7,7 @@ import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 import config from "../../Config";
+import { EmplyoeImg } from "@/assets";
 
 function OurTeam() {
   const { t } = useLanguageContext();
@@ -23,19 +23,24 @@ function OurTeam() {
 
   const handleDeleteMember = async (id: string) => {
     try {
-      const response = await fetch(`${config.firebaseDatabaseUrl}/team/${id}.json`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `${config.firebaseDatabaseUrl}/team/${id}.json`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
-        setMember((prevMembers) => prevMembers.filter((member) => member.id !== id));
-        toast.success('Member deleted successfully');
+        setMember((prevMembers) =>
+          prevMembers.filter((member) => member.id !== id)
+        );
+        toast.success("Member deleted successfully");
       } else {
-        console.error('Failed to delete Member:', response.statusText);
+        console.error("Failed to delete Member:", response.statusText);
       }
     } catch (error) {
-      console.error('Error deleting Member:', error);
+      console.error("Error deleting Member:", error);
     }
-    navigate('/team');
+    navigate("/team");
   };
 
   useEffect(() => {
@@ -62,14 +67,12 @@ function OurTeam() {
     }
   };
 
-
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
     <div>
-      <Container >
-
+      <Container>
         <div className="mt-14">
           <div className="flex flex-wrap gap-16 mt-6 justify-center">
             {member.map((item) => (
@@ -80,7 +83,7 @@ function OurTeam() {
                 <div className="w-full flex justify-center ">
                   <div className="absolute -top-10 ">
                     <img
-                      src={item.images[0] || EmployeImg}
+                      src={item.images[0] || EmplyoeImg}
                       alt="No Image Found"
                       className=" h-40 w-40"
                     />
@@ -94,18 +97,14 @@ function OurTeam() {
                       </span>
                     </div>
                   </div>
-                  <div
-                    className="h-[70%] w-full border-2 rounded-t-lg shadow-div"
-                  ></div>
+                  <div className="h-[70%] w-full border-2 rounded-t-lg shadow-div"></div>
                   <div className="absolute  flex justify-center w-full gap-2  bottom-[98px]">
                     <div
                       className="bg-[#DF201F]  h-12 w-12 flex justify-center rounded-3xl "
                       onClick={() => handleDeleteMember(item.id)}
                     >
                       <Button className="">
-                        <i
-                          className="fa-solid fa-trash fa-lg text-productBtn"
-                        ></i>
+                        <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                       </Button>
                     </div>
                     <div
@@ -113,9 +112,7 @@ function OurTeam() {
                       onClick={() => handleUpdateMember(item.id)}
                     >
                       <Button className="">
-                        <i
-                          className="fa-solid fa-pen fa-lg text-productBtn"
-                        ></i>
+                        <i className="fa-solid fa-pen fa-lg text-productBtn"></i>
                       </Button>
                     </div>
                   </div>
@@ -123,18 +120,11 @@ function OurTeam() {
               </div>
             ))}
             <div className=" sm:w-1/5 w-full mb-10 mt-8 h-[350px]">
-              <div
-                className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full shadow-addNew"
-              >
+              <div className="flex justify-center font-semibold flex-col text-md items-center  h-[200px] w-full shadow-addNew">
                 <div className="border-dotted rounded-[15px] border-4 h-[180px] flex-col gap-2 text-md w-[200px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                   <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
-                    <Button
-                      className="flex self-center"
-                      onClick={openDialog}
-                    >
-                      <i
-                        className="fa-duotone fa-plus fa-2xl text-addNew"
-                      ></i>
+                    <Button className="flex self-center" onClick={openDialog}>
+                      <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                     </Button>
                   </div>
                   <p className="">{t(Strings.category.addNewButton)}</p>

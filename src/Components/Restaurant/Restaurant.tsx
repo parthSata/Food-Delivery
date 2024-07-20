@@ -1,15 +1,14 @@
-
 import { Restaurant as RestaurantInterface } from "./AddRestaurants";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { db } from '../../Firebase/firebase';
-import { ref, onValue, remove } from 'firebase/database';
+import { db } from "../../Firebase/firebase";
+import { ref, onValue, remove } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 import { Container } from "../Config/index";
-import { Noodles, Star, DummyImg } from "../Config/images";
+import { Noodles, Star, DummyImg } from "@/assets";
 
 function Restaurant() {
   const { t } = useLanguageContext();
@@ -26,7 +25,7 @@ function Restaurant() {
     latitude: "",
     longitude: "",
   });
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   const handleAddRestaurant = (id: any) => {
     navigate(`/addrestaurants/${id}`);
@@ -37,24 +36,27 @@ function Restaurant() {
   }, []);
 
   const fetchRestaurants = async () => {
-    setisLoading(true)
+    setisLoading(true);
 
-    const restaurantRef = ref(db, 'restaurants');
-    onValue(restaurantRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const restaurantArray: any = Object.keys(data).map((key) => ({
-          id: key,
-          ...data[key],
-        }));
-        setRestarants(restaurantArray);
-        setRestarantList(restaurantArray);
+    const restaurantRef = ref(db, "restaurants");
+    onValue(
+      restaurantRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const restaurantArray: any = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+          }));
+          setRestarants(restaurantArray);
+          setRestarantList(restaurantArray);
+        }
+      },
+      (error) => {
+        console.error("Error fetching restaurants:", error);
       }
-    }, (error) => {
-      console.error("Error fetching restaurants:", error);
-    });
-    setisLoading(false)
-
+    );
+    setisLoading(false);
   };
 
   const handleUpdateRestaurant = (id: any) => {
@@ -62,7 +64,7 @@ function Restaurant() {
   };
 
   const handleDeleteRestaurant = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
 
     const restaurantRef = ref(db, `restaurants/${id}`);
     try {
@@ -73,15 +75,13 @@ function Restaurant() {
     } catch (error) {
       console.error("Error deleting restaurant:", error);
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   return (
     <div>
-      <Container >
+      <Container>
         <Loader isLoading={isLoading}>
-
           <div className="relative mt-4 bg-black opacity-90 w-full">
             <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
             <div className=" flex justify-start pl-16 ">
@@ -98,7 +98,8 @@ function Restaurant() {
           <div className="">
             <div className="mt-6 w-full  flex gap-2 justify-around flex-wrap  ">
               {restarants.map((item) => (
-                <div className="sm:w-1/4 mb-10 font-semibold shadow-3xl"
+                <div
+                  className="sm:w-1/4 mb-10 font-semibold shadow-3xl"
                   key={item.id}
                   style={{
                     fontFamily: "Bai Jamjuree",
@@ -117,9 +118,7 @@ function Restaurant() {
                         <span className="text-lg">{item.ratings}</span>
                       </div>
                       <Button className="border border-[#DF201F] rounded-lg text-[#DF201F] p-1.5">
-                        <i
-                          className="fa-solid fa-location-dot  fa-lg text-direction"
-                        ></i>{" "}
+                        <i className="fa-solid fa-location-dot  fa-lg text-direction"></i>{" "}
                         {t(Strings.restaurant.directionsButton)}
                       </Button>
                     </span>
@@ -142,9 +141,7 @@ function Restaurant() {
                       onClick={() => handleDeleteRestaurant(item.id)}
                     >
                       <Button className="">
-                        <i
-                          className="fa-solid fa-trash fa-lg text-productBtn"
-                        ></i>
+                        <i className="fa-solid fa-trash fa-lg text-productBtn"></i>
                       </Button>
                     </div>
                     <div className="bg-[#94CD00]  h-12 w-12 flex justify-center rounded-3xl">
@@ -160,18 +157,14 @@ function Restaurant() {
               ))}
 
               <div className=" sm:w-1/4  mb-10 w-full">
-                <div
-                  className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] shadow-addNew"
-                >
+                <div className="flex justify-center w-full font-semibold flex-col text-md items-center  h-[200px] shadow-addNew">
                   <div className="border-dotted rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[280px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                       <Button
                         className="flex self-center"
                         onClick={() => handleAddRestaurant(restarantList.id)}
                       >
-                        <i
-                          className="fa-duotone fa-plus fa-2xl text-addNew"
-                        ></i>
+                        <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>
                       </Button>
                     </div>
                     <p className="">{t(Strings.category.addNewButton)}</p>

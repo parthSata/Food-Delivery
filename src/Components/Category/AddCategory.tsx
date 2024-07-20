@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { CategoriesData } from "./CategoryPage";
-import { db } from '../../Firebase/firebase';
-import { set, ref, onValue, update } from 'firebase/database';
-import { Loaders } from "../Config/images";
+import { db } from "../../Firebase/firebase";
+import { set, ref, onValue, update } from "firebase/database";
+import { Loaders } from "@/assets";
 import Strings from "../Config/Strings";
 import Input from "../ReusableComponent/Input";
 import { useLanguageContext } from "../LanguageContext";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
-  id: string
+  id: string;
   onClose: () => void;
 }
 
@@ -31,8 +31,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
   const [errors, setErrors] = useState<Partial<CategoriesData>>({});
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [isLoading, setisLoading] = useState(false)
-
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -41,31 +40,38 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
   }, [id]);
 
   const fetchCategoryById = async (id: string) => {
-    setisLoading(true)
+    setisLoading(true);
     const categoryRef = ref(db, `categories/${id}`);
-    onValue(categoryRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        setCategory(data as CategoriesData);
-        setImagePreview(data.imageUrl || null);
-      } else {
-        toast.error("Error fetching category.");
+    onValue(
+      categoryRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          setCategory(data as CategoriesData);
+          setImagePreview(data.imageUrl || null);
+        } else {
+          toast.error("Error fetching category.");
+        }
+      },
+      {
+        onlyOnce: true,
       }
-    }, {
-      onlyOnce: true
-    });
-    setisLoading(false)
+    );
+    setisLoading(false);
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
 
     const newErrors: Partial<CategoriesData> = {};
-    if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
-    if (isFieldEmpty(category.description)) newErrors.description = "Description is required";
-    if (isFieldEmpty(category.numberOfProducts)) newErrors.numberOfProducts = "Number Of Products is required";
+    if (isFieldEmpty(category.categoryName))
+      newErrors.categoryName = "Category Name is required";
+    if (isFieldEmpty(category.description))
+      newErrors.description = "Description is required";
+    if (isFieldEmpty(category.numberOfProducts))
+      newErrors.numberOfProducts = "Number Of Products is required";
     if (isFieldEmpty(category.status)) newErrors.status = "Status is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -84,23 +90,26 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
     try {
       const categoryRef = ref(db, `categories/${id}`);
       await update(categoryRef, updatedCategory);
-      toast.success('Category successfully updated');
+      toast.success("Category successfully updated");
     } catch (error) {
       toast.error("Error updating category.");
     }
-    setisLoading(false)
-    onClose()
+    setisLoading(false);
+    onClose();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    setisLoading(true)
+    setisLoading(true);
 
     e.preventDefault();
     const newErrors: Partial<CategoriesData> = {};
 
-    if (isFieldEmpty(category.categoryName)) newErrors.categoryName = "Category Name is required";
-    if (isFieldEmpty(category.description)) newErrors.description = "Description is required";
-    if (isFieldEmpty(category.numberOfProducts)) newErrors.numberOfProducts = "Number Of Products is required";
+    if (isFieldEmpty(category.categoryName))
+      newErrors.categoryName = "Category Name is required";
+    if (isFieldEmpty(category.description))
+      newErrors.description = "Description is required";
+    if (isFieldEmpty(category.numberOfProducts))
+      newErrors.numberOfProducts = "Number Of Products is required";
     if (isFieldEmpty(category.status)) newErrors.status = "Status is required";
 
     if (Object.keys(newErrors).length > 0) {
@@ -128,19 +137,22 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
     } catch (error) {
       toast.error("Error adding category.");
     }
-    setisLoading(false)
+    setisLoading(false);
     resetForm();
-    onClose()
+    onClose();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
     const { name, value } = e.target;
-    const updatedCategory: any = { ...category }
-    updatedCategory[name] = value
+    const updatedCategory: any = { ...category };
+    updatedCategory[name] = value;
 
-    setCategory(updatedCategory)
+    setCategory(updatedCategory);
   };
-
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -164,27 +176,28 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
       numberOfProducts: "",
       status: "In Stock",
       id: "",
-      imageUrl: ""
+      imageUrl: "",
     });
     setImagePreview(null);
     setImageFile(null);
   };
 
-
-
   const uploadImageToCloudinary = async (file: File) => {
-    setisLoading(true)
+    setisLoading(true);
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", presetKey);
     formData.append("cloud_name", cloudName);
-    formData.append("folder", "Categories")
+    formData.append("folder", "Categories");
 
     try {
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -195,7 +208,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
       }
     } catch (error) {
       toast.error("Error uploading image.");
-      setisLoading(false)
+      setisLoading(false);
       return "";
     }
   };
@@ -212,7 +225,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
           className={`flex flex-col items-center relative mt-[2px] sm:mt-[60px] md:mt-[10px] lg:mt-[10px] `}
         >
           <span
-            className="font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
+            className="font-semibold"
+            style={{ fontFamily: "Montserrat Alternates" }}
           >
             {t(Strings.addCategory.labelImage)}
           </span>
@@ -220,7 +234,11 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
           <div className="">
             <div className="flex justify-center items-starts flex-col ">
               {imagePreview ? (
-                <img src={imagePreview} alt="Selected" className="w-full h-64 object-cover rounded-lg" />
+                <img
+                  src={imagePreview}
+                  alt="Selected"
+                  className="w-full h-64 object-cover rounded-lg"
+                />
               ) : (
                 <Input
                   type="file"
@@ -234,7 +252,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
         </div>
         <div className="w-full max-w-lg">
           <form
-            className="w-full flex flex-row font-semibold" style={{ fontFamily: "Montserrat Alternates" }}
+            className="w-full flex flex-row font-semibold"
+            style={{ fontFamily: "Montserrat Alternates" }}
           >
             {isLoading ? (
               <div className="flex justify-center items-center mt-20">
@@ -256,8 +275,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                   />
                   {errors.categoryName && (
                     <span
-                      className={`text-red-600 text-sm ${category.categoryName ? "" : "hidden"
-                        }}`}
+                      className={`text-red-600 text-sm ${
+                        category.categoryName ? "" : "hidden"
+                      }}`}
                     >
                       {errors.categoryName}
                     </span>
@@ -299,7 +319,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                     value={category.numberOfProducts}
                   />
                   {errors.numberOfProducts && (
-                    <span className="text-red-600 text-sm">{errors.numberOfProducts}</span>
+                    <span className="text-red-600 text-sm">
+                      {errors.numberOfProducts}
+                    </span>
                   )}
                 </div>
 
@@ -311,8 +333,9 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                     name="status"
                     value={category.status}
                     className="appearance-none block w-full h-[60px] text-[#A2A3A5] border border-[2px solid #E8E8E8] rounded py-3 px-4 leading-tight hover:border-[#9ad219]    focus:outline-[#99c928]    bg-white "
-                    onChange={(e) => handleChange(e)}                >
-                    <option className="" value="In Stock" >
+                    onChange={(e) => handleChange(e)}
+                  >
+                    <option className="" value="In Stock">
                       In Stock
                     </option>
                     <option className="" value="Out of Stock">
@@ -323,8 +346,8 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
                 {errors.status && (
                   <span className="text-red-600 text-sm">{errors.status}</span>
                 )}
-
-              </div>)}
+              </div>
+            )}
           </form>
         </div>
       </div>

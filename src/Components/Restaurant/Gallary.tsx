@@ -1,40 +1,39 @@
-
-
-import { GallaryHeader, GallaryModelAdd } from '../Config/index'
 import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
-import { ref, get } from 'firebase/database';
-import { db } from '../../Firebase/firebase';
+import { ref, get } from "firebase/database";
+import { db } from "../../Firebase/firebase";
 import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
-import { BurgerGallary, Link } from '../Config/images';
-
+import { BurgerGallary, Link } from "@/assets";
+import { GallaryHeader, GallaryModelAdd } from "../Config/index";
 
 const Gallary: React.FC<GallaryInterface> = () => {
   const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
-  const [isLoading, setisLoading] = useState(false)
+  const [isLoading, setisLoading] = useState(false);
 
   useEffect(() => {
     fetchGallaryImages();
   }, []);
 
   const fetchGallaryImages = async () => {
-    setisLoading(true)
+    setisLoading(true);
 
     try {
-      const gallaryRef = ref(db, 'gallary');
+      const gallaryRef = ref(db, "gallary");
       const snapshot = await get(gallaryRef);
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const gallaryArray = data ? Object.keys(data).map(key => ({
-          id: key,
-          ...data[key],
-        })) : [];
+        const gallaryArray = data
+          ? Object.keys(data).map((key) => ({
+              id: key,
+              ...data[key],
+            }))
+          : [];
         setGallaryImage(gallaryArray);
       } else {
         console.error("No gallary images available");
@@ -42,21 +41,23 @@ const Gallary: React.FC<GallaryInterface> = () => {
     } catch (error) {
       console.error("Error fetching gallary images:", error);
     }
-    setisLoading(false)
-
+    setisLoading(false);
   };
 
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
   return (
     <>
-      <Container >
+      <Container>
         <div className="">
           <GallaryHeader />
           <Loader isLoading={isLoading}>
             <div className="bg-[#D9D9D9] flex flex-row flex-wrap h-full w-full ">
               {gallaryImage.map((item) => (
-                <div className="relative sm:w-1/4 p-4 h-full w-full" key={item.id}>
+                <div
+                  className="relative sm:w-1/4 p-4 h-full w-full"
+                  key={item.id}
+                >
                   <div className="">
                     <img
                       src={item.images[0] || BurgerGallary}
@@ -72,9 +73,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
                 </div>
               ))}
               <div className=" sm:w-1/4 p-4 h-[290px] w-full ">
-                <div
-                  className="flex justify-center bg-[#FFFFFF] rounded-[15px] w-full font-semibold flex-col text-md items-center  h-[260px] shadow-addNew"
-                >
+                <div className="flex justify-center bg-[#FFFFFF] rounded-[15px] w-full font-semibold flex-col text-md items-center  h-[260px] shadow-addNew">
                   <div className="border-dotted rounded-[15px] border-4 h-[240px] flex-col gap-2 text-md w-[240px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                     <div className="relative   bg-[#DF201F] h-12  w-12 flex justify-center  rounded-full">
                       <Button className="flex self-center">

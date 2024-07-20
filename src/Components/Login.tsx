@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Logo, Online, Phone, flag, uk, us, united, uruguay, Store, Person } from './Config/images';
+import {
+  Logo,
+  Online,
+  Phone,
+  flag,
+  uk,
+  us,
+  united,
+  uruguay,
+  Store,
+  Person,
+} from "@/assets";
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
 import { auth, db } from "../Firebase/firebase";
-import { ref, get, child } from 'firebase/database';
+import { ref, get, child } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { useAuth } from "./AuthContext";
@@ -12,18 +23,19 @@ import ReCAPTCHA from "react-google-recaptcha";
 import config from "../Config";
 // import Loader from "./Loader";
 
-
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [callingCode, setCallingCode] = useState<string>("+91");
   const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage] = useState<string>("Please enter a valid 10-digit phone number.");
+  const [errorMessage] = useState<string>(
+    "Please enter a valid 10-digit phone number."
+  );
   const [otp, setOtp] = useState<string>("");
   const [passcode, setPasscode] = useState<string>("");
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-  const [role, setRole] = useState("")
+  const [role, setRole] = useState("");
   // const [isLoading, setIsLoading] = useState(false)
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,22 +43,26 @@ const Login: React.FC = () => {
   };
 
   useEffect(() => {
-    ConfigureCaptcha()
+    ConfigureCaptcha();
   }, []);
 
   const ConfigureCaptcha = () => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible',
-        callback: (response: any) => {
-          setRecaptchaToken(response);
-        },
-        'expired-callback': () => {
-          toast.warning("reCAPTCHA expired");
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: (response: any) => {
+            setRecaptchaToken(response);
+          },
+          "expired-callback": () => {
+            toast.warning("reCAPTCHA expired");
+          },
         }
-      });
+      );
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -59,7 +75,6 @@ const Login: React.FC = () => {
     setRecaptchaToken(token);
   };
 
-
   const handleLogin = async (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
     ConfigureCaptcha();
@@ -69,11 +84,15 @@ const Login: React.FC = () => {
       const appVerifier = window.recaptchaVerifier;
 
       try {
-        const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+        const result = await signInWithPhoneNumber(
+          auth,
+          phoneNumber,
+          appVerifier
+        );
         window.confirmationResult = result;
         toast.success("Otp Send Successfully");
 
-        const userDataRef = ref(db, 'users');
+        const userDataRef = ref(db, "users");
         const snapshot = await get(child(userDataRef, `${mobileNumber}`));
 
         if (snapshot.exists()) {
@@ -86,15 +105,17 @@ const Login: React.FC = () => {
             if (firebaseUser) {
               const token = await firebaseUser.getIdToken(true);
               const idTokenResult = await firebaseUser.getIdTokenResult();
-              const role = (idTokenResult.claims.role || userData.role || 'customer') as 'admin' | 'seller' | 'customer';
-              console.log("🚀 ~ handleLogin ~ role:", role)
+              const role = (idTokenResult.claims.role ||
+                userData.role ||
+                "customer") as "admin" | "seller" | "customer";
+              console.log("🚀 ~ handleLogin ~ role:", role);
 
               const user = {
                 uid: firebaseUser.uid,
                 role: role,
               };
 
-              localStorage.setItem('accessToken', token);
+              localStorage.setItem("accessToken", token);
               login(user);
             }
             navigate("/verification", { state: { mobileNumber, callingCode } });
@@ -108,12 +129,12 @@ const Login: React.FC = () => {
         console.error("Error during login:", error);
         toast.error("An error occurred. Please try again.");
       }
-
     } else {
-      toast.warn("Invalid inputs. Please check your mobile number and passcode.");
+      toast.warn(
+        "Invalid inputs. Please check your mobile number and passcode."
+      );
     }
   };
-
 
   const handlePasscodeChange = (otp: string | null) => {
     if (otp !== null && otp !== undefined) {
@@ -150,12 +171,25 @@ const Login: React.FC = () => {
       {/* <Loader isLoading={isLoading}> */}
       <div className="flex flex-row justify-center items-center gap-5 h-full w-full flex-wrap-reverse xl:flex-wrap">
         {/* Login */}
-        <form onSubmit={handleLogin} style={{ fontFamily: "Montserrat Alternates" }}>
+        <form
+          onSubmit={handleLogin}
+          style={{ fontFamily: "Montserrat Alternates" }}
+        >
           <div className="border-black flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center">
               <img className="h-[80px] w-[80px]" src={Logo} alt="" />
-              <p className="text-[30px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Login</p>
-              <p className="text-[#A2A3A5] mt-0 text-[16px] font-semibold" style={{ fontFamily: "Bai Jamjuree" }}>Welcome Back!</p>
+              <p
+                className="text-[30px] font-semibold"
+                style={{ fontFamily: "Bai Jamjuree" }}
+              >
+                Login
+              </p>
+              <p
+                className="text-[#A2A3A5] mt-0 text-[16px] font-semibold"
+                style={{ fontFamily: "Bai Jamjuree" }}
+              >
+                Welcome Back!
+              </p>
 
               {/* Country dropdown */}
               <div className="flex mt-5 border-b-2">
@@ -167,11 +201,21 @@ const Login: React.FC = () => {
                     style={{ fontFamily: "Bai Jamjuree" }}
                     value={callingCode}
                   >
-                    <option className="h-8 w-8" value="+91">+91</option>
-                    <option className="h-8 w-8" value="+1">+1</option>
-                    <option className="h-8 w-8" value="+971">+971</option>
-                    <option className="h-8 w-8" value="+44">+44</option>
-                    <option className="h-8 w-8" value="+598">+598</option>
+                    <option className="h-8 w-8" value="+91">
+                      +91
+                    </option>
+                    <option className="h-8 w-8" value="+1">
+                      +1
+                    </option>
+                    <option className="h-8 w-8" value="+971">
+                      +971
+                    </option>
+                    <option className="h-8 w-8" value="+44">
+                      +44
+                    </option>
+                    <option className="h-8 w-8" value="+598">
+                      +598
+                    </option>
                   </select>
                 </div>
                 <div className="flex items-center justify-center">
@@ -203,12 +247,17 @@ const Login: React.FC = () => {
                         {...props}
                         key={index}
                         className="rounded-md border-2 mr-2 p-[12px] focus:outline-none font-medium [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[70px] lg:h-[72px] lg:w-[65px] md:w-[60px] h-[72px] w-[60px]"
-                        style={{ width: 50, fontFamily: "Montserrat Alternates" }}
+                        style={{
+                          width: 50,
+                          fontFamily: "Montserrat Alternates",
+                        }}
                       />
                     )}
                   />
                 </div>
-                <p className="font-semibold text-[#DF201F] self-end">Forgot Passcode</p>
+                <p className="font-semibold text-[#DF201F] self-end">
+                  Forgot Passcode
+                </p>
                 <div className="flex  flex-col ">
                   <div className="flex items-center justify-center flex-col gap-6">
                     <div className="flex mt-2 justify-between gap-1 item-center sm:justify-around font-semibold">
@@ -221,8 +270,17 @@ const Login: React.FC = () => {
                           className="hidden"
                           id="customer-role"
                         />
-                        <label htmlFor="customer-role" className="flex items-center gap-3 cursor-pointer">
-                          <div className={`flex justify-center items-center rounded-full ${role === "customer" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                        <label
+                          htmlFor="customer-role"
+                          className="flex items-center gap-3 cursor-pointer"
+                        >
+                          <div
+                            className={`flex justify-center items-center rounded-full ${
+                              role === "customer"
+                                ? "bg-[#E23635]"
+                                : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
+                          >
                             <img src={Person} alt="" className="h-5" />
                           </div>
                           Customer
@@ -237,8 +295,17 @@ const Login: React.FC = () => {
                           className="hidden"
                           id="seller-role"
                         />
-                        <label htmlFor="seller-role" className="flex items-center gap-3 cursor-pointer">
-                          <div className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"} h-10 w-10`}>
+                        <label
+                          htmlFor="seller-role"
+                          className="flex items-center gap-3 cursor-pointer"
+                        >
+                          <div
+                            className={`flex justify-center items-center rounded-full ${
+                              role === "seller"
+                                ? "bg-[#E23635]"
+                                : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
+                          >
                             <img src={Store} alt="" className="h-5" />
                           </div>
                           Seller
@@ -255,8 +322,13 @@ const Login: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
-                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"}`}
+                  style={{
+                    fontFamily: "Bai Jamjuree",
+                    boxShadow: "2px 2px 25px 2px #DF201F80",
+                  }}
+                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
+                    isValid ? "" : "cursor-not-allowed opacity-50"
+                  }`}
                   disabled={!isValid || !recaptchaToken}
                 >
                   LOGIN
@@ -272,19 +344,25 @@ const Login: React.FC = () => {
             <div className="mt-4">
               <p className="text-gray-400 text-lg">
                 Don’t Have an account?
-                <span className="text-[#161A1D] font-semibold"><Link to="/register"> Register now?</Link></span>
+                <span className="text-[#161A1D] font-semibold">
+                  <Link to="/register"> Register now?</Link>
+                </span>
               </p>
             </div>
           </div>
-        </form >
+        </form>
 
         {/* image */}
-        <div className="flex justify" >
-          <img src={Online} className="h-full w-[425px] md:w-[435px] md:h-[400px]" alt="" />
+        <div className="flex justify">
+          <img
+            src={Online}
+            className="h-full w-[425px] md:w-[435px] md:h-[400px]"
+            alt=""
+          />
         </div>
 
         <div id="recaptcha-container"></div>
-      </div >
+      </div>
       {/* </Loader> */}
     </>
   );

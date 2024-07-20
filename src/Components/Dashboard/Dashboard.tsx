@@ -1,4 +1,4 @@
-import { Cart, Revenue, Customer, TotalShops, Pizza } from "../Config/images";
+import { Cart, Revenue, Customer, TotalShops, Pizza } from "@/assets";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
 import Strings from "../Config/Strings";
@@ -33,7 +33,7 @@ function Dashboard() {
       >
         <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
-            <span className="self-start">{ }</span>
+            <span className="self-start">{}</span>
             <span className="">{t(Strings.dashboard.recentOrder)}</span>
           </div>
           <span className="">
@@ -70,14 +70,9 @@ function Dashboard() {
       </div>
       {/* )} */}
       <div className="flex gap-6 ">
-        <div
-          className="mt-4 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full flex-wrap shadow-dashboard"
-
-        >
+        <div className="mt-4 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full flex-wrap shadow-dashboard">
           <div className="flex justify-around gap-6 flex-wrap lg:flex-nowrap ">
-            <div
-              className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full border-2 shadow-dashboard"
-            >
+            <div className="mt-8 rounded-[15px] bg-[#FFFFFF] h-[370px] w-full border-2 shadow-dashboard">
               <div className="flex justify-around">
                 <div className="relative  w-full">
                   <table
@@ -129,12 +124,14 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-            <div
-              className="flex flex-wrap  mt-8 border-2  rounded-[15px] h-[370px] w-full shadow-dashboard"
-            >
+            <div className="flex flex-wrap  mt-8 border-2  rounded-[15px] h-[370px] w-full shadow-dashboard">
               <div className="flex flex-col m-4">
-                <span className="self-start">{t(Strings.dashboard.revenue)}</span>
-                <span className="self-start">{t(Strings.dashboard.revenueAmount)}</span>
+                <span className="self-start">
+                  {t(Strings.dashboard.revenue)}
+                </span>
+                <span className="self-start">
+                  {t(Strings.dashboard.revenueAmount)}
+                </span>
               </div>
               <div className="ml-10 mb-10 " style={{ width: 550 }}>
                 {/* <LineChart /> */}
@@ -143,8 +140,12 @@ function Dashboard() {
           </div>
           <div className="mt-24 h-full w-full">
             <div className="flex justify-between font-semibold text-xl">
-              <span className="text-[#161A1D] ">{t(Strings.dashboard.recentlyPlacedOrders)}</span>
-              <span className="text-[#DF201F]">{t(Strings.dashboard.viewAll)}</span>
+              <span className="text-[#161A1D] ">
+                {t(Strings.dashboard.recentlyPlacedOrders)}
+              </span>
+              <span className="text-[#DF201F]">
+                {t(Strings.dashboard.viewAll)}
+              </span>
             </div>
             <div className="">
               <div
@@ -210,20 +211,25 @@ function Dashboard() {
                             alt=""
                           />
                           {/* {item.ProductName} */}
-                          <span className="mr-10">{t(Strings.dashboard.pizza)}</span>
+                          <span className="mr-10">
+                            {t(Strings.dashboard.pizza)}
+                          </span>
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
                           {/* {item.id} */}
                           {t(Strings.dashboard.parthSata)}
                         </td>
                         <td className="p-4 border-[2px] text-[#E9CB3F] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* {item.Stock} */}{t(Strings.dashboard.pending)}
+                          {/* {item.Stock} */}
+                          {t(Strings.dashboard.pending)}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* {item.Status} */}{t(Strings.dashboard.orderTime)}
+                          {/* {item.Status} */}
+                          {t(Strings.dashboard.orderTime)}
                         </td>
                         <td className="p-4 border-[2px] py-2 px-4 border-opacity-10 border-[#A2A3A5]">
-                          {/* ₹{item.Price} */}{t(Strings.dashboard.price)}
+                          {/* ₹{item.Price} */}
+                          {t(Strings.dashboard.price)}
                         </td>
                       </tr>
                       {/* ))} */}
