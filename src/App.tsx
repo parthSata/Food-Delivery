@@ -21,7 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
-          {/* <Route path="/restaurantType" element={<RestaurantTypes />} /> */}
+          <Route path="/restaurantType" element={<RestaurantTypes />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/admin/*"
