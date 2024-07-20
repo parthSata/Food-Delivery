@@ -25,8 +25,7 @@ interface AddProps {
 }
 
 const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});

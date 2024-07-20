@@ -24,8 +24,7 @@ export interface Product {
 }
 
 const ProductAdd: React.FC = () => {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const location = useLocation();
   const { CategoryId, updateId } = location.state || [];
   const presetKey = "ml_default";

@@ -1,10 +1,9 @@
 import { GallaryFood } from '../../Config/images';
 import UserGallaryHeader from './UserGallaryHeader';
-import { useTranslation } from 'react-i18next';
+import { useLanguageContext } from "../../../Components/LanguageContext";
 
 function ProductGallary() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
 
     return (
         <div>

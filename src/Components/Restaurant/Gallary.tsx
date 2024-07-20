@@ -1,7 +1,6 @@
-import GallaryHeader from "./GallaryHeader";
-import Burger from "../../assets/Restaurant/Rectangle 79.png";
-import Link from "../../assets/Restaurant/Link.png";
-import GallaryModelAdd from "./GallaryModelAdd";
+
+
+import { GallaryHeader, GallaryModelAdd } from '../Config/index'
 import { Gallary as GallaryInterface } from "./GallaryModelAdd";
 import React, { useEffect, useState } from "react";
 import { ref, get } from 'firebase/database';
@@ -11,10 +10,11 @@ import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
+import { BurgerGallary, Link } from '../Config/images';
+
 
 const Gallary: React.FC<GallaryInterface> = () => {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [gallaryImage, setGallaryImage] = useState<GallaryInterface[]>([]);
   const [isLoading, setisLoading] = useState(false)
@@ -59,7 +59,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
                 <div className="relative sm:w-1/4 p-4 h-full w-full" key={item.id}>
                   <div className="">
                     <img
-                      src={item.images[0] || Burger}
+                      src={item.images[0] || BurgerGallary}
                       alt="Sandwich and fries"
                       className="w-[300px]   h-[260px] object-cover rounded-lg"
                     />

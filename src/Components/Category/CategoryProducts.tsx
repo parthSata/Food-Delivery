@@ -12,8 +12,7 @@ import { useLanguageContext } from "../LanguageContext";
 
 
 function Category() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
 
   const { CategoryId } = useParams<{ CategoryId?: any }>();
   const navigate = useNavigate();

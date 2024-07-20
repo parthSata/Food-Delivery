@@ -19,8 +19,7 @@ import { useLanguageContext } from "./LanguageContext";
 
 
 function AdminLogin() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
     const navigate = useNavigate();
     const { login } = useAuth();
     const [mobileNumber, setMobileNumber] = useState<string>("");

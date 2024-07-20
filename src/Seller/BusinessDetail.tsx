@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Strings from "../Components/Config/Strings";
 import Button from "../Components/ReusableComponent/Button";
 import Input from "../Components/ReusableComponent/Input";
-import { useLanguageContext } from "../LanguageContext";
+import { useLanguageContext } from "../Components/LanguageContext";
 // import stripeKey from '../Config'
 // // @ts-ignore
 // import { loadStripe } from '@stripe/stripe-js';
@@ -29,7 +29,7 @@ interface BusinessDetails {
 
 
 function BusinessDetails() {
-    const { t } = useTranslation()
+    const { t } = useLanguageContext()
     // const presetKey = "ml_default";
     // const cloudName = "dwxhjomtn";
     const [imageFile, setImageFile] = useState<File | null>(null);

@@ -1,11 +1,10 @@
 import Strings from "../../../Components/Config/Strings";
+import { useLanguageContext } from "../../../Components/LanguageContext";
 import Button from "../../../Components/ReusableComponent/Button";
 import { Manchurian } from "../../Config/images";
-import { useTranslation } from 'react-i18next';
 
 function TodaySpecial() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
 
     return (
         <div className="h-full w-full">

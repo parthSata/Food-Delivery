@@ -1,17 +1,14 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminNavigation from "./Components/Authentication/AdminNavigation";
-import SellerNavigation from "./Components/Authentication/SellerNavigation";
-import CustomerNavigation from "./Components/Authentication/CustomerNavigation";
-import Login from "./Components/Login";
-import AdminLogin from "./Components/AdminLogin";
-import Register from "./Components/Register";
-import Verification from "./Components/Verification";
-import NotAuthorized from "./Components/NotAuthorized";
 import { AuthProvider } from "./Components/AuthContext";
-import ProtectedRoute from "./Components/ProtectedRoute";
-import RestaurantTypes from "./Seller/RestaurantTypes";
-import HomePage from "./User/Pages/Home/HomePage";
+import {
+  HomePage, Login, AdminLogin, Register, Verification, AdminNavigation,
+  SellerNavigation,
+  CustomerNavigation,
+  NotAuthorized,
+  ProtectedRoute,
+  RestaurantTypes,
+} from './Components/Config/index'
 
 
 function App() {
@@ -24,7 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
-          <Route path="/restaurantType" element={<RestaurantTypes />} />
+          {/* <Route path="/restaurantType" element={<RestaurantTypes />} /> */}
           <Route path="/" element={<HomePage />} />
           <Route
             path="/admin/*"

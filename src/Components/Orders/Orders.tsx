@@ -1,15 +1,17 @@
-import Burger from '../../assets/Orders/Burger.png'
 import Pizza from '../../assets/Orders/Pizza.png'
-import Accepted from '../../assets/Orders/OrderAccepted.png'
-import Cancel from '../../assets/Orders/OrderCancel.png'
+import {
+    Burger,
+    Accepted,
+    Cancel
+} from '../Config/images'
+
 import Strings from '../Config/Strings'
+import { useLanguageContext } from '../LanguageContext';
 import Input from '../ReusableComponent/Input'
-import { useLanguageContext } from '../LanguageContext'
 // import { useState } from 'react'
 
 function Orders() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
     // const [currentPage, setCurrentPage] = useState<number>(1);
     // const itemsPerPage = 5;
     // const [searchInput, setSearchInput] = useState("");

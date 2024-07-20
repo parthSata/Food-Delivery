@@ -13,8 +13,7 @@ import Input from "./ReusableComponent/Input";
 import { useLanguageContext } from "./LanguageContext";
 
 function Register() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState<string>("");
   const [callingCode, setCallingCode] = useState<string>("+91");

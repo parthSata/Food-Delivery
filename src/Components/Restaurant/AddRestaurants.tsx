@@ -23,8 +23,7 @@ export interface Restaurant {
 }
 
 function AddRestaurants() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   // @ts-ignore
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);

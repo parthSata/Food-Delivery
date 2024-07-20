@@ -19,9 +19,30 @@ import TeamAdd from "../Team/TeamAdd";
 import AdminLogin from '../AdminLogin'
 import BusinessDetails from "../../Seller/BusinessDetail";
 import CategoryProducts from "../Category/CategoryProducts";
+import Container from "../ReusableComponent/Container";
 
+import HomePage from "../../User/Pages/Home/HomePage";
+import AdminNavigation from "../Authentication/AdminNavigation";
+import SellerNavigation from "../Authentication/SellerNavigation";
+import CustomerNavigation from "../Authentication/CustomerNavigation";
+import NotAuthorized from "../NotAuthorized";
+import ProtectedRoute from "../ProtectedRoute";
+import RestaurantTypes from "../../Seller/RestaurantTypes";
+import CheckoutPage from "../../Seller/CheckOutPage";
+import GallaryHeader from "../Restaurant/GallaryHeader";
+import GallaryModelAdd from "../Restaurant/GallaryModelAdd";
 
 export {
+    GallaryHeader,
+    GallaryModelAdd,
+    CheckoutPage,
+    AdminNavigation,
+    SellerNavigation,
+    CustomerNavigation,
+    NotAuthorized,
+    ProtectedRoute,
+    RestaurantTypes,
+    HomePage,
     Login,
     CategoryProducts,
     BusinessDetails,
@@ -43,4 +64,5 @@ export {
     Gallary,
     OurTeam,
     TeamAdd,
+    Container,
 }

@@ -11,8 +11,7 @@ import config from "../../Config";
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [productImages, setProductImages] = useState<string[]>([]);
   const { productId } = useParams<{ productId?: string }>();

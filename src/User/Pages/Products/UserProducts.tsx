@@ -2,9 +2,10 @@ import Noodles from '../../assets/All Product/Noodles.jpg'
 import DummyImg from '../../assets/All Product/DummyFood.png'
 import { useState } from 'react';
 import search from "../../assets/HomePage/search.png";
-import Container from '../../Components/ReusableComponent/Container';
-import Button from '../../Components/ReusableComponent/Button';
-import Input from '../../Components/ReusableComponent/Input';
+import Container from '../../Components/PageComponent';
+import Input from '../../../Components/ReusableComponent/Input';
+import Button from '../../../Components/ReusableComponent/Button';
+
 
 
 function UserProducts() {

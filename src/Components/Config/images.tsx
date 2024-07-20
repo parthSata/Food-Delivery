@@ -40,13 +40,30 @@ import PaymentImage from '../../assets/Payment/PaymentImage.png'
 import UPI from '../../assets/Payment/UPI.png'
 import SBILogo from '../../assets/Payment/sbi-logo-744E8B0C10-seeklogo 1.png'
 
-
-import Resend from "../assets/Login/Resend.png";
-import image from "../assets/Login/img.png";
+import Conformation from '../../assets/Seller/Business Detail/Conformation.png'
+import Delete from '../../assets/Seller/Product View/Delete.png'
+import Edit from '../../assets/Seller/Product View/Edit.png'
+import RightArrow from '../../assets/Seller/Product View/Keyboard arrow right.png'
+import Burger from '../../assets/Orders/Burger.png'
+import Accepted from '../../assets/Orders/OrderAccepted.png'
+import Cancel from '../../assets/Orders/OrderCancel.png'
+import BurgerGallary from "../../assets/Restaurant/Rectangle 79.png";
+import Link from "../../assets/Restaurant/Link.png";
+import Noodles from "../../assets/All Product/Noodles.jpg";
+import Star from "../../assets/Restaurant/Star (2).png";
+import Resend from "../../assets/Login/Resend.png";
+import image from "../../assets/Login/img.png";
 
 
 export {
     Resend,
     image,
-    Logo, Shop, BankAccount, PaymentImage, UPI, SBILogo, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
+    Noodles,
+    Star,
+    BurgerGallary,
+    Link,
+    Burger,
+    Accepted,
+    Cancel,
+    Conformation, Edit, RightArrow, Delete, Logo, Shop, BankAccount, PaymentImage, UPI, SBILogo, Person, RestaurantImg, Owner, Attach, ImageOfRestaurant, BuisnessName, GSTNO, uploadDocument, Address, CloudUpload, Store, Email, Online, Loaders, Phone, flag, uk, us, united, uruguay, Customer, Seller, search, Pizza, DummyImg, Cart, Revenue, TotalShops, Notification, Profile, menu, Dashboard, Orders, Restaurant, Menu
 }

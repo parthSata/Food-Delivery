@@ -1,11 +1,10 @@
 import Strings from "../../../Components/Config/Strings";
 import Button from "../../../Components/ReusableComponent/Button";
 import { Burgger } from "../../Config/images";
-import { useTranslation } from 'react-i18next';
+import { useLanguageContext } from "../../../Components/LanguageContext";
 
 function BestSeller() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
 
     return (
         <div>

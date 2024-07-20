@@ -9,14 +9,14 @@ import {
   AddRestaurants,
   TeamAdd,
   OurTeam,
+  Container
 } from "../Config/index";
-import Container from "../ReusableComponent/Container";
 
 const AdminNavigation = () => {
   return (
     <Container>
       <Routes>
-        <Route path="categoryPage" element={<CategoryPage />} />
+        {/* <Route path="categoryPage" element={<CategoryPage />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="products" element={<Products />} />
         <Route path="productView/:productId" element={<ProductView />} />
@@ -24,7 +24,7 @@ const AdminNavigation = () => {
         <Route path="restaurants" element={<Restaurant />} />
         <Route path="addrestaurants" element={<AddRestaurants />} />
         <Route path="team" element={<OurTeam />} />
-        <Route path="teamAdd/:updateId" element={<TeamAdd onClose={() => { }} isOpen={true} />} />
+        <Route path="teamAdd/:updateId" element={<TeamAdd onClose={() => { }} isOpen={true} />} /> */}
       </Routes>
     </Container>
   );

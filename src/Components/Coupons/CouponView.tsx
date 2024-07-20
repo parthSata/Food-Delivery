@@ -9,8 +9,7 @@ import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 
 function CouponView() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const { couponId } = useParams();
   const navigate = useNavigate();
   const [couponDetail, setCouponDetail] = useState<Coupon>({

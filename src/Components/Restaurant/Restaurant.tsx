@@ -1,20 +1,18 @@
-import DummyImg from "../../assets/All Product/DummyFood.png";
-import Noodles from "../../assets/All Product/Noodles.jpg";
-import Star from "../../assets/Restaurant/Star (2).png";
+
 import { Restaurant as RestaurantInterface } from "./AddRestaurants";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from '../../Firebase/firebase';
 import { ref, onValue, remove } from 'firebase/database';
-import Container from "../ReusableComponent/Container";
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
+import { Container } from "../Config/index";
+import { Noodles, Star, DummyImg } from "../Config/images";
 
 function Restaurant() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const [restarants, setRestarants] = useState<RestaurantInterface[]>([]);
   const [restarantList, setRestarantList] = useState<RestaurantInterface>({

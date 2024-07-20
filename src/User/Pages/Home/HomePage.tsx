@@ -8,13 +8,12 @@ import Team from "./Team"
 import TodaySpecial from "./TodaySpecial"
 import Strings from "../../../Components/Config/Strings"
 import Button from "../../../Components/ReusableComponent/Button"
-import { useTranslation } from 'react-i18next';
+import { useLanguageContext } from "../../../Components/LanguageContext"
 
 
 
 function HomePage() {
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
     const navigate = useNavigate()
 
     const handleSubmit = () => {

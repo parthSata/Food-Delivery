@@ -22,7 +22,6 @@ interface TeamAddProps {
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
   const { t } = useLanguageContext();
-
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const navigate = useNavigate();

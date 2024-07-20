@@ -10,8 +10,7 @@ import Button from "../ReusableComponent/Button";
 import { useLanguageContext } from "../LanguageContext";
 
 function Coupons() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore

@@ -18,7 +18,6 @@ interface Props {
 
 const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
   const { t } = useLanguageContext();
-
   const presetKey = "ml_default";
   const cloudName = "dwxhjomtn";
   const [category, setCategory] = useState<CategoriesData>({

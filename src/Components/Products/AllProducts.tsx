@@ -1,4 +1,3 @@
-import DummyImg from "../../assets/All Product/DummyFood.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Product } from "./ProductAdd";
@@ -7,10 +6,10 @@ import { ref, remove, get } from 'firebase/database';
 import Loader from "../ReusableComponent/Loader";
 import Strings from "../Config/Strings";
 import { useLanguageContext } from "../LanguageContext";
+import { DummyImg } from '../Config/images'
 
 function AllProducts() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   const navigate = useNavigate();
   // @ts-ignore
   const [productUpdateId, setProductUpdateId] = useState("");
@@ -126,7 +125,7 @@ function AllProducts() {
                       )}
                     >
                       <i
-                        className="fa-solid fa-trash fa-lg text-productBtn" 
+                        className="fa-solid fa-trash fa-lg text-productBtn"
                       ></i>
                     </button>
                   </div>

@@ -5,8 +5,7 @@ import Strings from "../Config/Strings";
 import { useLanguageContext } from "../LanguageContext";
 
 function Dashboard() {
-    const { t } = useLanguageContext();
-
+  const { t } = useLanguageContext();
   // @ts-ignore
   const [dashboardData, setDashboardData] = useState(null);
 

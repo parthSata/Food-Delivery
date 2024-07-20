@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify'
-import { Conformation } from './images'
+import { Conformation } from '../Components/Config/images'
 import Strings from '../Components/Config/Strings';
-import { useTranslation } from 'react-i18next';
+import { useLanguageContext } from '../Components/LanguageContext';
 
 interface AddProps {
     onClose: () => void;
@@ -10,8 +10,7 @@ interface AddProps {
 
 const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
     if (!isOpen) return null;
-      const { t } = useLanguageContext();
-
+    const { t } = useLanguageContext();
 
 
 
