@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { Logo, Resend, image } from "@/assets";
@@ -7,6 +7,7 @@ import Loader from "./ReusableComponent/Loader";
 import { useAuth } from "../context/AuthContext";
 import { child, get, ref } from "firebase/database";
 import { auth, db } from "@/config/Firebase/firebase";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 function Verification() {
   const location = useLocation();
@@ -19,6 +20,8 @@ function Verification() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const [resendEnabled, setResendEnabled] = useState(false);
+  const [timer, setTimer] = useState(60);
 
   const handleSubmit = async () => {
     setIsLoading(true);
@@ -54,8 +57,8 @@ function Verification() {
               role === "admin"
                 ? "/admin"
                 : role === "seller"
-                ? "/seller"
-                : "/customer",
+                  ? "/seller"
+                  : "/customer",
               { state: { mobileNumber, callingCode } }
             );
           }
@@ -68,6 +71,54 @@ function Verification() {
     }
   };
 
+  useEffect(() => {
+    if (timer > 0) {
+      const countdown = setTimeout(() => {
+        setTimer(timer - 1);
+      }, 1000);
+      return () => clearTimeout(countdown);
+    } else {
+      setResendEnabled(true);
+    }
+  }, [timer]);
+
+  const configureCaptcha = () => {
+    if (!window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+        size: "invisible",
+        // @ts-ignore
+        callback: (response: any) => {
+          toast.success("Otp Resend Successfully")
+        },
+        "expired-callback": () => {
+          toast.warning("reCAPTCHA expired");
+        },
+      });
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (resendEnabled) {
+      setIsLoading(true);
+      try {
+        configureCaptcha();
+        const appVerifier = window.recaptchaVerifier;
+        const phoneNumber = `${callingCode}${mobileNumber}`;
+
+        const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+        window.confirmationResult = result;
+        toast.success("OTP resent successfully");
+        setResendEnabled(false);
+        setTimer(60);
+      } catch (error) {
+        console.error("Error during OTP resend:", error);
+        toast.error("An error occurred while resending OTP. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+  
   return (
     <>
       <Loader isLoading={isLoading}>
@@ -132,7 +183,8 @@ function Verification() {
                 <img
                   src={Resend}
                   alt=""
-                  className="h-[34px] ml-2 w-[34px] md:h-[34px] md:w-[34px]"
+                  className="h-[34px] ml-2 w-[34px] md:h-[34px] md:w-[34px] cursor-pointer"
+                  onClick={handleResendOtp}
                 />
               </span>
             </div>

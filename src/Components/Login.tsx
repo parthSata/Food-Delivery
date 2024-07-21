@@ -42,9 +42,16 @@ const Login: React.FC = () => {
     setRole(e.target.value);
   };
 
-  const configureCaptcha = () => {
+
+
+  useEffect(() => {
+    ConfigureCaptcha();
+  }, []);
+
+  const ConfigureCaptcha = () => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth,
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -54,14 +61,10 @@ const Login: React.FC = () => {
           "expired-callback": () => {
             toast.warning("reCAPTCHA expired");
           },
-        },
+        }
       );
     }
   };
-
-  useEffect(() => {
-    configureCaptcha();
-  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -75,14 +78,14 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async (e?: React.FormEvent<HTMLFormElement>) => {
+    // setIsLoading(true);
+
     e?.preventDefault();
-    configureCaptcha();
+    ConfigureCaptcha();
 
     if (isValid && passcode !== "") {
       const phoneNumber = `${callingCode}${mobileNumber}`;
       const appVerifier = window.recaptchaVerifier;
-      console.log("🚀 ~ handleLogin ~ auth:", auth)
-      console.log("🚀 ~ handleLogin ~ appVerifier:", appVerifier)
 
       try {
         const result = await signInWithPhoneNumber(
@@ -133,6 +136,7 @@ const Login: React.FC = () => {
       toast.warn(
         "Invalid inputs. Please check your mobile number and passcode."
       );
+      // setIsLoading(false);
     }
   };
   const handlePasscodeChange = (otp: string | null) => {
