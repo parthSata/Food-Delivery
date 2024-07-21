@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { CategoriesData } from "./CategoryPage";
+import { CategoriesData } from "@/Components/Category/CategoryPage";
 import { Product } from "../Products/ProductAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";

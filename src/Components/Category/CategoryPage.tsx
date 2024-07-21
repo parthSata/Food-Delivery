@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import AddCategory from "./AddCategory";
+import AddCategory from "../../pages/admin/category/components/AddCategory";
 import { search, Pizza } from "@/assets";
 import { useNavigate } from "react-router-dom";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "@/config/Firebase/firebase"; // Adjust the import based on your firebase setup
-import Loader from "../ReusableComponent/Loader";
-import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../../context/LanguageContext";
+import Loader from "@/Components/ReusableComponent/Loader";
+import Input from "@/Components/ReusableComponent/Input";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 export interface CategoriesData {
   id: string;
@@ -17,7 +17,7 @@ export interface CategoriesData {
   imageUrl: string;
 }
 
-function Home(): JSX.Element {
+function CategoryPage(): JSX.Element {
   const { t } = useLanguageContext();
 
   const [showAddCategoryDialog, setShowAddCategoryDialog] =
@@ -64,11 +64,9 @@ function Home(): JSX.Element {
     setisLoading(true);
     try {
       if (newCategory.id) {
-        // Update category
         const categoryRef = ref(db, `categories/${newCategory.id}`);
         await update(categoryRef, newCategory);
       } else {
-        // Add new category
         const newCategoryRef = ref(db, "categories");
         await set(newCategoryRef, newCategory);
       }
@@ -217,17 +215,17 @@ function Home(): JSX.Element {
                       <i
                         className="fa-solid fa-trash fa-xl cursor-pointer "
                         onClick={() => handleDelete(item.id)}
-                        // Delete Category
+                      // Delete Category
                       ></i>
                       <i
                         className="fa-solid fa-pen fa-xl cursor-pointer "
                         onClick={() => handleUpdate(item.id)}
-                        // Update Category
+                      // Update Category
                       ></i>{" "}
                       <i
                         className="fa-solid fa-eye fa-xl cursor-pointer"
                         onClick={() => handleViewCategories(item.id)}
-                        // View  Category Categories
+                      // View  Category Categories
                       ></i>
                     </td>
                   </tr>
@@ -258,9 +256,8 @@ function Home(): JSX.Element {
                   <a
                     href="#"
                     onClick={() => handlePageChange(index + 1)}
-                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${
-                      currentPage === index + 1 ? "font-bold" : ""
-                    }`}
+                    className={`h-[26px] w-[25px] rounded-sm focus:text-white focus:border-black-8 focus:bg-[#DF201F] ${currentPage === index + 1 ? "font-bold" : ""
+                      }`}
                   >
                     {index + 1}
                   </a>
@@ -328,4 +325,4 @@ function Home(): JSX.Element {
   );
 }
 
-export default Home;
+export default CategoryPage;

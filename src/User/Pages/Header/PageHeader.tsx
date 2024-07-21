@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Logo, menu, Notification, Profile, Cart } from "@/assets";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import PageSidebar from "./PageSidebar";
 
 const routes = {

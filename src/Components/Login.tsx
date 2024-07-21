@@ -42,14 +42,9 @@ const Login: React.FC = () => {
     setRole(e.target.value);
   };
 
-  useEffect(() => {
-    ConfigureCaptcha();
-  }, []);
-
-  const ConfigureCaptcha = () => {
+  const configureCaptcha = () => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
+      window.recaptchaVerifier = new RecaptchaVerifier(auth,
         "recaptcha-container",
         {
           size: "invisible",
@@ -59,10 +54,14 @@ const Login: React.FC = () => {
           "expired-callback": () => {
             toast.warning("reCAPTCHA expired");
           },
-        }
+        },
       );
     }
   };
+
+  useEffect(() => {
+    configureCaptcha();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const number = e.target.value;
@@ -77,11 +76,13 @@ const Login: React.FC = () => {
 
   const handleLogin = async (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
-    ConfigureCaptcha();
+    configureCaptcha();
 
     if (isValid && passcode !== "") {
       const phoneNumber = `${callingCode}${mobileNumber}`;
       const appVerifier = window.recaptchaVerifier;
+      console.log("🚀 ~ handleLogin ~ auth:", auth)
+      console.log("🚀 ~ handleLogin ~ appVerifier:", appVerifier)
 
       try {
         const result = await signInWithPhoneNumber(
@@ -108,7 +109,6 @@ const Login: React.FC = () => {
               const role = (idTokenResult.claims.role ||
                 userData.role ||
                 "customer") as "admin" | "seller" | "customer";
-              console.log("🚀 ~ handleLogin ~ role:", role);
 
               const user = {
                 uid: firebaseUser.uid,
@@ -135,7 +135,6 @@ const Login: React.FC = () => {
       );
     }
   };
-
   const handlePasscodeChange = (otp: string | null) => {
     if (otp !== null && otp !== undefined) {
       setOtp(otp);
@@ -275,11 +274,10 @@ const Login: React.FC = () => {
                           className="flex items-center gap-3 cursor-pointer"
                         >
                           <div
-                            className={`flex justify-center items-center rounded-full ${
-                              role === "customer"
-                                ? "bg-[#E23635]"
-                                : "bg-[#A2A3A5]"
-                            } h-10 w-10`}
+                            className={`flex justify-center items-center rounded-full ${role === "customer"
+                              ? "bg-[#E23635]"
+                              : "bg-[#A2A3A5]"
+                              } h-10 w-10`}
                           >
                             <img src={Person} alt="" className="h-5" />
                           </div>
@@ -300,11 +298,10 @@ const Login: React.FC = () => {
                           className="flex items-center gap-3 cursor-pointer"
                         >
                           <div
-                            className={`flex justify-center items-center rounded-full ${
-                              role === "seller"
-                                ? "bg-[#E23635]"
-                                : "bg-[#A2A3A5]"
-                            } h-10 w-10`}
+                            className={`flex justify-center items-center rounded-full ${role === "seller"
+                              ? "bg-[#E23635]"
+                              : "bg-[#A2A3A5]"
+                              } h-10 w-10`}
                           >
                             <img src={Store} alt="" className="h-5" />
                           </div>
@@ -326,9 +323,8 @@ const Login: React.FC = () => {
                     fontFamily: "Bai Jamjuree",
                     boxShadow: "2px 2px 25px 2px #DF201F80",
                   }}
-                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
-                    isValid ? "" : "cursor-not-allowed opacity-50"
-                  }`}
+                  className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValid ? "" : "cursor-not-allowed opacity-50"
+                    }`}
                   disabled={!isValid || !recaptchaToken}
                 >
                   LOGIN

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import "@/i18n";
+import "./i18n/index.ts";
 import { LanguageContextProvider } from "./context/LanguageContext.tsx";
 // import LanguageSelect from "./Components/LanguageSelect.tsx";
 

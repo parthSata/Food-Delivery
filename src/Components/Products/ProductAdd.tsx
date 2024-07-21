@@ -5,10 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
-import Loader from "../ReusableComponent/Loader";
+import Loader from "@/Components/ReusableComponent/Loader";
 
-import Input from "../ReusableComponent/Input";
-import { useLanguageContext } from "../../context/LanguageContext";
+import Input from "@/Components/ReusableComponent/Input";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 export interface Product {
   id: string;
@@ -292,11 +292,10 @@ const ProductAdd: React.FC = () => {
                   {[0, 1, 2, 3].map((index) => (
                     <div
                       key={index}
-                      className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${
-                        productImages[index]
+                      className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
                           ? "border-[#DF201F]"
                           : "border-[#161A1D]"
-                      }`}
+                        }`}
                     >
                       {productImages[index] ? (
                         <div
@@ -403,9 +402,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.name && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.name ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.name ? "" : "hidden"
+                            }`}
                         >
                           {errors.name}
                         </span>
@@ -425,9 +423,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.price && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.price ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.price ? "" : "hidden"
+                            }`}
                         >
                           {errors.price}
                         </span>
@@ -447,9 +444,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.discountPrice && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.discountPrice ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.discountPrice ? "" : "hidden"
+                            }`}
                         >
                           {errors.discountPrice}
                         </span>
@@ -469,9 +465,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.weight && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.weight ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.weight ? "" : "hidden"
+                            }`}
                         >
                           {errors.weight}
                         </span>
@@ -491,9 +486,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.unit && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.unit ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.unit ? "" : "hidden"
+                            }`}
                         >
                           {errors.unit}
                         </span>
@@ -513,9 +507,8 @@ const ProductAdd: React.FC = () => {
                       />
                       {errors.packagingCharges && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.packagingCharges ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.packagingCharges ? "" : "hidden"
+                            }`}
                         >
                           {errors.packagingCharges}
                         </span>
@@ -534,9 +527,8 @@ const ProductAdd: React.FC = () => {
                       ></textarea>
                       {errors.description && (
                         <span
-                          className={`text-red-600 text-sm ${
-                            product.description ? "" : "hidden"
-                          }`}
+                          className={`text-red-600 text-sm ${product.description ? "" : "hidden"
+                            }`}
                         >
                           {errors.description}
                         </span>
