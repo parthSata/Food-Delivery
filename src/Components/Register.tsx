@@ -181,11 +181,10 @@ function Register() {
                         className="flex items-center gap-3 cursor-pointer"
                       >
                         <div
-                          className={`flex justify-center items-center rounded-full ${
-                            role === "customer"
-                              ? "bg-[#E23635]"
-                              : "bg-[#A2A3A5]"
-                          } h-10 w-10`}
+                          className={`flex justify-center items-center rounded-full ${role === "customer"
+                            ? "bg-[#E23635]"
+                            : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
                         >
                           <img src={Person} alt="" className="h-5" />
                         </div>
@@ -207,9 +206,8 @@ function Register() {
                         className="flex items-center gap-3 cursor-pointer"
                       >
                         <div
-                          className={`flex justify-center items-center rounded-full ${
-                            role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"
-                          } h-10 w-10`}
+                          className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
                         >
                           <img src={Store} alt="" className="h-5" />
                         </div>
@@ -403,13 +401,12 @@ function Register() {
 
               <button
                 type="submit"
-                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
-                  isValidMobileNumber &&
+                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidMobileNumber &&
                   isValidEmail &&
                   passcode === confirmPasscode
-                    ? ""
-                    : "cursor-not-allowed opacity-50"
-                }`}
+                  ? ""
+                  : "cursor-not-allowed opacity-50"
+                  }`}
                 style={{
                   fontFamily: "Bai Jamjuree",
                 }}
