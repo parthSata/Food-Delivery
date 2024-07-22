@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Logo, Online, Person, Email } from "@/assets";
 import "react-toastify/dist/ReactToastify.css";
 import { auth, db } from "../config/Firebase/firebase";
-import { ref, get, child } from "firebase/database";
+import { ref, get } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { useAuth } from "../context/AuthContext";
