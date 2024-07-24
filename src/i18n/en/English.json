@@ -16,8 +16,8 @@
   },
   "register": {
     "createSeller": "Create Seller Account!",
-    "passCode": "Passcode:",
-    "confirmPasscode": "Confirm Passcode:",
+    "password": "Password:",
+    "confirmPassword": "Confirm Password:",
     "agreeTerms": "Agree Terms & Conditions",
     "registerButton": "register"
   },

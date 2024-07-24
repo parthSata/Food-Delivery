@@ -4,38 +4,27 @@ import {
   Shop,
   Store,
   Email,
-  Phone,
-  flag,
-  uk,
-  us,
-  united,
-  uruguay,
 } from "@/assets";
-import OtpInput from "react-otp-input";
 import { useNavigate } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "@/config/Firebase/firebase";
+import { auth, db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
-import Input from "./ReusableComponent/Input";
 import { useLanguageContext } from "../context/LanguageContext";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import Input from "./ReusableComponent/Input";
 
 function Register() {
   const { t } = useLanguageContext();
   const navigate = useNavigate();
-  const [mobileNumber, setMobileNumber] = useState<string>("");
-  const [callingCode, setCallingCode] = useState<string>("+91");
-  const [isValidMobileNumber, setIsValidMobileNumber] = useState<boolean>(true);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [email, setEmail] = useState("");
-  const [passcode, setPasscode] = useState("");
-  const [confirmPasscode, setConfirmPasscode] = useState("");
-  const [selectedState, setSelectedState] = useState<string>("Gujrat");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedState, setSelectedState] = useState<string>("Gujarat");
   const [name, setName] = useState("");
   const [role, setRole] = useState<string>("customer");
-
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,13 +33,6 @@ function Register() {
 
   const handleRoleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRole(e.target.value);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const number = e.target.value;
-    const mobileNumberPattern = /^\d{10}$/;
-    setIsValidMobileNumber(mobileNumberPattern.test(number));
-    setMobileNumber(number);
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -68,40 +50,44 @@ function Register() {
     return emailPattern.test(email);
   };
 
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newErrors: { [key: string]: string } = {};
 
     if (!name) newErrors.name = "Name is required.";
-    if (!mobileNumber) newErrors.mobileNumber = "Mobile number is required.";
     if (!email) newErrors.email = "Email is required.";
-    if (!passcode) newErrors.passcode = "Passcode is required.";
-    if (!confirmPasscode)
-      newErrors.confirmPasscode = "Confirm passcode is required.";
-    if (passcode !== confirmPasscode)
-      newErrors.confirmPasscode = "Passcode and Confirm Passcode must match.";
+    if (!password) newErrors.password = "Password is required.";
+    if (!confirmPassword)
+      newErrors.confirmPassword = "Confirm Password is required.";
+    if (password !== confirmPassword)
+      newErrors.confirmPassword = "Password and Confirm Password must match.";
 
     setErrors(newErrors);
 
     if (
       Object.keys(newErrors).length === 0 &&
-      isValidMobileNumber &&
       isValidEmail
     ) {
       const userData = {
         name,
-        mobileNumber,
         email,
         role,
-        passcode,
+        password,
+        confirmPassword,
         state: selectedState,
         id: uuidv4(),
       };
 
       try {
-        // @ts-ignore
-        const dbRef = ref(db);
-        await set(ref(db, "users/" + mobileNumber), userData);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        await sendEmailVerification(user);
+        toast.success("User created successfully. Please check your email to verify your account.");
+
+        const dbRef = ref(db, "users/" + user.uid);
+        await set(dbRef, userData);
         toast.success("Registration successful!");
         navigate("/login");
       } catch (error) {
@@ -109,34 +95,20 @@ function Register() {
         toast.error("Failed to register user. Please try again.");
       }
     } else {
-      if (!isValidMobileNumber) toast.warn("Enter valid number");
       if (!isValidEmail) toast.warn("Enter valid email");
       toast.warn("Please fill out all fields.");
     }
   };
 
-  const handleCallingCodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedCallingCode = e.target.value;
-    sessionStorage.setItem("callingCode", selectedCallingCode);
-    setCallingCode(selectedCallingCode);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
-  const renderFlag = (callingCode: string) => {
-    switch (callingCode) {
-      case "+91":
-        return flag;
-      case "+1":
-        return us;
-      case "+971":
-        return united;
-      case "+44":
-        return uk;
-      case "+598":
-        return uruguay;
-      default:
-        return flag;
-    }
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPassword(e.target.value);
   };
+
+
 
   return (
     <div>
@@ -181,11 +153,10 @@ function Register() {
                         className="flex items-center gap-3 cursor-pointer"
                       >
                         <div
-                          className={`flex justify-center items-center rounded-full ${
-                            role === "customer"
-                              ? "bg-[#E23635]"
-                              : "bg-[#A2A3A5]"
-                          } h-10 w-10`}
+                          className={`flex justify-center items-center rounded-full ${role === "customer"
+                            ? "bg-[#E23635]"
+                            : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
                         >
                           <img src={Person} alt="" className="h-5" />
                         </div>
@@ -207,9 +178,8 @@ function Register() {
                         className="flex items-center gap-3 cursor-pointer"
                       >
                         <div
-                          className={`flex justify-center items-center rounded-full ${
-                            role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"
-                          } h-10 w-10`}
+                          className={`flex justify-center items-center rounded-full ${role === "seller" ? "bg-[#E23635]" : "bg-[#A2A3A5]"
+                            } h-10 w-10`}
                         >
                           <img src={Store} alt="" className="h-5" />
                         </div>
@@ -237,54 +207,6 @@ function Register() {
                     <p className="text-red-600 text-xs">{errors.name}</p>
                   )}
 
-                  <div className="flex items-center border-b w-[350px]">
-                    <div className="flex">
-                      <img src={renderFlag(callingCode)} className="h-8 w-8" />
-                      <select
-                        onChange={handleCallingCodeChange}
-                        className="rounded-lg px-1 py-1 cursor-pointer outline-none bg-white "
-                        style={{
-                          fontFamily: "Bai Jamjuree",
-                        }}
-                        value={callingCode}
-                      >
-                        <option className="h-8 w-8" value="+91">
-                          +91
-                        </option>
-                        <option className="h-8 w-8" value="+1">
-                          +1
-                        </option>
-                        <option className="h-8 w-8" value="+971">
-                          +971
-                        </option>
-                        <option className="h-8 w-8" value="+44">
-                          +44
-                        </option>
-                        <option className="h-8 w-8" value="+598">
-                          +598
-                        </option>
-                      </select>
-                    </div>
-                    <Input
-                      type="number"
-                      placeholder="Mobile Number"
-                      className="ml-2 p-6 text-[14px]  focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none h-[50px] w-50 border-l hover:border-0 placeholder:font-extrabold font-semibold"
-                      style={{ fontFamily: "Montserrat Alternates" }}
-                      onChange={handleChange}
-                      value={mobileNumber}
-                    />
-                    <img
-                      src={Phone}
-                      className="h-[24px] ml-2 w-[24px]"
-                      alt=""
-                    />
-                  </div>
-                  {errors.mobileNumber && (
-                    <p className="text-red-600 text-xs ">
-                      {errors.mobileNumber}
-                    </p>
-                  )}
-
                   <div className="flex items-center">
                     <Input
                       type="email"
@@ -309,16 +231,48 @@ function Register() {
               <div className="mt-5 md:shrink flex flex-col gap-2">
                 <div className="flex justify-start gap-6">
                   <label className="font-semibold">
-                    {t("register.passCode")}
+                    {t("register.password")}
                   </label>
                 </div>
-                <div
+                <div className="flex items-center border-b">
+                  <Input
+                    type="password"
+                    value={password}
+                    placeholder="Password"
+                    className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold"
+                    style={{ fontFamily: "Montserrat Alternates" }}
+                    onChange={handlePasswordChange}
+                  />
+                  <img src={Person} className="h-[24px] ml-2 w-[24px]" alt="" />
+                </div>
+                {errors.password && <p className="text-red-600 text-xs">{errors.password}</p>}
+
+                <div className="mt-5 md:shrink flex flex-col gap-2">
+                  <div className="flex justify-start gap-6">
+                    <label className="font-semibold">
+                      {t("register.confirmPassword")}
+                    </label>
+                  </div>
+                  <div className="flex items-center border-b">
+                    <Input
+                      type="password"
+                      value={confirmPassword}
+                      placeholder="Password"
+                      className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold"
+                      style={{ fontFamily: "Montserrat Alternates" }}
+                      onChange={handleConfirmPasswordChange}
+                    />
+                    <img src={Person} className="h-[24px] ml-2 w-[24px]" alt="" />
+                  </div>
+                  {errors.password && <p className="text-red-600 text-xs">{errors.password}</p>}
+
+                  {/* <div
                   className="flex"
                   style={{ fontFamily: "Montserrat Alternates" }}
                 >
                   <OtpInput
-                    value={passcode}
-                    onChange={setPasscode}
+                    value={password}
+                    onChange={setPassword}
                     numInputs={6}
                     inputType="password"
                     renderInput={(props, index) => (
@@ -334,9 +288,9 @@ function Register() {
                 </div>
                 {errors.passcode && (
                   <p className="text-red-600 text-xs">{errors.passcode}</p>
-                )}
+                )} */}
 
-                <div className="mt-5 md:shrink flex flex-col gap-2">
+                  {/* <div className="mt-5 md:shrink flex flex-col gap-2">
                   <div className="flex justify-start gap-6">
                     <label className="font-semibold">
                       {t("register.confirmPasscode")}
@@ -366,57 +320,78 @@ function Register() {
                   <p className="text-red-600 text-xs">
                     {errors.confirmPasscode}
                   </p>
-                )}
+                )} */}
 
-                <select
-                  className="rounded-lg px-1 py-1 cursor-pointer outline-none mt-2 border-b-4 bg-white"
-                  value={selectedState}
+                  <select
+                    className="rounded-lg px-1 py-1 cursor-pointer outline-none mt-2 border-b-4 bg-white"
+                    value={selectedState}
+                    style={{
+                      fontFamily: "Bai Jamjuree",
+                    }}
+                    onChange={handleStateSelect}
+                  >
+                    <option className="h-8 w-8" value="Gujrat">
+                      Gujrat
+                    </option>
+                    <option className="h-8 w-8" value="Maharashtra">
+                      Maharashtra
+                    </option>
+                    <option className="h-8 w-8" value="Himachal">
+                      Himachal
+                    </option>
+                    <option className="h-8 w-8" value="Jharkhand">
+                      Jharkhand
+                    </option>
+                  </select>
+
+                  <div className="flex flex-row mt-4 justify-start gap-2 items-center">
+                    <Input
+                      type="checkbox"
+                      className="bg-red-600 h-[30px] w-[20px]"
+                    />
+                    <p className="text-[#161A1D] font-semibold text-lg">
+                      {t("register.agreeTerms")}
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidEmail &&
+                    password === confirmPassword
+                    ? ""
+                    : "cursor-not-allowed opacity-50"
+                    }`}
                   style={{
                     fontFamily: "Bai Jamjuree",
                   }}
-                  onChange={handleStateSelect}
+                  disabled={
+                    !isValidEmail ||
+                    password !== confirmPassword
+                  }
                 >
-                  <option className="h-8 w-8" value="Gujrat">
-                    Gujrat
-                  </option>
-                  <option className="h-8 w-8" value="Maharashtra">
-                    Maharashtra
-                  </option>
-                  <option className="h-8 w-8" value="Himachal">
-                    Himachal
-                  </option>
-                  <option className="h-8 w-8" value="Jharkhand">
-                    Jharkhand
-                  </option>
-                </select>
-
-                <div className="flex flex-row mt-4 justify-start gap-2 items-center">
-                  <Input
-                    type="checkbox"
-                    className="bg-red-600 h-[30px] w-[20px]"
-                  />
-                  <p className="text-[#161A1D] font-semibold text-lg">
-                    {t("register.agreeTerms")}
-                  </p>
-                </div>
+                  {t("register.registerButton")}
+                </button>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={1000}
+                  pauseOnFocusLoss={false}
+                  limit={1}
+                />
               </div>
-
               <button
                 type="submit"
-                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${
-                  isValidMobileNumber &&
-                  isValidEmail &&
-                  passcode === confirmPasscode
-                    ? ""
-                    : "cursor-not-allowed opacity-50"
-                }`}
+                className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidEmail &&
+                  password === confirmPassword
+                  ? ""
+                  : "cursor-not-allowed opacity-50"
+                  }`}
                 style={{
                   fontFamily: "Bai Jamjuree",
                 }}
                 disabled={
-                  !isValidMobileNumber ||
                   !isValidEmail ||
-                  passcode !== confirmPasscode
+                  password !== confirmPassword
                 }
               >
                 {t("register.registerButton")}

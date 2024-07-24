@@ -1,4 +1,3 @@
-// AuthContext.tsx
 import {
   createContext,
   useContext,
@@ -37,17 +36,39 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         const token = await getIdToken(firebaseUser, true); // force refresh token
         localStorage.setItem("accessToken", token);
         const userDataRef = ref(db, "users");
-        const mobileNumber: any = firebaseUser.phoneNumber;
-        const mobileArray = mobileNumber.split("");
-        mobileArray.splice(0, 3); // Remove the first 3 characters
-        const mobileWithoutCallingCode = mobileArray.join("");
-        const snapshot = await get(
-          child(userDataRef, `${mobileWithoutCallingCode}`)
-        );
 
-        if (snapshot.exists()) {
-          const userData = snapshot.val();
+        const mobileNumber: any = firebaseUser.phoneNumber;
+        let userData: User | null = null;
+
+        if (mobileNumber) {
+          const mobileArray = mobileNumber.split("");
+          mobileArray.splice(0, 3); // Remove the first 3 characters
+          const mobileWithoutCallingCode = mobileArray.join("");
+          const snapshot = await get(
+            child(userDataRef, `${mobileWithoutCallingCode}`)
+          );
+
+          if (snapshot.exists()) {
+            userData = snapshot.val();
+          }
+        } else {
+          // If no phone number, try to get user data by email or some other identifier
+          const email = firebaseUser.email;
+          if (email) {
+            const emailRef = ref(db, "usersByEmail");
+            const emailSnapshot = await get(
+              child(emailRef, email.replace(".", "%2E"))
+            );
+            if (emailSnapshot.exists()) {
+              userData = emailSnapshot.val();
+            }
+          }
+        }
+
+        if (userData) {
           setUser(userData);
+        } else {
+          setUser(null);
         }
       } else {
         localStorage.removeItem("accessToken");
