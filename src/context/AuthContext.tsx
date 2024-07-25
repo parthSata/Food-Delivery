@@ -8,7 +8,7 @@ import {
 import { auth, db } from "@/config/Firebase/firebase";
 import { getIdToken, onIdTokenChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { child, get, ref } from "firebase/database";
+import { get, ref } from "firebase/database";
 import Loader from "../Components/ReusableComponent/Loader";
 
 interface User {
@@ -28,51 +28,34 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); // Add loading state
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         const token = await getIdToken(firebaseUser, true); // force refresh token
         localStorage.setItem("accessToken", token);
-        const userDataRef = ref(db, "users");
 
-        const mobileNumber: any = firebaseUser.phoneNumber;
-        let userData: User | null = null;
+        const uid = firebaseUser.uid;
+        if (uid) {
+          const emailRef = ref(db, `users/${uid}`);
+          const emailSnapshot = await get(emailRef);
 
-        if (mobileNumber) {
-          const mobileArray = mobileNumber.split("");
-          mobileArray.splice(0, 3); // Remove the first 3 characters
-          const mobileWithoutCallingCode = mobileArray.join("");
-          const snapshot = await get(
-            child(userDataRef, `${mobileWithoutCallingCode}`)
-          );
-
-          if (snapshot.exists()) {
-            userData = snapshot.val();
+          if (emailSnapshot.exists()) {
+            const userData = emailSnapshot.val();
+            setUser(userData);
+          } else {
+            setUser(null);
+            console.log("No user data found for email:", uid);
           }
-        } else {
-          // If no phone number, try to get user data by email or some other identifier
-          const email = firebaseUser.email;
-          if (email) {
-            const emailRef = ref(db, "usersByEmail");
-            const emailSnapshot = await get(
-              child(emailRef, email.replace(".", "%2E"))
-            );
-            if (emailSnapshot.exists()) {
-              userData = emailSnapshot.val();
-            }
-          }
-        }
-
-        if (userData) {
-          setUser(userData);
         } else {
           setUser(null);
+          console.log("No email found for firebaseUser:", firebaseUser);
         }
       } else {
         localStorage.removeItem("accessToken");
         setUser(null);
+        console.log("No firebaseUser found, user set to null");
       }
       setIsLoading(false);
     });
@@ -82,18 +65,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (userData: User) => {
     setUser(userData);
+    console.log("User logged in:", userData);
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem("accessToken");
     navigate("/login");
+    console.log("User logged out");
   };
 
   const refreshToken = async () => {
     if (auth.currentUser) {
       const token = await getIdToken(auth.currentUser, true);
       localStorage.setItem("accessToken", token);
+      console.log("Token refreshed:", token);
     }
   };
 
