@@ -24,10 +24,10 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@/Components/ReusableComponent/Button";
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
-// import stripeKey from '../Config'
-// // @ts-ignore
-// import { loadStripe } from '@stripe/stripe-js';
-// const stripePromise = loadStripe(`${stripeKey}`);
+import { loadStripe } from '@stripe/stripe-js';
+import config from "@/config/Config";
+import { useNavigate } from "react-router-dom";
+const stripePromise = loadStripe(`${config.stripeKey}`);
 
 interface BusinessDetails {
   id: string;
@@ -58,6 +58,7 @@ function BusinessDetails() {
     email: "",
     images: [],
   });
+  const navigate = useNavigate()
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([]);
 
   const handleChange = (
@@ -124,6 +125,7 @@ function BusinessDetails() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    console.log("Button Clicked")
     e.preventDefault();
 
     const newErrors = validateFields();
@@ -175,7 +177,7 @@ function BusinessDetails() {
         images: [],
       });
 
-      const response = await fetch('seller/create-checkout-session', {
+      const response = await fetch(`create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -190,11 +192,14 @@ function BusinessDetails() {
       const session = await response.json();
       const stripe = await stripePromise;
 
+
+
       if (!stripe) {
         throw new Error("Stripe not initialized");
       }
 
       await stripe.redirectToCheckout({ sessionId: session.id });
+      navigate("seller/create-checkout-session")
     } catch (error) {
       toast.error("Failed to save business details.");
       if (error instanceof TypeError) {

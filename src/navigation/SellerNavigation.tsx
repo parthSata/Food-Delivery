@@ -11,6 +11,7 @@ import {
   CouponView,
   CategoryPage,
   CategoryProducts,
+  CheckoutPage,
 } from "@/navigation";
 import { Container } from "@/Components";
 
@@ -29,10 +30,7 @@ const SellerNavigation = () => {
         <Route path="productsAdd/:updateId" element={<ProductAdd />} />
         <Route path="productsAdd" element={<ProductAdd />} />
         <Route path="coupons" element={<Coupons />} />
-        <Route
-          path="couponAdd"
-          element={<CouponAdd onClose={() => {}} isOpen={true} />}
-        />
+        <Route path="couponAdd" element={<CouponAdd onClose={() => { }} isOpen={true} />} />
         <Route
           path="/couponAdd/:updateId"
           element={
@@ -46,6 +44,8 @@ const SellerNavigation = () => {
         />
         <Route path="couponview" element={<CouponView />} />
         <Route path="couponview/:couponId" element={<CouponView />} />
+        <Route path="create-checkout-session" element={<CheckoutPage />} />
+
       </Routes>
     </Container>
   );

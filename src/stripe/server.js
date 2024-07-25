@@ -30,8 +30,8 @@ app.post("/seller/create-checkout-session", async (req, res) => {
         },
       ],
       mode: "payment",
-      success_url: `${process.env.CLIENT_URL}/success`,
-      cancel_url: `${process.env.CLIENT_URL}/cancel`,
+      success_url: `${config.stripeClientUrl}/success`,
+      cancel_url: `${config.stripeClientUrl}/cancel`,
     });
 
     res.json({ id: session.id });

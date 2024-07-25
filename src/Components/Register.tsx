@@ -98,7 +98,7 @@ function Register() {
         state: selectedState,
         id: uuidv4(),
       };
-      await SignupWithEmail()
+      // await SignupWithEmail()
 
       try {
         const userCredential = await createUserWithEmailAndPassword(
@@ -108,6 +108,8 @@ function Register() {
         )
         const user = userCredential.user;
 
+        sendEmailVerification(user)
+        console.log("Send Email in MailBox")
         // @ts-ignore
         const dbRef = ref(db);
         await set(ref(db, `users/${user.uid}`), userData);
