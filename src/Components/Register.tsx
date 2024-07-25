@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
 import { useLanguageContext } from "../context/LanguageContext";
-import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import Input from "./ReusableComponent/Input";
 
 function Register() {
@@ -49,19 +49,39 @@ function Register() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
   };
+  // @ts-ignore
+  const SignupWithEmail = async () => {
+    try {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((result) => {
+          toast.success("User Created Successfully.");
 
+          updateProfile(result.user, {
+            displayName: name,
+          });
+
+          sendEmailVerification(result.user).then(() => {
+            alert("Please check your email and verify your account");
+          });
+        })
+        .catch((error) => setErrors(error.message));
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("Failed to Create User");
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e?.preventDefault();
     const newErrors: { [key: string]: string } = {};
 
     if (!name) newErrors.name = "Name is required.";
     if (!email) newErrors.email = "Email is required.";
-    if (!password) newErrors.password = "Password is required.";
+    if (!password) newErrors.password = "Passcode is required.";
     if (!confirmPassword)
       newErrors.confirmPassword = "Confirm Password is required.";
     if (password !== confirmPassword)
-      newErrors.confirmPassword = "Password and Confirm Password must match.";
+      newErrors.confirmPassword = "Passcode and Confirm Passcode must match.";
 
     setErrors(newErrors);
 
@@ -78,16 +98,19 @@ function Register() {
         state: selectedState,
         id: uuidv4(),
       };
+      await SignupWithEmail()
 
       try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        )
         const user = userCredential.user;
 
-        await sendEmailVerification(user);
-        toast.success("User created successfully. Please check your email to verify your account.");
-
-        const dbRef = ref(db, "users/" + user.uid);
-        await set(dbRef, userData);
+        // @ts-ignore
+        const dbRef = ref(db);
+        await set(ref(db, `users/${user.uid}`), userData);
         toast.success("Registration successful!");
         navigate("/login");
       } catch (error) {
@@ -99,6 +122,7 @@ function Register() {
       toast.warn("Please fill out all fields.");
     }
   };
+
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -266,62 +290,6 @@ function Register() {
                   </div>
                   {errors.password && <p className="text-red-600 text-xs">{errors.password}</p>}
 
-                  {/* <div
-                  className="flex"
-                  style={{ fontFamily: "Montserrat Alternates" }}
-                >
-                  <OtpInput
-                    value={password}
-                    onChange={setPassword}
-                    numInputs={6}
-                    inputType="password"
-                    renderInput={(props, index) => (
-                      <input
-                        {...props}
-                        key={index}
-                        accept="*"
-                        className="rounded-md  font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
-                        style={{ width: 50 }}
-                      />
-                    )}
-                  />
-                </div>
-                {errors.passcode && (
-                  <p className="text-red-600 text-xs">{errors.passcode}</p>
-                )} */}
-
-                  {/* <div className="mt-5 md:shrink flex flex-col gap-2">
-                  <div className="flex justify-start gap-6">
-                    <label className="font-semibold">
-                      {t("register.confirmPasscode")}
-                    </label>
-                  </div>
-                  <div
-                    className="flex"
-                    style={{ fontFamily: "Montserrat Alternates" }}
-                  >
-                    <OtpInput
-                      value={confirmPasscode}
-                      onChange={setConfirmPasscode}
-                      numInputs={6}
-                      inputType="password"
-                      renderInput={(props, index) => (
-                        <input
-                          {...props}
-                          key={index}
-                          className="rounded-md font-semibold text-lg border-2 mr-2 p-[12px] focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-[30px] md:text-[32px] lg:text-[34px] text-[#161A1D] border-gray-200 md:h-[50px] lg:h-[50px] lg:w-[65px] md:w-[60px] h-[50px] w-[60px]"
-                          style={{ width: 50 }}
-                        />
-                      )}
-                    />
-                  </div>
-                </div>
-                {errors.confirmPasscode && (
-                  <p className="text-red-600 text-xs">
-                    {errors.confirmPasscode}
-                  </p>
-                )} */}
-
                   <select
                     className="rounded-lg px-1 py-1 cursor-pointer outline-none mt-2 border-b-4 bg-white"
                     value={selectedState}
@@ -355,29 +323,6 @@ function Register() {
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className={`bg-[#94CD00] shadow-registerBtn h-[50px] uppercase w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidEmail &&
-                    password === confirmPassword
-                    ? ""
-                    : "cursor-not-allowed opacity-50"
-                    }`}
-                  style={{
-                    fontFamily: "Bai Jamjuree",
-                  }}
-                  disabled={
-                    !isValidEmail ||
-                    password !== confirmPassword
-                  }
-                >
-                  {t("register.registerButton")}
-                </button>
-                <ToastContainer
-                  position="top-right"
-                  autoClose={1000}
-                  pauseOnFocusLoss={false}
-                  limit={1}
-                />
               </div>
               <button
                 type="submit"

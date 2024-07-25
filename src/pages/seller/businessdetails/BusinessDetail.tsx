@@ -175,26 +175,26 @@ function BusinessDetails() {
         images: [],
       });
 
-      // const response = await fetch('http://localhost:5173/create-checkout-session', {
-      //     method: 'POST',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({}),
-      // });
+      const response = await fetch('seller/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+      });
 
-      // if (!response.ok) {
-      //     throw new Error(`Server error: ${response.status}`);
-      // }
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
 
-      // const session = await response.json();
-      // const stripe = await stripePromise;
+      const session = await response.json();
+      const stripe = await stripePromise;
 
-      // if (!stripe) {
-      //     throw new Error("Stripe not initialized");
-      // }
+      if (!stripe) {
+        throw new Error("Stripe not initialized");
+      }
 
-      // await stripe.redirectToCheckout({ sessionId: session.id });
+      await stripe.redirectToCheckout({ sessionId: session.id });
     } catch (error) {
       toast.error("Failed to save business details.");
       if (error instanceof TypeError) {
@@ -299,9 +299,8 @@ function BusinessDetails() {
                   </div>
                   {errors.businessName && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        businessData.businessName ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${businessData.businessName ? "" : "hidden"
+                        }}`}
                     >
                       {errors.businessName}
                     </span>
@@ -324,9 +323,8 @@ function BusinessDetails() {
                   </div>
                   {errors.ownerName && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        businessData.ownerName ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${businessData.ownerName ? "" : "hidden"
+                        }}`}
                     >
                       {errors.ownerName}
                     </span>
@@ -350,9 +348,8 @@ function BusinessDetails() {
                   </div>
                   {errors.address && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        businessData.address ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${businessData.address ? "" : "hidden"
+                        }}`}
                     >
                       {errors.address}
                     </span>
@@ -375,9 +372,8 @@ function BusinessDetails() {
                   </div>
                   {errors.gstNo && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        businessData.gstNo ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${businessData.gstNo ? "" : "hidden"
+                        }}`}
                     >
                       {errors.gstNo}
                     </span>
@@ -401,9 +397,8 @@ function BusinessDetails() {
                   </div>
                   {isValidEmail && (
                     <span
-                      className={`text-red-600 text-sm ${
-                        businessData.email ? "" : "hidden"
-                      }}`}
+                      className={`text-red-600 text-sm ${businessData.email ? "" : "hidden"
+                        }}`}
                     >
                       {errors.email}
                     </span>
