@@ -24,6 +24,7 @@ function Coupons() {
   const handleCouponView = (id: string) => {
     navigate(`/seller/couponView/${id}`, { state: { couponId: id } });
   };
+  
   const handleDeleteCoupons = async (id: string) => {
     setisLoading(true);
 

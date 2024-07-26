@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Sidebar from "../../../Components/Dashboard/Sidebar";
+import PageSidebar from "@/pages/user/header/PageSidebar";
 import { Link, useLocation } from "react-router-dom";
 import { Logo, menu } from "@/assets";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 
 const routes = {
   customer: [
@@ -41,9 +41,8 @@ function UserHeader() {
   const routeLinks = getRoutes().map((route) => (
     <li
       key={route.path}
-      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${
-        pathname === route.path ? "text-white bg-[#DF201F] w-full" : ""
-      }`}
+      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === route.path ? "text-white bg-[#DF201F] w-full" : ""
+        }`}
     >
       <Link to={route.path}>{route.label}</Link>
     </li>
@@ -51,7 +50,7 @@ function UserHeader() {
 
   return (
     <div className="h-full w-full mt-4 flex flex-wrap">
-      <Sidebar />
+      <PageSidebar />
       <nav className="flex w-full flex-wrap justify-evenly shadow-dashboard">
         <div className="flex items-center flex-row">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="Logo" />
@@ -62,9 +61,8 @@ function UserHeader() {
           </Link>
         </div>
         <div
-          className={`md:flex item-center text-[14px] ${
-            showSideMenu ? "" : "hidden"
-          }`}
+          className={`md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"
+            }`}
           style={{ fontFamily: "Bai Jamjuree" }}
         >
           <ul className="flex items-center font-semibold w-full text-[16px] gap-8">

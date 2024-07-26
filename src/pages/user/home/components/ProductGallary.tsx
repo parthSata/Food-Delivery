@@ -1,5 +1,5 @@
 import { GallaryFood } from "@/assets";
-import UserGallaryHeader from "../../../../User/Pages/Home/UserGallaryHeader";
+import UserGallaryHeader from "../../header/UserGallaryHeader";
 import { useLanguageContext } from "../../../../context/LanguageContext";
 
 function ProductGallary() {

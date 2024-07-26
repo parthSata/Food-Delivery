@@ -24,10 +24,9 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "@/Components/ReusableComponent/Button";
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
-import { loadStripe } from '@stripe/stripe-js';
-import config from "@/config/Config";
-import { useNavigate } from "react-router-dom";
-const stripePromise = loadStripe(`${config.stripeKey}`);
+// import { loadStripe } from '@stripe/stripe-js';
+// import config from "@/config/Config";
+// const stripePromise = loadStripe(`${config.stripeKey}`);
 
 interface BusinessDetails {
   id: string;
@@ -58,7 +57,6 @@ function BusinessDetails() {
     email: "",
     images: [],
   });
-  const navigate = useNavigate()
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([]);
 
   const handleChange = (
@@ -177,29 +175,29 @@ function BusinessDetails() {
         images: [],
       });
 
-      const response = await fetch(`create-checkout-session`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({}),
-      });
+      // const response = await fetch(`create-checkout-session`, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({}),
+      // });
 
-      if (!response.ok) {
-        throw new Error(`Server error: ${response.status}`);
-      }
+      // if (!response.ok) {
+      //   throw new Error(`Server error: ${response.status}`);
+      // }
 
-      const session = await response.json();
-      const stripe = await stripePromise;
+      // const session = await response.json();
+      // const stripe = await stripePromise;
 
 
 
-      if (!stripe) {
-        throw new Error("Stripe not initialized");
-      }
+      // if (!stripe) {
+      //   throw new Error("Stripe not initialized");
+      // }
 
-      await stripe.redirectToCheckout({ sessionId: session.id });
-      navigate("seller/create-checkout-session")
+      // await stripe.redirectToCheckout({ sessionId: session.id });
+      // navigate("seller/create-checkout-session")
     } catch (error) {
       toast.error("Failed to save business details.");
       if (error instanceof TypeError) {

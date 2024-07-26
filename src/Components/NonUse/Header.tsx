@@ -25,53 +25,48 @@ function Header(): JSX.Element {
           <span className="text-[24px] font-bold">Food Delivery</span>
         </div>
         <div
-          className={`  md:flex item-center text-[14px] ${
-            showSideMenu ? "" : "hidden"
-          }`}
+          className={`  md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"
+            }`}
           style={{ fontFamily: "Bai Jamjuree" }}
           id="navbar-default"
         >
           <ul className={`flex items-center  font-semibold text-[16px] gap-8`}>
             <li
-              className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/dashboard"
+              className={`flex p-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === "/dashboard"
                   ? "text-red-500  border-b-2 border-[#DF201F]"
                   : ""
-              } `}
+                } `}
             >
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/menus"
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/menus"
                   ? "text-red-500  border-b-2 border-[#DF201F]"
                   : ""
-              } `}
+                } `}
             >
               <Link to="/#">Menus</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/orders"
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/orders"
                   ? "text-red-500  border-b-2 border-[#DF201F]"
                   : ""
-              } `}
+                } `}
             >
               <Link to="/#">Orders</Link>
             </li>
             <li
-              className={` hover:text-red-500 hover:underline-offset-8 ${
-                pathname === "/restaurant-list"
+              className={` hover:text-red-500 hover:underline-offset-8 ${pathname === "/restaurant-list"
                   ? "text-red-500  border-b-2 border-[#DF201F]"
                   : ""
-              } `}
+                } `}
             >
               <Link to="/#">Restaurant List</Link>
             </li>
           </ul>
         </div>
         <div className="flex justify-between ">
-          <img src={Profile} alt="" className="h-[40px] w-[40px] border-r " />
+          <img src={Profile} alt="" className="h-[40px] w-[40px] border-r" />
           <div className="relative flex items-center justify-center mr-6">
             <img
               src={Notification}

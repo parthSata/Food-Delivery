@@ -30,8 +30,14 @@ import RestaurantTypes from "../pages/seller/restauranttypes/RestaurantTypes";
 import CheckoutPage from "../pages/user/checkout/CheckOutPage";
 import GallaryHeader from "../Components/Restaurant/GallaryHeader";
 import GallaryModelAdd from "../Components/Restaurant/GallaryModelAdd";
+import Container from "@/Components/Container";
+import UserCategory from "@/pages/user/category/Category";
+import UserContainer from "@/pages/user/components/UserContainer";
 
 export {
+  UserContainer,
+  Container,
+  UserCategory,
   GallaryHeader,
   GallaryModelAdd,
   CheckoutPage,

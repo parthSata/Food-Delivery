@@ -1,7 +1,7 @@
 import React from "react";
-import PageComponent from "./PageComponent";
+import PageComponent from "@/pages/user/components/PageComponent";
 
-const Container = ({ children }: { children: React.ReactNode }) => {
+const UserContainer = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
             <PageComponent>
@@ -11,4 +11,4 @@ const Container = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default Container;
+export default UserContainer;

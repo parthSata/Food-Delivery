@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Notification, Profile, Logo, menu } from "@/assets";
 import Sidebar from "./Sidebar";
 import { useAuth } from "../../context/AuthContext";
+import ProfileDialog from "../Profile/ProfileDialog";
 
 const routes = {
   admin: [
@@ -26,6 +27,8 @@ const routes = {
 
 const DashboardHeader = () => {
   const [showSideMenu] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
   const toggleSideMenu = () => {
     const sideMenu = document.getElementById("side-menu");
@@ -48,16 +51,18 @@ const DashboardHeader = () => {
   const routeLinks = getRoutes().map((route) => (
     <li
       key={route.path}
-      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${
-        pathname === route.path
-          ? "text-red-500 border-b-2 border-[#DF201F]"
-          : ""
-      } `}
+      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === route.path
+        ? "text-red-500 border-b-2 border-[#DF201F]"
+        : ""
+        } `}
     >
       <Link to={route.path}>{route.label}</Link>
     </li>
   ));
 
+
+  const openDialog = () => setIsDialogOpen(true);
+  const closeDialog = () => setIsDialogOpen(false);
   return (
     <div className="h-full w-full mt-4">
       <Sidebar />
@@ -71,9 +76,8 @@ const DashboardHeader = () => {
           </Link>
         </div>
         <div
-          className={`md:flex items-center text-[14px] ${
-            showSideMenu ? "" : "hidden"
-          }`}
+          className={`md:flex items-center text-[14px] ${showSideMenu ? "" : "hidden"
+            }`}
           style={{ fontFamily: "Bai Jamjuree" }}
         >
           <ul className={`flex items-center font-semibold text-[16px] gap-8`}>
@@ -85,6 +89,7 @@ const DashboardHeader = () => {
             src={Profile}
             alt="Profile"
             className="h-[40px] w-[40px] border-r"
+            onClick={openDialog}
           />
           <div className="relative items-center justify-center ml-6 hidden md:flex">
             <img
@@ -116,6 +121,9 @@ const DashboardHeader = () => {
           </div>
         </div>
       </div>
+      {isDialogOpen && (
+        <ProfileDialog isOpen={isDialogOpen} onClose={closeDialog} />
+      )}
     </div>
   );
 };

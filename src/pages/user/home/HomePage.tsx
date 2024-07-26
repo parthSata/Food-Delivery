@@ -21,7 +21,6 @@ function HomePage() {
   return (
     <div>
       <div className="h-full w-full mb-20 ">
-        <div className="">
           <div className="relative  bg-opacity-85 mt-0">
             <img src={HomeImg} alt="" className="h-[400px] w-full" />
             <div
@@ -158,7 +157,6 @@ function HomePage() {
               <Team />
             </div>
           </div>
-        </div>
       </div>
     </div>
   );

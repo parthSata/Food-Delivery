@@ -1,5 +1,5 @@
 import React from "react";
-import PageHeader from "../Pages/Header/PageHeader";
+import PageHeader from "../header/PageHeader";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
     return (

@@ -74,8 +74,18 @@ import Dummy from "../assets/images/Dummy.png";
 import StraightQuotes from "../assets/images/StraightQuotes.png";
 import StraightQuotes2 from "../assets/images/StraightQuotes2.png";
 import BurgerImg from "../assets/images/BurgerImg.png";
+import ProfilePicture from "../assets/images/ProfilePicture.png";
+import PrivacyPolicy from "../assets/images/PrivacyPolicy.png";
+import EditProfile from "../assets/images/EditProfile.png";
+import TearmsAndCondition from "../assets/images/TearmsAndCondition.png";
+import Logout from "../assets/images/Logout.png";
 
 export {
+  ProfilePicture,
+  PrivacyPolicy,
+  EditProfile,
+  TearmsAndCondition,
+  Logout ,
   Resend,
   image,
   Noodles,
