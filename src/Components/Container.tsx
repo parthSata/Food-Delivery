@@ -1,10 +1,10 @@
 import React from "react";
-import DashboardHeader from "./Dashboard/Menu";
+import Header from "./Dashboard/Header";
 
 const Container = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-      <DashboardHeader />
+      <Header />
       <div className="min-w-fit max-w-[1280px] w-full mx-auto px-6">
         {children}
       </div>

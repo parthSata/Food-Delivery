@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Logo, menu, Notification, Profile, Cart } from "@/assets";
 import { useAuth } from "@/context/AuthContext";
 import PageSidebar from "@/pages/user/header/PageSidebar";
+import ProfileDialog from "@/Components/Profile/ProfileDialog";
 
 const routes = {
   customer: [
@@ -20,6 +21,8 @@ const routes = {
 
 function PageHeader() {
   const [showSideMenu] = useState<boolean>(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
 
   const toggleSideMenu = () => {
     const sideMenu = document.getElementById("side-menu");
@@ -48,6 +51,9 @@ function PageHeader() {
     </li>
   ));
 
+  const openDialog = () => setIsDialogOpen(true);
+  const closeDialog = () => setIsDialogOpen(false);
+
   return (
     <div>
       <div className="h-full w-full mt-4 flex flex-wrap px-">
@@ -71,17 +77,17 @@ function PageHeader() {
             </ul>
           </div>
           <div className="flex flex-row  gap-4">
-            <div className="flex items-center gap-4 justify-center  px-6">
-              <img src={Profile} alt="" className=" h-12 w-12cursor-pointer" />
-              <div className="relative items-center justify-center ml-6 hidden md:flex">
-                <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " />
+            <div className="flex items-center gap-4 justify-around  px-6">
+              <div className="relative items-center border-r pr-10 justify-center  hidden md:flex">
+                <img src={Cart} alt="" className="   h-[30px] w-[30px] cursor-pointer " />
                 <div className="absolute -top-1 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
                 </div>
               </div>
-              <div className="relative items-center justify-center ml-6 hidden md:flex">
+              <img src={Profile} alt="" className=" h-12 w-12  cursor-pointer" onClick={openDialog} />
+              <div className="relative items-center justify-center pl-12 border-l  hidden md:flex">
                 <img src={Notification} alt="" className=" h-10 w-10 cursor-pointer" />
-                <div className="absolute top-0 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+                <div className="absolute top-0 left-16 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
                 </div>
               </div>
@@ -117,6 +123,9 @@ function PageHeader() {
           </div>
         </div>
       </div>
+      {isDialogOpen && (
+        <ProfileDialog isOpen={isDialogOpen} onClose={closeDialog} />
+      )}
     </div>
   );
 }
