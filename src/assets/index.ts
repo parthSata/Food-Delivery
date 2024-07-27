@@ -11,6 +11,7 @@ import Seller from "../assets/images/Seller.png";
 import search from "../assets/images/search.png";
 import Pizza from "../assets/images/Pizza.png";
 import DummyImg from "../assets/images/DummyFood.png";
+import CartLogo from "../assets/images/CartLogo.png";
 import Cart from "../assets/images/Cart.png";
 import Revenue from "../assets/images/Revenue.png";
 import TotalShops from "../assets/images/TotalShops.png";
@@ -81,11 +82,12 @@ import TearmsAndCondition from "../assets/images/TearmsAndCondition.png";
 import Logout from "../assets/images/Logout.png";
 
 export {
+  CartLogo,
   ProfilePicture,
   PrivacyPolicy,
   EditProfile,
   TearmsAndCondition,
-  Logout ,
+  Logout,
   Resend,
   image,
   Noodles,
