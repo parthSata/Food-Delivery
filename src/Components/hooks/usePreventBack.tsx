@@ -8,12 +8,8 @@ const usePreventBack = () => {
     useEffect(() => {
         const handlePopState = (event: any) => {
             event.preventDefault();
-            if (window.confirm('Are you sure you want to go back? You will be logged out.')) {
-                // Perform logout here if needed
-                navigate('/'); // Redirect to home page or login page after logout
-            } else {
-                window.history.pushState(null, location.pathname);
-            }
+            window.history.pushState(null, location.pathname);
+
         };
 
         window.history.pushState(null, window.location.pathname);
