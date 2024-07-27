@@ -41,9 +41,8 @@ function PageHeader() {
   const routeLinks = getRoutes().map((route) => (
     <li
       key={route.path}
-      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${
-        pathname === route.path ? "text-white bg-[#DF201F] w-full" : ""
-      }`}
+      className={`py-6 items-center hover:text-red-500 hover:underline-offset-8 ${pathname === route.path ? "text-white bg-[#DF201F] w-full" : ""
+        }`}
     >
       <Link to={route.path}>{route.label}</Link>
     </li>
@@ -63,9 +62,8 @@ function PageHeader() {
             </Link>
           </div>
           <div
-            className={`md:flex item-center text-[14px] ${
-              showSideMenu ? "" : "hidden"
-            }`}
+            className={`md:flex item-center text-[14px] ${showSideMenu ? "" : "hidden"
+              }`}
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <ul className="flex items-center font-semibold w-full text-[16px] gap-8">
@@ -74,15 +72,15 @@ function PageHeader() {
           </div>
           <div className="flex flex-row  gap-4">
             <div className="flex items-center gap-4 justify-center  px-6">
-              <img src={Profile} alt="" className=" h-12 w-12" />
+              <img src={Profile} alt="" className=" h-12 w-12cursor-pointer" />
               <div className="relative items-center justify-center ml-6 hidden md:flex">
-                <img src={Cart} alt="" className=" h-8 w-8" />
+                <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " />
                 <div className="absolute -top-1 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
                 </div>
               </div>
               <div className="relative items-center justify-center ml-6 hidden md:flex">
-                <img src={Notification} alt="" className=" h-10 w-10" />
+                <img src={Notification} alt="" className=" h-10 w-10 cursor-pointer" />
                 <div className="absolute top-0 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
                 </div>
@@ -93,7 +91,7 @@ function PageHeader() {
         <div className="flex mt-4 md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
           <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
             <span className="">
-              <img src={menu} alt="" className="" onClick={toggleSideMenu} />
+              <img src={menu} alt="" className="cursor-pointer" onClick={toggleSideMenu} />
             </span>
             <span className="text-lg text-white">Menu</span>
           </div>
@@ -101,7 +99,7 @@ function PageHeader() {
             <img
               src={Cart}
               alt="Cart"
-              className="absolute ml-4 h-8 w-8 top-[-10px]"
+              className="absolute ml-4 h-8 w-8 top-[-10px] cursor-pointer"
             />
             <div className="relative -top-4  left-8 rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
               10+
@@ -111,7 +109,7 @@ function PageHeader() {
             <img
               src={Notification}
               alt="Notification icon"
-              className="absolute  h-[45px] w-[45px] "
+              className="absolute  h-[45px] w-[45px] cursor-pointer"
             />
             <div className="relative -top-2 left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
               10+
