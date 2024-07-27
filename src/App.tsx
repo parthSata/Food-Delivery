@@ -49,6 +49,7 @@ function App() {
               />
             }
           />
+          <Route path="*" element={<NotAuthorized />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
