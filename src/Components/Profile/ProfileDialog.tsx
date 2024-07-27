@@ -28,6 +28,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
         };
     }, []);
 
+
     return (
         <div ref={sideMenuRef} className="relative right-24 inset-0 flex justify-end p-4">
             <div className="absolute right-20 bg-white shadow-lg rounded-lg  w-80">

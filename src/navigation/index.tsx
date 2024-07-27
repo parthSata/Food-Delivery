@@ -6,7 +6,7 @@ import Dashboard from "../Components/Dashboard/Dashboard";
 import Orders from "../pages/seller/Order/Orders";
 import Products from "@/Components/Products/AllProducts";
 import ProductAdd from "@/Components/Products/ProductAdd";
-import Category from "../Components/Category/CategoryProducts";
+import Category from "@/pages/user/category/Category";
 import ProductView from "../Components/Products/ProductView";
 import Coupons from "../pages/seller/coupon/Coupons";
 import CouponAdd from "../pages/seller/coupon/components/CouponAdd";
@@ -33,8 +33,10 @@ import GallaryModelAdd from "../Components/Restaurant/GallaryModelAdd";
 import Container from "@/Components/Container";
 import UserCategory from "@/pages/user/category/Category";
 import UserContainer from "@/pages/user/components/UserContainer";
+import usePreventBack from "@/Components/hooks/usePreventBack";
 
 export {
+  usePreventBack,
   UserContainer,
   Container,
   UserCategory,
