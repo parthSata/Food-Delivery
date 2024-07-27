@@ -32,7 +32,7 @@ function Category() {
           </span>
         </div>
         <div className="w-full">
-          <img src={BurgerImg} alt="" className="h-[205px] w-full" />
+          <img src={BurgerImg} alt="" className=" h-[205px] w-full" />
         </div>
       </div>
       {/* Products */}

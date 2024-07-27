@@ -14,6 +14,7 @@ import { ref, set } from "firebase/database";
 import { useLanguageContext } from "../context/LanguageContext";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import Input from "./ReusableComponent/Input";
+import Loader from "./ReusableComponent/Loader";
 
 function Register() {
   const { t } = useLanguageContext();
@@ -26,6 +27,8 @@ function Register() {
   const [name, setName] = useState("");
   const [role, setRole] = useState<string>("customer");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
   const handleStateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedState(e.target.value);
@@ -72,6 +75,7 @@ function Register() {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
     e?.preventDefault();
     const newErrors: { [key: string]: string } = {};
 
@@ -122,6 +126,7 @@ function Register() {
     } else {
       if (!isValidEmail) toast.warn("Enter valid email");
       toast.warn("Please fill out all fields.");
+      setIsLoading(false)
     }
   };
 
@@ -137,7 +142,7 @@ function Register() {
 
 
   return (
-    <div>
+    <Loader isLoading={isLoading}>
       <div className="flex flex-row px-10 justify-center items-center gap-20 h-full w-full flex-wrap-reverse md:flex-nowrap xl:flex-wrap">
         <form
           style={{ fontFamily: "Montserrat Alternates" }}
@@ -361,7 +366,7 @@ function Register() {
           />
         </div>
       </div>
-    </div>
+    </Loader>
   );
 }
 

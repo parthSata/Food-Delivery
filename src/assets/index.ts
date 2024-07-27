@@ -80,8 +80,10 @@ import PrivacyPolicy from "../assets/images/PrivacyPolicy.png";
 import EditProfile from "../assets/images/EditProfile.png";
 import TearmsAndCondition from "../assets/images/TearmsAndCondition.png";
 import Logout from "../assets/images/Logout.png";
+import Favorites from "../assets/images/Favorites.png";
 
 export {
+  Favorites,
   CartLogo,
   ProfilePicture,
   PrivacyPolicy,

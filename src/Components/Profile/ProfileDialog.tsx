@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Button from "../ReusableComponent/Button";
 import { Link } from "react-router-dom";
-import { EditProfile, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
+import { EditProfile, Favorites, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
 
 interface AddProps {
     onClose: () => void;
@@ -30,7 +30,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
 
 
     return (
-        <div ref={sideMenuRef} className="relative right-24 inset-0 flex justify-end p-4">
+        <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end p-4 ">
             <div className="absolute right-20 bg-white shadow-lg rounded-lg  w-80">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
                     <span className="text-lg font-semibold">Profile</span>
@@ -63,7 +63,14 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                     />
                     <p className="mt-2 text-xl font-semibold">Hi, Bharrat</p>
                 </div>
-                <div className=" border-gray-200">
+                <div className=" border-gray-200 ">
+                    <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
+
+                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={Favorites} alt="" className="" /></span>
+                        </div>
+                        <span className="">Favorites</span>
+                    </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
                         <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">

@@ -25,7 +25,7 @@ const routes = {
   ],
 };
 
-const DashboardHeader = () => {
+const Header = () => {
   const [showSideMenu] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -128,4 +128,4 @@ const DashboardHeader = () => {
   );
 };
 
-export default DashboardHeader;
+export default Header;
