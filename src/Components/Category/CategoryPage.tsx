@@ -189,7 +189,7 @@ function CategoryPage(): JSX.Element {
                 {currentItems?.map((item) => (
                   <tr
                     key={item.id}
-                    className="text-[#A2A3A5] border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
+                    className="text-[#A2A3A5] font-semibold border-[2px] border-opacity-10 border-[#A2A3A5] border-b"
                   >
                     <td className=" flex items-center p-6 sm:pr-16 pr-20 border-opacity-10 border-[#A2A3A5]  ">
                       <img

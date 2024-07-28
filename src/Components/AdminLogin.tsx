@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Logo, Online, Email, Person } from "@/assets";
 import "react-phone-input-2/lib/style.css";
@@ -7,7 +7,7 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, get } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../context/AuthContext";
+import { useAuth, } from "../context/AuthContext";
 import Input from "./ReusableComponent/Input";
 import Button from "./ReusableComponent/Button";
 import Loader from "@/Components/ReusableComponent/Loader";
@@ -16,12 +16,32 @@ import { useLanguageContext } from "../context/LanguageContext";
 function AdminLogin() {
   const { t } = useLanguageContext();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, fetchUserRole } = useAuth();
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token && auth.currentUser) {
+      const checkUserRole = async () => {
+        const user = auth.currentUser;
+        if (user) {
+          const role = await fetchUserRole(user.uid);
+          if (role) {
+            navigate(
+              role === "admin" ? "/admin" :
+                role === "seller" ? "/seller" :
+                  "/customer"
+            );
+          }
+        }
+      };
+      checkUserRole();
+    }
+  }, [navigate, fetchUserRole]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredEmail = e.target.value;

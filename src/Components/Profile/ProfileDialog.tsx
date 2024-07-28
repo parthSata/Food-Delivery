@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Button from "../ReusableComponent/Button";
 import { Link } from "react-router-dom";
 import { EditProfile, Favorites, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
-
+import { useAuth } from "@/context/AuthContext";
 interface AddProps {
     onClose: () => void;
     isOpen: boolean;
@@ -10,6 +10,7 @@ interface AddProps {
 
 const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
     const sideMenuRef = useRef<HTMLDivElement>(null);
+    const { logout } = useAuth()
     if (!isOpen) return null;
 
     const handleOutsideClick = (event: MouseEvent) => {
@@ -20,6 +21,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
             onClose();
         }
     };
+
 
     useEffect(() => {
         document.addEventListener("mousedown", handleOutsideClick);
@@ -90,12 +92,12 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                         </div>
                         <span className="">Tearms And Condition</span>
                     </Link>
-                    <Link to="/login" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
+                    <Button onClick={logout} className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
                         <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                             <span className=""><img src={EditProfile} alt="" className="" /></span>
                         </div>
                         <span className="">LogOut</span>
-                    </Link>
+                    </Button>
 
                 </div>
             </div>

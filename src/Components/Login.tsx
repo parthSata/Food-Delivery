@@ -5,13 +5,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { auth, db } from "../config/Firebase/firebase";
 import { ref, get } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
-import {
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword,
-} from "firebase/auth"; import { useAuth } from "../context/AuthContext";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "../context/AuthContext";
 import Input from "./ReusableComponent/Input";
 import Loader from "./ReusableComponent/Loader";
-// import Loader from "./Loader";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -40,14 +37,11 @@ const Login: React.FC = () => {
   const handleForgotPassword = () => {
     if (!email) {
       return;
-    } else if (
-      !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)
-    ) {
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
       toast.warn("Please write a valid email");
       return;
     }
 
-    // Send a password reset email
     sendPasswordResetEmail(auth, email)
       .then(() => {
         toast.success("Please check your email for password reset instructions");
@@ -55,7 +49,7 @@ const Login: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const handleLogin = async (e?: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
@@ -97,11 +91,10 @@ const Login: React.FC = () => {
           login(currentUser);
           toast.success("Login successful!");
 
-
           navigate(
             role === "admin" ? "/admin" :
               role === "seller" ? "/seller" :
-                "/customer"
+                "/customer", { replace: true }
           );
         } else {
           toast.warn("User not found. Please register first.");
@@ -120,11 +113,7 @@ const Login: React.FC = () => {
     <>
       <Loader isLoading={isLoading}>
         <div className="flex flex-row justify-center items-center gap-5 h-screen w-full overflow-x-auto flex-wrap-reverse xl:flex-wrap">
-          {/* Login */}
-          <form
-            onSubmit={handleLogin}
-            style={{ fontFamily: "Montserrat Alternates" }}
-          >
+          <form onSubmit={handleLogin} style={{ fontFamily: "Montserrat Alternates" }}>
             <div className="border-black flex flex-col justify-center items-center">
               <div className="flex flex-col justify-center items-center">
                 <div className="border-black flex flex-col justify-center items-center">
@@ -188,7 +177,6 @@ const Login: React.FC = () => {
             </div>
           </form>
 
-          {/* image */}
           <div className="flex justify">
             <img
               src={Online}
@@ -201,6 +189,5 @@ const Login: React.FC = () => {
     </>
   );
 };
-
 
 export default Login;

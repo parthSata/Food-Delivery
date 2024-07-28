@@ -23,6 +23,17 @@ const routes = {
     { path: "/seller/products", label: "Products" },
     { path: "/seller/coupons", label: "Coupons" },
   ],
+  customer: [
+    { path: "/customer/", label: "Home" },
+    { path: "/customer/category", label: "Category" },
+    { path: "/customer/about", label: "About" },
+    { path: "/customer/dishes", label: "Dishes" },
+    { path: "/customer/gallery", label: "Gallery" },
+    { path: "/customer/team", label: "Team" },
+    { path: "/customer/testimonials", label: "Testimonials" },
+    { path: "/customer/news", label: "News" },
+    { path: "/customer/contactUs", label: "Contact Us" },
+  ],
 };
 
 const Header = () => {
@@ -64,7 +75,7 @@ const Header = () => {
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
   return (
-    <div className="h-full w-full mt-4">
+    <div className="h-full w-full ">
       <Sidebar />
       <nav className="flex flex-wrap justify-between px-4 shadow-dashboard">
         <div className="flex items-center flex-row">

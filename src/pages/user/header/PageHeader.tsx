@@ -56,7 +56,7 @@ function PageHeader() {
 
   return (
     <div>
-      <div className="h-full w-full mt-4 flex flex-wrap px-">
+      <div className="h-full w-full flex flex-wrap px-">
         <PageSidebar />
         <nav className="flex w-full flex-wrap justify-between px-4 shadow-dashboard">
           <div className="flex items-center flex-row">

@@ -5,11 +5,13 @@ import {
   ReactNode,
   useEffect,
 } from "react";
+
 import { auth, db } from "@/config/Firebase/firebase";
 import { getIdToken, onIdTokenChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { get, ref } from "firebase/database";
 import Loader from "../Components/ReusableComponent/Loader";
+import { toast } from "react-toastify";
 
 interface User {
   uid: string;
@@ -21,6 +23,7 @@ interface AuthContextType {
   login: (userData: User) => void;
   logout: () => void;
   refreshToken: () => Promise<void>;
+  fetchUserRole: (uid: string) => Promise<string | null>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -30,10 +33,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
+
+  useEffect(() => {
+    const clearLocalStorageOnInit = () => {
+      if (!auth.currentUser) {
+        localStorage.removeItem("accessToken");
+      }
+    };
+
+    clearLocalStorageOnInit();
+
+    return () => {
+      localStorage.removeItem("accessToken");
+    };
+  }, []);
+
+
   useEffect(() => {
     const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
-        const token = await getIdToken(firebaseUser, true); // force refresh token
+        const token = await getIdToken(firebaseUser, true);
         localStorage.setItem("accessToken", token);
 
         const uid = firebaseUser.uid;
@@ -46,16 +65,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setUser(userData);
           } else {
             setUser(null);
-            console.log("No user data found for email:", uid);
+            toast.warn("No user data found for email");
           }
         } else {
           setUser(null);
-          console.log("No email found for firebaseUser:", firebaseUser);
+          toast.warn("No email found for firebaseUser");
         }
       } else {
         localStorage.removeItem("accessToken");
         setUser(null);
-        console.log("No firebaseUser found, user set to null");
+        toast.warn("No firebaseUser found, user set to null");
       }
       setIsLoading(false);
     });
@@ -63,28 +82,38 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
+
   const login = (userData: User) => {
     setUser(userData);
-    console.log("User logged in:", userData);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await auth.signOut();
     setUser(null);
     localStorage.removeItem("accessToken");
     navigate("/login");
-    console.log("User logged out");
   };
 
   const refreshToken = async () => {
     if (auth.currentUser) {
       const token = await getIdToken(auth.currentUser, true);
       localStorage.setItem("accessToken", token);
-      console.log("Token refreshed:", token);
     }
   };
 
+  const fetchUserRole = async (uid: string) => {
+    const userDataRef = ref(db, `users/${uid}`);
+    const snapshot = await get(userDataRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      return userData.role || null;
+    }
+    return null;
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, logout, refreshToken }}>
+    <AuthContext.Provider value={{ user, fetchUserRole, login, logout, refreshToken }}>
       <Loader isLoading={isLoading}>{children}</Loader>
     </AuthContext.Provider>
   );

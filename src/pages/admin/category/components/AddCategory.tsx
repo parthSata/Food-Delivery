@@ -352,7 +352,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
       </div>
       <div className="flex justify-center">
         <button
-          className="rounded-[60px] shadow-registerBtn ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] "
+          className="rounded-[60px] p-2 shadow-registerBtn ml-5 text-[#FFFFFF] bg-[#94CD00] h-[40px] w-[140px] "
           onClick={handleSubmit}
           style={{
             fontFamily: "Bai Jamjuree",
@@ -368,7 +368,7 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
         />
         <button
           type="submit"
-          className={`rounded-[60px] ml-5 text-[#FFFFFF] shadow-registerBtn bg-[#94CD00] h-[40px] w-[140px] `}
+          className={`rounded-[60px]  ml-5 text-[#FFFFFF] shadow-registerBtn bg-[#94CD00] h-[40px] w-[140px] `}
           onClick={handleUpdate}
           style={{
             fontFamily: "Bai Jamjuree",
