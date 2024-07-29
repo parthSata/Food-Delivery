@@ -8,7 +8,7 @@ import Team from "./components/Team";
 import TodaySpecial from "./components/TodaySpecial";
 import Button from "../../../Components/ReusableComponent/Button";
 import { useLanguageContext } from "../../../context/LanguageContext";
-import Testimonials from "../testimonials/Testimonials";
+// import Testimonials from "../testimonials/Testimonials";
 // import { useAuth } from "@/context/AuthContext";
 import { auth } from "@/config/Firebase/firebase";
 import { useEffect } from "react";
@@ -40,6 +40,7 @@ function HomePage() {
   }, [navigate, fetchUserRole]);
 
   const handleSubmit = () => {
+    console.log("Clicked")
     navigate("/login");
   };
 
@@ -139,30 +140,18 @@ function HomePage() {
             </div>
           </div>
           <div className="mb-4 flex  bottom-0   space-x-2 justify-center rtl:space-x-reverse">
-            <button
-              type="button"
+            <Button
               className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full"
-              aria-label="Slide 1"
-              data-carousel-slide-to="0"
-            ></button>
-            <button
-              type="button"
+            ></Button>
+            <Button
               className="w-3 h-3 border-2 border-[#94CD00]  rounded-full"
-              aria-label="Slide 2"
-              data-carousel-slide-to="1"
-            ></button>
-            <button
-              type="button"
+            ></Button>
+            <Button
               className="w-3 h-3 border-2 border-[#94CD00]  rounded-full"
-              aria-label="Slide 3"
-              data-carousel-slide-to="2"
-            ></button>
-            <button
-              type="button"
+            ></Button>
+            <Button
               className="w-3 h-3 border-2 border-[#94CD00]  rounded-full"
-              aria-label="Slide 4"
-              data-carousel-slide-to="3"
-            ></button>
+            ></Button>
           </div>
 
           <div className="">
@@ -183,9 +172,9 @@ function HomePage() {
           <div className="">
             <Team />
           </div>
-          <div className="">
+          {/* <div className="">
             <Testimonials />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

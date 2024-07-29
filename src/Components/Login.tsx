@@ -9,6 +9,7 @@ import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/aut
 import { useAuth } from "../context/AuthContext";
 import Input from "./ReusableComponent/Input";
 import Loader from "./ReusableComponent/Loader";
+import Button from "./ReusableComponent/Button";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -154,14 +155,13 @@ const Login: React.FC = () => {
                   </p>
 
                   <div className="flex justify-center flex-col m-4">
-                    <button
-                      type="submit"
+                    <Button
                       style={{ fontFamily: "Bai Jamjuree", boxShadow: "2px 2px 25px 2px #DF201F80" }}
                       className={`bg-red-600 h-[50px] w-[247px] rounded-3xl text-white text-[18px] md:text-[22px] mt-5 ${isValidEmail ? "" : "cursor-not-allowed opacity-50"}`}
                       disabled={!isValidEmail || isLoading}
                     >
                       LOGIN
-                    </button>
+                    </Button>
                   </div>
                   <ToastContainer position="top-right" autoClose={1000} pauseOnFocusLoss={false} limit={1} />
                 </div>

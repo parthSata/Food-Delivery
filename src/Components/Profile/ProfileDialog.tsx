@@ -33,7 +33,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
 
     return (
         <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end p-4 ">
-            <div className="absolute right-20 bg-white shadow-lg rounded-lg  w-80">
+            <div className="absolute right-20 bg-white shadow-lg rounded-lg h-[500px] overflow-y-auto w-80">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
                     <span className="text-lg font-semibold">Profile</span>
                     <Button
