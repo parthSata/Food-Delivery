@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Notification, Profile, Logo, menu } from "@/assets";
 import Sidebar from "./Sidebar";
-import { useAuth } from "@/context/AuthContext";
+import UserSidebar from "@/pages/user/header/PageSidebar";
+import { useAuth } from "../../context/AuthContext";
 import ProfileDialog from "../Profile/ProfileDialog";
 
 const routes = {
@@ -22,8 +23,7 @@ const routes = {
     { path: "/seller/orders", label: "Orders" },
     { path: "/seller/products", label: "Products" },
     { path: "/seller/coupons", label: "Coupons" },
-  ],
-  customer: [
+  ], customer: [
     { path: "/customer/", label: "Home" },
     { path: "/customer/category", label: "Category" },
     { path: "/customer/about", label: "About" },
@@ -40,6 +40,7 @@ const Header = () => {
   const [showSideMenu] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+
   const toggleSideMenu = () => {
     const sideMenu = document.getElementById("side-menu");
     if (sideMenu) {
@@ -54,9 +55,8 @@ const Header = () => {
   const getRoutes = () => {
     if (!user) return [];
     if (user.role === "admin") return routes.admin;
-    if (user.role === "seller") return routes.seller;
     if (user.role === "customer") return routes.customer;
-    console.log("🚀 ~ getRoutes ~ user.role:", user.role)
+    if (user.role === "seller") return routes.seller;
     return [];
   };
 
@@ -71,73 +71,71 @@ const Header = () => {
       <Link to={route.path}>{route.label}</Link>
     </li>
   ));
-
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <div className="h-full w-full">
-      <>
-        <Sidebar />
-        <nav className="flex flex-wrap justify-between px-4 shadow-dashboard">
-          <div className="flex items-center flex-row">
-            <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
-            <Link to="/">
-              <span className="text-xl sm:text-2xl md:text-lg font-bold">
-                Food Delivery
-              </span>
-            </Link>
-          </div>
-          <div
-            className={`md:flex items-center text-[14px] ${showSideMenu ? "" : "hidden"
-              }`}
-            style={{ fontFamily: "Bai Jamjuree" }}
-          >
-            <ul className="flex items-center font-semibold text-[16px] gap-8">
-              {routeLinks}
-            </ul>
-          </div>
-          <div className="flex items-center">
-            <img
-              src={Profile}
-              alt="Profile"
-              className="h-[40px] w-[40px] border-r"
-              onClick={openDialog}
-            />
-            <div className="relative items-center justify-center ml-6 hidden md:flex">
-              <img
-                src={Notification}
-                alt="Notification icon"
-                className="h-[38px] w-[38px]"
-              />
-              <div className="absolute -top-1 right-0 left-[15px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
-                10+
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div className="flex mt-4 md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
-          <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
-            <span>
-              <img src={menu} alt="" onClick={toggleSideMenu} />
+    <div className="h-full w-full p-2">
+      {user?.role == 'seller' ? <Sidebar /> : <UserSidebar />}
+
+      <nav className="flex flex-wrap justify-between px-4 shadow-dashboard">
+        <div className="flex items-center flex-row">
+          <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
+          <Link to="/">
+            <span className="text-xl sm:text-2xl md:text-lg font-bold">
+              Food Delivery
             </span>
-            <span className="text-lg text-white">Menu</span>
-          </div>
-          <div className="relative flex w-[15%] items-center justify-center bg-white">
+          </Link>
+        </div>
+        <div
+          className={`md:flex items-center text-[14px] ${showSideMenu ? "" : "hidden"
+            }`}
+          style={{ fontFamily: "Bai Jamjuree" }}
+        >
+          <ul className={`flex items-center font-semibold text-[16px] gap-8`}>
+            {routeLinks}
+          </ul>
+        </div>
+        <div className="flex items-center">
+          <img
+            src={Profile}
+            alt="Profile"
+            className="h-[40px] w-[40px] border-r cursor-pointer"
+            onClick={openDialog}
+          />
+          <div className="relative items-center justify-center ml-6 hidden md:flex">
             <img
               src={Notification}
               alt="Notification icon"
-              className="absolute ml-4 h-[45px] w-[45px] top-[-10px]"
+              className="h-[38px] w-[38px]"
             />
-            <div className="relative -top-2 left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+            <div className="absolute -top-1 right-0 left-[15px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
               10+
             </div>
           </div>
         </div>
-        {isDialogOpen && (
-          <ProfileDialog isOpen={isDialogOpen} onClose={closeDialog} />
-        )}
-      </>
+      </nav>
+      <div className="flex mt-4 md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
+        <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
+          <span className="">
+            <img src={menu} alt="" className="" onClick={toggleSideMenu} />
+          </span>
+          <span className="text-lg text-white">Menu</span>
+        </div>
+        <div className="relative flex w-[15%] items-center justify-center bg-white">
+          <img
+            src={Notification}
+            alt="Notification icon"
+            className="absolute ml-4 h-[45px] w-[45px] top-[-10px]"
+          />
+          <div className="relative -top-2 left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+            10+
+          </div>
+        </div>
+      </div>
+      {isDialogOpen && (
+        <ProfileDialog isOpen={isDialogOpen} onClose={closeDialog} />
+      )}
     </div>
   );
 };

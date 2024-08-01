@@ -12,11 +12,12 @@ import {
   CategoryPage,
   CategoryProducts,
   CheckoutPage,
+  usePreventBack,
 } from "@/navigation";
 import { Container } from "@/Components";
 
 const SellerNavigation = () => {
-  // usePreventBack()
+  usePreventBack()
   return (
     <Container>
       <Routes>

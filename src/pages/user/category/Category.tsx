@@ -13,7 +13,8 @@ function Category() {
   };
 
   const handleProductView = () => {
-    // Add product view logic here
+    console.log("Clicked")
+    navigate(`/customer/userProductView`);
   };
 
   return (

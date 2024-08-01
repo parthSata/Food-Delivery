@@ -34,8 +34,28 @@ import Container from "@/Components/Container";
 import UserCategory from "@/pages/user/category/Category";
 import UserContainer from "@/pages/user/components/UserContainer";
 import usePreventBack from "@/Components/hooks/usePreventBack";
+import AboutUs from "@/pages/user/home/components/AboutUs";
+import BestSeller from "@/pages/user/home/components/BestSeller";
+import LatestNews from "@/pages/user/home/components/LatestNews"
+import ProductGallary from "@/pages/user/home/components/ProductGallary";
+import Team from "@/pages/user/home/components/Team";
+import TodaySpecial from "@/pages/user/home/components/TodaySpecial";
+import Button from "@/Components/ReusableComponent/Button";
+import Testimonials from "@/pages/user/testimonials/Testimonials";
+import Footer from "@/pages/user/components/Footer";
+import UserProductView from '@/pages/user/category/UserProductView'
 
 export {
+  UserProductView,
+  Footer,
+  AboutUs,
+  BestSeller,
+  LatestNews,
+  ProductGallary,
+  Team,
+  TodaySpecial,
+  Button,
+  Testimonials,
   usePreventBack,
   UserContainer,
   Container,

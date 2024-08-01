@@ -1,46 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "@/assets";
-import AboutUs from "./components/AboutUs";
-import BestSeller from "./components/BestSeller";
-// import LatestNews from "./home/components/LatestNews"
-import ProductGallary from "./components/ProductGallary";
-import Team from "./components/Team";
-import TodaySpecial from "./components/TodaySpecial";
 import Button from "../../../Components/ReusableComponent/Button";
 import { useLanguageContext } from "../../../context/LanguageContext";
-// import Testimonials from "../testimonials/Testimonials";
-// import { useAuth } from "@/context/AuthContext";
 import { auth } from "@/config/Firebase/firebase";
-import { useEffect } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { BestSeller, AboutUs, TodaySpecial, ProductGallary, Team } from "@/navigation";
 
 function HomePage() {
   const { t } = useLanguageContext();
   const navigate = useNavigate();
-  const { fetchUserRole } = useAuth()
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token && auth.currentUser) {
-      const checkUserRole = async () => {
-        const user = auth.currentUser;
-        if (user) {
-          const role = await fetchUserRole(user.uid);
-          if (role) {
-            navigate(
-              role === "admin" ? "/admin" :
-                role === "seller" ? "/seller" :
-                  "/customer"
-            );
-          }
-        }
-      };
-      checkUserRole();
-    }
-  }, [navigate, fetchUserRole]);
+
 
   const handleSubmit = () => {
-    console.log("Clicked")
     navigate("/login");
   };
 
@@ -172,9 +143,7 @@ function HomePage() {
           <div className="">
             <Team />
           </div>
-          {/* <div className="">
-            <Testimonials />
-          </div> */}
+
         </div>
       </div>
     </div>

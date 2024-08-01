@@ -55,7 +55,7 @@ const Gallary: React.FC<GallaryInterface> = () => {
             <div className="bg-[#D9D9D9] flex flex-row flex-wrap h-full w-full ">
               {gallaryImage.map((item) => (
                 <div
-                  className="relative sm:w-1/4 p-4 h-full w-full"
+                  className="relative sm:w-1/4 p-4 flex items-center h-full w-full"
                   key={item.id}
                 >
                   <div className="">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo, Online, Person, Email } from "@/assets";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,15 +10,57 @@ import { useAuth } from "../context/AuthContext";
 import Input from "./ReusableComponent/Input";
 import Loader from "./ReusableComponent/Loader";
 import Button from "./ReusableComponent/Button";
+import Swal from 'sweetalert2'
+
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, fetchUserRole } = useAuth();
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [confirmationShown, setConfirmationShown] = useState<boolean>(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token && !confirmationShown) {
+
+      Swal.fire({
+        title: "You are already logged in. Do you want to Logout?",
+        icon: "warning",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Yes",
+        showDenyButton: true,
+        denyButtonText: "No",
+        denyButtonColor: "#d33"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          auth.signOut();
+        }
+        if (result.isDenied) {
+          const checkUserRole = async () => {
+            const user = auth.currentUser;
+            if (user) {
+              const role = await fetchUserRole(user.uid);
+              if (role) {
+                navigate(
+                  role === "admin" ? "/admin" :
+                    role === "seller" ? "/seller" :
+                      "/customer"
+                );
+              }
+            }
+          };
+          checkUserRole();
+        }
+      });
+
+      setConfirmationShown(true);
+    }
+  }, [navigate, fetchUserRole, confirmationShown]);
+
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const enteredEmail = e.target.value;

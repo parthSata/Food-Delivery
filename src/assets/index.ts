@@ -81,8 +81,20 @@ import EditProfile from "../assets/images/EditProfile.png";
 import TearmsAndCondition from "../assets/images/TearmsAndCondition.png";
 import Logout from "../assets/images/Logout.png";
 import Favorites from "../assets/images/Favorites.png";
+import Instagram from "../assets/images/Instagram.png";
+import Facebook from "../assets/images/Facebook.png";
+import PhoneImg from "../assets/images/PhoneImg.png";
+import Youtube from "../assets/images/Youtube.png";
+import Location from "../assets/images/Location on.png";
+import EmailImg from "../assets/images/Email (1).png";
 
 export {
+  Instagram,
+  Facebook,
+  PhoneImg,
+  Youtube,
+  Location,
+  EmailImg,
   Favorites,
   CartLogo,
   ProfilePicture,

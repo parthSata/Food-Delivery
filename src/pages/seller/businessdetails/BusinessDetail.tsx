@@ -211,7 +211,7 @@ function BusinessDetails() {
 
   return (
     <div>
-      <div className="flex flex-row   justify-center  items-center gap-20 h-full w-full flex-wrap md:flex-nowrap xl:flex-wrap">
+      <div className="flex flex-row py-4 justify-center  items-center gap-20 h-full w-full flex-wrap md:flex-nowrap xl:flex-wrap">
         {/* Form */}
 
         <form

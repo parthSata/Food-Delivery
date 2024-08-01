@@ -1,6 +1,6 @@
 #root {
   margin: 0 auto;
-  text-align: center;
+  text-align: center; 
 }
 
 .logo {
@@ -23,6 +23,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "Kozuka Gothic Pr6N R";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Kozuka Gothic Pr6N R"),
+    url("KozGoPr6NRegular.woff") format("woff");
 }
 
 @media (prefers-reduced-motion: no-preference) {

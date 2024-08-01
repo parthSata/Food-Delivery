@@ -7,7 +7,7 @@ function TodaySpecial() {
 
   return (
     <div className="h-full w-full">
-      <div className="text-2xl flex justify-between flex-wrap font-semibold m-2">
+      <div className="text-2xl flex w-full justify-between flex-wrap font-semibold m-2">
         <span className=" rounded-[0px, 60px, 60px, 0px] p-4  mb-4">
           <span className="border-b-4 pb-3 rounded-r  border-[#DF201F]">
             To
@@ -26,7 +26,7 @@ function TodaySpecial() {
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className="sm:w-1/5 w-full mb-10 font-semibold shadow-dashboard"
+            className="sm:w-1/5 w-full mb-10 flex justify-center flex-col items-center font-semibold shadow-dashboard"
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <img

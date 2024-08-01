@@ -33,6 +33,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
+  const fetchUserRole = async (uid: string) => {
+    const userDataRef = ref(db, `users/${uid}`);
+    const snapshot = await get(userDataRef);
+
+    if (snapshot.exists()) {
+      const userData = snapshot.val();
+      return userData.role || null;
+    }
+    return null;
+  };
+
+ 
 
   useEffect(() => {
     const clearLocalStorageOnInit = () => {
@@ -101,16 +113,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const fetchUserRole = async (uid: string) => {
-    const userDataRef = ref(db, `users/${uid}`);
-    const snapshot = await get(userDataRef);
-
-    if (snapshot.exists()) {
-      const userData = snapshot.val();
-      return userData.role || null;
-    }
-    return null;
-  };
 
   return (
     <AuthContext.Provider value={{ user, fetchUserRole, login, logout, refreshToken }}>

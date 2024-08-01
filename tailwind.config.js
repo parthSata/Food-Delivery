@@ -23,6 +23,8 @@ export default {
         montserrat: ["Montserrat", "sans-serif"],
         baiJamjuree: ["BaiJamjuree", "sans-serif"],
         fallinLove: ["Fall in love", "sans-serif"],
+        popins: ["Poppins", "sans-serif"],
+        kozuka: ["Kozuka Gothic", "sans-serif"],
       },
       colors: {
         fontGray: "#8f9194",

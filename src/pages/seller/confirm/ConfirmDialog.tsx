@@ -1,7 +1,7 @@
 import { ToastContainer } from "react-toastify";
 import { Conformation } from "@/assets";
 
-import { useLanguageContext } from "../../../context/LanguageContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 
 interface AddProps {
   onClose: () => void;

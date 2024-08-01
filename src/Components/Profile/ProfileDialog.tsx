@@ -32,12 +32,12 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
 
 
     return (
-        <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end p-4 ">
-            <div className="absolute right-20 bg-white shadow-lg rounded-lg h-[500px] overflow-y-auto w-80">
+        <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end  ">
+            <div className="absolute right-20 bg-white shadow-lg rounded-lg h-[480px] overflow-y-auto w-72">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
-                    <span className="text-lg font-semibold">Profile</span>
+                    <span className="text-sm font-semibold">Profile</span>
                     <Button
-                        className="absolute right-[14px]  text-white bg-red-500 rounded-full w-10 h-6 flex items-center justify-center"
+                        className="absolute right-[14px]  text-white bg-red-500 rounded-full w-8 h-5 flex items-center justify-center"
                         onClick={onClose}
                     >
                         <svg
@@ -57,44 +57,44 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                         </svg>
                     </Button>
                 </div>
-                <div className="p-4 text-center">
+                <div className=" text-center">
                     <img
                         src={ProfilePicture}
                         alt="User Avatar"
-                        className="w-28 h-28 rounded-full mx-auto"
+                        className="w-20 h-20 rounded-full mx-auto"
                     />
-                    <p className="mt-2 text-xl font-semibold">Hi, Bharrat</p>
+                    <p className=" text-md font-semibold">Hi, Bharrat</p>
                 </div>
-                <div className=" border-gray-200 ">
+                <div className=" border-gray-200 font-semibold">
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
-                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={Favorites} alt="" className="" /></span>
+                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={Favorites} alt="" className="w-4 h-4" /></span>
                         </div>
                         <span className="">Favorites</span>
                     </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
-                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={EditProfile} alt="" className="" /></span>
+                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={EditProfile} alt="" className="w-4 h-4" /></span>
                         </div>
                         <span className="">Edit Profile</span>
                     </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
-                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={PrivacyPolicy} alt="" className="" /></span>
+                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={PrivacyPolicy} alt="" className="w-4 h-4" /></span>
                         </div>
                         <span className="">Privacy Policy</span>
                     </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
-                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={TearmsAndCondition} alt="" className="" /></span>
+                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={TearmsAndCondition} alt="" className="w-4 h-4" /></span>
                         </div>
                         <span className="">Tearms And Condition</span>
                     </Link>
                     <Button onClick={logout} className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
-                        <div className="flex h-10 w-10 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={EditProfile} alt="" className="" /></span>
+                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                            <span className=""><img src={EditProfile} alt="" className="w-4 h-4" /></span>
                         </div>
                         <span className="">LogOut</span>
                     </Button>
