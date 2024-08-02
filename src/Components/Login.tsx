@@ -11,6 +11,7 @@ import Input from "./ReusableComponent/Input";
 import Loader from "./ReusableComponent/Loader";
 import Button from "./ReusableComponent/Button";
 import Swal from 'sweetalert2'
+import { usePreventBack } from "@/navigation";
 
 
 const Login: React.FC = () => {
@@ -22,6 +23,8 @@ const Login: React.FC = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [confirmationShown, setConfirmationShown] = useState<boolean>(false);
+
+  usePreventBack()
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");

@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage, CheckoutPage, Category, usePreventBack, UserContainer, UserProductView } from "@/navigation";
+import { HomePage, CheckoutPage, Category, UserContainer, UserProductView } from "@/navigation";
 
 const CustomerNavigation = () => {
-  usePreventBack()
   return (
     <UserContainer>
       <Routes>

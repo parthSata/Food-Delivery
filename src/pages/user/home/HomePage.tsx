@@ -44,10 +44,10 @@ function HomePage() {
               </p>
               {!auth.currentUser && (
                 <Button
-                  className="w-[120px] text-white cursor-pointer rounded-full self-center bg-[#94CD00] h-[50px]"
+                  className="w-[120px] text-white z-10 cursor-pointer rounded-full self-center bg-[#94CD00] h-[50px]"
                   onClick={handleSubmit}
                 >
-                  {t("login.loginButton")}
+                  {t("home.login")}
                 </Button>
               )}
             </div>

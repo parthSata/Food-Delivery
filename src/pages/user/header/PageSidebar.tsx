@@ -9,16 +9,7 @@ const routes = {
     { path: "/customer/category", label: "Category", image: Orders },
     { path: "/customer/about", label: "About", image: Orders },
     { path: "/customer/dishes", label: "Dishes", image: Orders },
-    { path: "/customer/gallery", label: "Gallery", image: Orders },
-    { path: "/customer/team", label: "Team", image: Orders },
-    { path: "/customer/testimonials", label: "Testimonials", image: Orders },
-    { path: "/customer/news", label: "News", image: Orders },
-    { path: "/customer/contactUs", label: "Contact Us", image: Orders },
-    {
-      path: "/customer/restaurantNearBy",
-      label: "Restaurant Nearby",
-      image: Orders,
-    },
+    { path: "/customer/restaurantNearBy", label: "Restaurant Nearby", image: Orders },
   ],
 };
 

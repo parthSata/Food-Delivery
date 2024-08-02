@@ -281,9 +281,9 @@ const ProductAdd: React.FC = () => {
     <>
       <div className="">
         <Loader isLoading={isLoading}>
-          <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
+          <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row px-6 h-full w-full">
             {/* Upload Product Image */}
-            <div className="flex flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
+            <div className="flex flex-wrap-reverse  sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
               <div className="flex flex-wrap">
                 <div
                   className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold"
@@ -293,8 +293,8 @@ const ProductAdd: React.FC = () => {
                     <div
                       key={index}
                       className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${productImages[index]
-                          ? "border-[#DF201F]"
-                          : "border-[#161A1D]"
+                        ? "border-[#DF201F]"
+                        : "border-[#161A1D]"
                         }`}
                     >
                       {productImages[index] ? (
@@ -361,13 +361,13 @@ const ProductAdd: React.FC = () => {
                 className="flex items-center w-full order-1"
                 style={{ fontFamily: "Bai Jamjuree" }}
               >
-                <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[420px] w-[480px] shadow-addNew">
+                <div className="flex justify-center w-full font-semibold flex-col text-md items-center m-4 h-[420px] sm:w-[480px] md:w-[480px] lg:w-[480px] xl:w-[480px] shadow-addNew">
                   <div className="border-dotted bg-[#F5F5F5] rounded-[15px] border-4 h-[380px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                     {previewImage ? (
                       <img
                         src={previewImage}
                         alt="Preview"
-                        className="h-[250px]  object-cover"
+                        className="h-[250px] w-full object-cover"
                       />
                     ) : (
                       <p>{t("productAdd.noImageUploaded")}</p>
@@ -535,24 +535,27 @@ const ProductAdd: React.FC = () => {
                       )}
                     </div>
                     <div className="flex w-full">
-                      <button
-                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
-                        style={{
-                          fontFamily: "Bai Jamjuree",
-                        }}
-                        onClick={handleSubmit}
-                      >
-                        Add Product
-                      </button>
-                      <button
-                        className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
-                        style={{
-                          fontFamily: "Bai Jamjuree",
-                        }}
-                        onClick={handleUpdate}
-                      >
-                        Update Product
-                      </button>
+                      {!updateId ? (
+                        <button
+                          className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
+                          style={{
+                            fontFamily: "Bai Jamjuree",
+                          }}
+                          onClick={handleSubmit}
+                        >
+                          Add Product
+                        </button>
+                      ) : (
+                        <button
+                          className="rounded-[60px] text-md ml-5 text-[#FFFFFF] bg-[#DF201F] h-[50px] w-full shadow-couponAdd"
+                          style={{
+                            fontFamily: "Bai Jamjuree",
+                          }}
+                          onClick={handleUpdate}
+                        >
+                          Update Product
+                        </button>
+                      )}
                       <ToastContainer
                         position="top-right"
                         autoClose={1000}

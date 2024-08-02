@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Notification, Profile, Logo, menu } from "@/assets";
+import { Notification, Profile, Logo, menu, Cart } from "@/assets";
 import Sidebar from "./Sidebar";
 import UserSidebar from "@/pages/user/header/PageSidebar";
 import { useAuth } from "../../context/AuthContext";
@@ -23,17 +23,14 @@ const routes = {
     { path: "/seller/orders", label: "Orders" },
     { path: "/seller/products", label: "Products" },
     { path: "/seller/coupons", label: "Coupons" },
-  ], customer: [
+  ],
+  customer: [
     { path: "/customer/", label: "Home" },
     { path: "/customer/category", label: "Category" },
     { path: "/customer/about", label: "About" },
     { path: "/customer/dishes", label: "Dishes" },
-    { path: "/customer/gallery", label: "Gallery" },
-    { path: "/customer/team", label: "Team" },
-    { path: "/customer/testimonials", label: "Testimonials" },
-    { path: "/customer/news", label: "News" },
-    { path: "/customer/contactUs", label: "Contact Us" },
-  ],
+    { path: "/customer/restaurantNearBy", label: "Restaurant Nearby" },
+  ]
 };
 
 const Header = () => {
@@ -96,21 +93,22 @@ const Header = () => {
             {routeLinks}
           </ul>
         </div>
-        <div className="flex items-center">
-          <img
-            src={Profile}
-            alt="Profile"
-            className="h-[40px] w-[40px] border-r cursor-pointer"
-            onClick={openDialog}
-          />
-          <div className="relative items-center justify-center ml-6 hidden md:flex">
-            <img
-              src={Notification}
-              alt="Notification icon"
-              className="h-[38px] w-[38px]"
-            />
-            <div className="absolute -top-1 right-0 left-[15px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
-              10+
+        <div className="flex flex-row  gap-4">
+          <div className="flex items-center gap-4 justify-center  px-6">
+            <img src={Profile} alt="" className=" h-12 w-12 cursor-pointer" onClick={openDialog} />
+            {user?.role == 'customer' ? (
+              <div className="relative items-center justify-center ml-6 hidden md:flex">
+                <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " />
+                <div className="absolute -top-1 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+                  10+
+                </div>
+              </div>
+            ) : ""}
+            <div className="relative items-center justify-center ml-6 hidden md:flex">
+              <img src={Notification} alt="" className=" h-10 w-10 cursor-pointer" />
+              <div className="absolute top-0 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+                10+
+              </div>
             </div>
           </div>
         </div>
@@ -118,15 +116,28 @@ const Header = () => {
       <div className="flex mt-4 md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
         <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
           <span className="">
-            <img src={menu} alt="" className="" onClick={toggleSideMenu} />
+            <img src={menu} alt="" className="cursor-pointer" onClick={toggleSideMenu} />
           </span>
           <span className="text-lg text-white">Menu</span>
         </div>
+        {user?.role == 'customer' ? (
+          <div className="relative flex w-[20%] items-center justify-center bg-white">
+            <img
+              src={Cart}
+              alt="Cart"
+              className="absolute ml-4 h-8 w-8 top-[-10px] cursor-pointer"
+            />
+            <div className="relative -top-4  left-8 rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+              10+
+            </div>
+          </div>
+        ) : ""}
+
         <div className="relative flex w-[15%] items-center justify-center bg-white">
           <img
             src={Notification}
             alt="Notification icon"
-            className="absolute ml-4 h-[45px] w-[45px] top-[-10px]"
+            className="absolute  h-[45px] w-[45px] cursor-pointer"
           />
           <div className="relative -top-2 left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
             10+
