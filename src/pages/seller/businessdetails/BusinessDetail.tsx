@@ -2,7 +2,6 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   Email,
   RestaurantImg,
-  CloudUpload,
   ImageOfRestaurant,
   BuisnessName,
   Owner,
@@ -20,13 +19,11 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
 import Button from "@/Components/ReusableComponent/Button";
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
-// import { loadStripe } from '@stripe/stripe-js';
-// import config from "@/config/Config";
-// const stripePromise = loadStripe(`${config.stripeKey}`);
+import config from "@/config/Config";
+import Loader from "@/Components/ReusableComponent/Loader";
 
 interface BusinessDetails {
   id: string;
@@ -37,13 +34,13 @@ interface BusinessDetails {
   gstNo: string;
   email: string;
   uploadDocument: string[];
+  publicId: any;
 }
 
 function BusinessDetails() {
   const { t } = useLanguageContext();
-  // const presetKey = "ml_default";
-  // const cloudName = "dwxhjomtn";
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [, setImageURL] = useState<string | null>(null);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState<Partial<BusinessDetails>>({});
@@ -56,8 +53,11 @@ function BusinessDetails() {
     gstNo: "",
     email: "",
     images: [],
+    publicId: "",
   });
+  const [isLoading, setisLoading] = useState(false);
   const [uploadedDocuments, setUploadedDocuments] = useState<File[]>([]);
+  const [] = useState<string[]>([]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -101,69 +101,99 @@ function BusinessDetails() {
     return newErrors;
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<{ url: string; publicId: string } | null> => {
+    setisLoading(true);
+    try {
+      const data = new FormData();
+      data.append("file", file);
+      data.append("upload_preset", config.cloudinaryPresetKey);
+      data.append("cloud_name", config.cloudinaryCloudName);
+      data.append("folder", "Business Image");
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
+
+      const imgData = await response.json();
+      return { url: imgData.url, publicId: imgData.public_id };
+    } catch (error) {
+      return null;
+    } finally {
+      setisLoading(false);
+    }
+  };
+
+  const handleImageUpload = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    setisLoading(true);
+
     if (!e.target.files) return;
     const file = e.target.files[0];
     setImageFile(file);
+    if (file) {
+      const imageData = await uploadImageToCloudinary(file);
+      if (imageData) {
+        const newImages = [...businessData.images];
+        newImages[index] = imageData.url;
+        setBusinessData((prevState) => ({
+          ...prevState,
+          images: newImages,
+          publicId: {
+            ...prevState.publicId,
+            [index]: imageData.publicId,
+          },
+        }));
+
+        setImageURL(imageData.url);
+        e.target.disabled = true;
+      }
+    }
+    setisLoading(false);
   };
 
-  const handleDocumentUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const file = e.target.files[0];
-    setUploadedDocuments((prevDocs) => [...prevDocs, file]);
-  };
-
-  const uploadFileToFirebase = async (
-    file: File,
-    folder: string
-  ): Promise<string> => {
-    const fileRef = storageRef(storage, `${folder}/${file.name}`);
-    await uploadBytes(fileRef, file);
-    return getDownloadURL(fileRef);
+  const handleDocumentUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+    const fileArray = Array.from(files);
+    setUploadedDocuments((prevDocs) => [...prevDocs, ...fileArray]);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("Button Clicked")
     e.preventDefault();
+    setisLoading(true);
 
     const newErrors = validateFields();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    setErrors({});
+
+    const id = uuidv4();
+    const docPromises = uploadedDocuments.map(async (doc) => {
+      const storageReference = storageRef(
+        storage,
+        `uploaded_documents/${id}/${doc.name}`
+      );
+      const snapshot = await uploadBytes(storageReference, doc);
+      const downloadURL = await getDownloadURL(snapshot.ref);
+      return downloadURL;
+    });
+
+    const documentUrls = await Promise.all(docPromises);
+    const businessDetails = { ...businessData, uploadDocument: documentUrls };
 
     try {
-      const imageUrls: string[] = [];
-      const documentUrls: string[] = [];
+      await set(dbRef(db, `businessDetails/${id}`), businessDetails);
+      toast.success("Data saved successfully!");
 
-      if (imageFile) {
-        const imageUrl = await uploadFileToFirebase(
-          imageFile,
-          "business_image"
-        );
-        imageUrls.push(imageUrl);
-      }
-
-      for (const doc of uploadedDocuments) {
-        const docUrl = await uploadFileToFirebase(doc, "business_documents");
-        documentUrls.push(docUrl);
-      }
-
-      const businessDetails = {
-        ...businessData,
-        images: imageUrls,
-        uploadDocument: documentUrls,
-        id: uuidv4(),
-      };
-
-      const newBusinessRef = dbRef(
-        db,
-        "businessDetails/" + new Date().getTime()
-      );
-      await set(newBusinessRef, businessDetails);
-
-      toast.success("Business details saved successfully!");
       setBusinessData({
         id: "",
         uploadDocument: [],
@@ -173,44 +203,21 @@ function BusinessDetails() {
         gstNo: "",
         email: "",
         images: [],
+        publicId: "",
       });
-
-      // const response = await fetch(`create-checkout-session`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({}),
-      // });
-
-      // if (!response.ok) {
-      //   throw new Error(`Server error: ${response.status}`);
-      // }
-
-      // const session = await response.json();
-      // const stripe = await stripePromise;
-
-
-
-      // if (!stripe) {
-      //   throw new Error("Stripe not initialized");
-      // }
-
-      // await stripe.redirectToCheckout({ sessionId: session.id });
-      // navigate("seller/create-checkout-session")
+      setImageFile(null);
+      setImageURL(null);
+      setUploadedDocuments([]);
     } catch (error) {
-      toast.error("Failed to save business details.");
-      if (error instanceof TypeError) {
-        toast.error("Failed to fetch. Is the server running?");
-      } else {
-        toast.error("Failed to save business details.");
-      }
-      console.error("Error saving business details:", error);
+      toast.error("Failed to save data. Please try again later.");
+    } finally {
+      setisLoading(false);
     }
   };
 
+
   return (
-    <div>
+    <Loader isLoading={isLoading}>
       <div className="flex flex-row py-4 justify-center  items-center gap-20 h-full w-full flex-wrap md:flex-nowrap xl:flex-wrap">
         {/* Form */}
 
@@ -273,11 +280,11 @@ function BusinessDetails() {
                   )}
                 </div>
 
-                <div className="absolute border-none rounded-full top-16 left-28 border-black">
+                {/* <div className="absolute border-none rounded-full top-16 left-28 border-black">
                   <Button className="h-10 flex justify-center items-center w-10 rounded-full bg-white shadow-cloud">
                     <img src={CloudUpload} alt="" className="full" />
                   </Button>
-                </div>
+                </div> */}
               </div>
 
               {/* Country dropdown */}
@@ -475,7 +482,7 @@ function BusinessDetails() {
           />
         </div>
       </div>
-    </div>
+    </Loader>
   );
 }
 

@@ -103,7 +103,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await auth.signOut();
     setUser(null);
     localStorage.removeItem("accessToken");
-    navigate("/login");
+    navigate("/");
   };
 
   const refreshToken = async () => {

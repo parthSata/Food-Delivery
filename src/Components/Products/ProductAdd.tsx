@@ -6,9 +6,12 @@ import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
 import Loader from "@/Components/ReusableComponent/Loader";
-
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
+import config from "@/config/Config";
+import CryptoJS from "crypto-js"; // Ensure you have installed crypto-js via npm
+import Button from "../ReusableComponent/Button";
+
 
 export interface Product {
   id: string;
@@ -21,14 +24,13 @@ export interface Product {
   description: string;
   images: string[];
   categoryId: any;
+  publicId: any
 }
 
 const ProductAdd: React.FC = () => {
   const { t } = useLanguageContext();
   const location = useLocation();
   const { CategoryId, updateId } = location.state || [];
-  const presetKey = "ml_default";
-  const cloudName = "dwxhjomtn";
   const [errors, setErrors] = useState<Partial<Product>>({});
   const [product, setProduct] = useState<Product>({
     id: "",
@@ -41,9 +43,9 @@ const ProductAdd: React.FC = () => {
     description: "",
     images: [],
     categoryId: "",
+    publicId: ""
   });
   const [isLoading, setisLoading] = useState(false);
-
   const navigate = useNavigate();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -170,22 +172,23 @@ const ProductAdd: React.FC = () => {
       description: "",
       images: [],
       categoryId: "",
+      publicId: ""
     });
   };
 
   const uploadImageToCloudinary = async (
     file: File
-  ): Promise<string | null> => {
+  ): Promise<{ url: string, publicId: string } | null> => {
     setisLoading(true);
     try {
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", presetKey);
-      data.append("cloud_name", cloudName);
+      data.append("upload_preset", config.cloudinaryPresetKey);
+      data.append("cloud_name", config.cloudinaryCloudName);
       data.append("folder", "Products");
 
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
         {
           method: "POST",
           body: data,
@@ -193,7 +196,7 @@ const ProductAdd: React.FC = () => {
       );
 
       const imgData = await response.json();
-      return imgData.url;
+      return { url: imgData.url, publicId: imgData.public_id };
     } catch (error) {
       return null;
     } finally {
@@ -211,20 +214,24 @@ const ProductAdd: React.FC = () => {
     const file = e.target.files[0];
     setImageFile(file);
     if (file) {
-      const imageUrl: any = await uploadImageToCloudinary(file);
-      if (imageUrl) {
+      const imageData = await uploadImageToCloudinary(file);
+      if (imageData) {
         const newImages = [...product.images];
-        newImages[index] = imageUrl;
+        newImages[index] = imageData.url;
         setProduct((prevState) => ({
           ...prevState,
           images: newImages,
+          publicId: {
+            ...prevState.publicId,
+            [index]: imageData.publicId
+          }
         }));
         setProductImages((prevImages) => {
           const updatedImages = [...prevImages];
-          updatedImages[index] = imageUrl;
+          updatedImages[index] = imageData.url;
           return updatedImages;
         });
-        setPreviewImage(imageUrl);
+        setPreviewImage(imageData.url);
         e.target.disabled = true;
       }
     }
@@ -245,37 +252,39 @@ const ProductAdd: React.FC = () => {
     return value === "" || value === null || value === undefined;
   };
 
-  const deleteImageFromCloudinary = async (imageUrl: string) => {
+  const deleteImageFromCloudinary = async (index: number) => {
     try {
-      const publicId = extractPublicIdFromUrl(imageUrl);
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ public_id: publicId }),
-        }
-      );
+      const publicId = product.publicId[index];
+      const url = `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/destroy`;
 
-      const data = await response.json();
-      if (data.result === "ok") {
-        toast.success(`Image ${publicId} deleted successfully from Cloudinary`);
+      const timestamp = Math.round(new Date().getTime() / 1000);
+      const stringToSign = `public_id=${publicId}&timestamp=${timestamp}${config.cloudinarySecretKey}`;
+      const signature = CryptoJS.SHA1(stringToSign).toString();
+
+      const data = new FormData();
+      data.append('public_id', publicId);
+      data.append('timestamp', timestamp.toString());
+      data.append('api_key', config.cloudinaryApiKey);
+      data.append('signature', signature);
+
+      const response = await fetch(url, {
+        method: 'POST',
+        body: data,
+      });
+
+      const result = await response.json();
+
+      if (result.result === 'ok') {
+        toast.success(`Image deleted successfully from Cloudinary`);
       } else {
-        console.warn(`Failed to delete image ${publicId} from Cloudinary`);
+        console.warn(`Failed to delete image from Cloudinary`);
       }
     } catch (error) {
       console.error("Error deleting image from Cloudinary:", error);
     }
   };
 
-  const extractPublicIdFromUrl = (url: string): string => {
-    const parts = url.split("/");
-    const fileName = parts[parts.length - 1];
-    const publicId = fileName.split(".")[0];
-    return publicId;
-  };
+
 
   return (
     <>
@@ -307,12 +316,11 @@ const ProductAdd: React.FC = () => {
                             alt={`Preview ${index}`}
                             className="h-auto w-auto object-cover"
                           />
-                          <button
-                            type="button"
+                          <Button
                             className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
-                            onClick={(e) => {
+                            onClick={(e: any) => {
                               e.stopPropagation();
-                              deleteImageFromCloudinary(product.id);
+                              deleteImageFromCloudinary(index);
                             }}
                           >
                             <span className="sr-only ">Close</span>
@@ -331,7 +339,7 @@ const ProductAdd: React.FC = () => {
                                 d="M6 18L18 6M6 6l12 12"
                               />
                             </svg>
-                          </button>
+                          </Button>
                         </div>
                       ) : (
                         <>

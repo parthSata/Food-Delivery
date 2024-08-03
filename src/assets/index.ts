@@ -87,8 +87,10 @@ import PhoneImg from "../assets/images/PhoneImg.png";
 import Youtube from "../assets/images/Youtube.png";
 import Location from "../assets/images/Location on.png";
 import EmailImg from "../assets/images/Email (1).png";
+import CustomerImage from "./images/Customer.png";
 
 export {
+  CustomerImage,
   Instagram,
   Facebook,
   PhoneImg,

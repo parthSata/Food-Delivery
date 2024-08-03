@@ -14,7 +14,11 @@ const config = {
     firebaseMessagingSenderId: String(import.meta.env.VITE_FIREBASE_MESSAGEING_SENDER_ID),
     firebaseAppId: String(import.meta.env.VITE_FIREBASE_APP_ID),
     firebaseMeasurementId: String(import.meta.env.VITE_FIREBASE_MEASUREMENT_ID),
-    reCaptchkey: String(import.meta.env.VITE_RECAPTCHKEY)
+    reCaptchkey: String(import.meta.env.VITE_RECAPTCHKEY),
+    cloudinaryApiKey: String(import.meta.env.VITE_CLOUDINARY_API_KEY),
+    cloudinarySecretKey: String(import.meta.env.VITE_CLOUDINARY_SECRET_KEY),
+    cloudinaryPresetKey: String(import.meta.env.VITE_CLOUDINARY_PRESET_KEY),
+    cloudinaryCloudName: String(import.meta.env.VITE_CLOUDINARY_CLOUDNAME),
 };
 
 export default config;

@@ -8,6 +8,7 @@ import { set, ref, onValue, update } from "firebase/database";
 import { Loaders } from "@/assets";
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
+import config from "@/config/Config";
 
 interface Props {
   onAddCategory: (newCategory: CategoriesData) => Promise<void>;
@@ -17,8 +18,6 @@ interface Props {
 
 const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
   const { t } = useLanguageContext();
-  const presetKey = "ml_default";
-  const cloudName = "dwxhjomtn";
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
     categoryName: "",
@@ -185,13 +184,13 @@ const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
     setisLoading(true);
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", presetKey);
-    formData.append("cloud_name", cloudName);
+    formData.append("upload_preset", config.cloudinaryPresetKey);
+    formData.append("cloud_name", config.cloudinaryCloudName);
     formData.append("folder", "Categories");
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
         {
           method: "POST",
           body: formData,

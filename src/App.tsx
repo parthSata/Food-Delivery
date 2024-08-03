@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import {
-  HomePage,
   Login,
   AdminLogin,
   Register,
@@ -19,12 +18,11 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/login/adminLogin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/verification" element={<Verification />} />
           <Route path="/not-authorized" element={<NotAuthorized />} />
-          <Route path="/" element={<HomePage />} />
           <Route
             path="/admin/*"
             element={

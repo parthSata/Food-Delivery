@@ -17,10 +17,10 @@ function Category() {
   };
 
   return (
-    <div className="">
+    <div className="w-full">
       {/* Product Heading */}
       <div
-        className="relative mt-4 w-full flex-row bg-black opacity-90"
+        className="relative mt-4 w-full h-full flex-row bg-black opacity-90"
         style={{ fontFamily: "Bai Jamjuree" }}
       >
         <div className="flex justify-start flex-col pl-16 w-full h-full">

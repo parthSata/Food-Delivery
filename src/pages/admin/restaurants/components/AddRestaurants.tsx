@@ -9,6 +9,7 @@ import Loader from "@/Components/ReusableComponent/Loader";
 
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
+import config from "@/config/Config";
 
 export interface Restaurant {
   id: string;
@@ -30,8 +31,6 @@ function AddRestaurants() {
   const [restaurantImages, setRestaurantImages] = useState<string[]>([]);
   const navigate = useNavigate();
   const { updateId } = useParams();
-  const presetKey = "ml_default";
-  const cloudName = "dwxhjomtn";
   const [errors, setErrors] = useState<Partial<Restaurant>>({});
   const [restaurant, setRestaurant] = useState<Restaurant>({
     id: "",
@@ -53,12 +52,12 @@ function AddRestaurants() {
     try {
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", presetKey);
-      data.append("cloud_name", cloudName);
+      data.append("upload_preset", config.cloudinaryPresetKey);
+      data.append("cloud_name", config.cloudinaryCloudName);
       data.append("folder", "Products");
 
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
         {
           method: "POST",
           body: data,

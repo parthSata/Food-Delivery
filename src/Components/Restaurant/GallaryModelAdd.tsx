@@ -6,6 +6,7 @@ import { db } from "@/config/Firebase/firebase";
 import { set, ref } from "firebase/database";
 import Loader from "../ReusableComponent/Loader";
 import Input from "../ReusableComponent/Input";
+import config from "@/config/Config";
 
 export interface Gallary {
   id: string;
@@ -27,8 +28,6 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   });
   const [errors, setErrors] = useState<Partial<Gallary>>({});
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const presetKey = "ml_default";
-  const cloudName = "dwxhjomtn";
   const [isLoading, setisLoading] = useState(false);
 
   if (!isOpen) return null;
@@ -39,12 +38,12 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
     try {
       const data = new FormData();
       data.append("file", file);
-      data.append("upload_preset", presetKey);
-      data.append("cloud_name", cloudName);
+      data.append("upload_preset", config.cloudinaryPresetKey);
+      data.append("cloud_name", config.cloudinaryCloudName);
       data.append("folder", "Gallary");
 
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
         {
           method: "POST",
           body: data,
@@ -220,9 +219,8 @@ const GallaryModelAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
                         />
                         {errors.title && (
                           <span
-                            className={`text-red-600 text-sm ${
-                              gallary.title ? "" : "hidden"
-                            }}`}
+                            className={`text-red-600 text-sm ${gallary.title ? "" : "hidden"
+                              }}`}
                           >
                             {errors.title}
                           </span>

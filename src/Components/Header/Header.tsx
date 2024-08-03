@@ -75,7 +75,7 @@ const Header = () => {
     <div className="h-full w-full p-2">
       {user?.role == 'seller' ? <Sidebar /> : <UserSidebar />}
 
-      <nav className="flex flex-wrap justify-between px-4 shadow-dashboard">
+      <nav className="flex flex-wrap justify-between w-full px-4 shadow-dashboard">
         <div className="flex items-center flex-row">
           <img src={Logo} className="ml-2 mr-2 h-10 w-10" alt="" />
           <Link to="/">

@@ -27,6 +27,7 @@ const ProductView: React.FC = () => {
     description: "",
     images: [],
     categoryId: "",
+    publicId: ""
   });
   const [isLoading, setisLoading] = useState(false);
 
@@ -70,9 +71,9 @@ const ProductView: React.FC = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
 
-  const handleEditOrder = () => {};
+  const handleEditOrder = () => { };
 
-  const handleDeleteOrder = () => {};
+  const handleDeleteOrder = () => { };
   return (
     <div className="">
       <Loader isLoading={isLoading}>
@@ -87,11 +88,10 @@ const ProductView: React.FC = () => {
                 {[0, 1, 2, 3].map((index) => (
                   <div
                     key={index}
-                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${
-                      productImages[index]
+                    className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index]
                         ? "border-[3px] border-[#DF201F]"
                         : " outline-none border-[#161A1D]"
-                    }`}
+                      }`}
                   >
                     {productImages[index] && (
                       <div
@@ -211,7 +211,6 @@ const ProductView: React.FC = () => {
           </div>
         </div>
       </Loader>
-      {/* <Footer /> */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ interface InputProps {
     name?: string;
     placeholder?: string;
     value?: string | number | readonly string[];
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: any;
     style?: React.CSSProperties;
     checked?: boolean;
     accept?: string;

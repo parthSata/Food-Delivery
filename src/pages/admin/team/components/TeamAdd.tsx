@@ -22,8 +22,6 @@ interface TeamAddProps {
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
   const { t } = useLanguageContext();
-  const presetKey = "ml_default";
-  const cloudName = "dwxhjomtn";
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Team>>({});
@@ -193,13 +191,13 @@ const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
   const uploadImageToCloudinary = async (file: File) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", presetKey);
-    formData.append("cloud_name", cloudName);
+    formData.append("upload_preset", config.cloudinaryPresetKey);
+    formData.append("cloud_name", config.cloudinaryCloudName);
     formData.append("folder", "Our Team");
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinaryCloudName}/image/upload`,
         {
           method: "POST",
           body: formData,

@@ -1,4 +1,4 @@
-import { CartLogo, Revenue, Customer, TotalShops, Pizza } from "@/assets";
+import { CartLogo, Revenue, TotalShops, Pizza, CustomerImage } from "@/assets";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
 import { useLanguageContext } from "../../context/LanguageContext";
@@ -24,7 +24,7 @@ function Dashboard() {
     }
   };
   return (
-    <div>
+    <div className="h-full w-full">
       {/* {dashboardData && ( */}
       <div
         className="flex justify-between  mt-8 w-full flex-wrap text-lg"
@@ -32,7 +32,7 @@ function Dashboard() {
       >
         <div className="h-[90px] sm:w-[280px]  mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
           <div className="flex flex-col">
-            <span className="self-start">{ }</span>
+            <span className="self-start">44620</span>
             <span className="">{t("dashboard.recentOrder")}</span>
           </div>
           <span className="">
@@ -54,7 +54,7 @@ function Dashboard() {
             <span className="">{t("dashboard.newCustomer")}</span>
           </div>
           <span className="">
-            <img src={Customer} className="h-[50px] w-[50px]" />
+            <img src={CustomerImage} className="h-[50px] w-[50px]" />
           </span>
         </div>
         <div className="h-[90px] sm:w-[280px] mb-4 w-full  flex justify-around rounded-[10px] items-center bg-[#DF201F]  text-[#FFFFFF]">
