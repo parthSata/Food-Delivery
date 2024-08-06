@@ -72,7 +72,7 @@ const Header = () => {
   const closeDialog = () => setIsDialogOpen(false);
 
   return (
-    <div className="h-full w-full p-2">
+    <div className="h-full w-full ">
       {user?.role == 'seller' ? <Sidebar /> : <UserSidebar />}
 
       <nav className="flex flex-wrap justify-between w-full px-4 shadow-dashboard">
@@ -104,7 +104,7 @@ const Header = () => {
                 </div>
               </div>
             ) : ""}
-            <div className="relative items-center justify-center ml-6 hidden md:flex">
+            <div className="relative  items-center justify-center ml-6 hidden md:flex">
               <img src={Notification} alt="" className=" h-10 w-10 cursor-pointer" />
               <div className="absolute top-0 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                 10+
@@ -113,33 +113,33 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <div className="flex mt-4 md:hidden lg:hidden xl:hidden w-[95%] items-center p-2 mr-4">
-        <div className="flex items-center w-[95%] p-4 border-2 gap-6 bg-[#DF201F]">
+      <div className="flex mt-4 md:hidden bg-[#F5F5F5]  lg:hidden xl:hidden w-full items-center  ">
+        <div className="flex items-center w-[70%]  p-4 border-2 gap-6 bg-[#DF201F]">
           <span className="">
             <img src={menu} alt="" className="cursor-pointer" onClick={toggleSideMenu} />
           </span>
           <span className="text-lg text-white">Menu</span>
         </div>
         {user?.role == 'customer' ? (
-          <div className="relative flex w-[20%] items-center justify-center bg-white">
+          <div className="relative flex w-[15%]  items-center justify-center  h-full">
             <img
               src={Cart}
               alt="Cart"
-              className="absolute ml-4 h-8 w-8 top-[-10px] cursor-pointer"
+              className="absolute  h-8 w-8  cursor-pointer"
             />
-            <div className="relative -top-4  left-8 rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+            <div className="relative -top-3  left-[10px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] flex justify-center items-center w-auto p-1">
               10+
             </div>
           </div>
         ) : ""}
 
-        <div className="relative flex w-[15%] items-center justify-center bg-white">
+        <div className={`relative flex  ${user?.role == 'customer' ? 'w-[15%]' : 'w-[25%]'}  items-center  justify-center  h-full`}>
           <img
             src={Notification}
             alt="Notification icon"
             className="absolute  h-[45px] w-[45px] cursor-pointer"
           />
-          <div className="relative -top-2 left-[16px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
+          <div className="relative -top-3 left-[10px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] flex justify-center items-center w-auto p-1">
             10+
           </div>
         </div>

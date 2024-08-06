@@ -165,7 +165,7 @@ const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
   };
 
   return (
-    <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">
+    <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70 overflow-y-auto">
       <Loader isLoading={isLoading}>
         <div className="bg-white w-[400px] h-[570px] sm:w-[500px] sm:h-auto md:w-[500px] md:h-[] lg:w-[] lg:h-[]  xl:w-[500px] xl:h-[560px] gap-2 rounded-[30px] shadow-lg p-6 relative">
           <button

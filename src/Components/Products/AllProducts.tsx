@@ -77,8 +77,7 @@ function AllProducts() {
         <div className="">
             {/* Product Heading */}
             <div
-                className="relative mt-4 bg-black opacity-90 "
-                style={{ fontFamily: "Bai Jamjuree" }}
+                className="relative mt-4 bg-black opacity-90 font-baiJamjuree"
             >
                 <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
                 <div className=" flex justify-start pl-16">

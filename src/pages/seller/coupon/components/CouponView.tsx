@@ -65,11 +65,11 @@ function CouponView() {
   return (
     <div>
       <div
-        className="flex justify-center mt-28 items-center"
+        className="flex justify-center mt-28 items-center px-6 h-full w-full"
         style={{ fontFamily: "Montserrat Alternates" }}
       >
-        <div className="flex flex-col gap-1 p-8 font-semibold bg-[#FFF3E5] rounded-[15px] h-auto w-[816px]  ">
-          <Loader isLoading={isLoading}>
+        <Loader isLoading={isLoading}>
+          <div className="flex flex-col gap-1 p-8 font-semibold bg-[#FFF3E5] rounded-[15px] h-auto w-full  ">
             <div className="flex flex-row  pl-4 gap-8 text-lg">
               <span className="font-bold text-[#A2A3A5]">
                 {t("couponAdd.offerCode")}{" "}
@@ -108,8 +108,8 @@ function CouponView() {
                 </Button>
               </div>
             </div>
-          </Loader>
-        </div>
+          </div>
+        </Loader>
       </div>
     </div>
   );

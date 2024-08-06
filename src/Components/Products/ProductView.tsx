@@ -77,7 +77,7 @@ const ProductView: React.FC = () => {
   return (
     <div className="">
       <Loader isLoading={isLoading}>
-        <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
+        <div className="flex flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row px-6">
           {/* Upload Product Image */}
           <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
             <div className="flex  flex-wrap">
@@ -89,8 +89,8 @@ const ProductView: React.FC = () => {
                   <div
                     key={index}
                     className={` rounded-[15px] border-2  h-[100px] m-6 flex-col gap-2 text-md w-[140px] flex justify-center items-center ${productImages[index]
-                        ? "border-[3px] border-[#DF201F]"
-                        : " outline-none border-[#161A1D]"
+                      ? "border-[3px] border-[#DF201F]"
+                      : " outline-none border-[#161A1D]"
                       }`}
                   >
                     {productImages[index] && (
@@ -114,7 +114,7 @@ const ProductView: React.FC = () => {
               className="flex items-start w-full  order-1"
               style={{ fontFamily: "Bai Jamjuree" }}
             >
-              <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew">
+              <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-full md:w-[500px] lg:w-[350px] xl:w-[429px] shadow-addNew">
                 <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                   {previewImage ? (
                     <img
@@ -135,7 +135,7 @@ const ProductView: React.FC = () => {
 
           {/* Order Details */}
           <div
-            className="w-full flex flex-col mt-[50px] gap-12 flex-wrap  font-semibold"
+            className="w-full flex flex-col mt-[50px] gap-12 flex-wrap  font-semibold "
             style={{ fontFamily: "Bai Jamjuree" }}
           >
             <div className="flex flex-col gap-2 ">
@@ -194,15 +194,15 @@ const ProductView: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex gap-6 justify-around">
+            <div className="flex gap-6 w-full justify-around">
               <button
-                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#94CD00] shadow-registerBtn"
+                className="h-[70px] w-full text-white text-xl  rounded-[60px] bg-[#94CD00] shadow-registerBtn"
                 onClick={handleEditOrder}
               >
                 {t("productView.editButton")}
               </button>
               <button
-                className="h-[70px] w-[200px] text-white text-xl  rounded-[60px] bg-[#DF201F] shadow-adminbtn"
+                className="h-[70px] w-full text-white text-xl  rounded-[60px] bg-[#DF201F] shadow-adminbtn"
                 onClick={handleDeleteOrder}
               >
                 {t("productView.deleteButton")}

@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return null;
   };
 
- 
+
 
   useEffect(() => {
     const clearLocalStorageOnInit = () => {

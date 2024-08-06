@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "@/assets";
-import Button from "../../../Components/ReusableComponent/Button";
-import { useLanguageContext } from "../../../context/LanguageContext";
+import Button from "../../Components/ReusableComponent/Button";
+import { useLanguageContext } from "../../context/LanguageContext";
 import { auth } from "@/config/Firebase/firebase";
 import { BestSeller, AboutUs, TodaySpecial, ProductGallary, Team } from "@/navigation";
 

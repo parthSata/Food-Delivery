@@ -15,7 +15,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onViewProduct, onDeleteProduct, onUpdateProduct }) => (
-    <div className="sm:w-1/5 mb-10 w-full cursor-pointer" onClick={() => onViewProduct(product.id)} key={product.id}>
+    <div className="sm:w-1/5 mb-10 w-full cursor-pointer px-8" onClick={() => onViewProduct(product.id)} key={product.id}>
         <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
             <img src={product.images?.[0]} alt="" className="h-20" />
             <p className="" style={{ fontFamily: "Bai Jamjuree" }}>{product.name}</p>

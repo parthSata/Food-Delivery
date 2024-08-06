@@ -20,8 +20,8 @@ export default {
         testimonials: "2px 2px 50px 2px #0000001A",
       },
       fontFamily: {
-        montserrat: ["Montserrat", "sans-serif"],
-        baiJamjuree: ["BaiJamjuree", "sans-serif"],
+        montserrat: ["Montserrat Alternates", "sans-serif"],
+        baiJamjuree: ["Bai Jamjuree", "sans-serif"],
         fallinLove: ["Fall in love", "sans-serif"],
         popins: ["Poppins", "sans-serif"],
         kozuka: ["Kozuka Gothic", "sans-serif"],

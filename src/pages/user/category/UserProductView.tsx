@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { useLanguageContext } from "@/context/LanguageContext";
-import { Burgger } from "@/assets";
+import { AttachFile, Burgger, Pasta, ReviewProfile, Star } from "@/assets";
 import Button from "@/Components/ReusableComponent/Button";
 
 const ProductView: React.FC = () => {
@@ -18,19 +18,19 @@ const ProductView: React.FC = () => {
     };
 
     return (
-        <div className="">
+        <div className="h-full w-full p-4">
             {/* <Loader isLoading={isLoading}> */}
             <div className="flex p-4 flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
                 <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
                     <div className="flex  flex-wrap">
                         <div
-                            className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold"
-                            style={{ fontFamily: "Bai Jamjuree" }}
+                            className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold font-baiJamjuree"
+
                         >
                             {[0, 1, 2, 3].map((index) => (
                                 <div
                                     key={index}
-                                    className={` rounded-[15px] border-2  h-[120px] m-6 flex-col gap-2 text-md w-[180px] flex justify-center items-center 
+                                    className={` rounded-[15px] border-2  h-[120px] m-6 flex-col gap-2 text-md w-[160px] flex justify-center items-center 
                                             ? "border-[3px] border-[#DF201F]"
                                             : " outline-none border-[#161A1D]"
                                             }`}
@@ -54,8 +54,7 @@ const ProductView: React.FC = () => {
                     </div>
                     {/* Preview Image */}
                     <div
-                        className="flex items-start w-full  order-1"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="flex items-start w-full  order-1 font-baiJamjuree"
                     >
                         <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew">
                             <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
@@ -78,14 +77,12 @@ const ProductView: React.FC = () => {
 
                 {/* Order Details */}
                 <div
-                    className="w-full flex flex-col mt-[50px] gap-12 flex-wrap  font-semibold"
-                    style={{ fontFamily: "Bai Jamjuree" }}
+                    className="w-full flex flex-col mt-[50px] gap-12 flex-wrap  font-semibold font-baiJamjuree"
                 >
                     <div className="flex flex-col gap-2 ">
                         <p className="text-2xl self-start">Burger</p>
                         <p
-                            className="text-[#DF201F] flex gap-1"
-                            style={{ fontFamily: "Montserrat Alternates" }}
+                            className="text-[#DF201F] flex gap-1 font-montserrat"
                         >
                             <span className="">₹200</span>
                             <span className="line-through">₹180</span>
@@ -128,20 +125,107 @@ const ProductView: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2  font-semibold">
+                    <div className="flex flex-col gap-2  font-semibold w-full">
                         <span className="self-start">Description</span>
-                        <div className="" style={{ fontFamily: "Montserrat Alternates" }}>
-                            <span className="text-[#A2A3A5] text-sm text-pretty">
+                        <div className="w-full bg-red-700 font-montserrat flex-wrap font-semibold" >
+                            <p className="text-[#A2A3A5] text-sm  w-full ">
                                 If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting
-                            </span>
+                            </p>
                         </div>
                     </div>
 
-                    <div className="flex gap-6 justify-around">
-                        <Button className="bg-[#DF201F] rounded-[60px] text-white w-full h-10">Add To Cart +</Button>
+                    <div className="flex gap-10 justify-around">
+                        <Button className="bg-[#DF201F] text-xl rounded-[60px] text-white  px-10 w-full h-14">Add To Cart +</Button>
                     </div>
                 </div>
             </div>
+
+            <div className="flex flex-col gap-6">
+                <div className=" flex  flex-col gap-4">
+                    <span className="flex  justify-start pl-10 rounded-[0px, 60px, 60px, 0px] text-xl font-semibold  font-baiJamjuree" >
+                        <span className="border-b-4 pb-3 rounded-r border-[#DF201F]">
+                            Re
+                        </span>
+                        lated Products
+                    </span>
+
+                    <div className="flex flex-row flex-wrap">
+                        {[0, 1, 2, 3].map((index) => (
+                            <div className="sm:w-1/4 mb-10 w-full cursor-pointer px-8" key={index}>
+                                <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFF3E5] h-[200px] w-full rounded-[20px]">
+                                    <img src={Burgger} alt="" className="h-20" />
+                                    <p className="font-baiJamjuree font-semibold">Burger</p>
+                                    <p className="flex gap-2 items-center text-[#DF201F] font-montserrat font-semibold ">
+                                        ₹180
+                                        <span className="text-xs line-through">₹200</span>
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+
+                    </div>
+                </div>
+                <div className="flex flex-col gap-6">
+                    <span className="flex  justify-start pl-10 rounded-[0px, 60px, 60px, 0px] text-xl font-semibold font-baiJamjuree ">
+                        <span className="border-b-4 pb-3 rounded-r border-[#DF201F]">
+                            Re
+                        </span>
+                        views
+                    </span>
+                    <div className="justify-start flex pl-10 flex-col gap-10">
+                        {[0, 1, 2, 3].map((index) => (
+
+                            <div className="flex flex-col  gap-4 " key={index}>
+                                <div className="flex flex-row gap-2 ">
+                                    <img src={ReviewProfile} alt="" className="" />
+                                    <div className="flex flex-col">
+                                        <span className="">Rajesh Singh</span>
+                                        <div className="flex gap-2">
+                                            <img src={Star} alt="" className="h-6" />
+                                            <span className="text-lg">5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="font-semibold text-sm font-montserrat text-[#99959E] ">
+                                    <p className="text-pretty">
+                                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more or less normal distribution
+                                    </p>
+                                </div>
+                                <div className="flex flex-wrap gap-4 w-full">
+                                    <img src={Pasta} alt="" className="h-24 w-auto" />
+                                    <img src={Pasta} alt="" className="h-24 w-auto" />
+                                    <img src={Pasta} alt="" className="h-24 w-auto" />
+                                    <img src={Pasta} alt="" className="h-24 w-auto" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="flex flex-col gap-6">
+                    <span className="flex  justify-start pl-10 rounded-[0px, 60px, 60px, 0px] text-xl font-semibold  font-baiJamjuree" >
+                        <span className="border-b-4 pb-3 rounded-r border-[#DF201F]">
+                            Re
+                        </span>
+                        view Here
+                    </span>
+                    <div className="pl-10">
+                        <div className="flex justify-start flex-col gap-4">
+                            <textarea className="text-[#A2A3A5] resize-none border-1 rounded-[20px] opacity-[0.2] shadow-3xl font-semibold w-full h-full p-6" rows={6} placeholder="Comment Type Here...."></textarea>
+                            <div className="flex flex-wrap flex-row justify-center font-baiJamjuree gap-4 h-full w-full">
+                                <Button className="shadow-3xl flex  gap-2 p-4 font-semibold rounded-[15px] items-center w-[200px]  h-[50px]">
+                                    <img src={AttachFile} alt="" className=" font-baiJamjuree font-semibold h-6 w-6" />
+                                    Choose files
+                                </Button>
+                                <Button className="uppercase text-white w-[350px] font-semibold rounded-[60px] h-[50px] bg-[#94CD00] shadow-registerBtn">Send Documents</Button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
             {/* </Loader> */}
         </div>
     );

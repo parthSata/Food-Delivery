@@ -14,8 +14,8 @@ function UserProducts() {
 
 
     return (
-        <div className="">
-            <Container >
+        <Container >
+            <div className="">
                 {/* Product Heading */}
                 <div className="relative bg-black opacity-90 ">
                     <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
@@ -72,8 +72,10 @@ function UserProducts() {
                         </div>
                     </div>
                 </div>
-            </Container>
-        </div >
+
+                
+            </div >
+        </Container>
     )
 }
 

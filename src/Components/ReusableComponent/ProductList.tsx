@@ -29,9 +29,9 @@ const ProductList: React.FC<ProductListProps> = ({ products, isLoading, onAddPro
                             onUpdateProduct={onUpdateProduct}
                         />
                     ))}
-                    <div className="sm:w-1/5 mb-10 w-full">
+                    <div className="sm:w-1/5 mb-10 w-full px-8">
                         <div className="flex justify-center w-full shadow-addNew font-semibold flex-col text-md items-center h-[200px]">
-                            <div className="border-dotted  rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[] xl:w-[200px] flex justify-center items-center border-[border: 2px solid #161A1D]">
+                            <div className="border-dotted  rounded-[15px] border-4 h-[160px] flex-col gap-2 text-md w-[300px] px-2 xl:w-[200px] lg:w-[180px] md:w-[130px] sm:w-[100px] flex justify-center items-center border-[border: 2px solid #161A1D]">
                                 <div className="relative bg-[#DF201F] h-12 w-12 flex justify-center rounded-full">
                                     <Button className="flex self-center" onClick={onAddProduct}>
                                         <i className="fa-duotone fa-plus fa-2xl text-addNew"></i>

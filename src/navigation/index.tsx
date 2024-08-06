@@ -20,7 +20,7 @@ import AdminLogin from "../Components/AdminLogin";
 import BusinessDetails from "../pages/seller/businessdetails/BusinessDetail";
 import CategoryProducts from "../Components/Category/CategoryProducts";
 
-import HomePage from "../pages/user/home/HomePage";
+import HomePage from "../pages/user/HomePage";
 import AdminNavigation from "./AdminNavigation";
 import SellerNavigation from "./SellerNavigation";
 import CustomerNavigation from "./CustomerNavigation";
@@ -44,8 +44,11 @@ import Button from "@/Components/ReusableComponent/Button";
 import Testimonials from "@/pages/user/testimonials/Testimonials";
 import Footer from "@/pages/user/components/Footer";
 import UserProductView from '@/pages/user/category/UserProductView'
+import Home from "@/pages/user/home/Home";
+
 
 export {
+  Home,
   UserProductView,
   Footer,
   AboutUs,

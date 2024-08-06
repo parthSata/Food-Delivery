@@ -88,8 +88,16 @@ import Youtube from "../assets/images/Youtube.png";
 import Location from "../assets/images/Location on.png";
 import EmailImg from "../assets/images/Email (1).png";
 import CustomerImage from "./images/Customer.png";
+import ReviewProfile from "./images/ReviewProfile.png";
+import AttachFile from "./images/Attach file.png";
+import ReviewProduct from "./images/ReviewProduct.png";
+import Pasta from "./images/Pasta.png";
 
 export {
+  ReviewProduct,
+  Pasta,
+  ReviewProfile,
+  AttachFile,
   CustomerImage,
   Instagram,
   Facebook,

@@ -6,10 +6,10 @@ interface CategoryHeaderProps {
 }
 
 const CategoryHeader: React.FC<CategoryHeaderProps> = ({ categoryName, imageUrl }) => (
-    <div className="bg-[#fcbc65] h-52 w-full sm:w-full" style={{ fontFamily: "Bai Jamjuree" }}>
-        <div className="flex justify-between items-center w-full">
-            <span className="text-3xl pl-28 text-white">{categoryName}</span>
-            <img src={imageUrl} alt="" className="visible sm:visible md:visible lg:visible xl:visible h-[205px] w-fit" />
+    <div className="bg-[#fcbc65] h-full w-full sm:w-full" style={{ fontFamily: "Bai Jamjuree" }}>
+        <div className="flex justify-between  flex-wrap  items-center w-full">
+            <span className="xl:text-3xl text-2xl pl-8 xl:pl-28 self-center  text-white">{categoryName}</span>
+            <img src={imageUrl} alt="" className="visible  sm:visible md:visible lg:visible xl:visible h-[150px] xl:h-[205px] w-auto" />
         </div>
     </div>
 );
