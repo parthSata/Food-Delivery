@@ -18,7 +18,7 @@ const ProductView: React.FC = () => {
     };
 
     return (
-        <div className="h-full w-full p-4">
+        <div className="h-full w-full ">
             {/* <Loader isLoading={isLoading}> */}
             <div className="flex p-4 flex-wrap lg:flex-nowrap xl:flex-nowrap flex-row ">
                 <div className="flex   flex-wrap-reverse sm:flex-wrap-reverse md:flex-nowrap lg:flex-nowrap xl:flex-nowrap mt-4 ">
@@ -53,16 +53,14 @@ const ProductView: React.FC = () => {
                         </div>
                     </div>
                     {/* Preview Image */}
-                    <div
-                        className="flex items-start w-full  order-1 font-baiJamjuree"
-                    >
-                        <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-[429px] shadow-addNew">
+                    <div className="flex items-start w-full  order-1" style={{ fontFamily: "Bai Jamjuree" }}>
+                        <div className="flex justify-center  font-semibold flex-col text-md items-center m-4 h-[500px] w-full md:w-[500px] lg:w-[350px] xl:w-[429px] shadow-addNew">
                             <div className=" bg-[#F5F5F5]  border-none rounded-[15px]  h-[480px] flex-col gap-2 text-md w-full flex justify-center items-center border-[border: 2px solid #161A1D]">
                                 {/* {previewImage ? ( */}
                                 <img
                                     src={Burgger}
                                     alt="Preview"
-                                    className="h-[240px] w-auto object-cover"
+                                    className="h-auto w-auto object-cover"
                                 />
                                 {/* ) : (
                                         <p>{t("productAdd.noImageUploaded")}</p>
@@ -125,18 +123,18 @@ const ProductView: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2  font-semibold w-full">
+                    <div className="flex flex-col gap-8  font-semibold w-full">
                         <span className="self-start">Description</span>
-                        <div className="w-full bg-red-700 font-montserrat flex-wrap font-semibold" >
+                        <div className="w-full  font-montserrat flex-wrap font-semibold" >
                             <p className="text-[#A2A3A5] text-sm  w-full ">
                                 If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting
                             </p>
                         </div>
+                        <div className="h-full w-full">
+                            <Button className="bg-[#DF201F] text-xl rounded-[60px] text-white   w-full h-14">Add To Cart +</Button>
+                        </div>
                     </div>
 
-                    <div className="flex gap-10 justify-around">
-                        <Button className="bg-[#DF201F] text-xl rounded-[60px] text-white  px-10 w-full h-14">Add To Cart +</Button>
-                    </div>
                 </div>
             </div>
 

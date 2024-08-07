@@ -30,9 +30,9 @@ const Gallary: React.FC<GallaryInterface> = () => {
         const data = snapshot.val();
         const gallaryArray = data
           ? Object.keys(data).map((key) => ({
-              id: key,
-              ...data[key],
-            }))
+            id: key,
+            ...data[key],
+          }))
           : [];
         setGallaryImage(gallaryArray);
       } else {

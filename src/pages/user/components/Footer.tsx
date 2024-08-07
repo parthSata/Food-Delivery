@@ -33,15 +33,15 @@ function Footer() {
                         </span>
                     </div>
                     <div className="flex flex-col gap-2 font-semibold font-popins ">
-                        <div className="flex gap-4">
+                        <div className="flex gap-2">
                             <img src={PhoneImg} alt="" className="h-5 w-5 " />
                             <span className=" text-[#99959E] text-sm">7874784388</span>
                         </div>
-                        <div className="flex gap-4">
+                        <div className="flex gap-2">
                             <img src={EmailImg} alt="" className="h-5 w-5 " />
-                            <span className=" text-[#99959E] text-wrap text-sm">fooddeliveryexample@gmail.com</span>
+                            <span className=" text-[#99959E] w-full text-sm">fooddeliveryexample@gmail.com</span>
                         </div>
-                        <div className="flex gap-4">
+                        <div className="flex gap-2">
                             <img src={Location} alt="" className="h-5 w-5 " />
                             <span className=" text-justify  text-[#99959E] text-sm">3th Street. 47 W 13th St, New York, NYc 10011,
                                 USA</span>

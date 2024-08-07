@@ -16,7 +16,7 @@ function ProductGallary() {
                 <img
                   src={GallaryFood}
                   alt={t("gallery.imageAlt")}
-                  className="w-[300px] h-[260px] object-cover rounded-lg"
+                  className="w-full h-[260px] object-cover rounded-lg"
                 />
               </div>
             </div>

@@ -92,8 +92,16 @@ import ReviewProfile from "./images/ReviewProfile.png";
 import AttachFile from "./images/Attach file.png";
 import ReviewProduct from "./images/ReviewProduct.png";
 import Pasta from "./images/Pasta.png";
+import Date from "./images/Date.png";
+import NewsImage1 from "./images/NewsImage-1.png";
+import NewsImage2 from "./images/NewsImage-2.png";
+import Order from "./images/Order.png";
 
 export {
+  Order,
+  Date,
+  NewsImage1,
+  NewsImage2,
   ReviewProduct,
   Pasta,
   ReviewProfile,

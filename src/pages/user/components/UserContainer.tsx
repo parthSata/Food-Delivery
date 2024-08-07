@@ -6,7 +6,7 @@ const UserContainer = ({ children }: { children: React.ReactNode }) => {
     return (
         <div>
             <PageComponent>
-                <div className="   w-full ">{children}</div>
+                <div className="w-full ">{children}</div>
                 <Footer />
             </PageComponent>
 

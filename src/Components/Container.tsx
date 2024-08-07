@@ -5,7 +5,7 @@ const Container = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <Header />
-      <div className="min-w-fit w-full">
+      <div className=" w-full">
         {children}
       </div>
     </div>

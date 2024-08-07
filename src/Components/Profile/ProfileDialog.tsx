@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Button from "../ReusableComponent/Button";
 import { Link } from "react-router-dom";
-import { EditProfile, Favorites, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
+import { EditProfile, Favorites, Order, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
 import { useAuth } from "@/context/AuthContext";
 interface AddProps {
     onClose: () => void;
@@ -10,7 +10,9 @@ interface AddProps {
 
 const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
     const sideMenuRef = useRef<HTMLDivElement>(null);
-    const { logout } = useAuth()
+    const { logout, user } = useAuth()
+
+
     if (!isOpen) return null;
 
     const handleOutsideClick = (event: MouseEvent) => {
@@ -33,7 +35,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
 
     return (
         <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end  ">
-            <div className="absolute right-20 bg-white shadow-lg rounded-lg h-[480px] overflow-y-auto w-72">
+            <div className="absolute right-20 bg-white shadow-lg rounded-lg h-auto overflow-y-auto w-72">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
                     <span className="text-sm font-semibold">Profile</span>
                     <Button
@@ -55,24 +57,33 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                                 d="M6 18L18 6M6 6l12 12"
                             />
                         </svg>
-                    </Button>
+                    </Button>''
                 </div>
                 <div className=" text-center">
                     <img
                         src={ProfilePicture}
                         alt="User Avatar"
-                        className="w-20 h-20 rounded-full mx-auto"
+                        className="w-16 h-16 rounded-full mx-auto"
                     />
                     <p className=" text-md font-semibold">Hi, Bharrat</p>
                 </div>
                 <div className=" border-gray-200 font-semibold">
-                    <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
+                    {user?.role == "customer" && "seller" ? (
+                        <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
-                        <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
-                            <span className=""><img src={Favorites} alt="" className="w-4 h-4" /></span>
-                        </div>
-                        <span className="">Favorites</span>
-                    </Link>
+                            <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                                <span className=""><img src={Order} alt="" className="w-4 h-4" /></span>
+                            </div>
+                            <span className="">Orders</span>
+                        </Link>) : (
+                        <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
+
+                            <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
+                                <span className=""><img src={Favorites} alt="" className="w-4 h-4" /></span>
+                            </div>
+                            <span className="">Favorites</span>
+                        </Link>
+                    )}
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
                         <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">

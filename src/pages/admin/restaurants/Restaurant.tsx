@@ -8,7 +8,6 @@ import Loader from "../../../Components/ReusableComponent/Loader";
 import Button from "../../../Components/ReusableComponent/Button";
 import { useLanguageContext } from "../../../context/LanguageContext";
 import { Noodles, Star, DummyImg } from "@/assets";
-import { Container } from "@/Components";
 
 function Restaurant() {
   const { t } = useLanguageContext();
@@ -80,7 +79,7 @@ function Restaurant() {
 
   return (
     <div>
-      <Container>
+      {/* <Container> */}
         <Loader isLoading={isLoading}>
           <div className="relative mt-4 bg-black opacity-90 w-full">
             <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
@@ -174,7 +173,7 @@ function Restaurant() {
             </div>
           </div>
         </Loader>
-      </Container>
+      {/* </Container> */}
     </div>
   );
 }

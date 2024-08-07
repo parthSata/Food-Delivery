@@ -71,7 +71,7 @@ function Team() {
             </div>
           </div>
         </div>
-        <div className="mb-4 flex relative -top-24  space-x-2 justify-center rtl:space-x-reverse">
+        <div className=" flex relative -top-24  space-x-2 justify-center rtl:space-x-reverse">
           <button
             type="button"
             className="w-3 h-3 border-2 border-[#94CD00] accent-[#DF201F]  rounded-full"
