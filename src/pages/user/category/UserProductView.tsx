@@ -138,7 +138,7 @@ const ProductView: React.FC = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 p-4">
                 <div className=" flex  flex-col gap-4">
                     <span className="flex  justify-start pl-10 rounded-[0px, 60px, 60px, 0px] text-xl font-semibold  font-baiJamjuree" >
                         <span className="border-b-4 pb-3 rounded-r border-[#DF201F]">
@@ -220,8 +220,6 @@ const ProductView: React.FC = () => {
                     </div>
 
                 </div>
-
-
             </div>
 
             {/* </Loader> */}

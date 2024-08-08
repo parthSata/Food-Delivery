@@ -1,4 +1,4 @@
-import { Date, DummyImg, Location, NewsImage1, Pizzza } from "@/assets"
+import { BhelPuri, Burgger, Date, DummyImg, Location, NewsImage1, Pizzza } from "@/assets"
 import Button from "@/Components/ReusableComponent/Button"
 import Input from "@/Components/ReusableComponent/Input"
 import { BestSeller, ProductGallary, Team, TodaySpecial } from "@/navigation"
@@ -8,31 +8,47 @@ function Home() {
     return (
         <div>
             <div className="">
-                <div className="relative flex justify-center font-baiJamjuree bg-black opacity-90">
-                    <img src={DummyImg} alt="" className="w-full" />
-                    <div className="relative flex flex-col items-center gap-2 justify-center top-20 ">
+                <div className="relative mt-4 bg-black opacity-90 font-baiJamjuree">
+                    <img src={DummyImg} alt="" className="h-[205px] w-full" />
+                    <div className="absolute flex flex-col gap-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4">
                         <label className="font-montserrat self-start font-semibold text-md text-white">Search Your Product</label>
                         <div className="flex flex-row h-full w-full">
-                            <div className="rounded-l-[15px] items-center border-r flex flex-row  p-2 gap-2 bg-white w-full h-full">
+                            <div className="rounded-l-[15px] items-center border-r flex flex-row p-2 gap-2 bg-white w-full h-full">
                                 <img src={Location} alt="" className="h-6 w-6" />
-                                <div className="flex flex-col ">
+                                <div className="flex flex-col">
                                     <label className="text-[#A2A3A5] self-start font-semibold font-montserrat">Location</label>
-                                    <Input type="text" className="border-none  outline-none h-full w-full text-black font-semibold " placeholder="ex. Rajkot , Gujrat"></Input>
+                                    <Input type="text" className="border-none placeholder:text-[#161A1D] outline-none h-full w-full text-black font-semibold" placeholder="ex. Rajkot , Gujrat"></Input>
                                 </div>
                             </div>
-                            <div className="rounded-r-[15px] items-center flex flex-row  p-5 gap-2 bg-white w-full h-full">
-                                <Input type="text" className="h-full w-full border-none outline-none " placeholder="Search..."></Input>
+                            <div className="rounded-r-[15px] items-center flex flex-row p-5 gap-2 bg-white w-full h-full">
+                                <Input type="text" className="h-full w-full border-none outline-none" placeholder="Search..."></Input>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* <div className="absolute top-52 ]">
-                        <div className=" flex flex-row items-end gap-4 top-10">
-                            <div className="rounded-[15px] h-[100px] w-[280px] bg-gradient-to-l  from-[#9E0821]"></div>
-                            <div className="rounded-[15px] h-[100px] w-[280px] bg-red-700"></div>
-                            <div className="rounded-[15px] h-[100px] w-[280px] bg-red-700"></div>
+                <div className="relative flex justify-center gap-8 mt-[-40px] px-10 z-10">
+                    <div className="rounded-[15px] h-auto gap-2 w-auto flex-wrap bg-[#A90F27] flex items-center justify-center p-4">
+                        <div className="flex gap-1 flex-col text-white">
+                            <span className="self-start font-montserrat text-xs font-medium">Get 30% OFF</span>
+                            <span className="text-justify text-white font-semibold text-sm font-baiJamjuree">Super Veg Delicious Dish</span>
                         </div>
-                    </div> */}
+                        <img src={Pizzza} alt="" className="h-20 w-20" />
+                    </div>
+                    <div className="rounded-[15px] h-auto gap-2 w-auto flex-wrap bg-[#96C039] flex items-center justify-center p-4">
+                        <div className="flex gap-1 flex-col text-white">
+                            <span className="self-start font-montserrat text-xs font-medium">Get 30% OFF</span>
+                            <span className="self-start text-justify text-white font-semibold text-sm font-baiJamjuree">Best Veg Hamburger</span>
+                        </div>
+                        <img src={Burgger} alt="" className="h-20 w-20 " />
+                    </div>
+                    <div className="rounded-[15px] h-auto gap-2 w-auto flex-wrap bg-[#E18F06] flex items-center justify-center p-4">
+                        <div className="flex gap-1 flex-col text-white">
+                            <span className="self-start font-montserrat text-xs font-medium">Get 30% OFF</span>
+                            <span className="self-start text-justify text-white font-semibold text-sm font-baiJamjuree">Cheese Bhel Puri</span>
+                        </div>
+                        <img src={BhelPuri} alt="" className="h-20 w-20 " />
+                    </div>
                 </div>
 
                 <div className="p-6">

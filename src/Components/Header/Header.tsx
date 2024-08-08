@@ -5,6 +5,7 @@ import Sidebar from "./Sidebar";
 import UserSidebar from "@/pages/user/header/PageSidebar";
 import { useAuth } from "../../context/AuthContext";
 import ProfileDialog from "../Profile/ProfileDialog";
+import CartDialog from "../ReusableComponent/CartDialog";
 
 const routes = {
   admin: [
@@ -36,6 +37,7 @@ const routes = {
 const Header = () => {
   const [showSideMenu] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isCartDialog, setIsCartDialog] = useState(false)
 
 
   const toggleSideMenu = () => {
@@ -71,6 +73,9 @@ const Header = () => {
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);
 
+  const openCartDialog = () => setIsCartDialog(true);
+  const closeCartDialog = () => setIsCartDialog(false);
+
   return (
     <div className="h-full w-full ">
       {user?.role == 'seller' ? <Sidebar /> : <UserSidebar />}
@@ -98,7 +103,7 @@ const Header = () => {
             <img src={Profile} alt="" className=" h-12 w-12 cursor-pointer" onClick={openDialog} />
             {user?.role == 'customer' ? (
               <div className="relative items-center justify-center ml-6 hidden md:flex">
-                <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " />
+                <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " onClick={openCartDialog} />
                 <div className="absolute -top-1 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
                 </div>
@@ -147,6 +152,10 @@ const Header = () => {
       {isDialogOpen && (
         <ProfileDialog isOpen={isDialogOpen} onClose={closeDialog} />
       )}
+      {isCartDialog && (
+        <CartDialog isOpen={isCartDialog} onClose={closeCartDialog} />
+      )}
+
     </div>
   );
 };

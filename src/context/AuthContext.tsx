@@ -13,6 +13,7 @@ import { get, ref } from "firebase/database";
 import Loader from "../Components/ReusableComponent/Loader";
 import { toast } from "react-toastify";
 
+
 interface User {
   uid: string;
   role: "admin" | "seller" | "customer";
@@ -116,7 +117,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ user, fetchUserRole, login, logout, refreshToken }}>
-      <Loader isLoading={isLoading}>{children}</Loader>
+      <div className="">
+        <Loader isLoading={isLoading}>{children}</Loader>
+      </div>
     </AuthContext.Provider>
   );
 };

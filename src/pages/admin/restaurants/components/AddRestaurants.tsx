@@ -10,6 +10,7 @@ import Loader from "@/Components/ReusableComponent/Loader";
 import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
 import config from "@/config/Config";
+import Button from "@/Components/ReusableComponent/Button";
 
 export interface Restaurant {
   id: string;
@@ -239,8 +240,8 @@ function AddRestaurants() {
                   <div
                     key={index}
                     className={`border-dotted rounded-[15px] border-4 h-[120px] m-6 flex-col gap-2 text-md w-[150px] flex justify-center items-center ${restaurantImages[index]
-                        ? "border-[#DF201F]"
-                        : "border-[#161A1D]"
+                      ? "border-[#DF201F]"
+                      : "border-[#161A1D]"
                       }`}
                   >
                     {restaurantImages[index] ? (
@@ -253,10 +254,9 @@ function AddRestaurants() {
                           alt={`Preview ${index}`}
                           className="h-auto w-auto object-cover "
                         />
-                        <button
-                          type="button"
+                        <Button
                           className={`text-white p-[2px] bg-[#DF201F]  rounded-2xl absolute   top-[2px] left-[110px] `}
-                          onClick={(e) => {
+                          onClick={(e:any) => {
                             e.stopPropagation();
                             // onCloseDelete(restaurantImages[index], index)
                           }}
@@ -277,7 +277,7 @@ function AddRestaurants() {
                               d="M6 18L18 6M6 6l12 12"
                             />
                           </svg>
-                        </button>
+                        </Button>
                       </div>
                     ) : (
                       <>
@@ -457,8 +457,8 @@ function AddRestaurants() {
                           <label htmlFor={`star${rating}`}>
                             <svg
                               className={`h-8 w-8 cursor-pointer ${Number(restaurant?.ratings) >= rating
-                                  ? "text-yellow-400"
-                                  : "text-gray-400"
+                                ? "text-yellow-400"
+                                : "text-gray-400"
                                 }`}
                               fill="currentColor"
                               viewBox="0 0 24 24"
