@@ -1,5 +1,6 @@
 import { EmailImg, Facebook, Instagram, Location, Logo, PhoneImg, Youtube } from "@/assets"
 import { useAuth } from "@/context/AuthContext"
+import { t } from "i18next"
 
 function Footer() {
     const { user } = useAuth()
@@ -9,12 +10,11 @@ function Footer() {
                 <div className="flex flex-col gap-6 ">
                     <div className="flex items-center gap-2 font-bold text-white text-[22px]">
                         <img src={Logo} alt="" className="h-16 w-14  " />
-                        <span className="font-semibold font-kozuka">Food Delivery</span>
+                        <span className="font-semibold font-kozuka">{t("footer.brandName")}</span>
                     </div>
                     <div className="">
                         <p className="font-montserrat font-semibold pl-2 text-[#99959E] text-sm text-justify">
-                            It is a long established fact that a reader will be istracted by the readable content content here making it look like readable.
-                        </p>
+                        {t("footer.description")}                        </p>
                     </div>
                 </div>
                 <div className="flex flex-col gap-10 ">
@@ -26,16 +26,15 @@ function Footer() {
                     <div className="flex flex-col gap-2 font-semibold font-popins ">
                         <div className="flex gap-2">
                             <img src={PhoneImg} alt="" className="h-5 w-5 " />
-                            <span className=" text-[#99959E] text-sm">7874784388</span>
+                            <span className=" text-[#99959E] text-sm">{t("footer.phone")}</span>
                         </div>
                         <div className="flex gap-2">
                             <img src={EmailImg} alt="" className="h-5 w-5 " />
-                            <span className=" text-[#99959E] w-full text-sm">fooddeliveryexample@gmail.com</span>
+                            <span className=" text-[#99959E] w-full text-sm">{t("footer.email")}</span>
                         </div>
                         <div className="flex gap-2">
                             <img src={Location} alt="" className="h-5 w-5 " />
-                            <span className=" text-justify  text-[#99959E] text-sm">3th Street. 47 W 13th St, New York, NYc 10011,
-                                USA</span>
+                            <span className=" text-justify  text-[#99959E] text-sm">{t("footer.location")}</span>
                         </div>
                     </div>
                 </div>
@@ -64,7 +63,7 @@ function Footer() {
 
 
             <div className="font-baiJamjuree flex items-center justify-center pt-6  border-[#A2A3A5] font-semibold border-t text-white ">
-                <span className="">© 2022  Food Delivery | All Rights Reserved </span>
+                <span className="">{t("footer.copyright")}</span>
             </div>
         </div>
     )

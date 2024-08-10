@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { BurgerImg, FlashBurger } from "@/assets";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Button } from "@/Components/index";
 
 function Category() {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
 
   const handleAddProduct = () => {

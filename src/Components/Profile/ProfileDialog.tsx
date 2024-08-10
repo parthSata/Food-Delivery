@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { EditProfile, Favorites, Order, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/Components/index";
+import { t } from "i18next";
 interface AddProps {
     onClose: () => void;
     isOpen: boolean;
@@ -37,7 +38,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
         <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end  ">
             <div className="absolute right-20 bg-white shadow-lg rounded-lg h-auto overflow-y-auto w-72">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
-                    <span className="text-md font-baiJamjuree font-semibold">Profile</span>
+                    <span className="text-md font-baiJamjuree font-semibold">{t("profile.title")}</span>
                     <Button
                         className="absolute right-[14px]  text-white bg-red-500 rounded-full w-8 h-5 flex items-center justify-center"
                         onClick={onClose}
@@ -74,14 +75,14 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                             <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                                 <span className=""><img src={Order} alt="" className="w-4 h-4" /></span>
                             </div>
-                            <span className="">Orders</span>
+                            <span className="">{t("profile.orders")}</span>
                         </Link>) : (
                         <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
                             <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                                 <span className=""><img src={Favorites} alt="" className="w-4 h-4" /></span>
                             </div>
-                            <span className="">Favorites</span>
+                            <span className="">{t("profile.favorites")}</span>
                         </Link>
                     )}
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
@@ -89,25 +90,25 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                         <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                             <span className=""><img src={EditProfile} alt="" className="w-4 h-4" /></span>
                         </div>
-                        <span className="">Edit Profile</span>
+                        <span className="">{t("profile.editProfile")}</span>
                     </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
                         <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                             <span className=""><img src={PrivacyPolicy} alt="" className="w-4 h-4" /></span>
                         </div>
-                        <span className="">Privacy Policy</span>
+                        <span className="">{t("profile.privacyPolicy")}</span>
                     </Link>
                     <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
                         <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                             <span className=""><img src={TearmsAndCondition} alt="" className="w-4 h-4" /></span>
                         </div>
-                        <span className="">Tearms And Condition</span>
+                        <span className="">{t("profile.termsAndConditions")}</span>
                     </Link>
                     <Button onClick={logout} className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
                         <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                             <span className=""><img src={EditProfile} alt="" className="w-4 h-4" /></span>
                         </div>
-                        <span className="">LogOut</span>
+                        <span className="">{t("profile.logout")}</span>
                     </Button>
 
                 </div>

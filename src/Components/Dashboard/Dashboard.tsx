@@ -1,10 +1,9 @@
 import { CartLogo, Revenue, TotalShops, Pizza, CustomerImage } from "@/assets";
 // import LineChart from '../Chart/Line'
 import { useEffect, useState } from "react";
-import { useLanguageContext } from "../../context/LanguageContext";
+import { t } from "i18next";
 
 function Dashboard() {
-  const { t } = useLanguageContext();
   // @ts-ignore
   const [dashboardData, setDashboardData] = useState(null);
 

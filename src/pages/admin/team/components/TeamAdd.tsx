@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 
 import Input from "@/Components/ReusableComponent/Input";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import config from "@/config/Config";
 
 export interface Team {
@@ -21,7 +21,6 @@ interface TeamAddProps {
 }
 
 const TeamAdd: React.FC<TeamAddProps> = ({ onClose, isOpen }) => {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Team>>({});

@@ -7,12 +7,11 @@ import { db } from "@/config/Firebase/firebase";
 import { ref, get } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth, } from "../../../context/AuthContext";
-import { useLanguageContext } from "../../../context/LanguageContext";
+import { useAuth, } from "@/context/AuthContext";
+import { t } from "i18next";
 import { Button, Input, Loader } from "@/Components/index";
 
 function AdminLogin() {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const { login, fetchUserRole } = useAuth();
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);

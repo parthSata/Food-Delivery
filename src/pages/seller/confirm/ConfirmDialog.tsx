@@ -1,7 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { Conformation } from "@/assets";
-
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 
 interface AddProps {
   onClose: () => void;
@@ -10,7 +9,6 @@ interface AddProps {
 
 const ConfirmDialog: React.FC<AddProps> = ({ onClose, isOpen }) => {
   if (!isOpen) return null;
-  const { t } = useLanguageContext();
 
   return (
     <div className="fixed  inset-0 flex  items-center justify-center bg-black bg-opacity-70">

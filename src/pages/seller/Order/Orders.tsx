@@ -1,11 +1,9 @@
 import { Burger, Accepted, Cancel, Pizza } from "@/assets";
 
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import Input from "@/Components/ReusableComponent/Input";
-// import { useState } from 'react'
 
 function Orders() {
-  const { t } = useLanguageContext();
   // const [currentPage, setCurrentPage] = useState<number>(1);
   // const itemsPerPage = 5;
   // const [searchInput, setSearchInput] = useState("");

@@ -5,9 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { ref, set, onValue } from "firebase/database";
-import Loader from "@/Components/ReusableComponent/Loader";
-import Input from "@/Components/ReusableComponent/Input";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
+import { Input, Loader } from "@/Components";
 
 export interface Coupon {
   id: string;
@@ -24,7 +23,6 @@ interface AddProps {
 }
 
 const CouponAdd: React.FC<AddProps> = ({ onClose, isOpen }) => {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const { updateId } = useParams();
   const [errors, setErrors] = useState<Partial<Coupon>>({});

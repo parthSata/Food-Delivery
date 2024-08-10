@@ -1,9 +1,8 @@
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { PlayArrow, Shafe } from "@/assets";
 import { Button } from "@/Components/index";
 
 function AboutUs() {
-  const { t } = useLanguageContext();
 
   return (
     <div>

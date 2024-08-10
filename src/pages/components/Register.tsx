@@ -11,13 +11,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
-import { useLanguageContext } from "../../context/LanguageContext";
+import { t } from "i18next";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import Input from "../../Components/ReusableComponent/Input";
-import Loader from "../../Components/ReusableComponent/Loader";
+import { Input, Loader } from "@/Components";
 
 function Register() {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [email, setEmail] = useState("");

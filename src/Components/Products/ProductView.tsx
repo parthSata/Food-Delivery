@@ -4,14 +4,12 @@ import { Product } from "./ProductAdd";
 import { useParams } from "react-router-dom";
 import Loader from "../ReusableComponent/Loader";
 import { toast } from "react-toastify";
-
-import { useLanguageContext } from "../../context/LanguageContext";
-import config from "../../config/Config";
+import { t } from "i18next";
+import config from "@/config/Config";
 
 // import Footer from '../Footer';
 
 const ProductView: React.FC = () => {
-  const { t } = useLanguageContext();
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [productImages, setProductImages] = useState<string[]>([]);
   const { productId } = useParams<{ productId?: string }>();

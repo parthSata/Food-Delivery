@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import CouponAdd, { Coupon } from "./components/CouponAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Button, Loader } from "@/Components/index";
 
 function Coupons() {
-  const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore

@@ -3,12 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Noodles, Star, DummyImg } from "@/assets";
 import { Button, Loader } from "@/Components/index";
 
 function Restaurant() {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
   const [restarants, setRestarants] = useState<RestaurantInterface[]>([]);
   const [restarantList, setRestarantList] = useState<RestaurantInterface>({

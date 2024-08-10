@@ -204,6 +204,36 @@
     "description": "It is a long established fact that a reader will be distracted",
     "login": "Login Now",
     "bestCategory": "Best Category",
-    "categories": ["Pizza", "Burger", "Pasta", "Sushi"]
+    "categories": ["Pizza", "Burger", "Pasta", "Sushi"],
+    "searchProductLabel": "Search Your Product",
+    "locationLabel": "Location"
+  },
+  "userProductView": {
+    "descriptionLabel": "Description",
+    "chooseFiles": "Choose Files",
+    "sendDocuments": "Send Documents",
+    "addToCartBtn": "Add To Cart +"
+  },
+  "profile": {
+    "title": "Profile",
+    "logout": "LogOut",
+    "orders": "Orders",
+    "favorites": "Favorites",
+    "editProfile": "Edit Profile",
+    "privacyPolicy": "Privacy Policy",
+    "termsAndConditions": "Terms And Conditions"
+  },
+  "cart": {
+    "title": "Cart",
+    "checkoutBtn": "Checkout"
+  },
+  "footer": {
+    "brandName": "Food Delivery",
+    "description": "It is a long established fact that a reader will be distracted by the readable content here making it look like readable.",
+    "phone": "9924234374",
+    "email": "fooddeliveryexample@gmail.com",
+    "location": "3th Street. 47 W 13th St, New York, NYc 10011, USA",
+    "locationTitle": "Location",
+    "copyright": "© 2022  Food Delivery | All Rights Reserved"
   }
 }

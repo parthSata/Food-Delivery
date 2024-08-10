@@ -1,9 +1,8 @@
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Manchurian } from "@/assets";
 import { Button } from "@/Components/index";
 
 function TodaySpecial() {
-  const { t } = useLanguageContext();
 
   return (
     <div className="h-full w-full">

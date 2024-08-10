@@ -7,7 +7,7 @@ import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
 import { Loaders } from "@/assets";
 import Input from "@/Components/ReusableComponent/Input";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import config from "@/config/Config";
 
 interface Props {
@@ -17,7 +17,6 @@ interface Props {
 }
 
 const AddCategory: React.FC<Props> = ({ onAddCategory, id, onClose }) => {
-  const { t } = useLanguageContext();
   const [category, setCategory] = useState<CategoriesData>({
     id: "",
     categoryName: "",

@@ -6,7 +6,7 @@ import { ref, onValue, set, update, remove } from "firebase/database";
 import { db } from "@/config/Firebase/firebase"; // Adjust the import based on your firebase setup
 import Loader from "@/Components/ReusableComponent/Loader";
 import Input from "@/Components/ReusableComponent/Input";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 
 export interface CategoriesData {
   id: string;
@@ -18,7 +18,6 @@ export interface CategoriesData {
 }
 
 function CategoryPage(): JSX.Element {
-  const { t } = useLanguageContext();
 
   const [showAddCategoryDialog, setShowAddCategoryDialog] =
     useState<boolean>(false);

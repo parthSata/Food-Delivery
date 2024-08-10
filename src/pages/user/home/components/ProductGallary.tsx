@@ -1,9 +1,8 @@
 import { GallaryFood } from "@/assets";
 import UserGallaryHeader from "../../header/UserGallaryHeader";
-import { useLanguageContext } from "../../../../context/LanguageContext";
+import { t } from "i18next";
 
 function ProductGallary() {
-  const { t } = useLanguageContext();
 
   return (
     <div>

@@ -19,7 +19,7 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import config from "@/config/Config";
 import { Button, Input, Loader } from "@/Components/index";
 
@@ -36,7 +36,6 @@ interface BusinessDetails {
 }
 
 function BusinessDetails() {
-  const { t } = useLanguageContext();
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [, setImageURL] = useState<string | null>(null);
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);

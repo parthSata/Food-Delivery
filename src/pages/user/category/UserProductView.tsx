@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { AttachFile, Burgger, Pasta, ReviewProfile, Star } from "@/assets";
 import { Button } from "@/Components/index";
 
 const ProductView: React.FC = () => {
-    const { t } = useLanguageContext();
     // const [previewImage, setPreviewImage] = useState<string | null>(null);
     const [quantity, setQuantity] = useState<number>(1);
 
@@ -124,14 +123,14 @@ const ProductView: React.FC = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-8  font-semibold w-full">
-                        <span className="self-start">Description</span>
+                        <span className="self-start">{t("userProductView.descriptionLabel")}</span>
                         <div className="w-full  font-montserrat flex-wrap font-semibold" >
                             <p className="text-[#A2A3A5] text-sm  w-full ">
                                 If you use this site regularly and would like to help keep the site on the Internet, please consider donating a small sum to help pay for the hosting
                             </p>
                         </div>
                         <div className="h-full w-full">
-                            <Button className="bg-[#DF201F] text-xl rounded-[60px] text-white   w-full h-14">Add To Cart +</Button>
+                            <Button className="bg-[#DF201F] text-xl rounded-[60px] text-white   w-full h-14">{t("userProductView.addToCartBtn")}</Button>
                         </div>
                     </div>
 
@@ -212,9 +211,9 @@ const ProductView: React.FC = () => {
                             <div className="flex flex-wrap flex-row justify-center font-baiJamjuree gap-4 h-full w-full">
                                 <Button className="shadow-3xl flex  gap-2 p-4 font-semibold rounded-[15px] items-center w-[200px]  h-[50px]">
                                     <img src={AttachFile} alt="" className=" font-baiJamjuree font-semibold h-6 w-6" />
-                                    Choose files
+                                    {t("userProductView.chooseFiles")}
                                 </Button>
-                                <Button className="uppercase text-white w-[350px] font-semibold rounded-[60px] h-[50px] bg-[#94CD00] shadow-registerBtn">Send Documents</Button>
+                                <Button className="uppercase text-white w-[350px] font-semibold rounded-[60px] h-[50px] bg-[#94CD00] shadow-registerBtn">{t("userProductView.sendDocuments")}</Button>
                             </div>
                         </div>
                     </div>

@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { AllFood, HomeImg, Left, Pizza, Right, texture } from "@/assets";
-import { useLanguageContext } from "../../context/LanguageContext";
 import { auth } from "@/config/Firebase/firebase";
 import { BestSeller, AboutUs, TodaySpecial, ProductGallary, Team, Button } from "@/Components/index";
+import { t } from "i18next";
 
 function HomePage() {
-  const { t } = useLanguageContext();
   const navigate = useNavigate();
 
 

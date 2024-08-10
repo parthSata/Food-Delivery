@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Button, config, Input, Loader } from "@/Components/index";
 
 export interface Restaurant {
@@ -21,7 +21,6 @@ export interface Restaurant {
 }
 
 function AddRestaurants() {
-  const { t } = useLanguageContext();
   // @ts-ignore
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);

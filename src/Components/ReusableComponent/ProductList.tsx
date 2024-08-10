@@ -1,5 +1,5 @@
 import React from "react";
-import { useLanguageContext } from "../../context/LanguageContext";
+import { t } from "i18next";
 import { Button, Loader, ProductCard } from "@/Components/index";
 
 interface ProductListProps {
@@ -12,7 +12,6 @@ interface ProductListProps {
 }
 
 const ProductList: React.FC<ProductListProps> = ({ products, isLoading, onAddProduct, onViewProduct, onDeleteProduct, onUpdateProduct }) => {
-    const { t } = useLanguageContext();
 
     return (
         <div className="">

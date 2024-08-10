@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { FlashBurger, Delete, Edit, RightArrow } from "@/assets";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Button, Input } from "@/Components/index";
 
 function CheckoutPage() {
-  const { t } = useLanguageContext();
 
   const [quantity, setQuantity] = useState(0);
   const incrementQuantity = () => {

@@ -4,12 +4,10 @@ import { Product } from "./ProductAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, remove, get } from "firebase/database";
 import Loader from "@/Components/ReusableComponent/Loader";
-
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { DummyImg } from "@/assets";
 
 function AllProducts() {
-    const { t } = useLanguageContext();
     const navigate = useNavigate();
     // @ts-ignore
     const [productUpdateId, setProductUpdateId] = useState("");

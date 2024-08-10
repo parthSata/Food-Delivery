@@ -3,13 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./components/TeamAdd";
 import Container from "@/Components/ReusableComponent/Container";
 import { toast } from "react-toastify";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import config from "@/config/Config";
 import { EmplyoeImg } from "@/assets";
 import { Button } from "@/Components/index";
 
 function OurTeam() {
-  const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
   // @ts-ignore

@@ -1,9 +1,8 @@
 import { Burgger } from "@/assets";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 import { Button } from "@/Components/index";
 
 function BestSeller() {
-  const { t } = useLanguageContext();
 
   return (
     <div>

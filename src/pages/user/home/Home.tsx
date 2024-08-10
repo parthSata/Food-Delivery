@@ -9,12 +9,12 @@ function Home() {
                 <div className="relative mt-4 bg-black opacity-90 font-baiJamjuree">
                     <img src={DummyImg} alt="" className="h-[205px] w-full" />
                     <div className="absolute flex flex-col gap-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4">
-                        <label className="font-montserrat self-start font-semibold text-md text-white">Search Your Product</label>
+                        <label className="font-montserrat self-start font-semibold text-md text-white">{t("home.searchProductLabel")}</label>
                         <div className="flex flex-row h-full w-full">
                             <div className="rounded-l-[15px] items-center border-r flex flex-row p-2 gap-2 bg-white w-full h-full">
                                 <img src={Location} alt="" className="h-6 w-6" />
                                 <div className="flex flex-col">
-                                    <label className="text-[#A2A3A5] self-start font-semibold font-montserrat">Location</label>
+                                    <label className="text-[#A2A3A5] self-start font-semibold font-montserrat">{t("home.locationLabel")}</label>
                                     <Input type="text" className="border-none placeholder:text-[#161A1D] outline-none h-full w-full text-black font-semibold" placeholder="ex. Rajkot , Gujrat"></Input>
                                 </div>
                             </div>

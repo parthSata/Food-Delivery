@@ -3,10 +3,9 @@ import { ToastContainer } from "react-toastify";
 import ConfirmDialog from "../confirm/ConfirmDialog";
 
 import Input from "@/Components/ReusableComponent/Input";
-import { useLanguageContext } from "@/context/LanguageContext";
+import { t } from "i18next";
 
 function RestaurantTypes() {
-  const { t } = useLanguageContext();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const openDialog = () => setIsDialogOpen(true);
   const closeDialog = () => setIsDialogOpen(false);

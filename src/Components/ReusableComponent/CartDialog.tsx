@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Burger, DeletePng } from "@/assets";
 import { Button } from "@/Components/index";
+import { t } from "i18next";
 
 interface AddProps {
     onClose: () => void;
@@ -35,7 +36,7 @@ const CartDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
         <div ref={sideMenuRef} className="relative right-24 inset-0 flex z-50 justify-end  ">
             <div className="absolute right-20 bg-white shadow-lg rounded-lg h-auto overflow-y-auto w-[360px]">
                 <div className="relative p-4 border-gray-200 flex justify-between items-center">
-                    <span className="text-md font-baiJamjuree font-semibold">Cart</span>
+                    <span className="text-md font-baiJamjuree font-semibold">{t("cart.title")}</span>
                     <Button
                         className="absolute right-[14px]  text-white bg-red-500 rounded-full w-8 h-5 flex items-center justify-center"
                         onClick={onClose}
@@ -88,7 +89,7 @@ const CartDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                     ))}
                 </div>
                 <div className="p-4">
-                    <Button className="uppercase rounded-[60px]  text-white font-semibold font-baiJamjuree text-md shadow-registerBtn  bg-[#94CD00] h-14 w-full">Checkout</Button>
+                    <Button className="uppercase rounded-[60px]  text-white font-semibold font-baiJamjuree text-md shadow-registerBtn  bg-[#94CD00] h-14 w-full">{t("cart.checkoutBtn")}</Button>
                 </div>
             </div>
         </div>
