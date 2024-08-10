@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import Container from '../components/PageComponent';
-import { Button, Input } from '@/navigation';
+import { Button, Input } from '@/Components/index';
 import { DummyImg, Noodles, search } from '@/assets';
 
 

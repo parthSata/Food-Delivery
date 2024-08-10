@@ -1,5 +1,5 @@
 import { AttachFile, DummyImg, Pasta, ReviewProfile, Star } from '@/assets'
-import { Button } from '@/navigation'
+import { Button } from '@/Components/index'
 
 function Reviews() {
     return (
