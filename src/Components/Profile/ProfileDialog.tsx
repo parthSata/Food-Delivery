@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import Button from "../ReusableComponent/Button";
 import { Link } from "react-router-dom";
 import { EditProfile, Favorites, Order, PrivacyPolicy, ProfilePicture, TearmsAndCondition } from "@/assets";
 import { useAuth } from "@/context/AuthContext";
+import { Button } from "@/Components/index";
 interface AddProps {
     onClose: () => void;
     isOpen: boolean;

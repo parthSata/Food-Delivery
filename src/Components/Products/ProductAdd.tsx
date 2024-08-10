@@ -5,13 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { db } from "@/config/Firebase/firebase";
 import { set, ref, onValue, update } from "firebase/database";
-import Loader from "@/Components/ReusableComponent/Loader";
-import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
-import config from "@/config/Config";
 import CryptoJS from "crypto-js"; // Ensure you have installed crypto-js via npm
-import Button from "../ReusableComponent/Button";
-
+import { Button, config, Input, Loader } from "@/Components/index";
 
 export interface Product {
   id: string;

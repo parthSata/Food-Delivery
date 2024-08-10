@@ -1,7 +1,5 @@
 import { BhelPuri, Burgger, Date, DummyImg, Location, NewsImage1, Pizzza } from "@/assets"
-import Button from "@/Components/ReusableComponent/Button"
-import Input from "@/Components/ReusableComponent/Input"
-import { BestSeller, ProductGallary, Team, TodaySpecial } from "@/navigation"
+import { BestSeller, Button, Input, ProductGallary, Team, TodaySpecial } from "@/Components/index"
 import { t } from "i18next"
 
 function Home() {
@@ -27,7 +25,7 @@ function Home() {
                     </div>
                 </div>
 
-                <div className="relative flex justify-center gap-8 mt-[-40px] px-10 z-10">
+                <div className="relative flex justify-center flex-col sm:flex-row md:flex-row xl:flex-row gap-8 mt-[-40px] px-10 z-10">
                     <div className="rounded-[15px] h-auto gap-2 w-auto flex-wrap bg-[#A90F27] flex items-center justify-center p-4">
                         <div className="flex gap-1 flex-col text-white">
                             <span className="self-start font-montserrat text-xs font-medium">Get 30% OFF</span>

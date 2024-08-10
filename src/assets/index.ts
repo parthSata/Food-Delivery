@@ -97,8 +97,10 @@ import NewsImage1 from "./images/NewsImage-1.png";
 import NewsImage2 from "./images/NewsImage-2.png";
 import Order from "./images/Order.png";
 import DeletePng from "./images/DeletePng.png";
+import RestaurantImage2 from "./images/RestaurantImg2.png";
 
 export {
+  RestaurantImage2,
   DeletePng,
   Order,
   Date,

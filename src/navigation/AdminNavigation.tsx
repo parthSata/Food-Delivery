@@ -10,8 +10,8 @@ import {
   TeamAdd,
   OurTeam,
   usePreventBack,
-} from "@/navigation";
-import { Container } from "@/Components";
+  Container
+} from "@/Components/index";
 
 const AdminNavigation = () => {
   usePreventBack()

@@ -1,5 +1,5 @@
+import { Button } from "@/Components/index";
 import React from "react";
-import Button from "../ReusableComponent/Button";
 
 interface ProductCardProps {
     product: {

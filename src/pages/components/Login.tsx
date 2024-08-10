@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo, Online, Person, Email } from "@/assets";
 import "react-toastify/dist/ReactToastify.css";
-import { auth, db } from "../config/Firebase/firebase";
+import { auth, db } from "../../config/Firebase/firebase";
 import { ref, get } from "firebase/database";
 import { ToastContainer, toast } from "react-toastify";
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../context/AuthContext";
-import Input from "./ReusableComponent/Input";
-import Loader from "./ReusableComponent/Loader";
-import Button from "./ReusableComponent/Button";
+import { useAuth } from "../../context/AuthContext";
 import Swal from 'sweetalert2'
-import { usePreventBack } from "@/navigation";
+import { Button, Input, Loader, usePreventBack } from "@/Components/index";
 
 
 const Login: React.FC = () => {

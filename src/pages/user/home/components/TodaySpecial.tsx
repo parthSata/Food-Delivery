@@ -1,6 +1,6 @@
-import { useLanguageContext } from "../../../../context/LanguageContext";
-import Button from "../../../../Components/ReusableComponent/Button";
+import { useLanguageContext } from "@/context/LanguageContext";
 import { Manchurian } from "@/assets";
+import { Button } from "@/Components/index";
 
 function TodaySpecial() {
   const { t } = useLanguageContext();

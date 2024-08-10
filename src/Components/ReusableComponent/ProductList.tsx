@@ -1,8 +1,6 @@
 import React from "react";
-import Loader from "../ReusableComponent/Loader";
-import Button from "../ReusableComponent/Button";
-import ProductCard from "./ProductCard";
 import { useLanguageContext } from "../../context/LanguageContext";
+import { Button, Loader, ProductCard } from "@/Components/index";
 
 interface ProductListProps {
     products: any[];

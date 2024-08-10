@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { FlashBurger, Delete, Edit, RightArrow } from "@/assets";
-
-import Button from "@/Components/ReusableComponent/Button";
-import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
+import { Button, Input } from "@/Components/index";
 
 function CheckoutPage() {
   const { t } = useLanguageContext();
@@ -18,7 +16,7 @@ function CheckoutPage() {
   };
   return (
     <div className="h-full w-full">
-      <div className="flex  h-full w-full  gap-10 ">
+      <div className="sm:flex   xl:flex-nowrap   h-full w-full  gap-10 ">
         {/* Total */}
         <div className="flex flex-row order-1 p-10">
           <div className="flex flex-col h-full w-full gap-4 font-semibold justify-center items-center">
@@ -180,7 +178,7 @@ function CheckoutPage() {
       </div>
 
       {/* Address */}
-      <div className="sm:flex sm:flex-wrap flex-row h-full w-full ">
+      <div className="sm:flex  xl:flex-nowrap  flex-row h-full w-full ">
         {/* Add New Address */}
         <div className="h-full w-full -order-1">
           <div

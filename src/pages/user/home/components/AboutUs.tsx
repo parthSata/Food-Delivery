@@ -1,6 +1,6 @@
-import { useLanguageContext } from "../../../../context/LanguageContext";
-import Button from "../../../../Components/ReusableComponent/Button";
+import { useLanguageContext } from "@/context/LanguageContext";
 import { PlayArrow, Shafe } from "@/assets";
+import { Button } from "@/Components/index";
 
 function AboutUs() {
   const { t } = useLanguageContext();

@@ -30,7 +30,7 @@ const routes = {
     { path: "/customer/category", label: "Category" },
     { path: "/customer/about", label: "About" },
     { path: "/customer/dishes", label: "Dishes" },
-    { path: "/customer/restaurantNearBy", label: "Restaurant Nearby" },
+    { path: "/customer/restaurantNearBy", label: "Restaurant" },
   ]
 };
 
@@ -70,7 +70,10 @@ const Header = () => {
       <Link to={route.path}>{route.label}</Link>
     </li>
   ));
-  const openDialog = () => setIsDialogOpen(true);
+  const openDialog = () => {
+    console.log("Clicked")
+    setIsDialogOpen(true)
+  };
   const closeDialog = () => setIsDialogOpen(false);
 
   const openCartDialog = () => setIsCartDialog(true);
@@ -102,7 +105,7 @@ const Header = () => {
           <div className="flex items-center gap-4 justify-center  px-6">
             <img src={Profile} alt="" className=" h-12 w-12 cursor-pointer" onClick={openDialog} />
             {user?.role == 'customer' ? (
-              <div className="relative items-center justify-center ml-6 hidden md:flex">
+              <div className="relative items-center justify-center ml-6 hidden md:flex " >
                 <img src={Cart} alt="" className=" h-[30px] w-[30px] cursor-pointer " onClick={openCartDialog} />
                 <div className="absolute -top-1 left-4 right-0  rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] w-[26px]">
                   10+
@@ -131,6 +134,7 @@ const Header = () => {
               src={Cart}
               alt="Cart"
               className="absolute  h-8 w-8  cursor-pointer"
+              onClick={openCartDialog}
             />
             <div className="relative -top-3  left-[10px] rounded-full bg-[#DF201F] text-white text-center text-[14px] h-[20px] flex justify-center items-center w-auto p-1">
               10+

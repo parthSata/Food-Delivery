@@ -19,11 +19,9 @@ import {
 } from "firebase/storage";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Button from "@/Components/ReusableComponent/Button";
-import Input from "@/Components/ReusableComponent/Input";
 import { useLanguageContext } from "@/context/LanguageContext";
 import config from "@/config/Config";
-import Loader from "@/Components/ReusableComponent/Loader";
+import { Button, Input, Loader } from "@/Components/index";
 
 interface BusinessDetails {
   id: string;

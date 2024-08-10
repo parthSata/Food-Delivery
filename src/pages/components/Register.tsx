@@ -11,10 +11,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 import { auth, db } from "@/config/Firebase/firebase";
 import { ref, set } from "firebase/database";
-import { useLanguageContext } from "../context/LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
-import Input from "./ReusableComponent/Input";
-import Loader from "./ReusableComponent/Loader";
+import Input from "../../Components/ReusableComponent/Input";
+import Loader from "../../Components/ReusableComponent/Loader";
 
 function Register() {
   const { t } = useLanguageContext();

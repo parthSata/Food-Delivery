@@ -3,11 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
-import Loader from "../../../Components/ReusableComponent/Loader";
-
-import Button from "../../../Components/ReusableComponent/Button";
-import { useLanguageContext } from "../../../context/LanguageContext";
+import { useLanguageContext } from "@/context/LanguageContext";
 import { Noodles, Star, DummyImg } from "@/assets";
+import { Button, Loader } from "@/Components/index";
 
 function Restaurant() {
   const { t } = useLanguageContext();

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import Button from "../ReusableComponent/Button";
 import { Burger, DeletePng } from "@/assets";
+import { Button } from "@/Components/index";
+
 interface AddProps {
     onClose: () => void;
     isOpen: boolean;
@@ -54,7 +55,7 @@ const CartDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                                 d="M6 18L18 6M6 6l12 12"
                             />
                         </svg>
-                    </Button>''
+                    </Button>
                 </div>
 
                 <div className="flex flex-col gap-4 overflow-y-auto  h-[300px]">

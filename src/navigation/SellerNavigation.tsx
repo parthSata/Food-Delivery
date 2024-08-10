@@ -12,8 +12,8 @@ import {
   CategoryPage,
   CategoryProducts,
   CheckoutPage,
-} from "@/navigation";
-import { Container } from "@/Components";
+  Container
+} from "@/Components/index";
 
 const SellerNavigation = () => {
   return (

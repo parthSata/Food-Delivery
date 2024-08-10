@@ -1,5 +1,5 @@
 import React from "react";
-import { useLanguageContext } from "../context/LanguageContext";
+import { useLanguageContext } from "../../context/LanguageContext";
 
 const LanguageSelect: React.FC = () => {
   const { languages, onClickLanguageChange } = useLanguageContext();

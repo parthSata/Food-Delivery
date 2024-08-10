@@ -1,10 +1,9 @@
-import Noodles from '../../assets/All Product/Noodles.jpg'
-import DummyImg from '../../assets/All Product/DummyFood.png'
+
 import { useState } from 'react';
-import search from "../../assets/HomePage/search.png";
 import Container from '../components/PageComponent';
-import Input from '../../../Components/ReusableComponent/Input';
-import Button from '../../../Components/ReusableComponent/Button';
+import { Button, Input } from '@/navigation';
+import { DummyImg, Noodles, search } from '@/assets';
+
 
 
 
@@ -16,6 +15,8 @@ function UserProducts() {
     return (
         <Container >
             <div className="">
+                <Button />
+
                 {/* Product Heading */}
                 <div className="relative bg-black opacity-90 ">
                     <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
@@ -73,7 +74,7 @@ function UserProducts() {
                     </div>
                 </div>
 
-                
+
             </div >
         </Container>
     )

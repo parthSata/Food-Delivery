@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView } from "@/navigation";
-import RestaurantNearby from "@/pages/user/Restaurant/RestaurantNearby";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby } from "@/Components/index";
 
 const CustomerNavigation = () => {
   return (

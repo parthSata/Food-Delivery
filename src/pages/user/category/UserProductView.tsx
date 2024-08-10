@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { useLanguageContext } from "@/context/LanguageContext";
 import { AttachFile, Burgger, Pasta, ReviewProfile, Star } from "@/assets";
-import Button from "@/Components/ReusableComponent/Button";
+import { Button } from "@/Components/index";
 
 const ProductView: React.FC = () => {
     const { t } = useLanguageContext();

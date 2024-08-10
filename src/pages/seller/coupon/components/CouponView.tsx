@@ -3,9 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Coupon } from "./CouponAdd";
 import { db } from "@/config/Firebase/firebase";
 import { ref, onValue, remove } from "firebase/database";
-import Loader from "@/Components/ReusableComponent/Loader";
-import Button from "@/Components/ReusableComponent/Button";
 import { useLanguageContext } from "@/context/LanguageContext";
+import { Button, Loader } from "@/Components/index";
 
 function CouponView() {
   const { t } = useLanguageContext();

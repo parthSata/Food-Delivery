@@ -62,10 +62,10 @@ function Footer() {
                 </div>
             </div>
 
-            <div className="font-baiJamjuree flex items-center justify-center  border-[#A2A3A5] font-semibold border-t text-white ">
+
+            <div className="font-baiJamjuree flex items-center justify-center pt-6  border-[#A2A3A5] font-semibold border-t text-white ">
                 <span className="">© 2022  Food Delivery | All Rights Reserved </span>
             </div>
-
         </div>
     )
 }

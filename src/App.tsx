@@ -11,7 +11,7 @@ import {
   NotAuthorized,
   ProtectedRoute,
   HomePage,
-} from "./navigation/index";
+} from "@/Components/index";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           {/* <Route path="/verification" element={<Verification />} /> */}
           <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="/home" element={<HomePage />} />
+
           <Route
             path="/admin/*"
             element={

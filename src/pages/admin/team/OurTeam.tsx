@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TeamAdd, { Team } from "./components/TeamAdd";
-import Container from "@/Components/Container";
+import Container from "@/Components/ReusableComponent/Container";
 import { toast } from "react-toastify";
-
-import Button from "../../../Components/ReusableComponent/Button";
-import { useLanguageContext } from "../../../context/LanguageContext";
-import config from "../../../config/Config";
+import { useLanguageContext } from "@/context/LanguageContext";
+import config from "@/config/Config";
 import { EmplyoeImg } from "@/assets";
+import { Button } from "@/Components/index";
 
 function OurTeam() {
   const { t } = useLanguageContext();
