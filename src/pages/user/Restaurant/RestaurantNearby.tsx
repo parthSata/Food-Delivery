@@ -1,7 +1,12 @@
 import { DummyImg, Location, RestaurantImage2, search, Star } from "@/assets"
 import { Input } from "@/Components/index"
+import { useNavigate } from "react-router-dom"
 
 function RestaurantNearby() {
+    const navigate = useNavigate()
+    const handleRestaurantView = () => {
+        navigate('/customer/restaurantView')
+    }
     return (
         <div className=''>
             <div className="relative mt-4 bg-black opacity-90 font-baiJamjuree">
@@ -20,6 +25,7 @@ function RestaurantNearby() {
                     <div
                         className="sm:w-1/4 mb-10  font-semibold shadow-3xl cursor-pointer font-baiJamjuree"
                         key={index}
+                        onClick={handleRestaurantView}
                     >
                         <img
                             src={RestaurantImage2}

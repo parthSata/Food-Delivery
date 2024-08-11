@@ -1,10 +1,10 @@
-import { AttachFile, DummyImg, Pasta, ReviewProfile, Star } from '@/assets'
+import { AttachFile, Pasta, ReviewProfile, Star } from '@/assets'
 import { Button } from '@/Components/index'
 
 function Reviews() {
     return (
         <div className=''>
-            <div
+            {/* <div
                 className="relative mt-4 bg-black opacity-90 font-baiJamjuree"
             >
                 <img src={DummyImg} alt="" className=" h-[205px] w-full  " />
@@ -16,7 +16,7 @@ function Reviews() {
                         Restaurant Reviews
                     </span>
                 </div>
-            </div>
+            </div> */}
 
             <div className="p-10 flex flex-col gap-10">
                 <div className="flex flex-col gap-6">

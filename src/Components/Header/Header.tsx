@@ -71,7 +71,6 @@ const Header = () => {
     </li>
   ));
   const openDialog = () => {
-    console.log("Clicked")
     setIsDialogOpen(true)
   };
   const closeDialog = () => setIsDialogOpen(false);
