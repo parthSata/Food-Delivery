@@ -99,7 +99,7 @@ const ProductView: React.FC = () => {
                         <img
                           src={productImages[index]}
                           alt={`Preview ${index}`}
-                          className="h-auto w-auto object-cover"
+                          className="h-auto w-full object-cover"
                         />
                       </div>
                     )}
@@ -118,7 +118,7 @@ const ProductView: React.FC = () => {
                     <img
                       src={previewImage}
                       alt="Preview"
-                      className="h-[240px] w-auto object-cover"
+                      className="h-auto w-full object-cover"
                     />
                   ) : (
                     <p>{t("productAdd.noImageUploaded")}</p>
@@ -146,7 +146,7 @@ const ProductView: React.FC = () => {
                 <span className="line-through">₹{product.discountPrice}</span>
               </p>
             </div>
-            <div className="flex gap-28 flex-row">
+            <div className="flex gap-28 flex-wrap w-full flex-row">
               <div className="flex items-start gap-2 flex-col">
                 <span className="">Size</span>
                 <ul className="flex items-end justify-around gap-2 w-[80px] top-[]">

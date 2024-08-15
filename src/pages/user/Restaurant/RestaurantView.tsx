@@ -8,10 +8,10 @@ import { Outlet } from "react-router-dom"
 function RestaurantView() {
     return (
         <div>
-            <div className="p-4 flex gap-10 flex-wrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap">
+            <div className="p-8 flex gap-10 flex-wrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap">
                 <img src={RestaurantImage1} alt="" className="h-[300px] rounded-lg sm:w-full xl:w-[450px]" />
                 <div className="flex flex-col items-center justify-center gap-4">
-                    <span className="self-start text-xl font-semibold font-baiJamjuree">Golden Fish Restaurant</span>
+                    <span className="self-start text-xl font-semibold font-baiJamjuree">Gajanan Restaurant</span>
                     <div className="flex flex-col gap-4 border-2 rounded-[20px] shadow-addNew h-auto w-full p-4">
                         <div className="flex gap-6 font-semibold">
                             <div className="flex">
@@ -44,7 +44,7 @@ function RestaurantView() {
                     </div>
                 </div>
             </div>
-            <div className="">
+            <div className="px-8">
                 <RestaurantHeader />
                 <Outlet />
             </div>

@@ -79,11 +79,13 @@ function Register() {
 
     if (!name) newErrors.name = "Name is required.";
     if (!email) newErrors.email = "Email is required.";
-    if (!password) newErrors.password = "Passcode is required.";
-    if (!confirmPassword)
+    if (!password) newErrors.password = "Password is required.";
+    if (password.length < 6) newErrors.password = "Password is must be 6 Characters";
+    if (confirmPassword.length < 6) newErrors.password = "Confirm Password is must be 6 Characters";
+    if (!confirmPassword && confirmPassword.length < 6)
       newErrors.confirmPassword = "Confirm Password is required.";
     if (password !== confirmPassword)
-      newErrors.confirmPassword = "Passcode and Confirm Passcode must match.";
+      newErrors.confirmPassword = "Password and Confirm Password must match.";
 
     setErrors(newErrors);
 
@@ -286,7 +288,7 @@ function Register() {
                     <Input
                       type="password"
                       value={confirmPassword}
-                      placeholder="Password"
+                      placeholder="Confirm Password"
                       className="ml-2 p-6 text-[14px] focus:outline-none h-[50px] w-[320px] hover:border-0 font-semibold"
                       style={{ fontFamily: "Montserrat Alternates" }}
                       onChange={handleConfirmPasswordChange}

@@ -50,6 +50,6 @@ export { default as Gallary } from "@/Components/Restaurant/Gallary";
 export { default as OurTeam } from "@/pages/admin/team/OurTeam";
 export { default as TeamAdd } from "@/pages/admin/team/components/TeamAdd";
 export { default as RestaurantView } from "@/pages/user/Restaurant/RestaurantView";
-export { default as Overview } from "@/pages/user/Restaurant/overview/Overview";
+export { default as Overview } from "@/pages/user/Restaurant/components/Overview";
 export { default as Reviews } from "@/pages/user/Restaurant/review/Reviews";
-
+export { default as OrderOnline } from '@/pages/user/Restaurant/components/OrderOnline'

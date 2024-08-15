@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview } from "@/Components/index";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline } from "@/Components/index";
+
 
 const CustomerNavigation = () => {
   return (
@@ -13,6 +14,7 @@ const CustomerNavigation = () => {
         <Route path="/restaurantView" element={<RestaurantView />}>
           <Route path="overView" element={<Overview />} />
           <Route path="reviews" element={<Reviews />} />
+          <Route path="orderOnline" element={<OrderOnline />} />
         </Route>
 
       </Routes>

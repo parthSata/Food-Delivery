@@ -67,7 +67,7 @@ function Reviews() {
                         <div className="flex justify-start flex-col gap-4">
                             <textarea className=" resize-none border-2 rounded-[20px]  outline-none shadow-3xl text-black  placeholder:text-[#A2A3A5] font-semibold w-full h-full p-6" rows={6} placeholder="Comment Type Here...."></textarea>
                             <div className="flex flex-wrap flex-row justify-center font-baiJamjuree gap-4 h-full w-full">
-                                <Button className="shadow-3xl border flex  gap-2 p-4 font-semibold rounded-[15px] items-center w-[200px]  h-[50px]">
+                                <Button className="shadow-3xl  flex  gap-2 p-4 font-semibold rounded-[15px] items-center w-[200px]  h-[50px]">
                                     <img src={AttachFile} alt="" className=" font-baiJamjuree font-semibold h-6 w-6" />
                                     Choose files
                                 </Button>

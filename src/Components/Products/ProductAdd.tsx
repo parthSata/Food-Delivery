@@ -370,7 +370,7 @@ const ProductAdd: React.FC = () => {
                       <img
                         src={previewImage}
                         alt="Preview"
-                        className="h-[250px] w-full object-cover"
+                        className="h-auto  w-full object-cover"
                       />
                     ) : (
                       <p>{t("productAdd.noImageUploaded")}</p>
