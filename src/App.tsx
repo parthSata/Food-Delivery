@@ -25,6 +25,7 @@ function App() {
           <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="/home" element={<HomePage />} />
 
+
           <Route
             path="/admin/*"
             element={

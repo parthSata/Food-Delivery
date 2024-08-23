@@ -6,7 +6,7 @@ const routes = {
         { path: "overView", label: "Overview" },
         { path: "orderOnline", label: "Order Online" },
         { path: "reviews", label: "Reviews" },
-        // { path: "#", label: "Photos" },
+        { path: "photos", label: "Photos" },
     ],
 };
 

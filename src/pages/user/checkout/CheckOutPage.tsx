@@ -2,10 +2,12 @@ import { useState } from "react";
 import { FlashBurger, Delete, Edit, RightArrow } from "@/assets";
 import { t } from "i18next";
 import { Button, Input } from "@/Components/index";
+import ViewCoupons from "../coupon/ViewCoupons";
 
 function CheckoutPage() {
 
   const [quantity, setQuantity] = useState(0);
+  const [isCouponDialogOpen, setIsCouponDialogOpen] = useState(false)
   const incrementQuantity = () => {
     setQuantity((prevQuantity) => prevQuantity + 1);
   };
@@ -13,99 +15,49 @@ function CheckoutPage() {
   const decrementQuantity = () => {
     setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
   };
+
+
+  const openDialog = () => setIsCouponDialogOpen(true);
+  const closeDialog = () => setIsCouponDialogOpen(false);
   return (
     <div className="h-full w-full">
-      <div className="sm:flex   xl:flex-nowrap   h-full w-full  gap-10 ">
+      <div className="sm:flex   xl:flex-nowrap   h-full w-full   ">
         {/* Total */}
-        <div className="flex flex-row order-1 p-10">
-          <div className="flex flex-col h-full w-full gap-4 font-semibold justify-center items-center">
-            <div
-              className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full "
-              style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
-            >
-              <div className=" flex flex-row  w-[300px] h-[126px] ">
-                <div className="flex justify-center items-center w-full">
-                  <img src={FlashBurger} alt="" className=" w-28 " />
-                </div>
-                <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                  <span className="">{t("orders.hamburger")}</span>
-                  <span className="flex gap-2 items-center text-[#DF201F]">
-                    {t("checkOut.discountPrice")}
-                    <span className="line-through text-xs">
-                      {t("checkOut.price")}
+        <div className="flex flex-row order-1 p-10 ">
+          <div className="flex flex-col h-full w-full   gap-4 font-semibold justify-center items-center">
+            {[0, 1, 2, 3].map((index) => (
+              <div
+                className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full"
+                style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
+                key={index}
+              >
+                <div className="flex flex-row w-[300px] h-[126px]">
+                  <div className="flex justify-center items-center w-full">
+                    <img src={FlashBurger} alt="" className="w-28" />
+                  </div>
+                  <div className="h-full items-center justify-center w-full flex flex-col gap-2">
+                    <span className="">{t("orders.hamburger")}</span>
+                    <span className="flex gap-2 items-center text-[#DF201F]">
+                      {t("checkOut.discountPrice")}
+                      <span className="line-through text-xs">
+                        {t("checkOut.price")}
+                      </span>
                     </span>
-                  </span>
-                  <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
-                    <div className="cursor-pointer">
-                      <i className="fa-solid fa-minus p-2 "></i>
-                    </div>
-                    <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">
-                      01
-                    </div>
-                    <div className="cursor-pointer">
-                      <i className="fa-solid fa-plus  p-2 "></i>
+                    <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5] rounded-[5px]">
+                      <div className="cursor-pointer" onClick={decrementQuantity}>
+                        <i className="fa-solid fa-minus p-2"></i>
+                      </div>
+                      <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">
+                        {quantity}
+                      </div>
+                      <div className="cursor-pointer" onClick={incrementQuantity}>
+                        <i className="fa-solid fa-plus p-2"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div
-              className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full "
-              style={{ boxShadow: "2px 2px 30px 2px #FFF3E5" }}
-            >
-              <div className=" flex flex-row  w-[300px] h-[126px] ">
-                <div className="flex justify-center items-center w-full">
-                  <img src={FlashBurger} alt="" className=" w-28 " />
-                </div>
-                <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                  <span className="">{t("orders.hamburger")}</span>
-                  <span className="flex gap-2 items-center text-[#DF201F]">
-                    {t("checkOut.discountPrice")}
-                    <span className="line-through text-xs">
-                      {t("checkOut.price")}
-                    </span>
-                  </span>
-                  <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
-                    <div className="cursor-pointer" onClick={decrementQuantity}>
-                      <i className="fa-solid fa-minus p-2 "></i>
-                    </div>
-                    <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">
-                      {quantity}
-                    </div>
-                    <div className="cursor-pointer" onClick={incrementQuantity}>
-                      <i className="fa-solid fa-plus  p-2 "></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center h-full flex-wrap items-center rounded-[15px] w-full shadow-dashboard">
-              <div className=" flex flex-row  w-[300px] h-[126px] ">
-                <div className="flex justify-center items-center w-full">
-                  <img src={FlashBurger} alt="" className=" w-28 " />
-                </div>
-                <div className="h-full items-center justify-center w-full flex flex-col gap-2">
-                  <span className="">{t("orders.hamburger")}</span>
-                  <span className="flex gap-2 items-center text-[#DF201F]">
-                    {t("checkOut.discountPrice")}
-                    <span className="line-through text-xs">
-                      {t("checkOut.price")}
-                    </span>
-                  </span>
-                  <div className="flex justify-center items-center flex-row gap-4 bg-[#FFE5E5]  rounded-[5px]">
-                    <div className="cursor-pointer">
-                      <i className="fa-solid fa-minus p-2 "></i>
-                    </div>
-                    <div className="border-[#000000] border py-2 px-2 border-opacity-[0.08] text-black">
-                      01
-                    </div>
-                    <div className="cursor-pointer">
-                      <i className="fa-solid fa-plus  p-2 "></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
         <div className="h-full order-2 w-full p-10">
@@ -125,7 +77,7 @@ function CheckoutPage() {
                   placeholder="Coupon Code"
                   name="CouponCode"
                 />
-                <div className="absolute flex  items-center cursor-pointer right-8 h-8 w-8 justify-center rounded-full bg-[#DF201F]">
+                <div className="absolute flex  items-center cursor-pointer right-8 h-8 w-8 justify-center rounded-full bg-[#DF201F]" onClick={openDialog}>
                   <img src={RightArrow} alt="" className="" />
                 </div>
               </div>
@@ -286,6 +238,10 @@ function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {isCouponDialogOpen && (
+        <ViewCoupons isOpen={isCouponDialogOpen} onClose={closeDialog} />
+      )}
     </div>
   );
 }

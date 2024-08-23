@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline } from "@/Components/index";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos } from "@/Components/index";
 
 
 const CustomerNavigation = () => {
@@ -15,6 +15,7 @@ const CustomerNavigation = () => {
           <Route path="overView" element={<Overview />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="orderOnline" element={<OrderOnline />} />
+          <Route path="photos" element={<Photos />} />
         </Route>
 
       </Routes>

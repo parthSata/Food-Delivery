@@ -37,8 +37,8 @@ function Category() {
       {/* <Loader isLoading={isLoading}> */}
       <div className="">
         <div className="mt-6 w-full flex gap-2 justify-around flex-wrap">
-          <div className="sm:w-1/5 w-full mb-10" onClick={handleProductView}>
-            <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]">
+          <div className="sm:w-1/5 w-full mb-10" >
+            <div className="flex justify-center font-semibold flex-col text-md items-center bg-[#FFE5E5] h-[200px] w-full rounded-[20px]" onClick={handleProductView}>
               {/* @ts-ignore */}
               <img src={FlashBurger} alt="" className="h-20" />
               <p className="" style={{ fontFamily: "Bai Jamjuree" }}>
@@ -54,9 +54,9 @@ function Category() {
                 </span>
               </p>
             </div>
-            <div className="relative flex justify-center w-full gap-2 -top-6">
-              <div className="hover:bg-[#DF201F] bg-white h-12 w-12 flex justify-center rounded-3xl shadow-Size">
-                <Button className="" onClick={handleAddProduct}>
+            <div className="relative flex justify-center w-full gap-2 -top-6" >
+              <div className="hover:bg-[#DF201F] bg-white h-12 w-12 flex justify-center rounded-3xl shadow-Size" onClick={handleAddProduct} >
+                <Button className="">
                   <i className="fa-solid fa-plus fa-lg hover:text-white text-addProd"></i>
                 </Button>
               </div>

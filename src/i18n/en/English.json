@@ -236,5 +236,12 @@
     "location": "3th Street. 47 W 13th St, New York, NYc 10011, USA",
     "locationTitle": "Location",
     "copyright": "© 2022  Food Delivery | All Rights Reserved"
+  },
+  "couponview": {
+    "applyBtn": "Apply"
+  },
+  "photos": {
+    "all": "All",
+    "food": "Food"
   }
 }

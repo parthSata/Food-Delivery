@@ -23,7 +23,7 @@ function CategoryMenu() {
 
     return (
         <div>
-            <ul className="pl-4 sticky top-0 overflow-x-scroll h-screen flex flex-col gap-2 justify-center  text-left border-r-2 ">
+            <ul className="pl-4 sticky top-0 overflow-x-scroll max-h-full flex flex-col gap-2 justify-center  text-left border-r-2 ">
                 {categories.map((category, index) => (
                     <li
                         key={index}
