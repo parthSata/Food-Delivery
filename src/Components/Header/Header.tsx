@@ -31,6 +31,7 @@ const routes = {
     { path: "/customer/about", label: "About" },
     { path: "/customer/dishes", label: "Dishes" },
     { path: "/customer/restaurantNearBy", label: "Restaurant" },
+    { path: "/customer/gallary", label: "Gallary" },
   ]
 };
 

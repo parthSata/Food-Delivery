@@ -17,10 +17,10 @@ function OrderOnline() {
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-row justify-between flex-wrap gap-4">
                         <div className="text-left flex flex-col gap-4">
-                            <span className="text-2xl font-semibold">Order Online</span>
+                            <span className="text-2xl font-semibold">{t("orderOnline.title")}</span>
                             <div className="flex items-center gap-4 flex-wrap justify-center">
                                 <span className=""><i className="fa-regular fa-compass fa-lg"></i></span>
-                                <span className="text-gray-600 border-r-2 pr-4">Live track your order</span>
+                                <span className="text-gray-600 border-r-2 pr-4">{t("orderOnline.trackOrder")}</span>
                                 <span className="text-gray-600">• 22 min</span>
                             </div>
                         </div>

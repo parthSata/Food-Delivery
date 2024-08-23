@@ -243,5 +243,14 @@
   "photos": {
     "all": "All",
     "food": "Food"
+  },
+  "orderOnline": {
+    "title": "Order Online",
+    "trackOrder": "Live track your order"
+  },
+  "overview": {
+    "pageTitle": "About This Page",
+    "callTitle": "Call",
+    "direction": "Direction"
   }
 }

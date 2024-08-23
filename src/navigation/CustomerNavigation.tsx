@@ -1,8 +1,19 @@
-import { Route, Routes } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos } from "@/Components/index";
-
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos, ImagePreview } from "@/Components/index";
+import { useAuth } from "@/context/AuthContext"
 
 const CustomerNavigation = () => {
+  const { user } = useAuth()
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: any) => {
+    if (user?.role === 'admin') {
+      window.open(path, '_blank');
+    } else {
+      navigate(path);
+    }
+  };
+
   return (
     <UserContainer>
       <Routes>
@@ -16,8 +27,21 @@ const CustomerNavigation = () => {
           <Route path="reviews" element={<Reviews />} />
           <Route path="orderOnline" element={<OrderOnline />} />
           <Route path="photos" element={<Photos />} />
+          {/* This route can open in a new tab or the same page based on role */}
+          <Route
+            path="image"
+            element={
+              <ImagePreview
+                onClose={() => handleNavigation('/restaurantView/photos')}
+                isOpen={true}
+                images={[]} // Provide actual image sources
+                currentImageIndex={0}
+                onPrevImage={() => { }}
+                onNextImage={() => { }}
+              />
+            }
+          />
         </Route>
-
       </Routes>
     </UserContainer>
   );

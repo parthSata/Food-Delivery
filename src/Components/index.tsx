@@ -54,3 +54,4 @@ export { default as Overview } from "@/pages/user/Restaurant/components/Overview
 export { default as Reviews } from "@/pages/user/Restaurant/review/Reviews";
 export { default as OrderOnline } from '@/pages/user/Restaurant/components/OrderOnline'
 export { default as Photos } from '@/pages/user/Restaurant/components/Photos'
+export { default as ImagePreview } from '@/pages/user/Restaurant/components/ImagePreview'

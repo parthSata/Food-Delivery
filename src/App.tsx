@@ -21,7 +21,6 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/login/adminLogin" element={<AdminLogin />} />
           <Route path="/register" element={<Register />} />
-          {/* <Route path="/verification" element={<Verification />} /> */}
           <Route path="/not-authorized" element={<NotAuthorized />} />
           <Route path="/home" element={<HomePage />} />
 
