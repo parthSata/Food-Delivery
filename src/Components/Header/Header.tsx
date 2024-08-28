@@ -30,8 +30,7 @@ const routes = {
     { path: "/customer/category", label: "Category" },
     { path: "/customer/about", label: "About" },
     { path: "/customer/dishes", label: "Dishes" },
-    { path: "/customer/restaurantNearBy", label: "Restaurant" },
-    { path: "/customer/gallary", label: "Gallary" },
+    { path: "/customer/restaurantNearBy", label: "Restaurant Nearby" }
   ]
 };
 

@@ -252,5 +252,8 @@
     "pageTitle": "About This Page",
     "callTitle": "Call",
     "direction": "Direction"
+  },
+  "orderView": {
+    "orderDateTime": "25 March, 03:25 PM"
   }
 }

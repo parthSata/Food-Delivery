@@ -2,6 +2,7 @@ import { Burger, Accepted, Cancel, Pizza } from "@/assets";
 
 import { t } from "i18next";
 import Input from "@/Components/ReusableComponent/Input";
+import { useNavigate } from "react-router-dom";
 
 function Orders() {
   // const [currentPage, setCurrentPage] = useState<number>(1);
@@ -33,6 +34,12 @@ function Orders() {
   //         setCurrentPage(currentPage - 1);
   //     }
   // };
+
+  const navigate = useNavigate()
+
+  const handleOrderView = () => {
+    navigate('/customer/orderView')
+  }
 
   return (
     <>
@@ -73,7 +80,7 @@ function Orders() {
                       className="block w-full p-4 ps-10 text-sm  text-gray-500 border border-[1px solid #E7E7E9] rounded-lg "
                       style={{ fontFamily: "Montserrat Alternates" }}
                       placeholder="Search"
-                      // onChange={(e) => setSearchInput(e.target.value)}
+                    // onChange={(e) => setSearchInput(e.target.value)}
                     />
                   </div>
                 </form>
@@ -81,22 +88,21 @@ function Orders() {
               </span>
             </div>
             <div className="flex flex-wrap  item-center">
-              <div className="w-full flex flex-wrap  p-2 ">
+              <div className="w-full flex  flex-wrap  p-2 " onClick={handleOrderView}>
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
                   <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
-                      <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
+                      <span className="font-baiJamjuree" >
                         {t("orders.orderNumber")}
                       </span>
                       <p
-                        className="text-[#A2A3A5] text-xs "
-                        style={{ fontFamily: "Montserrat Alternates" }}
+                        className="text-[#A2A3A5] text-xs font-montserrat"
+
                       >
                         {t("orders.orderTime")}
                       </p>
                       <span
-                        className="flex justify-center items-center text-[#50E06B] gap-2"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="flex justify-center items-center text-[#50E06B] gap-2 font-baiJamjuree"
                       >
                         <img src={Accepted} alt="" className="h-5" />
                         {t("orders.acceptedOrder")}
@@ -106,8 +112,7 @@ function Orders() {
                   <div className="flex  flex-wrap  gap-4">
                     <div className=" flex flex-wrap w-full sm:flex-nowrap md:flex-nowrap lg:flex-nowrap xl:flex-nowrap gap-4   ">
                       <div
-                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center font-baiJamjuree"
                       >
                         <img src={Burger} alt="" className="h-[40px]" />
                         <div className="flex flex-col ">
@@ -118,8 +123,7 @@ function Orders() {
                         </div>
                       </div>
                       <div
-                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center font-baiJamjuree"
                       >
                         <img src={Burger} alt="" className="h-[40px]" />
                         <div className="flex flex-col ">
@@ -130,8 +134,7 @@ function Orders() {
                         </div>
                       </div>
                       <div
-                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center"
-                        style={{ fontFamily: "Bai Jamjuree" }}
+                        className="flex flex-row gap-2 w-full p-4 flex-wrap h-auto justify-center border-2  rounded-[10px]  items-center font-baiJamjuree"
                       >
                         <img src={Burger} alt="" className="h-[40px]" />
                         <div className="flex flex-col ">
@@ -146,7 +149,7 @@ function Orders() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap  item-center">
+            <div className="flex flex-wrap bg-yellow-700   item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
                   <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
@@ -165,7 +168,7 @@ function Orders() {
                         style={{ fontFamily: "Bai Jamjuree" }}
                       >
                         <img src={Cancel} alt="" className="h-5" />
-                        Accepted Order
+                        Cancelled Order
                       </span>
                     </div>
                   </div>
@@ -216,7 +219,7 @@ function Orders() {
         </div>
         <div className="flex flex-col flex-wrap">
           <div className="">
-            <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
+            <div className="m-2 flex   flex-wrap justify-between items-center font-medium">
               <span
                 className="text-[#161A1D] mb-2"
                 style={{ fontFamily: "Bai Jamjuree" }}
@@ -224,7 +227,7 @@ function Orders() {
                 Yesterday , 24th March 2022
               </span>
             </div>
-            <div className="flex flex-wrap  item-center">
+            <div className="flex flex-wrap bg-blue-700   item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div
                   className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full "
@@ -293,10 +296,10 @@ function Orders() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap  item-center">
+            <div className="flex flex-wrap bg-orange-700  item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
-                  <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                  <div className=" font-semibold  flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
                         Order# ORD00003
@@ -312,7 +315,7 @@ function Orders() {
                         style={{ fontFamily: "Bai Jamjuree" }}
                       >
                         <img src={Cancel} alt="" className="h-5" />
-                        Accepted Order
+                        Cancelled Order
                       </span>
                     </div>
                   </div>

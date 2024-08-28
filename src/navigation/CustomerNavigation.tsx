@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos, ImagePreview } from "@/Components/index";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos, ImagePreview, Orders, OrderView } from "@/Components/index";
 import { useAuth } from "@/context/AuthContext"
 
 const CustomerNavigation = () => {
@@ -27,21 +27,10 @@ const CustomerNavigation = () => {
           <Route path="reviews" element={<Reviews />} />
           <Route path="orderOnline" element={<OrderOnline />} />
           <Route path="photos" element={<Photos />} />
-          {/* This route can open in a new tab or the same page based on role */}
-          <Route
-            path="image"
-            element={
-              <ImagePreview
-                onClose={() => handleNavigation('/restaurantView/photos')}
-                isOpen={true}
-                images={[]} // Provide actual image sources
-                currentImageIndex={0}
-                onPrevImage={() => { }}
-                onNextImage={() => { }}
-              />
-            }
-          />
+          <Route path="image" element={<ImagePreview onClose={() => handleNavigation('/restaurantView/photos')} isOpen={true} images={[]} currentImageIndex={0} onPrevImage={() => { }} onNextImage={() => { }} />} />
         </Route>
+        <Route path="orders" element={<Orders />} />
+        <Route path="orderView" element={<OrderView />} />
       </Routes>
     </UserContainer>
   );

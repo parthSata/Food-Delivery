@@ -70,7 +70,7 @@ const ProfileDialog: React.FC<AddProps> = ({ isOpen, onClose }) => {
                 </div>
                 <div className=" border-gray-200 font-semibold">
                     {user?.role == "customer" && "seller" ? (
-                        <Link to="#" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
+                        <Link to="/customer/orders" className="flex p-4 border-b border-[#C4C4C4] items-center gap-4">
 
                             <div className="flex h-8 w-8 justify-center items-center text-sm bg-[#FFE5E5] rounded-full text-gray-700 hover:bg-gray-100  ">
                                 <span className=""><img src={Order} alt="" className="w-4 h-4" /></span>
