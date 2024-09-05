@@ -26,7 +26,7 @@ const ProductView: React.FC = () => {
                             className="flex -order-1 justify-center flex-wrap sm:flex-row md:flex-col xl:flex-row w-auto flex-row mb-10 font-semibold font-baiJamjuree"
 
                         >
-                            {[0, 1, 2, 3].map((index) => (
+                            {[0, 1, 2, 3 ].map((index) => (
                                 <div
                                     key={index}
                                     className={` rounded-[15px] border-2  h-[120px] m-6 flex-col gap-2 text-md w-[160px] flex justify-center items-center 

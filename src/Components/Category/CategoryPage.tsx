@@ -119,7 +119,7 @@ function CategoryPage(): JSX.Element {
   const closeAddCategoryDialog = () => setShowAddCategoryDialog(false);
 
   return (
-    <div>
+    <div className="px-10">
       {/* Body Part Started */}
       <div className="flex justify-between items-center font-BaiJamjuree font-semibold  mt-10 flex-wrap gap-2">
         <div className="">

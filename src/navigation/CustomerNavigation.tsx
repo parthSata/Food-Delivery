@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos, ImagePreview, Orders, OrderView } from "@/Components/index";
+import { Home, CheckoutPage, Category, UserContainer, UserProductView, RestaurantNearby, RestaurantView, Reviews, Overview, OrderOnline, Photos, ImagePreview, Orders, OrderView, Dishes } from "@/Components/index";
 import { useAuth } from "@/context/AuthContext"
 
 const CustomerNavigation = () => {
@@ -31,6 +31,7 @@ const CustomerNavigation = () => {
         </Route>
         <Route path="orders" element={<Orders />} />
         <Route path="orderView" element={<OrderView />} />
+        <Route path="dishes" element={<Dishes />} />
       </Routes>
     </UserContainer>
   );

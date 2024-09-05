@@ -11,10 +11,10 @@ function RestaurantNearby() {
         <div className=''>
             <div className="relative mt-4 bg-black opacity-90 font-baiJamjuree">
                 <img src={DummyImg} alt="" className="h-[205px] w-full" />
-                <div className="absolute flex flex-col gap-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4">
+                <div className="absolute max-w-[600px] flex flex-col gap-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4">
                     <label className="font-montserrat self-start font-semibold text-md text-white">Search For Restaurants</label>
-                    <div className="rounded-[15px] items-center self flex flex-row p-5 gap-2 bg-white  h-full">
-                        <Input type="text" className="h-full w-full border-none outline-none font-montserrat font-semibold text-[#161A1D]" placeholder="Search..."></Input>
+                    <div className="rounded-[15px] justify-center  items-center self flex flex-row p-5 gap-2 bg-white  h-full">
+                        <Input type="text" className="h-full w-full  border-none outline-none font-montserrat font-semibold text-[#161A1D]" placeholder="Search..."></Input>
                         <img src={search} alt="" className="" />
                     </div>
                 </div>

@@ -43,7 +43,7 @@ function Orders() {
 
   return (
     <>
-      <div className="">
+      <div className="p-8">
         <div className="flex flex-col flex-wrap">
           <div className="">
             <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
@@ -87,10 +87,10 @@ function Orders() {
                 {/* Search Input */}
               </span>
             </div>
-            <div className="flex flex-wrap  item-center">
+            <div className="flex shadow-3xl flex-wrap  item-center">
               <div className="w-full flex  flex-wrap  p-2 " onClick={handleOrderView}>
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
-                  <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                  <div className="flex font-semibold text-left flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="font-baiJamjuree" >
                         {t("orders.orderNumber")}
@@ -149,10 +149,10 @@ function Orders() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap bg-yellow-700   item-center">
+            <div className="flex shadow-3xl flex-wrap  item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
-                  <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                  <div className="flex font-semibold text-left flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
                         Order# ORD00003
@@ -219,7 +219,7 @@ function Orders() {
         </div>
         <div className="flex flex-col flex-wrap">
           <div className="">
-            <div className="m-2 flex   flex-wrap justify-between items-center font-medium">
+            <div className="m-2 flex  flex-wrap justify-between items-center font-medium">
               <span
                 className="text-[#161A1D] mb-2"
                 style={{ fontFamily: "Bai Jamjuree" }}
@@ -227,13 +227,13 @@ function Orders() {
                 Yesterday , 24th March 2022
               </span>
             </div>
-            <div className="flex flex-wrap bg-blue-700   item-center">
+            <div className="flex flex-wrap shadow-3xl  item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div
                   className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full "
                   style={{ boxShadow: "2px 2px 30px 2px #FFF3E5CC" }}
                 >
-                  <div className="flex font-semibold  flex-row flex-wrap  self-start justify-center ">
+                  <div className="flex font-semibold text-left flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
                         Order# ORD00003
@@ -296,10 +296,10 @@ function Orders() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-wrap bg-orange-700  item-center">
+            <div className="flex flex-wrap shadow-3xl  item-center">
               <div className="w-full flex flex-wrap  p-2 ">
                 <div className=" p-3 flex  flex-wrap gap-8 mb-4 h-full w-full shadow-Order">
-                  <div className=" font-semibold  flex-row flex-wrap  self-start justify-center ">
+                  <div className=" font-semibold text-left  flex-row flex-wrap  self-start justify-center ">
                     <div className="flex flex-col  gap-1">
                       <span className="" style={{ fontFamily: "Bai Jamjuree" }}>
                         Order# ORD00003

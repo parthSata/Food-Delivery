@@ -56,3 +56,4 @@ export { default as OrderOnline } from '@/pages/user/Restaurant/components/Order
 export { default as Photos } from '@/pages/user/Restaurant/components/Photos'
 export { default as ImagePreview } from '@/pages/user/Restaurant/components/ImagePreview'
 export { default as OrderView } from '@/Components/Orders/OrderView'
+export { default as Dishes } from '@/pages/user/Dishes/Dish'
